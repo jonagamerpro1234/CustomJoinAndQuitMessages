@@ -1,0 +1,26 @@
+main: jss.customjoinandquitmessages.CustomJoinAndQuitMessages
+name: CustomJoinAndQuitMessages
+version: 1.6.0
+author: jonagamerpro1234
+softdepend: [PlaceholderAPI]
+api-version: 1.13
+website: 
+
+commands:
+  CustomJoinAndQuitMessages:
+    description: ---
+    aliases:
+      - cjm
+permissions:
+  Cjm.*:
+    description: ---
+    children:
+      Cjm.Update.Notify: true
+      Cjm.Commands.Reload: true
+    default: op
+  Cjm.Update.Notify:
+    description: ---
+    default: op
+  Cjm.Commands.Reload:
+    description: ---
+    default: op

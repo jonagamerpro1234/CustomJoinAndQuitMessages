@@ -1,0 +1,105 @@
+# |[======================]|
+# |[  CustomJoinMessaje   ]|
+# |[ By Jonagamerpro1234  ]|
+# |[  Version: 1.5.1      ]|
+# |[======================]|
+# 
+# There are two variables that show the name of the player in a message and that are | <Name>, <DisplayName> | these two variables can also be in lowercase.
+# 
+# Vars = #|<name>, <displayname>, [<rank>, <money> | Vault Extend and PlaceHoderAPI], <world>, <server_name>, <version>, <online>, <online_max>|
+#
+# | Join | It contains multiple options, which are :
+# | true = customizable message | false = default game message | none = the message is disabled|
+# 
+# | Quit | It contains multiple options, which are :
+# | true = customizable message | false = default game message | none = the message is disabled|
+#
+# |Welcome| It contains multiple options, which are :
+# | true = default | false = disabled welcome message|
+#
+# | Title | It contains multiple options, which are :
+# | true = default | false = disabled welcome message|
+# | warning | !! the title only works when the BountifulAPI plugin is !!|
+#
+# | ActionBar | It contains multiple options, which are :
+# | true = default | false = disabled welcome message|
+# | warning | !! the title only works when the BountifulAPI plugin is !!|
+#
+# |Sound| this is the way you should be|
+# |     sound_name;volume;pitch        |
+# |Ej 1.9.  BLOCK_NOTE_PLING;10;2      |
+# |Sound list: https://www.spigotmc.org/wiki/cc-sounds-list/ |
+#
+Config:
+  Lang: en-US
+  Update:
+    Enabled: true
+    Notify:
+      Enabled: true
+    Lang: en #|Lang| [es] [Spanish | Espanol] | [en] [English | Ingles] 
+  SoftDepends:
+    PlaceHolderAPI: false
+  Debug:
+    Enabled: false  #| Debug | shows you important information about the plugin loading | ! in case of error or problems put [Debug: true]!
+    Lang: en #|Lang| [es] [Spanish | Espanol] | [en] [English | Ingles]
+Join:
+  Enabled: true
+  Text: '&b[&a+&b] <name>' #|<name>, <displayname>, [<rank>, <money> | Vault Extend and PlaceHoderAPI], <world>, <server_name>, <version>, <online>, <online_max>|
+  Type: Default #| Default ,Double[Experimental] ,Hover ,Click ,None |
+  HoverEvent:
+    Text: ''
+    Mode: TEXT #TEXT |!comings soond more modes!|
+    Color: AQUA #RED, BLUE, GREEN, AQUA, YELLOW, ...etc.
+  ClickEvent:
+    Action: ''
+    Mode: URL # URL,CMD
+Quit:
+  Enabled: true
+  Text: '&b[&c-&b] <name>' #|<name>, <displayname>, [<rank>, <money> | Vault Extend and PlaceHoderAPI], <world>, <server_name>, <version>, <online>, <online_max>|
+  Type: Default #| Default ,[ Double | !Experimental!] ,Hover ,Click ,None |
+  HoverEvent:
+    Text: ''
+    Mode: TEXT # TEXT |!comings soond more modes!|
+    Color: AQUA #| RED, BLUE, GREEN, AQUA, YELLOW, ...etc. |
+  ClickEvent:
+    Action: ''
+    Mode: URL #| URL,CMD |
+Welcome:
+  Enabled: true
+  Max-Line: 7 #| default 7 | set of max line|
+  Text:
+    - '&b&m=========================================&r'
+    - '<0>'
+    - '&e> &7Welcome To The Server &b<name>'
+    - '<0>'
+    - '&e> &cShop: shop-example.com'
+    - '&e> &7Use &b/skin to put on a skin'
+    - '<0>'
+    - '&b&m=========================================&r'
+Title:
+  Enabled: true
+  Text:
+    Title: '&a&lWelcome to the server'
+    SubTitle: '&b<name>'
+  Settings:
+    Time:
+      FadeIn: 20 #| Default 20 ticks | 20 ticks = 1s
+      Stay: 40 #| Default 40 ticks | 40 ticks = 2s
+      FadeOut: 20 #| Default 20 ticks | 20 ticks = 1s
+ActionBar:
+  Enabled: true
+  Text: 'Welcome to the server <name>'
+Sounds:
+  Enabled: true
+  Settings:
+    Send-All-Sounds: true
+  Join:
+    Enabled: true
+    Sound: NOTE_PLING;10;1
+    Enabled-Permission: false
+    Custom-Permission: 'MultiOptions.join'
+  Quit:
+    Enabled: true
+    Sound: NOTE_PLING;10;1
+    Enabled-Permission: false
+    Custom-Permission: 'MultiOptions.quit'

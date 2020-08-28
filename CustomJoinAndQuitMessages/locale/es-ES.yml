@@ -1,0 +1,28 @@
+# |    CustomJoinAndQuitMessages     |
+# |       By Jonagamerpro1234        |
+# |        Version: 1.6.0            |
+# |__________________________________|
+# 
+#
+# |Traducido por [Jonagamerpro1234]
+# |Idioma [Español | Spanish]
+# |Version: 1
+#
+CustomJoinAndQuitMessages:
+  Help-Messages:
+    Page1:
+      - '&b/CustomJoinAndQuitMessages &8| &9/Cjm &7Esta son todas las variantes del comando principal'
+      - '&b/Cjm &eHelp &7Muestra este mismo mensaje'
+      - '&b/Cjm &eReload &7Recarga los  archivos del plugin'
+      - '&b/Cjm &eInfo &7Muestra infomacion del plugin'
+  Commands:
+    No-Permission: '&aNo tienes permiso para hacer eso!'
+    No-Permission-Label: ''
+    Error-Args: '&cArgumento desconosido!'
+    Reload: '&aRecarga Completada'
+  Sounds:
+    Error-Version: ''
+    Error-Sound-Path: ''
+    Error-Vol-Path: ''
+    Error-Pitch-Path: ''
+    
