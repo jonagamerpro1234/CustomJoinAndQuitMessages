@@ -37,11 +37,6 @@ public class ConfigFile extends FileManager implements FileHelper{
 			getConfig().options().copyDefaults(true);
 			saveConfig();
 		}
-		if(getConfig().getString("Settings.Debug").equals("true")) {
-			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + "&5 <|| &c* &eDebug Mode: &bLoad config.yml");
-		}else {
-			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + "&5 <|| &c* &7Loading &d[&bConfig.yml&d]");
-		}
 	}
 
 	public FileConfiguration getConfig() {

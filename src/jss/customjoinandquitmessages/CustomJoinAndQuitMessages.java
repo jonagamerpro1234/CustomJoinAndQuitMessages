@@ -62,7 +62,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
         	Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &aenabled &7method &b1.16");
         }
 		setupCommands();
-		setupEvents();
+		//setupEvents();
 		placeholderapi.onPlaceHolderAPI();
 		update.Update(eventUtils.getConsoleSender());
 	}
