@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.EventsUtils;
+import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.UpdateChecker;
 import jss.customjoinandquitmessages.utils.Utils;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -28,11 +27,11 @@ import net.md_5.bungee.api.chat.TextComponent;
 public class JoinListener implements Listener{
 
 	private CustomJoinAndQuitMessages plugin;
-	private CommandSender c = Bukkit.getConsoleSender();
+	private EventUtils eventUtils = new EventUtils(plugin);
 	
 	public JoinListener(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
-		EventsUtils.getManger().registerEvents(this, plugin);
+		eventUtils.addEventList(this);
 	}
 	
 	@EventHandler
@@ -129,10 +128,11 @@ public class JoinListener implements Listener{
 				}	
 			}
 		}catch(NullPointerException ex) {
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&cError-Path: Welcome section ?");
+			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError-Path: Welcome section ?");
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	@EventHandler
 	public void sendJoinTitle(PlayerJoinEvent e) {
 		FileConfiguration config = plugin.getConfig();
@@ -154,7 +154,6 @@ public class JoinListener implements Listener{
 		subtitle = getAllVars(j, subtitle);
 		
 		if(config.getString(path).equals("true")) {
-			Utils.sendTitle(j, fadeIn, stay, fadeOut, title, subtitle);
 		}
 	}
 	

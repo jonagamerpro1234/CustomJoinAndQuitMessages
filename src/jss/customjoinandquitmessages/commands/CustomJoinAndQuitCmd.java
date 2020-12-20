@@ -33,7 +33,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(!(sender instanceof Player)) {
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + plugin.Locale().Error_Console);
+			Utils.sendColorMessage(c, Utils.getPrefix() + " " + plugin.Locale().Error_Console);
 			return false;
 		}
 		Player j = (Player) sender;
@@ -66,7 +66,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				}
 				PluginConfig.loadConfig(plugin);
 				plugin.reloadConfig();
-				Utils.sendColorMessage(j, Utils.getPrefixCJMPlayer() + " " + plugin.Locale().reload);
+				Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().reload);
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("info")) {
@@ -78,10 +78,10 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				return true;
 			}
-			Utils.sendColorMessage(j, Utils.getPrefixCJMPlayer() + " " + plugin.Locale().Error_Cmd);
+			Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().Error_Cmd);
 			return true;
 		}
-		Utils.sendColorMessage(j, Utils.getPrefixCJMPlayer() + " " + plugin.Locale().Help_cmd);
+		Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().Help_cmd);
 		return true;
 	}
 	

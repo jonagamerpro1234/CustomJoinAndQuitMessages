@@ -1,13 +1,11 @@
 package jss.customjoinandquitmessages;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,7 +14,8 @@ import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
 import jss.customjoinandquitmessages.custom.SendActionBarEvent;
 import jss.customjoinandquitmessages.events.JoinListener;
 import jss.customjoinandquitmessages.events.SoundsListener;
-import jss.customjoinandquitmessages.utils.CustomJoinAndQuitMessagesExpand;
+import jss.customjoinandquitmessages.hook.Placeholderapi;
+import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Lang;
 import jss.customjoinandquitmessages.utils.PluginConfig;
 import jss.customjoinandquitmessages.utils.Settings;
@@ -33,17 +32,18 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	public Metrics metrics;
 	public String latestversion;
 	private UpdateChecker update = new UpdateChecker(this);
-	private CommandSender c = Bukkit.getConsoleSender();
     public boolean useLegacyversions = false;
     public String nmsversion;
 	private Map<String,Lang> availableLocales = new HashMap<>();
+	private Placeholderapi placeholderapi = new Placeholderapi(this);
+	private EventUtils eventUtils = new EventUtils(this);
 	
 	public void onEnable() {
-		Utils.getEnable(Utils.getPrefixCJMConsole(), version);
-		saveDefaultConfig();
-		setupConfig();
+		Utils.setEnabled(version);
+
+
 		if(!PluginConfig.loadConfig(this)) {
-			Utils.sendColorMessage(c, "&e[&b"+ name +"&e]&c error load lang and config file");
+			Utils.sendColorMessage(eventUtils.getConsoleSender(), "&e[&b"+ name +"&e]&c error load lang and config file");
 			return;
 		}		
 		metrics = new Metrics(this);
@@ -53,35 +53,27 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
         if (nmsversion.equalsIgnoreCase("v1_8_R1") || nmsversion.equalsIgnoreCase("v1_7_")) { 
         	useLegacyversions = true;
         	if(useLegacyversions == true) {
-        		Utils.sendColorMessage(c, " Test 1.7_? | 1.8_R1");
+        		Utils.sendColorMessage(eventUtils.getConsoleSender(), " Test 1.7_? | 1.8_R1");
         	}
         }
         if (nmsversion.equalsIgnoreCase("v1_8_R3")) { 
         	useLegacyversions = true;
         	if(useLegacyversions == true) {
-        		Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&7Use " + nmsversion + " &cdisabled &7method &b1.16");
+        		Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &cdisabled &7method &b1.16");
         	}
         }else if(nmsversion.equalsIgnoreCase("v1_16_R2")){
-        	Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&7Use " + nmsversion + " &aenabled &7method &b1.16");
+        	Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &aenabled &7method &b1.16");
         }
 		setupCommands();
 		setupEvents();
-		setupPlaceHolderAPI();
-		update.Update(c);
+		placeholderapi.onPlaceHolderAPI();
+		update.Update(eventUtils.getConsoleSender());
 	}
 	
 	public void onDisable() {
-		Utils.getDisable(Utils.getPrefixCJMConsole(), version);
+		Utils.setDisabled(version);
 		metrics = null;
 		placeholders = false;
-	}
-	
-	public void setupConfig() {
-		File config = new File(getDataFolder(), "config.yml");
-		if (!config.exists()) {
-			getConfig().options().copyDefaults(true);
-			saveDefaultConfig();
-		}
 	}
 	
 	public void setupCommands() {
@@ -97,29 +89,6 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 		return plugin;
 	}
 	
-	public void SetupSoftDepends() {
-		if(setupPlaceHolderAPI()) {
-			Utils.sendColorMessage(c, "&e[&d"+ name +"&e]&5 <|============================================|>");
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + "&5<| &ePlaceHolderAPI:&b" + " " + placeholders);
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + "&5<| &eVars PlaceHolderAPI:&a true");
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + "&5<| &aEnabled &eCustomJoinAndQuitMessages Vars");
-			Utils.sendColorMessage(c, "&e[&d"+ name +"&e]&5 <|============================================|>");
-			new CustomJoinAndQuitMessagesExpand(this).register();
-		}else {
-			Utils.sendColorMessage(c, "&e[&d"+ name +"&e]&5 <|============================================|>");
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + "&5<| &ePlaceHolderAPI:&b" + " " + placeholders);
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + "&5<| &eVars PlaceHolderAPI:&c false");
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + "&5<| &cDisabled &eCustomJoinAndQuitMessages Vars");
-			Utils.sendColorMessage(c, "&e[&d"+ name +"&e]&5 <|============================================|>");
-		}		
-	}
-	
-	public boolean setupPlaceHolderAPI(){
-		if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-			this.placeholders = true;
-		}
-		return this.placeholders;
-	}
 	
 	public Lang Locale() {
 		return availableLocales.get(Settings.defaultLanguage);

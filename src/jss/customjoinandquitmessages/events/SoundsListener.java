@@ -3,7 +3,6 @@ package jss.customjoinandquitmessages.events;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,17 +11,18 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.EventsUtils;
+import jss.customjoinandquitmessages.utils.EventUtils;
+
 import jss.customjoinandquitmessages.utils.Utils;
 
-public class SoundsListener extends EventsUtils implements Listener{
+public class SoundsListener implements Listener{
 
 	private CustomJoinAndQuitMessages plugin;
-	private CommandSender c = Bukkit.getConsoleSender();
+	private EventUtils eventUtils = new EventUtils(plugin);
 	
 	public SoundsListener(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
-		getManger().registerEvents(this, plugin);
+		eventUtils.addEventList(this);
 	}
 	
 	@EventHandler
@@ -76,21 +76,21 @@ public class SoundsListener extends EventsUtils implements Listener{
 			ex.printStackTrace();
 		}*/
 		}catch(IllegalArgumentException ex) {
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&cError: &b Sounds.Enabled &9== &eNull &d?");
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + plugin.Locale().Error_Sound);
+			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull &d?");
+			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Error_Sound);
 		}catch(NullPointerException ex){
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&cError: &b Sounds.Enabled &9== &eNull &d?");
+			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull &d?");
 			if(split[0] == null) {
-				Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&cError: &b Sounds.Enabled &9== &eNull 0 &d?");
+				Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull 0 &d?");
 			}
 			if(split[1] == null) {
-				Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&cError: &b Sounds.Enabled &9== &eNull 1 &d?");
+				Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull 1 &d?");
 			}
 			if(split[2] == null) {
-				Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&cError: &b Sounds.Enabled &9== &eNull 2 &d?");
+				Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull 2 &d?");
 			}
 			if(split[0] == null || split[1] == null || split[2] == null) {
-				Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&cError: &b Sounds.Enabled &9== &eNull all &d?");
+				Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull all &d?");
 			}
 		}
 	}
@@ -146,21 +146,21 @@ public class SoundsListener extends EventsUtils implements Listener{
 		}*/
 		
 		}catch(IllegalArgumentException ex) {
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&cError: &b Sounds.Enabled &9== &eNull &d?");
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + plugin.Locale().Error_Sound);
+			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull &d?");
+			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Error_Sound);
 		}catch(NullPointerException ex){
-			Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&cError: &b Sounds.Enabled &9== &aNull &d?");
+			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &aNull &d?");
 			if(split[0] == null) {
-				Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&cError: &b Sounds.Enabled &9== &eNull 0 &d?");
+				Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull 0 &d?");
 			}
 			if(split[1] == null) {
-				Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&cError: &b Sounds.Enabled &9== &eNull 1 &d?");
+				Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull 1 &d?");
 			}
 			if(split[2] == null) {
-				Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&cError: &b Sounds.Enabled &9== &eNull 2 &d?");
+				Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull 2 &d?");
 			}
 			if(split[0] == null || split[1] == null || split[2] == null) {
-				Utils.sendColorMessage(c, Utils.getPrefixCJMConsole() + " " + "&cError: &b Sounds.Enabled &9== &eNull all &d?");
+				Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull all &d?");
 			}
 		}
 	}
