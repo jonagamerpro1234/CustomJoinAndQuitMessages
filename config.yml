@@ -1,0 +1,143 @@
+# | CustomJoinAndQuitMessage |
+# |   By jonagamerpro1234    |
+# |      Version 1.6.1       |
+# |__________________________|
+# 
+# There are two variables that show the name of the player in a message and that are | <Name>, <DisplayName> | these two variables can also be in lowercase.
+# Vars = #|<name>, <displayname>, [<rank>, <money> | Vault Extend and PlaceHoderAPI], <world>, <server_name>, <version>, <online>, <online_max>|
+#
+Config:
+  Lang: en-US # you can use the available languages of the plugin or you can add your own translations [Default | en-US ]
+  Update:
+    Enabled: true # allows to send an update message available on the console [ Default| true ]
+    Notify:
+      Enabled: true # allows to send an update message available on the player [ Default| true ]
+    Lang: en # [ en | es ] there are 2 languages available at the moment [English|Spanish] 
+  Debug:
+    Enabled: false  #| Debug | shows you important information about the plugin loading | ! in case of error or problems put [Debug: true]!
+    Lang: en #|Lang| [es] [Spanish | Espanol] | [en] [English | Ingles]
+#
+# |Join and Quit|
+#
+# |Enabled|
+# here you can deactivate or activate the customization of the Join/Quit message [ Default | true ]
+#
+# |Text|
+# This is where Join/Quit's customizable message is located
+#
+# |Type|
+# [Default] will use normal plugin customization and only modify the message adding color as well
+# [None] hides the Join/Quit message for both the plugin and the vanilla message for minecraft
+# [Hover] activate the sub-messages function when hovering the mouse over the Join/Quit message
+# [Click] activate the custom actions function when you click on the Join/Quit message
+# [Double] Activate the two HoverEvent functions in ClickEvent at the same time, this option is [experimental] and may present a bug
+# | Vars | there are variables that only work in certain functions
+# \n used to move to the next line in the hover function
+Join:
+  Enabled: true
+  Text: '&b[&a+&b] <name>' #|<name>, <displayname>, [<rank>, <money> | Vault Extend and PlaceHoderAPI], <world>, <server_name>, <version>, <online>, <online_max>|
+  Type: Default #| Default ,Double[Experimental] ,Hover ,Click ,None ,Group[Experimental]|
+  HoverEvent:
+    Text: '&6hello &b<name>'
+    Mode: TEXT # |Mode| [TEXT] show hover text
+    Legacy-Color: false #|Legacy-Color| the legacy color mode is used to activate the old color system for hover event
+    Color: AQUA #[RED] | [AQUA] | [BLUE] | [GREED] | [GOlD] | ....etc
+  ClickEvent:
+    Action: 'say hello'
+    Mode: CMD #|Mode| [URL] oper url | [CMD] send command
+Quit:
+  Enabled: true
+  Text: '&b[&c-&b] <name>' #|<name>, <displayname>, [<rank>, <money> | Vault Extend and PlaceHoderAPI], <world>, <server_name>, <version>, <online>, <online_max>|
+  Type: Default #| Default ,Double[Experimental] ,Hover ,Click ,None ,Group[Experimental]|
+  HoverEvent:
+    Text: '&6bay &c<name>'
+    Mode: TEXT # TEXT |!comings soond more modes!|
+    Legacy-Color: false #|Legacy-Color| the legacy color mode is used to activate the old color system for hover event
+    Color: AQUA #| RED, BLUE, GREEN, AQUA, YELLOW, ...etc. |
+  ClickEvent:
+    Action: 'say bay <name>'
+    Mode: CMD #|Mode| [URL] oper url | [CMD] send command
+#
+# |Welcome| 
+# Here you can customize the welcome message for players when entering the server
+# | Vars | there are variables that only work in certain functions
+#  <0> leave an empty line
+Welcome:
+  Enabled: true #|Enabled| turn the welcome message on and off [ Default | true ]
+  Max-Line: 8 #|Max Line| is the maximum number of lines allowed to avoid a bug [Default | 8]
+  Text:
+    - '&b&m=========================================&r'
+    - '<0>'
+    - '&e> &7Welcome To The Server &b<name>'
+    - '<0>'
+    - '&e> &cShop: shop-example.com'
+    - '&e> &7Use &b/skin to put on a skin'
+    - '<0>'
+    - '&b&m=========================================&r'
+#
+# |Title|
+# Here you can customize the title for the players when entering the server for more help with the ticks, enter this link
+# https://github.com/jonagamerpro1234/MultiOptions/wiki/Ticks-in-Minecraft 
+Title:
+  Enabled: true #|Enabled| here you can activate and deactivate the title in this option [Default | true]
+  Text:
+    Title: '&a&lWelcome to the server'
+    SubTitle: '&b<name>'
+  Settings:
+    Time:
+      FadeIn: 20 #| Default 20 ticks | 20 ticks = 1s
+      Stay: 40 #| Default 40 ticks | 40 ticks = 2s
+      FadeOut: 20 #| Default 20 ticks | 20 ticks = 1s
+#
+# |Actionbar|
+# Here you can customize the Actionbar for the players when entering the server
+ActionBar:
+  Enabled: true #|Enabled| here you can activate and deactivate the actionbar in this option [Default | true]
+  Text: 'Welcome to the server <name>'
+#
+# |Sounds|
+#
+# Format: sound_name;vol;pitch        
+# Ej 1.9.  BLOCK_NOTE_PLING;10;2      
+# Sound list: https://www.spigotmc.org/wiki/cc-sounds-list/ 
+Sounds:
+  Enabled: true
+  Settings:
+    Send-All-Sounds: true
+  Join:
+    Enabled: true
+    Sound: NOTE_PLING;10;1
+    Enabled-Permission: false
+    Custom-Permission: 'MultiOptions.join'
+  Quit:
+    Enabled: true
+    Sound: NOTE_PLING;10;1
+    Enabled-Permission: false
+    Custom-Permission: 'MultiOptions.quit'
+#  
+# |Groups|
+# currently only join and quit functions are available for the group system
+#
+# |Format:
+# |Groups:
+# |  <group name>:
+# |    Join:
+# |      Text: 'hello'
+# |      Permission: 'my.permission'
+# |    Quit:
+# |      Text: 'hello'
+# |      Permission: 'my.permission'      
+Groups:
+  Default:
+    Join:
+      Text: '&6[&a+&6] &7<name>'
+      Permission: 'cjm.group.join.default'    
+    Quit:
+      Text: '&6[&c-&6] &7<name>'
+      Permission: 'cjm.group.quit.default'
+#
+# This is the end of the configuration ... [-_-] more things coming soon
+# 
+# | Config File  |
+# | Version 1.6  |
+#
