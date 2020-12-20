@@ -1,18 +1,18 @@
-package jss.customjoinandquitmessages.custom;
+package jss.customjoinandquitmessages.events.custom;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class SendActionBarEvent extends Event implements Cancellable{
+public class ActionbarEvent extends Event implements Cancellable{
 
     private static final HandlerList handlers = new HandlerList();
 	private boolean cancelled = false;
 	private Player player;
 	private String title;
 	
-	public SendActionBarEvent(Player player, String title) {
+	public ActionbarEvent(Player player, String title) {
 		this.player = player;
 		this.title = title;
 	}

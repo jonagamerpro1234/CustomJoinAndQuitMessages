@@ -170,7 +170,6 @@ public class JoinListener implements Listener{
 		text = getAllVars(j, text);
 		
 		if(config.getString(path).equals("true")) {
-			plugin.sendActionBar(j, text);
 		}
 	}
 	

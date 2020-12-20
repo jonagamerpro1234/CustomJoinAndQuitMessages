@@ -1,4 +1,4 @@
-package jss.customjoinandquitmessages.utils;
+package jss.customjoinandquitmessages.utils.interfaces;
 
 import java.io.IOException;
 import java.util.List;
