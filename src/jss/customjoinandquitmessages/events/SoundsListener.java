@@ -71,10 +71,6 @@ public class SoundsListener implements Listener{
 					}
 				}
 			}
-			
-		/*}catch(Exception ex) {
-			ex.printStackTrace();
-		}*/
 		}catch(IllegalArgumentException ex) {
 			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull &d?");
 			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Error_Sound);
@@ -141,10 +137,6 @@ public class SoundsListener implements Listener{
 					}
 				}
 			}
-		/*}catch(Exception ex) {
-			ex.printStackTrace();
-		}*/
-		
 		}catch(IllegalArgumentException ex) {
 			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull &d?");
 			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Error_Sound);

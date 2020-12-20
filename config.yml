@@ -1,6 +1,6 @@
 # | CustomJoinAndQuitMessage |
 # |   By jonagamerpro1234    |
-# |      Version 1.6.1       |
+# |      Version 1.7.0       |
 # |__________________________|
 # 
 # There are two variables that show the name of the player in a message and that are | <Name>, <DisplayName> | these two variables can also be in lowercase.
@@ -36,13 +36,13 @@ Config:
 Join:
   Enabled: true
   Text: '&b[&a+&b] <name>' #|<name>, <displayname>, [<rank>, <money> | Vault Extend and PlaceHoderAPI], <world>, <server_name>, <version>, <online>, <online_max>|
-  Type: Default #| Default ,Double[Experimental] ,Hover ,Click ,None ,Group[Experimental]|
-  HoverEvent:
+  Type: Normal #| Normal ,Double[Experimental] ,Hover ,Click ,None ,Group[Experimental]|
+  Hover:
     Text: '&6hello &b<name>'
     Mode: TEXT # |Mode| [TEXT] show hover text
     Legacy-Color: false #|Legacy-Color| the legacy color mode is used to activate the old color system for hover event
     Color: AQUA #[RED] | [AQUA] | [BLUE] | [GREED] | [GOlD] | ....etc
-  ClickEvent:
+  Click:
     Action: 'say hello'
     Mode: CMD #|Mode| [URL] oper url | [CMD] send command
 Quit:
@@ -102,6 +102,7 @@ ActionBar:
 # Sound list: https://www.spigotmc.org/wiki/cc-sounds-list/ 
 Sounds:
   Enabled: true
+  Type: Normal #| Normal | Group [!Experimental!] |
   Settings:
     Send-All-Sounds: true
   Join:
@@ -116,7 +117,7 @@ Sounds:
     Custom-Permission: 'MultiOptions.quit'
 #  
 # |Groups|
-# currently only join and quit functions are available for the group system
+# |> currently only join and quit functions are available for the group system
 #
 # |Format:
 # |Groups:
@@ -139,5 +140,5 @@ Groups:
 # This is the end of the configuration ... [-_-] more things coming soon
 # 
 # | Config File  |
-# | Version 1.6  |
+# | Version 1.7  |
 #
