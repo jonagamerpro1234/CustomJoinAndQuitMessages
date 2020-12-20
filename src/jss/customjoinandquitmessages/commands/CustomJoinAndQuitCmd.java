@@ -3,7 +3,6 @@ package jss.customjoinandquitmessages.commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,6 +10,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.PluginConfig;
 import jss.customjoinandquitmessages.utils.Utils;
 import net.md_5.bungee.api.ChatColor;
@@ -22,7 +22,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 	
 	private CustomJoinAndQuitMessages plugin;
-	private CommandSender c = Bukkit.getConsoleSender();
+	private EventUtils eventUtils = new EventUtils(plugin);
 	
 	public CustomJoinAndQuitCmd(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
@@ -33,14 +33,41 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(!(sender instanceof Player)) {
-			Utils.sendColorMessage(c, Utils.getPrefix() + " " + plugin.Locale().Error_Console);
+			
+			if(args.length >= 1) {
+				
+				if(args[0].equalsIgnoreCase("help")) {
+					List<String> list = plugin.Locale().help_1;
+					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
+					for(int i = 0; i < list.size(); i++) {
+						String text = (String) list.get(i);
+						Utils.sendColorMessage(eventUtils.getConsoleSender(), text);
+					}
+					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+				}else if(args[0].equalsIgnoreCase("reload")) {
+					PluginConfig.loadConfig(plugin);
+					plugin.reloadConfig();
+					Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().reload);
+				}else if(args[0].equalsIgnoreCase("info")) {
+					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5 <||=-=-=-=-="+Utils.getPrefix()+"&5=-=-=-=-=-=-");
+					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5 <|| &c* &bName: &3"+plugin.name);
+					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5 <|| &c* &bAuthor: &3jonagamerpro1234");
+					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5 <|| &c* &bVersion: &a"+plugin.version);
+					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5 <|| &c* &bUpdate: &e" + plugin.latestversion);
+					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5 <||=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+				}else {
+					Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Error_Cmd);
+				}
+				return true;
+			}
+			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Help_cmd);
 			return false;
 		}
 		Player j = (Player) sender;
 		
 		if(args.length >= 1) {
 			if(args[0].equalsIgnoreCase("help")) {
-				if(!(j.hasPermission("Cjm.Commands.Help")) || !(j.isOp())) {
+				if((j.isOp()) ||  (j.hasPermission("Cjm.Commands.Help"))) {
 					TextComponent msg = new TextComponent();
 					msg.setText(Utils.color(plugin.Locale().No_Permission));
 					msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT , new ComponentBuilder(plugin.Locale().No_Permission_Label).color(ChatColor.YELLOW).create()));
@@ -57,7 +84,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("reload")) {
-				if(!(j.hasPermission("Cjm.Commands.Reload")) || !(j.isOp())) {
+				if((j.isOp()) || (j.hasPermission("Cjm.Commands.Reload"))) {
 					TextComponent msg = new TextComponent();
 					msg.setText(Utils.color(plugin.Locale().No_Permission));
 					msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT , new ComponentBuilder(plugin.Locale().No_Permission_Label).color(ChatColor.YELLOW).create()));
