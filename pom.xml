@@ -27,8 +27,24 @@
 		<id>placeholderapi</id>
 		<url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
 	</repository>  	
-  </repositories>
-  <dependencies>
+	<repository>
+		<id>jitpack.io</id>
+		<url>https://jitpack.io</url>
+	</repository>
+</repositories>
+<dependencies>
+    <dependency>
+        <groupId>com.github.MilkBowl</groupId>
+        <artifactId>VaultAPI</artifactId>
+        <version>1.7</version>
+        <scope>provided</scope>
+        <exclusions>
+        	<exclusion>
+        		<groupId>org.bukkit</groupId>
+        		<artifactId>bukkit</artifactId>
+        	</exclusion>
+        </exclusions>
+    </dependency>
   	<dependency>
   		<groupId>me.clip</groupId>
   		<artifactId>placeholderapi</artifactId>
@@ -36,4 +52,7 @@
   		<scope>provided</scope>
   	</dependency>
   </dependencies>
+  <url>https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages</url>
+  <name>CustomJoinAndQuitMessages</name>
+  <description>A simple to use plugin that will allow you to customize the join and quit message, it also brings a message customization option that will allow you to add special actions.</description>
 </project>

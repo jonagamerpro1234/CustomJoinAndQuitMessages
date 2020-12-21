@@ -9,16 +9,13 @@ import java.io.UnsupportedEncodingException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.FileManager;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.Utils;
 import jss.customjoinandquitmessages.utils.interfaces.FileHelper;
 
 public class ConfigFile extends FileManager implements FileHelper{
 
 	private CustomJoinAndQuitMessages plugin;
-	private EventUtils eventUtils = new EventUtils(plugin);
 	private File file;
 	private FileConfiguration config;
 	private String path;

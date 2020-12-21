@@ -8,9 +8,9 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
-import jss.customjoinandquitmessages.events.JoinListener;
 import jss.customjoinandquitmessages.events.SoundsListener;
 import jss.customjoinandquitmessages.hook.Placeholderapi;
+import jss.customjoinandquitmessages.hook.Vault;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Lang;
 import jss.customjoinandquitmessages.utils.PluginConfig;
@@ -25,6 +25,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	public String version = this.jss.getVersion();
 	private static CustomJoinAndQuitMessages plugin;
 	public boolean placeholders = false;
+	public boolean vault = false;
 	public Metrics metrics;
 	public String latestversion;
 	private UpdateChecker update = new UpdateChecker(this);
@@ -32,6 +33,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
     public String nmsversion;
 	private Map<String,Lang> availableLangs = new HashMap<>();
 	private Placeholderapi placeholderapi = new Placeholderapi(this);
+	private Vault vault2 = new Vault(this);
 	private EventUtils eventUtils = new EventUtils(this);
 	private ConfigFile configFile = new ConfigFile(this, "config.yml");
 	
@@ -62,8 +64,9 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
         	Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &aenabled &7method &b1.16");
         }
 		setupCommands();
-		//setupEvents();
+		setupEvents();
 		placeholderapi.onPlaceHolderAPI();
+		vault2.onVault();
 		update.Update(eventUtils.getConsoleSender());
 	}
 	
@@ -71,6 +74,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 		Utils.setDisabled(version);
 		metrics = null;
 		placeholders = false;
+		vault = false;
 	}
 	
 	public void setupCommands() {
@@ -78,7 +82,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	}
 	
 	public void setupEvents() {
-		new JoinListener(this);
+		//new JoinListener(this);
 		new SoundsListener(this);
 	}
 	
@@ -106,4 +110,11 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	public String getNmsversion() {
 		return nmsversion;
 	}
+
+	public ConfigFile getConfigFile() {
+		return configFile;
+	}
+	
+	
+	
 }

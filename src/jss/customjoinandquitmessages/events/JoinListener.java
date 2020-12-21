@@ -1,7 +1,5 @@
 package jss.customjoinandquitmessages.events;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Collection;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -12,18 +10,20 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import jss.customjoinandquitmessages.ConfigFile;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.UpdateChecker;
 import jss.customjoinandquitmessages.utils.Utils;
-import me.clip.placeholderapi.PlaceholderAPI;
+import jss.customjoinandquitmessages.utils.nms.Actionbar;
+import jss.customjoinandquitmessages.utils.nms.Title;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 
-@SuppressWarnings("deprecation")
 public class JoinListener implements Listener{
 
 	private CustomJoinAndQuitMessages plugin;
@@ -34,23 +34,22 @@ public class JoinListener implements Listener{
 		eventUtils.addEventList(this);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void JoinMessages(PlayerJoinEvent e) {
-		FileConfiguration config = plugin.getConfig();
+	public void onJoinMessages(PlayerJoinEvent e) {
+		ConfigFile configFile = plugin.getConfigFile();
+		FileConfiguration config = configFile.getConfig();
 		Player j = e.getPlayer();
 		
 		String path = "Join.Enabled";
 		String text = config.getString("Join.Text");
 		String type = "Join.Type";
-		String hovetext = config.getString("Join.HoverEvent.Text");
-		String hovecolor = config.getString("Join.HoverEvent.Color");
-		String hovemode = config.getString("Join.HoverEvent.Mode");
-		String clickaction = config.getString("Join.ClickEvent.Action");
-		String clickmode = config.getString("Join.ClickEvent.Mode");
+		String hovetext = config.getString("Join.Hover.Text");
+		String hovecolor = config.getString("Join.Hover.Color");
+		String hovemode = config.getString("Join.Hover.Mode");
+		String clickaction = config.getString("Join.Click.Action");
+		String clickmode = config.getString("Join.Click.Mode");
 		
-		text = Utils.color(text);
-		text = replacePlaceholderAPI(j, text);
-		text = getAllVars(j, text);
 		
 		if(config.getString(path).equals("true")) {
 			if(config.getString(type).equals("Default")) {
@@ -60,8 +59,8 @@ public class JoinListener implements Listener{
 				e.setJoinMessage(null);
 				TextComponent msg = new TextComponent();
 				msg.setText(text);
-				msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(hovemode)) , new ComponentBuilder(hovetext).color(ChatColor.valueOf(hovecolor)).create()));
-				msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(getActionClickType(clickmode)), clickaction));
+				msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(Utils.getActionHoverType(hovemode)) , new ComponentBuilder(hovetext).color(ChatColor.of(hovecolor)).create()));
+				msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(Utils.getActionClickType(clickmode)), clickaction));
 				j.spigot().sendMessage(msg);
 			}
 			if (config.getString(type).equals("Hover")){
@@ -69,12 +68,12 @@ public class JoinListener implements Listener{
 					e.setJoinMessage(null);
 					TextComponent msg = new TextComponent();
 					msg.setText(text);
-					msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(hovemode)) , new ComponentBuilder(hovetext).color(ChatColor.valueOf(hovecolor)).create()));
+					msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(Utils.getActionHoverType(hovemode)) , new ComponentBuilder(hovetext).color(ChatColor.of(hovecolor)).create()));
 					j.spigot().sendMessage(msg);					
 				}else if(config.getString("Join.HoverEvent.Legacy-Color").equals("false")) {
 					e.setJoinMessage(null);
 					TextComponent tc = new TextComponent();
-					HoverEvent hover = new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(hovemode)), new ComponentBuilder(Utils.color(hovetext)).create());
+					HoverEvent hover = new HoverEvent(HoverEvent.Action.valueOf(Utils.getActionHoverType(hovemode)), new ComponentBuilder(Utils.color(hovetext)).create());
 					tc.setHoverEvent(hover);
 					tc.setText(text);
 					j.spigot().sendMessage(tc);
@@ -84,7 +83,7 @@ public class JoinListener implements Listener{
 				e.setJoinMessage(null);
 				TextComponent msg = new TextComponent();
 				msg.setText(text);
-				msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(getActionClickType(clickmode)), clickaction));
+				msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(Utils.getActionClickType(clickmode)), clickaction));
 				j.spigot().sendMessage(msg);
 			}
 			if(config.getString(type).equals("None")){
@@ -98,8 +97,6 @@ public class JoinListener implements Listener{
 					if(j.hasPermission(joinperm)){}
 					
 					e.setJoinMessage(null);
-					jointext = getAllVars(j, jointext);
-					jointext = replacePlaceholderAPI(j, jointext);
 					
 					Utils.sendColorMessage(j, jointext);
 					
@@ -119,8 +116,6 @@ public class JoinListener implements Listener{
 			if(config.getString(path).equals("true")) {
 				for(int i = 0; i < list.size(); i++){
 					String text = (String) list.get(i);
-					text = replacePlaceholderAPI(j, text);
-					text = getAllVars(j, text);
 					Utils.sendColorMessage(j, text.replace("<0>", " "));
 					if(i == max) {
 						break;
@@ -132,7 +127,6 @@ public class JoinListener implements Listener{
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	@EventHandler
 	public void sendJoinTitle(PlayerJoinEvent e) {
 		FileConfiguration config = plugin.getConfig();
@@ -146,14 +140,11 @@ public class JoinListener implements Listener{
 		int fadeOut = config.getInt("Title.Settings.Time.FadeOut");
 		
 		title = Utils.color(title);
-		title = replacePlaceholderAPI(j, title);
-		title = getAllVars(j, title);
 		
 		subtitle = Utils.color(subtitle);
-		subtitle = replacePlaceholderAPI(j, subtitle);
-		subtitle = getAllVars(j, subtitle);
 		
 		if(config.getString(path).equals("true")) {
+			Title.sendTitle(j, title, subtitle, fadeIn, stay, fadeOut);
 		}
 	}
 	
@@ -166,23 +157,29 @@ public class JoinListener implements Listener{
 		String text = config.getString("ActionBar.Text");
 		
 		text = Utils.color(text);
-		text = replacePlaceholderAPI(j, text);
-		text = getAllVars(j, text);
-		
 		if(config.getString(path).equals("true")) {
+			Actionbar actionbar = new Actionbar();
+			actionbar.sendActionBar(j, text);
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void sendJoinUpdate(PlayerJoinEvent e) {
 		FileConfiguration config = plugin.getConfig();
 		Player j = e.getPlayer();
 		UpdateChecker update = new UpdateChecker(plugin);
-		if(!(j.hasPermission("MultiOptions.Update.Notify")) || !(j.isOp())) {
+		if((j.isOp()) || (j.hasPermission("Cjm.Update.Notify"))) {
 			if(config.getString("Config.Debug.Enabled").equals("true")) {
 				TextComponent msg = new TextComponent();
 				msg.setText(Utils.color("&c&l&n[!]&7 You do not have permission"));
-				msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT , new ComponentBuilder("ask an admin or owner for help for more information").color(ChatColor.YELLOW).create()));
+				msg.setColor(ChatColor.YELLOW);
+				if(Bukkit.getVersion().equals("1.16")) {
+					msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT , new Text("ask an admin or owner for help for more information")));	
+				}else {
+					msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT , new ComponentBuilder("ask an admin or owner for help for more information").create()));
+				}
+				
 				j.spigot().sendMessage(msg);
 			}
 			return;
@@ -190,6 +187,7 @@ public class JoinListener implements Listener{
 		update.Update(j);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void QuitMessages(PlayerQuitEvent e) {
 		FileConfiguration config = plugin.getConfig();
@@ -198,15 +196,13 @@ public class JoinListener implements Listener{
 		String path = "Quit.Enabled";
 		String text = config.getString("Quit.Text");
 		String type = "Quit.Type";
-		String hovetext = config.getString("Quit.HoverEvent.Text");
-		String hovecolor = config.getString("Quit.HoverEvent.Color");
-		String hovemode = config.getString("Quit.HoverEvent.Mode");
-		String clickaction = config.getString("Quit.ClickEvent.Action");
-		String clickmode = config.getString("Quit.ClickEvent.Mode");
+		String hovetext = config.getString("Quit.Hover.Text");
+		String hovecolor = config.getString("Quit.Hover.Color");
+		String hovemode = config.getString("Quit.Hover.Mode");
+		String clickaction = config.getString("Quit.Click.Action");
+		String clickmode = config.getString("Quit.Click.Mode");
 		
 		text = Utils.color(text);
-		text = replacePlaceholderAPI(j, text);
-		text = getAllVars(j, text);
 		
 		if(config.getString(path).equals("true")) {
 			if(config.getString(type).equals("Default")) {
@@ -216,32 +212,22 @@ public class JoinListener implements Listener{
 				e.setQuitMessage(null);
 				TextComponent msg = new TextComponent();
 				msg.setText(text);
-				msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(hovemode)) , new ComponentBuilder(hovetext).color(ChatColor.valueOf(hovecolor)).create()));
-				msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(getActionClickType(clickmode)), clickaction));
+				msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(Utils.getActionHoverType(hovemode)) , new ComponentBuilder(hovetext).color(ChatColor.valueOf(hovecolor)).create()));
+				msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(Utils.getActionClickType(clickmode)), clickaction));
 				j.spigot().sendMessage(msg);
 			}
 			if (config.getString(type).equals("Hover")){
 				if(config.getString("Quit.HoverEvent.Legacy-Color").equals("true")) {
 					e.setQuitMessage(null);
-					TextComponent msg = new TextComponent();
-					msg.setText(text);
-					msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(hovemode)) , new ComponentBuilder(hovetext).color(ChatColor.valueOf(hovecolor)).create()));
-					j.spigot().sendMessage(msg);					
+					Utils.sendTextComponent(j, hovemode, text, hovetext, hovecolor);
 				}else if(config.getString("Quit.HoverEvent.Legacy-Color").equals("false")) {
 					e.setQuitMessage(null);
-					TextComponent tc = new TextComponent();
-					HoverEvent hover = new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(hovemode)), new ComponentBuilder(Utils.color(hovetext)).create());
-					tc.setHoverEvent(hover);
-					tc.setText(text);
-					j.spigot().sendMessage(tc);
+					Utils.sendTextComponent(j, hovemode, text, hovetext);
 				}	
 			}
 			if(config.getString(type).equals("Click")) {
 				e.setQuitMessage(null);
-				TextComponent msg = new TextComponent();
-				msg.setText(text);
-				msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(getActionClickType(clickmode)), clickaction));
-				j.spigot().sendMessage(msg);
+				Utils.sendTextComponent(j, clickmode, text, clickaction);
 			}
 			if(config.getString(type).equals("None")){
 				e.setQuitMessage(null);
@@ -253,9 +239,6 @@ public class JoinListener implements Listener{
 					String quitperm = config.getString("Groups."+key+".Quit.Permission");
 					
 					if(j.hasPermission(quitperm)){}
-					e.setQuitMessage(null);
-					quittext = getAllVars(j, quittext);
-					quittext = replacePlaceholderAPI(j, quittext);
 					
 					Utils.sendColorMessage(j, quittext);
 				}
@@ -263,68 +246,6 @@ public class JoinListener implements Listener{
 		}			
 	}
 	
-	public  String replacePlaceholderAPI(Player p, String message){
-	    String holders = message;
-	    if ((plugin.placeholders) && (PlaceholderAPI.containsPlaceholders(holders))) {
-	      holders = PlaceholderAPI.setPlaceholders(p, holders);
-	    }
-	    return holders;
-	}
-	
-	public String getAllVars(Player j, String msg) {	
-		int playersOnline = 0;
-	    try
-	    {
-	      if (Bukkit.class.getMethod("getOnlinePlayers", new Class[0]).getReturnType() == Collection.class) {
-	        playersOnline = ((Collection<?>)Bukkit.class.getMethod("getOnlinePlayers", new Class[0]).invoke(null, new Object[0])).size();
-	      } else {
-	        playersOnline = ((Player[])Bukkit.class.getMethod("getOnlinePlayers", new Class[0]).invoke(null, new Object[0])).length;
-	      }
-	    }
-	    catch (NoSuchMethodException ex) {}catch (InvocationTargetException ex) {}catch (IllegalAccessException ex) {}		
-		try {
-			msg = msg.replace("<Name>", j.getName());
-			msg = msg.replace("<DisplayName>", j.getDisplayName());
-			msg = msg.replace("<MaxPlayer>", "" +plugin.getServer().getMaxPlayers());
-			msg = msg.replace("<Online>", "" + playersOnline);
-			//msg = msg.replace("<Server>", plugin.getServer().getServerName());
-			msg = msg.replace("<Version>",  plugin.getServer().getBukkitVersion());
-			msg = msg.replace("<World>", j.getWorld().getName());
-			
-			msg = msg.replace("<name>", j.getName());
-			msg = msg.replace("<displayname>", j.getDisplayName());
-			msg = msg.replace("<maxPlayer>", "" +plugin.getServer().getMaxPlayers());
-			msg = msg.replace("<online>", "" + playersOnline);
-			//msg = msg.replace("<server>", plugin.getServer().getServerName());
-			msg = msg.replace("<version>",  plugin.getServer().getBukkitVersion());
-			msg = msg.replace("<world>", j.getWorld().getName());
-		}catch(Exception  e) {}
-		return msg;
-	}
 
-	public String getActionHoverType(String arg) {
-		String temp = arg;
-		
-		if(temp.equalsIgnoreCase("text")) {
-			return "SHOW_TEXT";
- 		}
-		if(temp.equalsIgnoreCase("item")) {
-			return "SHOW_ITEM";
-		}
-		if(temp.equalsIgnoreCase("entity")) {
-			return "SHOW_ENTITY";
-		}
-		return null;
-	}
-	
-	public String getActionClickType(String arg) {
-		String temp = arg;
-		if(temp.equalsIgnoreCase("url")) {
-			return "OPER_URL";
- 		}
-		if(temp.equalsIgnoreCase("cmd")) {
-			return "RUN_COMMAND";
-		}
-		return null;
-	}
+
 }

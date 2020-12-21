@@ -36,7 +36,7 @@ Config:
 Join:
   Enabled: true
   Text: '&b[&a+&b] <name>' #|<name>, <displayname>, [<rank>, <money> | Vault Extend and PlaceHoderAPI], <world>, <server_name>, <version>, <online>, <online_max>|
-  Type: Normal #| Normal ,Double[Experimental] ,Hover ,Click ,None ,Group[Experimental]|
+  Type: Normal #| Normal, Double[Experimental!], Hover, Click, None, Group[Experimental!]|
   Hover:
     Text: '&6hello &b<name>'
     Mode: TEXT # |Mode| [TEXT] show hover text
@@ -49,14 +49,14 @@ Quit:
   Enabled: true
   Text: '&b[&c-&b] <name>' #|<name>, <displayname>, [<rank>, <money> | Vault Extend and PlaceHoderAPI], <world>, <server_name>, <version>, <online>, <online_max>|
   Type: Default #| Default ,Double[Experimental] ,Hover ,Click ,None ,Group[Experimental]|
-  HoverEvent:
+  Hover:
     Text: '&6bay &c<name>'
     Mode: TEXT # TEXT |!comings soond more modes!|
     Legacy-Color: false #|Legacy-Color| the legacy color mode is used to activate the old color system for hover event
     Color: AQUA #| RED, BLUE, GREEN, AQUA, YELLOW, ...etc. |
-  ClickEvent:
+  Click:
     Action: 'say bay <name>'
-    Mode: CMD #|Mode| [URL] oper url | [CMD] send command
+    Mode: CMD #|Mode| [URL] open url | [CMD] send command
 #
 # |Welcome| 
 # Here you can customize the welcome message for players when entering the server
@@ -119,7 +119,6 @@ Sounds:
 # |Groups|
 # |> currently only join and quit functions are available for the group system
 #
-# |Format:
 # |Groups:
 # |  <group name>:
 # |    Join:
@@ -132,12 +131,18 @@ Groups:
   Default:
     Join:
       Text: '&6[&a+&6] &7<name>'
-      Permission: 'cjm.group.join.default'    
+      Permission: 'cjm.group.join.default'
+      Enabled-Sound: true
+      Sound: NOTE_PLING;10;1
+      Send-All-Sound: true
     Quit:
       Text: '&6[&c-&6] &7<name>'
       Permission: 'cjm.group.quit.default'
+      Enabled-Sound: true
+      Sound: NOTE_PLING;10;1
+      Send-All-Sound: true
 #
-# This is the end of the configuration ... [-_-] more things coming soon
+# |> This is the end of the configuration ... [-_-] more things coming soon
 # 
 # | Config File  |
 # | Version 1.7  |
