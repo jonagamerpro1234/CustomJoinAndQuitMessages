@@ -4,15 +4,14 @@
 # |__________________________|
 # 
 # There are two variables that show the name of the player in a message and that are | <Name>, <DisplayName> | these two variables can also be in lowercase.
-# Vars = #|<name>, <displayname>, [<rank>, <money> | Vault Extend and PlaceHoderAPI], <world>, <server_name>, <version>, <online>, <online_max>|
 #
 Config:
-  Lang: en-US # you can use the available languages of the plugin or you can add your own translations [Default | en-US ]
+  Lang: en-US # you can use the available languages of the plugin or you can add your own translations [ Default | en-US ]
   Update:
-    Enabled: true # allows to send an update message available on the console [ Default| true ]
+    Enabled: true # allows to send an update message available on the console [ Default | true ]
     Notify:
-      Enabled: true # allows to send an update message available on the player [ Default| true ]
-    Lang: en # [ en | es ] there are 2 languages available at the moment [English|Spanish] 
+      Enabled: true # allows to send an update message available on the player [ Default | true ]
+    Lang: en # [ en | es ] there are 2 languages available at the moment [ English | Spanish ] 
   Debug:
     Enabled: false  #| Debug | shows you important information about the plugin loading | ! in case of error or problems put [Debug: true]!
     Lang: en #|Lang| [es] [Spanish | Espanol] | [en] [English | Ingles]
@@ -35,8 +34,8 @@ Config:
 # \n used to move to the next line in the hover function
 Join:
   Enabled: true
-  Text: '&b[&a+&b] <name>' #|<name>, <displayname>, [<rank>, <money> | Vault Extend and PlaceHoderAPI], <world>, <server_name>, <version>, <online>, <online_max>|
-  Type: Normal #| Normal, Double[Experimental!], Hover, Click, None, Group[Experimental!]|
+  Text: '&b[&a+&b] <name>' #|<name>, <displayname>|
+  Type: Normal #| Normal, Double, Hover, Click, None, Group[Experimental!] |
   Hover:
     Text: '&6hello &b<name>'
     Mode: TEXT # |Mode| [TEXT] show hover text
@@ -47,8 +46,8 @@ Join:
     Mode: CMD #|Mode| [URL] oper url | [CMD] send command
 Quit:
   Enabled: true
-  Text: '&b[&c-&b] <name>' #|<name>, <displayname>, [<rank>, <money> | Vault Extend and PlaceHoderAPI], <world>, <server_name>, <version>, <online>, <online_max>|
-  Type: Default #| Default ,Double[Experimental] ,Hover ,Click ,None ,Group[Experimental]|
+  Text: '&b[&c-&b] <name>' #|<name>, <displayname> |
+  Type: Default #| Default ,Double ,Hover ,Click ,None ,Group[Experimental]|
   Hover:
     Text: '&6bay &c<name>'
     Mode: TEXT # TEXT |!comings soond more modes!|

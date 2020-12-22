@@ -31,10 +31,9 @@ public class JoinListener implements Listener{
 	
 	public JoinListener(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
-		eventUtils.addEventList(this);
+		eventUtils.getEventManager().registerEvents(this, plugin);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onJoinMessages(PlayerJoinEvent e) {
 		ConfigFile configFile = plugin.getConfigFile();
@@ -57,34 +56,26 @@ public class JoinListener implements Listener{
 			}
 			if (config.getString(type).equals("Double")){
 				e.setJoinMessage(null);
-				TextComponent msg = new TextComponent();
+				//Test new methods
+				/*TextComponent msg = new TextComponent();
 				msg.setText(text);
 				msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(Utils.getActionHoverType(hovemode)) , new ComponentBuilder(hovetext).color(ChatColor.of(hovecolor)).create()));
 				msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(Utils.getActionClickType(clickmode)), clickaction));
-				j.spigot().sendMessage(msg);
+				j.spigot().sendMessage(msg);*/
+				Utils.sendTextComponentDouble(j, text, hovetext, hovemode, clickmode, clickaction);
 			}
 			if (config.getString(type).equals("Hover")){
 				if(config.getString("Join.HoverEvent.Legacy-Color").equals("true")) {
 					e.setJoinMessage(null);
-					TextComponent msg = new TextComponent();
-					msg.setText(text);
-					msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(Utils.getActionHoverType(hovemode)) , new ComponentBuilder(hovetext).color(ChatColor.of(hovecolor)).create()));
-					j.spigot().sendMessage(msg);					
+					Utils.sendTextComponentHover(j, hovemode, text, hovetext, hovecolor);					
 				}else if(config.getString("Join.HoverEvent.Legacy-Color").equals("false")) {
 					e.setJoinMessage(null);
-					TextComponent tc = new TextComponent();
-					HoverEvent hover = new HoverEvent(HoverEvent.Action.valueOf(Utils.getActionHoverType(hovemode)), new ComponentBuilder(Utils.color(hovetext)).create());
-					tc.setHoverEvent(hover);
-					tc.setText(text);
-					j.spigot().sendMessage(tc);
+					Utils.sendTextComponent116Hover(j, hovemode, text, hovetext);
 				}
 			}
 			if(config.getString(type).equals("Click")) {
 				e.setJoinMessage(null);
-				TextComponent msg = new TextComponent();
-				msg.setText(text);
-				msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(Utils.getActionClickType(clickmode)), clickaction));
-				j.spigot().sendMessage(msg);
+				Utils.sendTextComponentClick(j, clickmode, text, clickaction);
 			}
 			if(config.getString(type).equals("None")){
 				e.setJoinMessage(null);
@@ -219,15 +210,15 @@ public class JoinListener implements Listener{
 			if (config.getString(type).equals("Hover")){
 				if(config.getString("Quit.HoverEvent.Legacy-Color").equals("true")) {
 					e.setQuitMessage(null);
-					Utils.sendTextComponent(j, hovemode, text, hovetext, hovecolor);
+					Utils.sendTextComponentHover(j, hovemode, text, hovetext, hovecolor);
 				}else if(config.getString("Quit.HoverEvent.Legacy-Color").equals("false")) {
 					e.setQuitMessage(null);
-					Utils.sendTextComponent(j, hovemode, text, hovetext);
+					Utils.sendTextComponent116Hover(j, hovemode, text, hovetext);
 				}	
 			}
 			if(config.getString(type).equals("Click")) {
 				e.setQuitMessage(null);
-				Utils.sendTextComponent(j, clickmode, text, clickaction);
+				Utils.sendTextComponentClick(j, clickmode, text, clickaction);
 			}
 			if(config.getString(type).equals("None")){
 				e.setQuitMessage(null);

@@ -22,7 +22,7 @@ public class SoundsListener implements Listener{
 	
 	public SoundsListener(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
-		eventUtils.addEventList(this);
+		eventUtils.getEventManager().registerEvents(this, plugin);
 	}
 	
 	@EventHandler

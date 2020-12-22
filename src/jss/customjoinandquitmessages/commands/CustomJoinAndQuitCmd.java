@@ -13,12 +13,7 @@ import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.PluginConfig;
 import jss.customjoinandquitmessages.utils.Utils;
-import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
 
-@SuppressWarnings("deprecation")
 public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 	
 	private CustomJoinAndQuitMessages plugin;
@@ -26,16 +21,13 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 	
 	public CustomJoinAndQuitCmd(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
-		
 		plugin.getCommand("CustomJoinAndQuitMessages").setExecutor(this);
 		plugin.getCommand("CustomJoinAndQuitMessages").setTabCompleter(this);
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(!(sender instanceof Player)) {
-			
 			if(args.length >= 1) {
-				
 				if(args[0].equalsIgnoreCase("help")) {
 					List<String> list = plugin.Locale().help_1;
 					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
@@ -64,14 +56,10 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 			return false;
 		}
 		Player j = (Player) sender;
-		
 		if(args.length >= 1) {
 			if(args[0].equalsIgnoreCase("help")) {
-				if((j.isOp()) ||  (j.hasPermission("Cjm.Commands.Help"))) {
-					TextComponent msg = new TextComponent();
-					msg.setText(Utils.color(plugin.Locale().No_Permission));
-					msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT , new ComponentBuilder(plugin.Locale().No_Permission_Label).color(ChatColor.YELLOW).create()));
-					j.spigot().sendMessage(msg);
+				if((j.isOp()) ||  (j.hasPermission("Cjm.Help"))) {
+					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
 					return true;
 				}
 				List<String> list = plugin.Locale().help_1;
@@ -84,11 +72,8 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("reload")) {
-				if((j.isOp()) || (j.hasPermission("Cjm.Commands.Reload"))) {
-					TextComponent msg = new TextComponent();
-					msg.setText(Utils.color(plugin.Locale().No_Permission));
-					msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT , new ComponentBuilder(plugin.Locale().No_Permission_Label).color(ChatColor.YELLOW).create()));
-					j.spigot().sendMessage(msg);
+				if((j.isOp()) || (j.hasPermission("Cjm.Reload"))) {
+					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
 					return true;
 				}
 				PluginConfig.loadConfig(plugin);
@@ -112,20 +97,17 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 		return true;
 	}
 	
-	
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
 		if(!(sender instanceof Player)) {
 			return new ArrayList<>();
 		}
-		
 		List<String> options = new ArrayList<>();
 		String lastArgs = args.length !=0 ? args[(args.length - 1)] : "";
 		Player j = (Player) sender;
-		
 		switch (args.length) {
 		case 0:
 		case 1:
-			if(!(j.hasPermission("Cjm.Tab")) || !(j.isOp())){
+			if((j.isOp()) || (j.hasPermission("Cjm.Tab"))){
 				return null;
 			}
 			options.add("help");
@@ -133,7 +115,6 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 			options.add("info");
 			break;
 		}
-		
 		return Utils.TabLimit(options, lastArgs);
 	}
 }

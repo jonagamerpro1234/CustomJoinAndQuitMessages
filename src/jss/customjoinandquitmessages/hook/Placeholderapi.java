@@ -14,7 +14,6 @@ public class Placeholderapi {
 	private EventUtils eventUtils = new EventUtils(plugin);
 	
 	public Placeholderapi(CustomJoinAndQuitMessages plugin) {
-		super();
 		this.plugin = plugin;
 	}
 
@@ -48,8 +47,7 @@ public class Placeholderapi {
 	 
 	    public CustomJoinAndQuitMessagesExpand(CustomJoinAndQuitMessages plugin) {
 	    	this.plugin = plugin;
-	    }
-	 
+	    }	 
 
 	    public boolean persist(){
 	        return true;
@@ -58,7 +56,6 @@ public class Placeholderapi {
 	    public boolean canRegister(){
 	        return true;
 	    }
-
 
 	    public String getAuthor(){
 	        return "jonagamerpro1234";
@@ -75,11 +72,14 @@ public class Placeholderapi {
 	    public String onPlaceholderRequest(Player player, String identifier){
 	 
 	        if(player == null){
-	            return "";
+	            return null;
 	        }
 
 	        if(identifier.equals("name")){
 	        	return player.getName();
+	        }
+	        if(identifier.equals("displayname")) {
+	        	return player.getDisplayName();
 	        }
 	 
 	        return null;

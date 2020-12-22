@@ -8,6 +8,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
+import jss.customjoinandquitmessages.events.JoinListener;
 import jss.customjoinandquitmessages.events.SoundsListener;
 import jss.customjoinandquitmessages.hook.Placeholderapi;
 import jss.customjoinandquitmessages.hook.Vault;
@@ -82,7 +83,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	}
 	
 	public void setupEvents() {
-		//new JoinListener(this);
+		new JoinListener(this);
 		new SoundsListener(this);
 	}
 	

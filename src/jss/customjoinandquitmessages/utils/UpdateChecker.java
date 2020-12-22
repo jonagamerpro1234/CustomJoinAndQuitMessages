@@ -14,7 +14,7 @@ import jss.customjoinandquitmessages.utils.interfaces.UpdateHelper;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
-public class UpdateChecker implements UpdateHelper{
+public class UpdateChecker implements UpdateHelper {
 
 	private CustomJoinAndQuitMessages plugin;
 	
@@ -43,9 +43,7 @@ public class UpdateChecker implements UpdateHelper{
 			}catch(Exception ex) {
 				sendError(sender, lang);
 			}
-			
 		}
-		
 	}
 	
 	public void Update(Player player) {
@@ -68,13 +66,11 @@ public class UpdateChecker implements UpdateHelper{
 				}
 			}catch(Exception ex) {
 				sendError(player, lang);
-			}
-			
+			}	
 		}
 	}
 
 	public void sendMessage(CommandSender sender, String lang) {
-		
 		String temp = lang;
 		
 		if(temp.equalsIgnoreCase("es")) {
@@ -87,7 +83,6 @@ public class UpdateChecker implements UpdateHelper{
 			Utils.sendColorMessage(sender, Utils.getPrefix() + " &5<| " + Utils.getLine());
 			return;
 		}
-		
 		if(temp.equalsIgnoreCase("en")) {
 			Utils.sendColorMessage(sender, Utils.getPrefix() + " &5<| ");
 			Utils.sendColorMessage(sender, Utils.getPrefix() + " &5<| " + Utils.getLine());
@@ -101,7 +96,6 @@ public class UpdateChecker implements UpdateHelper{
 	}
 	
 	public void sendMessage(Player player, String lang) {
-		
 		String temp = lang;
 		
 		if(temp.equalsIgnoreCase("es")) {
@@ -109,29 +103,23 @@ public class UpdateChecker implements UpdateHelper{
 			TextComponent msg = new TextComponent();
 			msg.setText(Utils.color(Utils.getPrefixPlayer() + " &eClick en este mensaje para copiar el enlace"));
 			msg.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.spigotmc.org/resources/custom-join-and-quit-message-1-7-x-1-16-x.57006/"));
-			
 			Utils.sendColorMessage(player, Utils.getPrefixPlayer() + "&5 " + Utils.getLine());
 			Utils.sendColorMessage(player, Utils.getPrefixPlayer() + " &bVersion Actual &3[&a"+plugin.version+"&3] &9-->&b Version Nueva &3[&d"+plugin.latestversion+"&3]" );
 			Utils.sendColorMessage(player, Utils.getPrefixPlayer() + " ");
 			Utils.sendColorMessage(player, Utils.getPrefixPlayer() + " &eHay una nueva version disponible");
-			//Utils.sendColorMessage(player, Utils.getPrefixPlayer() + " &eClick en este mensaje para copiar el enlace");
 			player.spigot().sendMessage(msg);
 			Utils.sendColorMessage(player, Utils.getPrefixPlayer() + "&5 " + Utils.getLine());	
 			return;
-		}
-		
+		}		
 		if(temp.equalsIgnoreCase("en")) {
 			
 			TextComponent msg = new TextComponent();
 			msg.setText(Utils.color(Utils.getPrefixPlayer() + " &eClick on this message to copy the link"));
 			msg.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.spigotmc.org/resources/custom-join-and-quit-message-1-7-x-1-16-x.57006/"));
-
-			
 			Utils.sendColorMessage(player, Utils.getPrefixPlayer() + "&5 " + Utils.getLine());
 			Utils.sendColorMessage(player, Utils.getPrefixPlayer() + " &bCurrent version &3[&a"+plugin.version+"&3] &9-->&b New version &3[&d"+plugin.latestversion+"&3]" );
 			Utils.sendColorMessage(player, Utils.getPrefixPlayer() + " ");
 			Utils.sendColorMessage(player, Utils.getPrefixPlayer() + " &eThere is a new version available");
-			//Utils.sendColorMessage(player, Utils.getPrefixPlayer() + " &eClick on this message to copy the link");
 			player.spigot().sendMessage(msg);
 			Utils.sendColorMessage(player, Utils.getPrefixPlayer() + "&5 " + Utils.getLine());
 			return;
@@ -151,7 +139,6 @@ public class UpdateChecker implements UpdateHelper{
 			Utils.sendColorMessage(sender, Utils.getPrefix() + " &5<| " + Utils.getLine());
 			return;
 		}
-		
 		if(temp.equalsIgnoreCase("en")) {
 			Utils.sendColorMessage(sender, Utils.getPrefix() + " &5<| ");
 			Utils.sendColorMessage(sender, Utils.getPrefix() + " &5<| " + Utils.getLine());
@@ -176,7 +163,6 @@ public class UpdateChecker implements UpdateHelper{
 			Utils.sendColorMessage(player, Utils.getPrefixPlayer() + "&5 " + Utils.getLine());
 			return;
 		}
-		
 		if(temp.equalsIgnoreCase("en")) {
 			Utils.sendColorMessage(player, Utils.getPrefixPlayer() + "&5 " + Utils.getLine());
 			Utils.sendColorMessage(player, Utils.getPrefixPlayer() + " &bCurrent version &3[&a"+plugin.version+"&3] &9-->&b New version &3[&c"+plugin.latestversion+"&3]" );

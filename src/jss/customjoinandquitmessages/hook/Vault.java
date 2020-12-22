@@ -12,7 +12,6 @@ public class Vault {
 	private static Economy econ = null;
 	
 	public Vault(CustomJoinAndQuitMessages plugin) {
-		super();
 		this.plugin = plugin;
 	}
 

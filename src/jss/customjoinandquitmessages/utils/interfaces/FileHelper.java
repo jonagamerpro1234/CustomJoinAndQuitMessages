@@ -16,6 +16,4 @@ public interface FileHelper {
 	
 	public void saveDefaultConfig();
 	
-	public void resetConfig();	
-	
 }
