@@ -10,6 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import com.cryptomorin.xseries.XSound;
+
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.EventUtils;
 
@@ -42,7 +44,7 @@ public class SoundsListener implements Listener{
 				if(je.equals("true")) {
 					if(useperm.equals("true")) {
 						if(!(j.hasPermission(perm)) || !(j.isOp())) {
-							Sound sound = Sound.valueOf(split[0]);
+							Sound sound = XSound.valueOf(split[0]).parseSound();
 							int vol = Integer.valueOf(split[1]);
 							float pitch = Float.valueOf(split[2]);
 							if(sap.equals("true")) {
@@ -56,7 +58,7 @@ public class SoundsListener implements Listener{
 							}
 						}
 					}else if(useperm.equals("false")){
-						Sound sound = Sound.valueOf(split[0]);
+						Sound sound =  XSound.valueOf(split[0]).parseSound();
 						int vol = Integer.valueOf(split[1]);
 						float pitch = Float.valueOf(split[2]);
 						if(sap.equals("true")) {
@@ -76,16 +78,16 @@ public class SoundsListener implements Listener{
 			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Error_Sound);
 		}catch(NullPointerException ex){
 			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull &d?");
-			if(split[0] == null) {
+			if(split[0].isEmpty()) {
 				Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull 0 &d?");
 			}
-			if(split[1] == null) {
+			if(split[1].isEmpty()) {
 				Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull 1 &d?");
 			}
-			if(split[2] == null) {
+			if(split[2].isEmpty()) {
 				Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull 2 &d?");
 			}
-			if(split[0] == null || split[1] == null || split[2] == null) {
+			if(split[0].isEmpty() || split[1].isEmpty() || split[2].isEmpty()) {
 				Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&cError: &b Sounds.Enabled &9== &eNull all &d?");
 			}
 		}
