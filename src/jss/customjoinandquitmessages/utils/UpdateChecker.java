@@ -1,15 +1,21 @@
 package jss.customjoinandquitmessages.utils;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Scanner;
+import java.util.function.Consumer;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.utils.Logger.Level;
 import jss.customjoinandquitmessages.utils.interfaces.UpdateHelper;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -17,11 +23,27 @@ import net.md_5.bungee.api.chat.TextComponent;
 public class UpdateChecker implements UpdateHelper {
 
 	private CustomJoinAndQuitMessages plugin;
+    private Logger logger = new Logger(plugin);
+    private int ID;
+
+    public UpdateChecker(CustomJoinAndQuitMessages plugin, int ID) {
+        this.plugin = plugin;
+        this.ID = ID;
+    }
+
+    public void getUpdateVersion(Consumer<String> consumer) {
+        Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
+            try (InputStream inputStream = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.ID).openStream(); Scanner scanner = new Scanner(inputStream)) {
+                if (scanner.hasNext()) {
+                    consumer.accept(scanner.next());
+                }
+            } catch (IOException e) {
+                logger.Log(Level.INFO, "Could not check for updates:&c" + e.getMessage());
+            }
+        });
+    }
 	
-	public UpdateChecker(CustomJoinAndQuitMessages plugin) {
-		this.plugin = plugin;
-	}
-	
+	@Deprecated
 	public void Update(CommandSender sender) {
 		FileConfiguration config = plugin.getConfig();
 		String path = "Config.Update.Enabled";
@@ -46,6 +68,7 @@ public class UpdateChecker implements UpdateHelper {
 		}
 	}
 	
+	@Deprecated
 	public void Update(Player player) {
 		FileConfiguration config = plugin.getConfig();
 		String path = "Config.Update.Enabled";
@@ -70,7 +93,7 @@ public class UpdateChecker implements UpdateHelper {
 		}
 	}
 
-	public void sendMessage(CommandSender sender, String lang) {
+	private void sendMessage(CommandSender sender, String lang) {
 		String temp = lang;
 		
 		if(temp.equalsIgnoreCase("es")) {
@@ -95,7 +118,7 @@ public class UpdateChecker implements UpdateHelper {
 		}
 	}
 	
-	public void sendMessage(Player player, String lang) {
+	private void sendMessage(Player player, String lang) {
 		String temp = lang;
 		
 		if(temp.equalsIgnoreCase("es")) {
@@ -126,7 +149,7 @@ public class UpdateChecker implements UpdateHelper {
 		}
 	}
 	
-	public  void sendError(CommandSender sender, String lang) {
+	private void sendError(CommandSender sender, String lang) {
 		String temp = lang;
 		
 		if(temp.equalsIgnoreCase("es")) {
@@ -151,7 +174,7 @@ public class UpdateChecker implements UpdateHelper {
 		}
 	}
 	
-	public  void sendError(Player player, String lang) {
+	private void sendError(Player player, String lang) {
 		String temp = lang;
 		
 		if(temp.equalsIgnoreCase("es")) {

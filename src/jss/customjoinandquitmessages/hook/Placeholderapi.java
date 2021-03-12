@@ -24,7 +24,7 @@ public class Placeholderapi {
 			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + "&5 <|| &c* &eVars PlaceHolderAPI:&a true");
 			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + "&5 <|| &c* &bCustomJoinAndQuitMessages:&a true");
 			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + "&5 <||============================================----");
-			new CustomJoinAndQuitMessagesExpand(plugin).register();
+			//new CustomJoinAndQuitMessagesExpand(plugin).register();
 		}else {
 			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + "&5 <||============================================----");
 			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + "&5 <|| &c* &ePlaceHolderAPI:&b" + " " + plugin.placeholders);

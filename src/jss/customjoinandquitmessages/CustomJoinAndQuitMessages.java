@@ -14,9 +14,12 @@ import jss.customjoinandquitmessages.hook.Placeholderapi;
 import jss.customjoinandquitmessages.hook.Vault;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Lang;
+import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.Logger.Level;
 import jss.customjoinandquitmessages.utils.PluginConfig;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.UpdateChecker;
+import jss.customjoinandquitmessages.utils.UpdateSettings;
 import jss.customjoinandquitmessages.utils.Utils;
 
 public class CustomJoinAndQuitMessages extends JavaPlugin{
@@ -29,7 +32,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	public boolean vault = false;
 	public Metrics metrics;
 	public String latestversion;
-	private UpdateChecker update = new UpdateChecker(this);
+	//private UpdateChecker update;
     public boolean useLegacyversions = false;
     public String nmsversion;
 	private Map<String,Lang> availableLangs = new HashMap<>();
@@ -37,6 +40,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	private Vault vault2 = new Vault(this);
 	private EventUtils eventUtils = new EventUtils(this);
 	private ConfigFile configFile = new ConfigFile(this, "config.yml");
+	private Logger logger = new Logger(this);
 	
 	public void onEnable() {
 		Utils.setEnabled(version);
@@ -61,14 +65,26 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
         	if(useLegacyversions == true) {
         		Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &cdisabled &7method &b1.16");
         	}
-        }else if(nmsversion.equalsIgnoreCase("v1_16_R2")){
+        }else if(nmsversion.equalsIgnoreCase("v1_16_R1") || nmsversion.equalsIgnoreCase("v1_16_R2") || nmsversion.equalsIgnoreCase("v1_16_R3")){
         	Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &aenabled &7method &b1.16");
         }
 		setupCommands();
 		setupEvents();
 		placeholderapi.onPlaceHolderAPI();
 		vault2.onVault();
-		update.Update(eventUtils.getConsoleSender());
+		
+		new UpdateChecker(this, UpdateSettings.ID).getUpdateVersion(version -> {
+			if(this.getDescription().getVersion().equalsIgnoreCase(version)) {
+				logger.Log(Level.SUCCESS, "&a" + this.name + " is up to date!");
+			}else {
+                logger.Log(Level.OUTLINE, "&5<||" + Utils.getLine("&5"));
+                logger.Log(Level.WARNING, "&5<||" + "&b" + this.name + " is outdated!");
+                logger.Log(Level.WARNING, "&5<||" + "&bNewest version: &a" + version);
+                logger.Log(Level.WARNING, "&5<||" + "&bYour version: &d" + UpdateSettings.VERSION);
+                logger.Log(Level.WARNING, "&5<||" + "&bUpdate Here on Spigot: &e" + UpdateSettings.URL_PlUGIN);
+                logger.Log(Level.OUTLINE, "&5<||" + Utils.getLine("&5"));
+			}
+		});
 	}
 	
 	public void onDisable() {

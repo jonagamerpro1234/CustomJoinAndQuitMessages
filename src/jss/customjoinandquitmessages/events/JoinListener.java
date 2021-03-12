@@ -2,7 +2,6 @@ package jss.customjoinandquitmessages.events;
 
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,6 +13,7 @@ import jss.customjoinandquitmessages.ConfigFile;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.UpdateChecker;
+import jss.customjoinandquitmessages.utils.UpdateSettings;
 import jss.customjoinandquitmessages.utils.Utils;
 import jss.customjoinandquitmessages.utils.nms.Actionbar;
 import jss.customjoinandquitmessages.utils.nms.Title;
@@ -22,7 +22,7 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.chat.hover.content.Text;
+import net.md_5.bungee.api.chat.ClickEvent.Action;
 
 public class JoinListener implements Listener{
 
@@ -157,9 +157,9 @@ public class JoinListener implements Listener{
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void sendJoinUpdate(PlayerJoinEvent e) {
-		FileConfiguration config = plugin.getConfig();
+		FileConfiguration config = plugin.getConfigFile().getConfig();
 		Player j = e.getPlayer();
-		UpdateChecker update = new UpdateChecker(plugin);
+		/*UpdateChecker update = new UpdateChecker(plugin);
 		if((j.isOp()) || (j.hasPermission("Cjm.Update.Notify"))) {
 			if(config.getString("Config.Debug.Enabled").equals("true")) {
 				TextComponent msg = new TextComponent();
@@ -175,7 +175,20 @@ public class JoinListener implements Listener{
 			}
 			return;
 		}
-		update.Update(j);
+		update.Update(j);*/
+		
+		String path = "Config.Update.Notify";
+		
+		if(config.getString(path).equals("true")) {
+			if(j.isOp() || j.hasPermission("Cjm.Update.Notify")) {
+				new UpdateChecker(CustomJoinAndQuitMessages.getPlugin(), UpdateSettings.ID).getUpdateVersion(version ->{
+                    TextComponent component = new TextComponent(Utils.color(Utils.getPrefixPlayer() + " &aThere is a new version available for download"));
+                    component.setClickEvent(new ClickEvent(Action.OPEN_URL, UpdateSettings.URL_PlUGIN));
+                    component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Utils.color("&6Click on this message to copy the link")).create()));
+                    j.spigot().sendMessage(component);
+				});
+			}
+		}
 	}
 	
 	@SuppressWarnings("deprecation")

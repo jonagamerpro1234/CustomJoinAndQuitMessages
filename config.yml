@@ -9,9 +9,8 @@ Config:
   Lang: en-US # you can use the available languages of the plugin or you can add your own translations [ Default | en-US ]
   Update:
     Enabled: true # allows to send an update message available on the console [ Default | true ]
-    Notify:
-      Enabled: true # allows to send an update message available on the player [ Default | true ]
-    Lang: en # [ en | es ] there are 2 languages available at the moment [ English | Spanish ] 
+    Notify-Player: true # allows to send an update message available on the player [ Default | true ]
+# Disable Lang: en # [ en | es ] there are 2 languages available at the moment [ English | Spanish ] 
   Debug:
     Enabled: false  #| Debug | shows you important information about the plugin loading | ! in case of error or problems put [Debug: true]!
     Lang: en #|Lang| [es] [Spanish | Espanol] | [en] [English | Ingles]
@@ -127,6 +126,7 @@ Sounds:
 # |      Text: 'hello'
 # |      Permission: 'my.permission'      
 Groups:
+  Use-Vault-Groups: false
   Default:
     Join:
       Text: '&6[&a+&6] &7<name>'
@@ -137,6 +137,32 @@ Groups:
     Quit:
       Text: '&6[&c-&6] &7<name>'
       Permission: 'cjm.group.quit.default'
+      Enabled-Sound: true
+      Sound: NOTE_PLING;10;1
+      Send-All-Sound: true
+  Vip:
+    Join:
+      Text: '&6[&a+&6] &eWelcome to server &a[&b<name>&a]'
+      Permission: 'cjm.group.join.vip'
+      Enabled-Sound: true
+      Sound: NOTE_PLING;10;1
+      Send-All-Sound: true
+    Quit:
+      Text: '&6[&c-&6] &eSee you soon &a[&b<name>&a]'
+      Permission: 'cjm.group.quit.vip'
+      Enabled-Sound: true
+      Sound: NOTE_PLING;10;1
+      Send-All-Sound: true
+  Admin:
+    Join:
+      Text: '&bThe admin &6[&c<name>&6] &bjoined the server'
+      Permission: 'cjm.group.join.admin'
+      Enabled-Sound: true
+      Sound: NOTE_PLING;10;1
+      Send-All-Sound: true
+    Quit:
+      Text: 'The admin [<name>] quit of server'
+      Permission: 'cjm.group.quit.admin'
       Enabled-Sound: true
       Sound: NOTE_PLING;10;1
       Send-All-Sound: true
