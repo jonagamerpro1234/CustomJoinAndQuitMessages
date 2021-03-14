@@ -7,10 +7,7 @@
 #
 Config:
   Lang: en-US # you can use the available languages of the plugin or you can add your own translations [ Default | en-US ]
-  Update:
-    Enabled: true # allows to send an update message available on the console [ Default | true ]
-    Notify-Player: true # allows to send an update message available on the player [ Default | true ]
-# Disable Lang: en # [ en | es ] there are 2 languages available at the moment [ English | Spanish ] 
+  Update: true
   Debug:
     Enabled: false  #| Debug | shows you important information about the plugin loading | ! in case of error or problems put [Debug: true]!
     Lang: en #|Lang| [es] [Spanish | Espanol] | [en] [English | Ingles]
@@ -34,35 +31,61 @@ Config:
 Join:
   Enabled: true
   Text: '&b[&a+&b] <name>' #|<name>, <displayname>|
-  Type: Normal #| Normal, Double, Hover, Click, None, Group[Experimental!] |
+# |Type|
+# |> [ Custom | Double | Hover | Click | None | Group ]
+  Type: Custom
   Hover:
-    Text: '&6hello &b<name>'
-    Mode: TEXT # |Mode| [TEXT] show hover text
-    Legacy-Color: false #|Legacy-Color| the legacy color mode is used to activate the old color system for hover event
-    Color: AQUA #[RED] | [AQUA] | [BLUE] | [GREED] | [GOlD] | ....etc
+    Text: 
+      - '&6hello &b<name>'
+# |Mode| 
+# |> [TEXT] show hover text
+    Mode: TEXT 
+# |Legacy-Color| 
+# |> the legacy color mode is used to activate the old color system for hover event 
+# |> legay color does not need to use the color format, for example [ &6 ]
+# |> Colors [RED] | [AQUA] | [BLUE] | [GREED] | [GOlD] | ....etc
+    Legacy-Color: false  
+    Color: AQUA 
   Click:
     Action: 'say hello'
-    Mode: CMD #|Mode| [URL] oper url | [CMD] send command
+# |Mode| 
+# |> [URL] open a link 
+# |> [CMD] run a command
+    Mode: CMD 
 Quit:
   Enabled: true
   Text: '&b[&c-&b] <name>' #|<name>, <displayname> |
-  Type: Default #| Default ,Double ,Hover ,Click ,None ,Group[Experimental]|
+# |Type|
+# |> [ Custom | Double | Hover | Click | None | Group ]
+  Type: Custom
   Hover:
-    Text: '&6bay &c<name>'
-    Mode: TEXT # TEXT |!comings soond more modes!|
-    Legacy-Color: false #|Legacy-Color| the legacy color mode is used to activate the old color system for hover event
-    Color: AQUA #| RED, BLUE, GREEN, AQUA, YELLOW, ...etc. |
+    Text: 
+      - '&6bay &c<name>'
+# |Mode| 
+# |> [TEXT] show hover text
+    Mode: TEXT 
+# |Legacy-Color| 
+# |> the legacy color mode is used to activate the old color system for hover event 
+# |> legay color does not need to use the color format, for example [ &6 ]
+# |> Colors [RED] | [AQUA] | [BLUE] | [GREED] | [GOlD] | ....etc
+    Legacy-Color: false  
+    Color: AQUA 
   Click:
-    Action: 'say bay <name>'
-    Mode: CMD #|Mode| [URL] open url | [CMD] send command
+    Action: 'say hello'
+# |Mode| 
+# |> [URL] open a link 
+# |> [CMD] run a command
+    Mode: CMD 
 #
 # |Welcome| 
 # Here you can customize the welcome message for players when entering the server
 # | Vars | there are variables that only work in certain functions
 #  <0> leave an empty line
 Welcome:
-  Enabled: true #|Enabled| turn the welcome message on and off [ Default | true ]
-  Max-Line: 8 #|Max Line| is the maximum number of lines allowed to avoid a bug [Default | 8]
+# |Enabled| turn the welcome message on and off [ Default | true ]
+  Enabled: true
+# |Max Line| is the maximum number of lines allowed to avoid a bug [Default | 8] 
+  Max-Line: 8 
   Text:
     - '&b&m=========================================&r'
     - '<0>'
@@ -74,8 +97,8 @@ Welcome:
     - '&b&m=========================================&r'
 #
 # |Title|
-# Here you can customize the title for the players when entering the server for more help with the ticks, enter this link
-# https://github.com/jonagamerpro1234/MultiOptions/wiki/Ticks-in-Minecraft 
+# |> Here you can customize the title for the players when entering the server for more help with the ticks, enter this link
+# |> https://github.com/jonagamerpro1234/MultiOptions/wiki/Ticks-in-Minecraft 
 Title:
   Enabled: true #|Enabled| here you can activate and deactivate the title in this option [Default | true]
   Text:
@@ -88,83 +111,89 @@ Title:
       FadeOut: 20 #| Default 20 ticks | 20 ticks = 1s
 #
 # |Actionbar|
-# Here you can customize the Actionbar for the players when entering the server
-ActionBar:
+# |> Here you can customize the Actionbar for the players when entering the server
+Actionbar:
   Enabled: true #|Enabled| here you can activate and deactivate the actionbar in this option [Default | true]
   Text: 'Welcome to the server <name>'
 #
 # |Sounds|
 #
-# Format: sound_name;vol;pitch        
+# Format: <sound name>;<vol>;<pitch>        
 # Ej 1.9.  BLOCK_NOTE_PLING;10;2      
 # Sound list: https://www.spigotmc.org/wiki/cc-sounds-list/ 
 Sounds:
   Enabled: true
-  Type: Normal #| Normal | Group [!Experimental!] |
+  Type: Normal #| Normal | Group |
   Settings:
     Send-All-Sounds: true
   Join:
     Enabled: true
-    Sound: NOTE_PLING;10;1
+    Sound: BLOCK_NOTE_PLING;10;1
     Enabled-Permission: false
-    Custom-Permission: 'MultiOptions.join'
+    Custom-Permission: 'Cjm.join'
   Quit:
     Enabled: true
-    Sound: NOTE_PLING;10;1
+    Sound: BLOCK_NOTE_PLING;10;1
     Enabled-Permission: false
-    Custom-Permission: 'MultiOptions.quit'
+    Custom-Permission: 'Cjm.quit'
 #  
 # |Groups|
 # |> currently only join and quit functions are available for the group system
+# |> to be able to use the group system properly it is necessary to have a permissions plugin with [LuckPerm or others]
 #
 # |Groups:
 # |  <group name>:
 # |    Join:
 # |      Text: 'hello'
 # |      Permission: 'my.permission'
+# |      Enabled-Sound: true
+# |      Sound: <sound name>;<vol>;<pitch>
+# |      Send-All-Sound: true
 # |    Quit:
 # |      Text: 'hello'
-# |      Permission: 'my.permission'      
+# |      Permission: 'my.permission'
+# |      Enabled-Sound: true
+# |      Sound: <sound name>;<vol>;<pitch>
+# |      Send-All-Sound: true  
 Groups:
-  Use-Vault-Groups: false
   Default:
     Join:
       Text: '&6[&a+&6] &7<name>'
       Permission: 'cjm.group.join.default'
       Enabled-Sound: true
-      Sound: NOTE_PLING;10;1
+      Sound: BLOCK_NOTE_PLING;10;1
       Send-All-Sound: true
     Quit:
       Text: '&6[&c-&6] &7<name>'
       Permission: 'cjm.group.quit.default'
       Enabled-Sound: true
-      Sound: NOTE_PLING;10;1
+      Sound: BLOCK_NOTE_PLING;10;1
       Send-All-Sound: true
   Vip:
     Join:
       Text: '&6[&a+&6] &eWelcome to server &a[&b<name>&a]'
       Permission: 'cjm.group.join.vip'
       Enabled-Sound: true
-      Sound: NOTE_PLING;10;1
+      Sound: BLOCK_NOTE_PLING;10;1
       Send-All-Sound: true
     Quit:
       Text: '&6[&c-&6] &eSee you soon &a[&b<name>&a]'
       Permission: 'cjm.group.quit.vip'
       Enabled-Sound: true
-      Sound: NOTE_PLING;10;1
+      Sound: BLOCK_NOTE_PLING;10;1
       Send-All-Sound: true
   Admin:
     Join:
       Text: '&bThe admin &6[&c<name>&6] &bjoined the server'
       Permission: 'cjm.group.join.admin'
       Enabled-Sound: true
-      Sound: NOTE_PLING;10;1
+      Sound: BLOCK_NOTE_PLING;10;1
       Send-All-Sound: true
     Quit:
       Text: 'The admin [<name>] quit of server'
       Permission: 'cjm.group.quit.admin'
       Enabled-Sound: true
-      Sound: NOTE_PLING;10;1
+      Sound: BLOCK_NOTE_PLING;10;1
       Send-All-Sound: true
 #
 # |> This is the end of the configuration ... [-_-] more things coming soon

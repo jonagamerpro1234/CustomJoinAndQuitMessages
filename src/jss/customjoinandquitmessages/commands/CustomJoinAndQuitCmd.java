@@ -102,7 +102,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 			return new ArrayList<>();
 		}
 		List<String> options = new ArrayList<>();
-		String lastArgs = args.length !=0 ? args[(args.length - 1)] : "";
+		String lastArgs = args.length != 0 ? args[(args.length - 1)] : "";
 		Player j = (Player) sender;
 		switch (args.length) {
 		case 0:

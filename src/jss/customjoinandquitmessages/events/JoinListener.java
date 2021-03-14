@@ -9,15 +9,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import com.cryptomorin.xseries.messages.ActionBar;
+import com.cryptomorin.xseries.messages.Titles;
+
 import jss.customjoinandquitmessages.ConfigFile;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.UpdateChecker;
 import jss.customjoinandquitmessages.utils.UpdateSettings;
 import jss.customjoinandquitmessages.utils.Utils;
-import jss.customjoinandquitmessages.utils.nms.Actionbar;
-import jss.customjoinandquitmessages.utils.nms.Title;
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -35,7 +35,7 @@ public class JoinListener implements Listener{
 	}
 	
 	@EventHandler
-	public void onJoinMessages(PlayerJoinEvent e) {
+	public void onJoin(PlayerJoinEvent e) {
 		ConfigFile configFile = plugin.getConfigFile();
 		FileConfiguration config = configFile.getConfig();
 		Player j = e.getPlayer();
@@ -43,18 +43,18 @@ public class JoinListener implements Listener{
 		String path = "Join.Enabled";
 		String text = config.getString("Join.Text");
 		String type = "Join.Type";
-		String hovetext = config.getString("Join.Hover.Text");
-		String hovecolor = config.getString("Join.Hover.Color");
-		String hovemode = config.getString("Join.Hover.Mode");
+		List<String> hovertext = config.getStringList("Join.Hover.Text");
+		String hovercolor = config.getString("Join.Hover.Color");
+		String hovermode = config.getString("Join.Hover.Mode");
 		String clickaction = config.getString("Join.Click.Action");
 		String clickmode = config.getString("Join.Click.Mode");
 		
+		text = Utils.getVar(j,text);
 		
 		if(config.getString(path).equals("true")) {
-			if(config.getString(type).equals("Default")) {
-				e.setJoinMessage(text);
-			}
-			if (config.getString(type).equals("Double")){
+			if(config.getString(type).equals("Custom")) {
+				e.setJoinMessage(Utils.hexcolor(text));
+			}else if (config.getString(type).equals("Double")){
 				e.setJoinMessage(null);
 				//Test new methods
 				/*TextComponent msg = new TextComponent();
@@ -62,25 +62,39 @@ public class JoinListener implements Listener{
 				msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(Utils.getActionHoverType(hovemode)) , new ComponentBuilder(hovetext).color(ChatColor.of(hovecolor)).create()));
 				msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(Utils.getActionClickType(clickmode)), clickaction));
 				j.spigot().sendMessage(msg);*/
-				Utils.sendTextComponentDouble(j, text, hovetext, hovemode, clickmode, clickaction);
-			}
-			if (config.getString(type).equals("Hover")){
+				for(int i = 0; i < hovertext.size(); i++) {
+					String a = (String) hovertext.get(i);
+					Utils.sendTextComponentDouble(j, text, a, hovermode, clickmode, clickaction);
+					if(i == hovertext.size()) {
+						break;
+					}
+				}
+			}else if (config.getString(type).equals("Hover")){
 				if(config.getString("Join.HoverEvent.Legacy-Color").equals("true")) {
-					e.setJoinMessage(null);
-					Utils.sendTextComponentHover(j, hovemode, text, hovetext, hovecolor);					
+					e.setJoinMessage(null);			
+					for(int i = 0; i < hovertext.size(); i++) {
+						String a = (String) hovertext.get(i);
+						Utils.sendTextComponentHover(j, hovermode, text, a, hovercolor);
+						if(i == hovertext.size()) {
+							break;
+						}
+					}
 				}else if(config.getString("Join.HoverEvent.Legacy-Color").equals("false")) {
 					e.setJoinMessage(null);
-					Utils.sendTextComponent116Hover(j, hovemode, text, hovetext);
+					for(int i = 0; i < hovertext.size(); i++) {
+						String a = (String) hovertext.get(i);
+						Utils.sendTextComponent116Hover(j, hovermode, text, a);
+						if(i == hovertext.size()) {
+							break;
+						}
+					}
 				}
-			}
-			if(config.getString(type).equals("Click")) {
+			}else if(config.getString(type).equals("Click")) {
 				e.setJoinMessage(null);
 				Utils.sendTextComponentClick(j, clickmode, text, clickaction);
-			}
-			if(config.getString(type).equals("None")){
+			}else if(config.getString(type).equals("None")){
 				e.setJoinMessage(null);
-			}
-			if(config.getString(type).equals("Group")) {
+			}else if(config.getString(type).equals("Group")) {
 				for(String key : config.getConfigurationSection("Groups").getKeys(false)) {
 					
 					String jointext = config.getString("Groups."+key+".Join.Text");
@@ -119,7 +133,7 @@ public class JoinListener implements Listener{
 	}
 	
 	@EventHandler
-	public void sendJoinTitle(PlayerJoinEvent e) {
+	public void onTitle(PlayerJoinEvent e) {
 		FileConfiguration config = plugin.getConfig();
 		Player j = e.getPlayer();
 		
@@ -130,33 +144,34 @@ public class JoinListener implements Listener{
 		int stay = config.getInt("Title.Settings.Time.Stay");
 		int fadeOut = config.getInt("Title.Settings.Time.FadeOut");
 		
-		title = Utils.color(title);
-		
-		subtitle = Utils.color(subtitle);
-		
+		title = Utils.hexcolor(title);
+		title = Utils.getVar(j, title);
+		subtitle = Utils.hexcolor(subtitle);
+		subtitle = Utils.getVar(j, subtitle);
 		if(config.getString(path).equals("true")) {
-			Title.sendTitle(j, title, subtitle, fadeIn, stay, fadeOut);
+			//Title.sendTitle(j, title, subtitle, fadeIn, stay, fadeOut);
+			Titles.sendTitle(j, fadeIn, stay, fadeOut, title, subtitle);
 		}
 	}
 	
 	@EventHandler
-	public void sendJoinActionBar(PlayerJoinEvent e) {
-		FileConfiguration config = plugin.getConfig();
+	public void onActionBar(PlayerJoinEvent e) {
+		FileConfiguration config = plugin.getConfigFile().getConfig();
 		Player j = e.getPlayer();
 		
-		String path = "ActionBar.Enabled";
-		String text = config.getString("ActionBar.Text");
+		String path = "Actionbar.Enabled";
+		String text = config.getString("Actionbar.Text");
 		
-		text = Utils.color(text);
+		text = Utils.hexcolor(text);
+		text = Utils.getVar(j, text);
 		if(config.getString(path).equals("true")) {
-			Actionbar actionbar = new Actionbar();
-			actionbar.sendActionBar(j, text);
+			ActionBar.sendActionBar(j, text);
 		}
 	}
 	
 	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void sendJoinUpdate(PlayerJoinEvent e) {
+	public void onUpdate(PlayerJoinEvent e) {
 		FileConfiguration config = plugin.getConfigFile().getConfig();
 		Player j = e.getPlayer();
 		/*UpdateChecker update = new UpdateChecker(plugin);
@@ -177,21 +192,22 @@ public class JoinListener implements Listener{
 		}
 		update.Update(j);*/
 		
-		String path = "Config.Update.Notify";
+		String path = "Config.Update";
 		
 		if(config.getString(path).equals("true")) {
 			if(j.isOp() || j.hasPermission("Cjm.Update.Notify")) {
 				new UpdateChecker(CustomJoinAndQuitMessages.getPlugin(), UpdateSettings.ID).getUpdateVersion(version ->{
-                    TextComponent component = new TextComponent(Utils.color(Utils.getPrefixPlayer() + " &aThere is a new version available for download"));
-                    component.setClickEvent(new ClickEvent(Action.OPEN_URL, UpdateSettings.URL_PlUGIN));
-                    component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Utils.color("&6Click on this message to copy the link")).create()));
-                    j.spigot().sendMessage(component);
+					if(!CustomJoinAndQuitMessages.getPlugin().getDescription().getVersion().equalsIgnoreCase(version)) {
+	                    TextComponent component = new TextComponent(Utils.color(Utils.getPrefixPlayer() + " &aThere is a new version available for download"));
+	                    component.setClickEvent(new ClickEvent(Action.OPEN_URL, UpdateSettings.URL_PlUGIN[0]));
+	                    component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Utils.color("&6Click on this message to copy the link")).create()));
+	                    j.spigot().sendMessage(component);
+					}
 				});
 			}
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void QuitMessages(PlayerQuitEvent e) {
 		FileConfiguration config = plugin.getConfig();
@@ -200,43 +216,58 @@ public class JoinListener implements Listener{
 		String path = "Quit.Enabled";
 		String text = config.getString("Quit.Text");
 		String type = "Quit.Type";
-		String hovetext = config.getString("Quit.Hover.Text");
-		String hovecolor = config.getString("Quit.Hover.Color");
-		String hovemode = config.getString("Quit.Hover.Mode");
+		List<String> hovertext = config.getStringList("Quit.Hover.Text");
+		String hovercolor = config.getString("Quit.Hover.Color");
+		String hovermode = config.getString("Quit.Hover.Mode");
 		String clickaction = config.getString("Quit.Click.Action");
 		String clickmode = config.getString("Quit.Click.Mode");
 		
-		text = Utils.color(text);
+		text = Utils.getVar(j, text);
+		text = Utils.hexcolor(text);
 		
 		if(config.getString(path).equals("true")) {
-			if(config.getString(type).equals("Default")) {
-				e.setQuitMessage(text);
-			}
-			if (config.getString(type).equals("Double")){
+			if(config.getString(type).equals("Custom")) {
+				e.setQuitMessage(Utils.hexcolor(text));
+			}else if (config.getString(type).equals("Double")){
 				e.setQuitMessage(null);
-				TextComponent msg = new TextComponent();
+				/*TextComponent msg = new TextComponent();
 				msg.setText(text);
-				msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(Utils.getActionHoverType(hovemode)) , new ComponentBuilder(hovetext).color(ChatColor.valueOf(hovecolor)).create()));
+				msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(Utils.getActionHoverType(hovermode)) , new ComponentBuilder(a).color(ChatColor.valueOf(hovercolor)).create()));
 				msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(Utils.getActionClickType(clickmode)), clickaction));
-				j.spigot().sendMessage(msg);
-			}
-			if (config.getString(type).equals("Hover")){
+				j.spigot().sendMessage(msg);*/
+				for(int i = 0; i < hovertext.size(); i++) {
+					String a = (String) hovertext.get(i);
+					Utils.sendTextComponentDouble(j, text, a, hovermode, clickmode, clickaction);
+					if(i == hovertext.size()) {
+						break;
+					}
+				}
+			}else if (config.getString(type).equals("Hover")){
 				if(config.getString("Quit.HoverEvent.Legacy-Color").equals("true")) {
 					e.setQuitMessage(null);
-					Utils.sendTextComponentHover(j, hovemode, text, hovetext, hovecolor);
+					for(int i = 0; i < hovertext.size(); i++) {
+						String a = (String) hovertext.get(i);
+						Utils.sendTextComponentHover(j, hovermode, text, a, hovercolor);
+						if(i == hovertext.size()) {
+							break;
+						}
+					}
 				}else if(config.getString("Quit.HoverEvent.Legacy-Color").equals("false")) {
 					e.setQuitMessage(null);
-					Utils.sendTextComponent116Hover(j, hovemode, text, hovetext);
+					for(int i = 0; i < hovertext.size(); i++) {
+						String a = (String) hovertext.get(i);
+						Utils.sendTextComponent116Hover(j, hovermode, text, a);
+						if(i == hovertext.size()) {
+							break;
+						}
+					}
 				}	
-			}
-			if(config.getString(type).equals("Click")) {
+			}else if(config.getString(type).equals("Click")) {
 				e.setQuitMessage(null);
 				Utils.sendTextComponentClick(j, clickmode, text, clickaction);
-			}
-			if(config.getString(type).equals("None")){
+			}else if(config.getString(type).equals("None")){
 				e.setQuitMessage(null);
-			}
-			if(config.getString(type).equals("Group")) {
+			}else if(config.getString(type).equals("Group")) {
 				for(String key : config.getConfigurationSection("Groups").getKeys(false)) {
 					
 					String quittext = config.getString("Groups."+key+".Quit.Text");

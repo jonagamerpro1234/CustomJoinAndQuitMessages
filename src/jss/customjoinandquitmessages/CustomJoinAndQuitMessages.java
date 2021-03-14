@@ -81,7 +81,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
                 logger.Log(Level.WARNING, "&5<||" + "&b" + this.name + " is outdated!");
                 logger.Log(Level.WARNING, "&5<||" + "&bNewest version: &a" + version);
                 logger.Log(Level.WARNING, "&5<||" + "&bYour version: &d" + UpdateSettings.VERSION);
-                logger.Log(Level.WARNING, "&5<||" + "&bUpdate Here on Spigot: &e" + UpdateSettings.URL_PlUGIN);
+                logger.Log(Level.WARNING, "&5<||" + "&bUpdate Here on Spigot: &e" + UpdateSettings.URL_PlUGIN[0]);
                 logger.Log(Level.OUTLINE, "&5<||" + Utils.getLine("&5"));
 			}
 		});
