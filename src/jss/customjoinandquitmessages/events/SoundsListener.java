@@ -45,7 +45,7 @@ public class SoundsListener implements Listener{
 					if(je.equals("true")) {
 						if(useperm.equals("true")) {
 							if(!(j.hasPermission(perm)) || !(j.isOp())) {
-								Sound sound = XSound.valueOf(split[0].toString()).parseSound();
+								Sound sound = XSound.valueOf(split[0]).parseSound();
 								int vol = Integer.valueOf(split[1]);
 								float pitch = Float.valueOf(split[2]);
 								if(sap.equals("true")) {
@@ -60,7 +60,7 @@ public class SoundsListener implements Listener{
 								}
 							}
 						}else if(useperm.equals("false")){
-							Sound sound =  XSound.valueOf(split[0].toString()).parseSound();
+							Sound sound =  XSound.valueOf(split[0]).parseSound();
 							int vol = Integer.valueOf(split[1]);
 							float pitch = Float.valueOf(split[2]);
 							if(sap.equals("true")) {

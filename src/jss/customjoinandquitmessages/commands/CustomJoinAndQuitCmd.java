@@ -59,26 +59,26 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 		if(args.length >= 1) {
 			if(args[0].equalsIgnoreCase("help")) {
 				if((j.isOp()) ||  (j.hasPermission("Cjm.Help"))) {
+					List<String> list = plugin.Locale().help_1;
+					Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
+					for(int i = 0; i < list.size(); i++) {
+						String text = (String) list.get(i);
+						Utils.sendColorMessage(j, text);
+					}
+					Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+				}else {
 					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
-					return true;
 				}
-				List<String> list = plugin.Locale().help_1;
-				Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
-				for(int i = 0; i < list.size(); i++) {
-					String text = (String) list.get(i);
-					Utils.sendColorMessage(j, text);
-				}
-				Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("reload")) {
 				if((j.isOp()) || (j.hasPermission("Cjm.Reload"))) {
+					PluginConfig.loadConfig(plugin);
+					plugin.reloadConfig();
+					Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().reload);
+				}else {
 					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
-					return true;
 				}
-				PluginConfig.loadConfig(plugin);
-				plugin.reloadConfig();
-				Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().reload);
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("info")) {

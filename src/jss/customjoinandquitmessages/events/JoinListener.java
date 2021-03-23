@@ -70,24 +70,21 @@ public class JoinListener implements Listener{
 					}
 				}
 			}else if (config.getString(type).equals("Hover")){
-				if(config.getString("Join.HoverEvent.Legacy-Color").equals("true")) {
+				if(config.getString("Join.Hover.Legacy-Color").equals("true")) {
 					e.setJoinMessage(null);			
 					for(int i = 0; i < hovertext.size(); i++) {
 						String a = (String) hovertext.get(i);
 						Utils.sendTextComponentHover(j, hovermode, text, a, hovercolor);
-						if(i == hovertext.size()) {
-							break;
-						}
+						if(i == hovertext.size()) break;
 					}
-				}else if(config.getString("Join.HoverEvent.Legacy-Color").equals("false")) {
+				}else if(config.getString("Join.Hover.Legacy-Color").equals("false")) {
 					e.setJoinMessage(null);
+					String a = "";
 					for(int i = 0; i < hovertext.size(); i++) {
-						String a = (String) hovertext.get(i);
-						Utils.sendTextComponent116Hover(j, hovermode, text, a);
-						if(i == hovertext.size()) {
-							break;
-						}
+						a = (String) hovertext.get(i);
+						
 					}
+					Utils.sendTextComponent116Hover(j, hovermode, text, a);
 				}
 			}else if(config.getString(type).equals("Click")) {
 				e.setJoinMessage(null);
