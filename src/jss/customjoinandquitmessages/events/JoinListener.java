@@ -56,12 +56,6 @@ public class JoinListener implements Listener{
 				e.setJoinMessage(Utils.hexcolor(text));
 			}else if (config.getString(type).equals("Double")){
 				e.setJoinMessage(null);
-				//Test new methods
-				/*TextComponent msg = new TextComponent();
-				msg.setText(text);
-				msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(Utils.getActionHoverType(hovemode)) , new ComponentBuilder(hovetext).color(ChatColor.of(hovecolor)).create()));
-				msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(Utils.getActionClickType(clickmode)), clickaction));
-				j.spigot().sendMessage(msg);*/
 				for(int i = 0; i < hovertext.size(); i++) {
 					String a = (String) hovertext.get(i);
 					Utils.sendTextComponentDouble(j, text, a, hovermode, clickmode, clickaction);
@@ -146,7 +140,6 @@ public class JoinListener implements Listener{
 		subtitle = Utils.hexcolor(subtitle);
 		subtitle = Utils.getVar(j, subtitle);
 		if(config.getString(path).equals("true")) {
-			//Title.sendTitle(j, title, subtitle, fadeIn, stay, fadeOut);
 			Titles.sendTitle(j, fadeIn, stay, fadeOut, title, subtitle);
 		}
 	}
@@ -171,24 +164,6 @@ public class JoinListener implements Listener{
 	public void onUpdate(PlayerJoinEvent e) {
 		FileConfiguration config = plugin.getConfigFile().getConfig();
 		Player j = e.getPlayer();
-		/*UpdateChecker update = new UpdateChecker(plugin);
-		if((j.isOp()) || (j.hasPermission("Cjm.Update.Notify"))) {
-			if(config.getString("Config.Debug.Enabled").equals("true")) {
-				TextComponent msg = new TextComponent();
-				msg.setText(Utils.color("&c&l&n[!]&7 You do not have permission"));
-				msg.setColor(ChatColor.YELLOW);
-				if(Bukkit.getVersion().equals("1.16")) {
-					msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT , new Text("ask an admin or owner for help for more information")));	
-				}else {
-					msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT , new ComponentBuilder("ask an admin or owner for help for more information").create()));
-				}
-				
-				j.spigot().sendMessage(msg);
-			}
-			return;
-		}
-		update.Update(j);*/
-		
 		String path = "Config.Update";
 		
 		if(config.getString(path).equals("true")) {
@@ -227,11 +202,7 @@ public class JoinListener implements Listener{
 				e.setQuitMessage(Utils.hexcolor(text));
 			}else if (config.getString(type).equals("Double")){
 				e.setQuitMessage(null);
-				/*TextComponent msg = new TextComponent();
-				msg.setText(text);
-				msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(Utils.getActionHoverType(hovermode)) , new ComponentBuilder(a).color(ChatColor.valueOf(hovercolor)).create()));
-				msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(Utils.getActionClickType(clickmode)), clickaction));
-				j.spigot().sendMessage(msg);*/
+
 				for(int i = 0; i < hovertext.size(); i++) {
 					String a = (String) hovertext.get(i);
 					Utils.sendTextComponentDouble(j, text, a, hovermode, clickmode, clickaction);

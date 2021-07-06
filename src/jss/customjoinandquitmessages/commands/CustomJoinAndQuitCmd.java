@@ -98,11 +98,20 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 	}
 	
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
-		if(!(sender instanceof Player)) {
-			return new ArrayList<>();
-		}
 		List<String> options = new ArrayList<>();
 		String lastArgs = args.length != 0 ? args[(args.length - 1)] : "";
+		if(!(sender instanceof Player)) {
+			switch (args.length) {
+			case 0:
+			case 1:
+				options.add("help");
+				options.add("reload");
+				options.add("info");
+				break;
+			}
+			return Utils.TabLimit(options, lastArgs);
+		}
+
 		Player j = (Player) sender;
 		switch (args.length) {
 		case 0:

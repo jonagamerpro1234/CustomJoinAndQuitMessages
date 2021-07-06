@@ -10,8 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
 import jss.customjoinandquitmessages.events.JoinListener;
 import jss.customjoinandquitmessages.events.SoundsListener;
-import jss.customjoinandquitmessages.hook.Placeholderapi;
-import jss.customjoinandquitmessages.hook.Vault;
+import jss.customjoinandquitmessages.hook.HooksManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Lang;
 import jss.customjoinandquitmessages.utils.Logger;
@@ -32,15 +31,13 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	public boolean vault = false;
 	public Metrics metrics;
 	public String latestversion;
-	//private UpdateChecker update;
     public boolean useLegacyversions = false;
     public String nmsversion;
 	private Map<String,Lang> availableLangs = new HashMap<>();
-	private Placeholderapi placeholderapi = new Placeholderapi(this);
-	private Vault vault2 = new Vault(this);
 	private EventUtils eventUtils = new EventUtils(this);
 	private ConfigFile configFile = new ConfigFile(this, "config.yml");
 	private Logger logger = new Logger(this);
+	private HooksManager hooksManager = new HooksManager(this);
 	
 	public void onEnable() {
 		Utils.setEnabled(version);
@@ -70,19 +67,18 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
         }
 		setupCommands();
 		setupEvents();
-		placeholderapi.onPlaceHolderAPI();
-		vault2.onVault();
+		hooksManager.load();
 		
 		new UpdateChecker(this, UpdateSettings.ID).getUpdateVersion(version -> {
 			if(this.getDescription().getVersion().equalsIgnoreCase(version)) {
 				logger.Log(Level.SUCCESS, "&a" + this.name + " is up to date!");
 			}else {
-                logger.Log(Level.OUTLINE, "&5<||" + Utils.getLine("&5"));
+                logger.Log(Level.OUTLINE, "&5<||" + Utils.setLine("&5"));
                 logger.Log(Level.WARNING, "&5<||" + "&b" + this.name + " is outdated!");
                 logger.Log(Level.WARNING, "&5<||" + "&bNewest version: &a" + version);
                 logger.Log(Level.WARNING, "&5<||" + "&bYour version: &d" + UpdateSettings.VERSION);
                 logger.Log(Level.WARNING, "&5<||" + "&bUpdate Here on Spigot: &e" + UpdateSettings.URL_PlUGIN[0]);
-                logger.Log(Level.OUTLINE, "&5<||" + Utils.getLine("&5"));
+                logger.Log(Level.OUTLINE, "&5<||" + Utils.setLine("&5"));
 			}
 		});
 	}

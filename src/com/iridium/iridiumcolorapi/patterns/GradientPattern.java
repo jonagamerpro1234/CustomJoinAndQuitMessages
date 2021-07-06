@@ -12,6 +12,7 @@ public class GradientPattern implements Pattern {
 
     java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("<GRADIENT:([0-9A-Fa-f]{6})>(.*?)</GRADIENT:([0-9A-Fa-f]{6})>");
 
+
     /**
      * Applies a gradient pattern to the provided String.
      * Output might me the same as the input if this pattern is not present.

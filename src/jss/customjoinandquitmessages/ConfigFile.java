@@ -10,7 +10,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import jss.customjoinandquitmessages.utils.FileManager;
-import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.interfaces.FileHelper;
 
 public class ConfigFile extends FileManager implements FileHelper{

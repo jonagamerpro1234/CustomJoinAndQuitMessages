@@ -10,8 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import com.cryptomorin.xseries.XSound;
-
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.EventUtils;
 
@@ -45,7 +43,7 @@ public class SoundsListener implements Listener{
 					if(je.equals("true")) {
 						if(useperm.equals("true")) {
 							if(!(j.hasPermission(perm)) || !(j.isOp())) {
-								Sound sound = XSound.valueOf(split[0]).parseSound();
+								Sound sound =  Sound.valueOf(split[0]);
 								int vol = Integer.valueOf(split[1]);
 								float pitch = Float.valueOf(split[2]);
 								if(sap.equals("true")) {
@@ -60,7 +58,7 @@ public class SoundsListener implements Listener{
 								}
 							}
 						}else if(useperm.equals("false")){
-							Sound sound =  XSound.valueOf(split[0]).parseSound();
+							Sound sound =  Sound.valueOf(split[0]);
 							int vol = Integer.valueOf(split[1]);
 							float pitch = Float.valueOf(split[2]);
 							if(sap.equals("true")) {
@@ -82,7 +80,7 @@ public class SoundsListener implements Listener{
 						String gqe = config.getString("Groups."+key+".Join.Enabled-Sound");
 						String[] gsplit = gslipsound.split(";");
 						
-						Sound sound = XSound.valueOf(gsplit[0]).parseSound();
+						Sound sound = Sound.valueOf(gsplit[0]);
 						int vol = Integer.valueOf(gsplit[1]);
 						float pitch = Float.valueOf(gsplit[2]);
 						
@@ -142,7 +140,7 @@ public class SoundsListener implements Listener{
 					if(qe.equals("true")) {
 						if(useperm.equals("true")) {
 							if(!(j.hasPermission(perm)) || !(j.isOp())) {
-								Sound sound = XSound.valueOf(split[0]).parseSound();
+								Sound sound = Sound.valueOf(split[0]);
 								int vol = Integer.valueOf(split[1]);
 								float pitch = Float.valueOf(split[2]);
 								if(sap.equals("true")) {
@@ -156,7 +154,7 @@ public class SoundsListener implements Listener{
 								}
 							}
 						}else if(useperm.equals("false")){
-							Sound sound = XSound.valueOf(split[0]).parseSound();
+							Sound sound = Sound.valueOf(split[0]);
 							int vol = Integer.valueOf(split[1]);
 							float pitch = Float.valueOf(split[2]);
 							if(sap.equals("true")) {
@@ -178,7 +176,7 @@ public class SoundsListener implements Listener{
 						String gqe = config.getString("Groups."+key+".Quit.Enabled-Sound");
 						String[] gsplit = gslipsound.split(";");
 						
-						Sound sound = XSound.valueOf(gsplit[0]).parseSound();
+						Sound sound = Sound.valueOf(gsplit[0]);
 						int vol = Integer.valueOf(gsplit[1]);
 						float pitch = Float.valueOf(gsplit[2]);
 						
