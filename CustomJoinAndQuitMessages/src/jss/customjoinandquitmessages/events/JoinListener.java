@@ -121,7 +121,7 @@ public class JoinListener implements Listener{
 	}
 	
 	@EventHandler
-	public void JoinWelcome(PlayerJoinEvent e) {
+	public void onJoinWelcome(PlayerJoinEvent e) {
 		FileConfiguration config = plugin.getConfig();
 		Player j = e.getPlayer();
 		try {
@@ -200,7 +200,7 @@ public class JoinListener implements Listener{
 	}
 	
 	@EventHandler
-	public void QuitMessages(PlayerQuitEvent e) {
+	public void onQuit(PlayerQuitEvent e) {
 		FileConfiguration config = plugin.getConfig();
 		Player j = e.getPlayer();
 		

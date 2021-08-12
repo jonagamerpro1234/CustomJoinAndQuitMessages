@@ -5,10 +5,7 @@ import java.util.List;
 import org.bukkit.entity.Player;
 
 import jss.customjoinandquitmessages.utils.Utils;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.*;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
 
 @SuppressWarnings("deprecation")
@@ -67,13 +64,13 @@ public class Json {
 	public void send() {
 		TextComponent component = new TextComponent(Utils.hexcolor(this.text));
 		if(this.hoverText != null) {
-			component.setHoverEvent(new HoverEvent(net.md_5.bungee.api.chat.HoverEvent.Action.SHOW_TEXT, this.hoverText));
+			component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, this.hoverText));
 		} 
 		if(this.executeCommand != null){
-			component.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.RUN_COMMAND, this.executeCommand));
+			component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, this.executeCommand));
 		}
 		if(this.suggestCommand != null) {
-			component.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, this.suggestCommand));
+			component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, this.suggestCommand));
 		}
 		if(this.openUrl != null) {
 			component.setClickEvent(new ClickEvent(Action.OPEN_URL, this.openUrl));
@@ -84,13 +81,13 @@ public class Json {
 	public void sendToAll() {
 		TextComponent component = new TextComponent(Utils.hexcolor(this.text));
 		if(this.hoverText != null) {
-			component.setHoverEvent(new HoverEvent(net.md_5.bungee.api.chat.HoverEvent.Action.SHOW_TEXT, this.hoverText));
+			component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, this.hoverText));
 		} 
 		if(this.executeCommand != null){
-			component.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.RUN_COMMAND, this.executeCommand));
+			component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, this.executeCommand));
 		}
 		if(this.suggestCommand != null) {
-			component.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, this.suggestCommand));
+			component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, this.suggestCommand));
 		}
 		if(this.openUrl != null) {
 			component.setClickEvent(new ClickEvent(Action.OPEN_URL, this.openUrl));
