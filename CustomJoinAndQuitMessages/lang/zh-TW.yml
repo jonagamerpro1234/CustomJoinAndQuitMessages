@@ -1,0 +1,23 @@
+# | CustomJoinAndQuitMessage |
+# |   By jonagamerpro1234    |
+# |      Version 1.6.0       |
+# |__________________________|
+# 
+# | 通過 EanLer | 版: v1.5
+# | 語言格式: zh-CH 
+# | 郎: 中文[傳統的]
+# | 版: 1.6
+# | 更新資料: jonagamerpro1234 [v1.6.0]
+#
+CustomJoinAndQuitMessage:
+  Help-Msg:
+    - '&b/CustomJoinAndQuitMessage &8| &9/Cjm &7這些是主插件命令的變體'
+    - '&b/Cjm &ehelp &7顯示相同的消息'
+    - '&b/Cjm &ereload &7重新加載插件文件'
+    - '&b/Cjm &einfo &7顯示有關插件的信息'
+  Help-Cmd: '&7Use &b/Cjm &6help&7想要查詢更多的信息'
+  Reload: '&a重新加載完成'
+  Error-Cmd: '&c未知參數'
+  No-Permission: '&c您無權執行此操作'
+  No-Permission-Label: '向服務器所有者或管理員尋求幫助以獲取更多信息'
+  Sound-Error: '聲音不屬於當前版本名稱錯誤'

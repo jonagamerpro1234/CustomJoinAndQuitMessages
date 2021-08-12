@@ -1,0 +1,22 @@
+# | CustomJoinAndQuitMessage |
+# |   By jonagamerpro1234    |
+# |      Version 1.6.0       |
+# |__________________________|
+# 
+# | Par jonagamerpro1234
+# | Format de langue: fr-FR 
+# | Langue: français[FR]
+# | Version: 1.6
+#
+CustomJoinAndQuitMessage:
+  Help-Msg:
+    - '&b/CustomJoinAndQuitMessage &8| &9/Cjm &7these are the variants of the main plugin command'
+    - '&b/Cjm &ehelp &7afficher ce même message'
+    - '&b/Cjm &ereload &7recharger les fichiers du plugin'
+    - '&b/Cjm &einfo &7affiche des informations sur le plugin'
+  Help-Cmd: '&7Utilisation &b/Cjm &6help &7pour plus d´informations'
+  Reload: '&aRecharger terminé'
+  Error-Cmd: '&cArgument inconnu'
+  No-Permission: '&cVous n´avez pas la permission de faire ça!'
+  No-Permission-Label: 'Demandez de l´aide au propriétaire du serveur ou à un administrateur pour plus d´informations'
+  Sound-Error: 'le son n´appartient pas à la version actuelle ou le nom est erroné'
