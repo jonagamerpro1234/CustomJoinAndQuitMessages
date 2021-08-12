@@ -1,4 +1,4 @@
-package jss.customjoinandquitmessages.utils;
+package jss.customjoinandquitmessages.config;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -15,6 +15,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.utils.Utils;
 
 
 public class FileListener {

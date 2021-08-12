@@ -1,13 +1,12 @@
-package jss.customjoinandquitmessages;
+package jss.customjoinandquitmessages.config;
 
 import java.io.IOException;
 import java.util.HashMap;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.EventUtils;
-import jss.customjoinandquitmessages.utils.FileListener;
-import jss.customjoinandquitmessages.utils.Lang;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.Utils;
 
@@ -27,7 +26,6 @@ public class PreConfigLoader {
 			Settings.boolean_quit = config.getString("Quit.Enabled").equals("true");
 			Settings.boolean_welcome = config.getString("Welcome.Enabled").equals("true");
 			Settings.boolean_update = config.getString("Config.Update").equals("true");
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -71,7 +71,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				}
 				return true;
 			}
-			if(args[0].equalsIgnoreCase("reload")) {
+			if(args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("rl")) {
 				if((j.isOp()) || (j.hasPermission("Cjm.Reload"))) {
 					plugin.getPreConfigLoader().loadConfig();
 					plugin.getPreConfigLoader().loadLangs();
@@ -114,16 +114,15 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 		}
 
 		Player j = (Player) sender;
-		switch (args.length) {
-		case 0:
-		case 1:
-			if((j.isOp()) || (j.hasPermission("Cjm.Tab"))){
-				return null;
+		if((j.isOp()) || (j.hasPermission("Cjm.Tab"))) {
+			switch (args.length) {
+			case 0:
+			case 1:
+				options.add("help");
+				options.add("reload");
+				options.add("info");
+				break;
 			}
-			options.add("help");
-			options.add("reload");
-			options.add("info");
-			break;
 		}
 		return Utils.TabLimit(options, lastArgs);
 	}

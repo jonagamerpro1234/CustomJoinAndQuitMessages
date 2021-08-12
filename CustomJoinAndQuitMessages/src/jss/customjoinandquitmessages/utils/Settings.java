@@ -10,6 +10,9 @@ public class Settings {
 	public static boolean boolean_quit;
 	public static boolean boolean_welcome;
 	public static List<String> list_welcome;
+	public static String message_join;
+	public static String message_quit;
+	public static String message_first_join;
 	
 	//---------------------------//
 	public static String message_;

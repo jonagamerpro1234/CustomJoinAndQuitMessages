@@ -11,6 +11,7 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
 
+@SuppressWarnings("deprecation")
 public class Json {
 
 	private Player player;
@@ -63,7 +64,6 @@ public class Json {
 		this.openUrl = url;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void send() {
 		TextComponent component = new TextComponent(Utils.hexcolor(this.text));
 		if(this.hoverText != null) {
@@ -81,7 +81,6 @@ public class Json {
 		player.spigot().sendMessage(component);
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void sendToAll() {
 		TextComponent component = new TextComponent(Utils.hexcolor(this.text));
 		if(this.hoverText != null) {

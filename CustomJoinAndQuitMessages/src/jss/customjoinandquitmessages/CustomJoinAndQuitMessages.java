@@ -8,11 +8,13 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
+import jss.customjoinandquitmessages.config.ConfigFile;
+import jss.customjoinandquitmessages.config.Lang;
+import jss.customjoinandquitmessages.config.PreConfigLoader;
 import jss.customjoinandquitmessages.events.JoinListener;
 import jss.customjoinandquitmessages.events.SoundsListener;
 import jss.customjoinandquitmessages.hook.HooksManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
-import jss.customjoinandquitmessages.utils.Lang;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Logger.Level;
 import jss.customjoinandquitmessages.utils.Settings;
@@ -55,13 +57,13 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
         nmsversion = nmsversion.substring(nmsversion.lastIndexOf(".") + 1);
         if (nmsversion.equalsIgnoreCase("v1_8_R1") || nmsversion.equalsIgnoreCase("v1_7_")) { 
         	useLegacyversions = true;
-        	if(useLegacyversions == true) {
+        	if(useLegacyversions) {
         		Utils.sendColorMessage(eventUtils.getConsoleSender(), " is legacy &e1.7_? &8|&e 1.8_R1");
         	}
         }
         if (nmsversion.equalsIgnoreCase("v1_8_R3")) { 
         	useLegacyversions = true;
-        	if(useLegacyversions == true) {
+        	if(useLegacyversions) {
         		Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &cdisabled &7method &b1.16");
         	}
         }else if(nmsversion.equalsIgnoreCase("v1_16_R1") || nmsversion.equalsIgnoreCase("v1_16_R2") || nmsversion.equalsIgnoreCase("v1_16_R3")){

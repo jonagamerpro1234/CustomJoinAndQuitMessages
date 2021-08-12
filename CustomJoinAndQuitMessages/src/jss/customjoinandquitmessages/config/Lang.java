@@ -1,4 +1,4 @@
-package jss.customjoinandquitmessages.utils;
+package jss.customjoinandquitmessages.config;
 
 import java.util.List;
 import java.io.File;

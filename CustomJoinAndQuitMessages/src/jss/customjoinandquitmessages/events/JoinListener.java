@@ -12,8 +12,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import com.cryptomorin.xseries.messages.ActionBar;
 import com.cryptomorin.xseries.messages.Titles;
 
-import jss.customjoinandquitmessages.ConfigFile;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.config.ConfigFile;
 import jss.customjoinandquitmessages.json.Json;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.UpdateChecker;
