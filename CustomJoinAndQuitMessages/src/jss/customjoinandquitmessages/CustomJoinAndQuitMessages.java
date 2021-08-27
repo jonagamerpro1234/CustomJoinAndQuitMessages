@@ -24,7 +24,7 @@ import jss.customjoinandquitmessages.utils.Utils;
 
 public class CustomJoinAndQuitMessages extends JavaPlugin{
 
-	PluginDescriptionFile jss = getDescription();
+	private PluginDescriptionFile jss = getDescription();
 	public String name = this.jss.getName();
 	public String version = this.jss.getVersion();
 	private static CustomJoinAndQuitMessages plugin;
