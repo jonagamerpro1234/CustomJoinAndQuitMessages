@@ -6,52 +6,87 @@
 # There are two variables that show the name of the player in a message and that are | <Name>, <DisplayName> | these two variables can also be in lowercase.
 #
 Config:
-  Lang: en-US # you can use the available languages of the plugin or you can add your own translations [ Default | en-US ]
+
+  # |Lang| you can use the available languages of the plugin or you can add your own translations [ Default = en-US ]
+  Lang: en-US 
+  
+  # |Update| This function lets you know if there is a plugin update [Does not disable console messages]
   Update: true
-  Debug:
-    Enabled: false  #| Debug | shows you important information about the plugin loading | ! in case of error or problems put [Debug: true]!
-    Lang: en #|Lang| [es] [Spanish | Espanol] | [en] [English | Ingles]
+  
+  # |Debug| shows you important information about the plugin loading 
+  Debug: false
+  
+  # |Type|  the type is a way of knowing what is being used whether in the [ normal ] or [ group ] format
+  Type: normal
+    
 #
-# |Join and Quit|
-#
-# |Enabled|
-# here you can deactivate or activate the customization of the Join/Quit message [ Default | true ]
-#
-# |Text|
-# This is where Join/Quit's customizable message is located
-#
-# |Type|
-# [Default] will use normal plugin customization and only modify the message adding color as well
-# [None] hides the Join/Quit message for both the plugin and the vanilla message for minecraft
-# [Hover] activate the sub-messages function when hovering the mouse over the Join/Quit message
-# [Click] activate the custom actions function when you click on the Join/Quit message
-# [Double] Activate the two HoverEvent functions in ClickEvent at the same time, this option is [experimental] and may present a bug
-# | Vars | there are variables that only work in certain functions
-# \n used to move to the next line in the hover function
+# | Join |
+# 
 Join:
-  Enabled: true
-  Text: '&b[&a+&b] <name>' #|<name>, <displayname>|
-# |Type|
-# |> [ Custom | Double | Hover | Click | None | Group ]
-  Type: Custom
-  Hover:
-    Text: 
+  
+  # |Text| This is where Join customizable message is located
+  Text: '&b[&a+&b] <name>'
+  
+  # |Type|
+  Type: normal
+  
+  HoverEvent:
+    
+    # |Enabled| Here you can enable or disable this feature
+    Enabled: true
+  
+    Hover: 
       - '&6hello &b<name>'
-# |Mode| 
-# |> [TEXT] show hover text
-    Mode: TEXT 
-# |Legacy-Color| 
-# |> the legacy color mode is used to activate the old color system for hover event 
-# |> legay color does not need to use the color format, for example [ &6 ]
-# |> Colors [RED] | [AQUA] | [BLUE] | [GREED] | [GOlD] | ....etc
-    Legacy-Color: false  
-    Color: AQUA 
-  Click:
-    Action: 'say hello'
-# |Mode| 
-# |> [URL] open a link 
-# |> [CMD] run a command
-    Mode: CMD 
+
+  ClickEvent:
+    
+    # |Enabled| Here you can enable or disable this feature
+    Enabled: true
+    
+    Mode: command
+    
+    Actions:
+      
+      Command: 'tell <name> hello player'
+      
+      Url: ''
+      
+      Suggest-Command: '/msg <name>'
+  
+  Sound:
+    
+    # |Enabled| Here you can enable or disable this feature
+    Enabled: true
+    
+    Sound: 'BLOCK_NOTE_BLOCK_PLING'
+    
+    Pitch: 1
+    
+    Volume: 10
+    
+    
+  Title:
+    
+    # |Enabled| Here you can enable or disable this feature
+    Enabled: true
+    
+    Title: ''
+    
+    SubTitle: ''
+    
+    FadeIn: 20
+    
+    Stay: 40
+    
+    FadeOut: 20
+  
+  ActionBar:
+    
+    # |Enabled| Here you can enable or disable this feature
+    Enabled: true
+    
+    Text: ''
+  
 Quit:
   Enabled: true
   Text: '&b[&c-&b] <name>' #|<name>, <displayname> |

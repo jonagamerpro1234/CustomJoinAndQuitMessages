@@ -2,7 +2,7 @@ package jss.customjoinandquitmessages.hook;
 
 import org.bukkit.Bukkit;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.EventUtils;
+import jss.customjoinandquitmessages.utils.EventsUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Logger.Level;
 import jss.customjoinandquitmessages.utils.Utils;
@@ -13,7 +13,7 @@ public class PlaceholderApiHook implements LoaderHook{
 	private CustomJoinAndQuitMessages plugin;
 	private HooksManager hooksManager;
 	private Logger logger = new Logger(plugin);
-	private EventUtils eventUtils = new EventUtils(plugin);
+	private EventsUtils EventsUtils = new EventsUtils(plugin);
 	private boolean isEnabled;
 	
 	public PlaceholderApiHook(HooksManager hooksManager) {
@@ -28,7 +28,7 @@ public class PlaceholderApiHook implements LoaderHook{
 		}
 		
 		this.isEnabled = true;
-		Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&aLoading placeholderapi features...");
+		Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + "&aLoading placeholderapi features...");
 	}
 	
 	public boolean isEnabled() {

@@ -1,4 +1,4 @@
-package jss.customjoinandquitmessages.events;
+package jss.customjoinandquitmessages.events.old;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -13,14 +13,13 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import com.cryptomorin.xseries.XSound;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.EventUtils;
-
+import jss.customjoinandquitmessages.utils.EventsUtils;
 import jss.customjoinandquitmessages.utils.Utils;
 
 public class SoundsListener implements Listener{
 
 	private CustomJoinAndQuitMessages plugin;
-	private EventUtils eventUtils = new EventUtils(plugin);
+	private EventsUtils eventUtils = new EventsUtils(plugin);
 	
 	public SoundsListener(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;

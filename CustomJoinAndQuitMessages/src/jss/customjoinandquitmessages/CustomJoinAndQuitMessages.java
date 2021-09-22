@@ -11,10 +11,10 @@ import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
 import jss.customjoinandquitmessages.config.ConfigFile;
 import jss.customjoinandquitmessages.config.Lang;
 import jss.customjoinandquitmessages.config.PreConfigLoader;
-import jss.customjoinandquitmessages.events.JoinListener;
-import jss.customjoinandquitmessages.events.SoundsListener;
+import jss.customjoinandquitmessages.events.old.JoinListener;
+import jss.customjoinandquitmessages.events.old.SoundsListener;
 import jss.customjoinandquitmessages.hook.HooksManager;
-import jss.customjoinandquitmessages.utils.EventUtils;
+import jss.customjoinandquitmessages.utils.EventsUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Logger.Level;
 import jss.customjoinandquitmessages.utils.Settings;
@@ -35,7 +35,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
     public boolean useLegacyversions = false;
     public String nmsversion;
 	private Map<String,Lang> availableLangs = new HashMap<>();
-	private EventUtils eventUtils = new EventUtils(this);
+	private EventsUtils EventsUtils = new EventsUtils(this);
 	private ConfigFile configFile = new ConfigFile(this, "config.yml");
 	private Logger logger = new Logger(this);
 	private HooksManager hooksManager = new HooksManager(this);
@@ -49,7 +49,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 		configFile.create();
 		preConfigLoader.loadConfig();
 		if(!preConfigLoader.loadLangs()) {
-			Utils.sendColorMessage(eventUtils.getConsoleSender(), "&e[&b"+ name +"&e]&c error load lang and config file");
+			Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&e[&b"+ name +"&e]&c error load lang and config file");
 			return;
 		}		
 		metrics = new Metrics(this);
@@ -58,18 +58,18 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
         if (nmsversion.equalsIgnoreCase("v1_8_R1") || nmsversion.equalsIgnoreCase("v1_7_")) { 
         	useLegacyversions = true;
         	if(useLegacyversions) {
-        		Utils.sendColorMessage(eventUtils.getConsoleSender(), " is legacy &e1.7_? &8|&e 1.8_R1");
+        		Utils.sendColorMessage(EventsUtils.getConsoleSender(), " is legacy &e1.7_? &8|&e 1.8_R1");
         	}
         }
         if (nmsversion.equalsIgnoreCase("v1_8_R3")) { 
         	useLegacyversions = true;
         	if(useLegacyversions) {
-        		Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &cdisabled &7method &b1.16");
+        		Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &cdisabled &7method &b1.16");
         	}
         }else if(nmsversion.equalsIgnoreCase("v1_16_R1") || nmsversion.equalsIgnoreCase("v1_16_R2") || nmsversion.equalsIgnoreCase("v1_16_R3")){
-        	Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &aenabled &7method &b1.16 ");
+        	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &aenabled &7method &b1.16 ");
         }else if(nmsversion.equalsIgnoreCase("v1_17_R1")) {
-        	Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &aenabled &7method &b1.17 ");
+        	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &aenabled &7method &b1.17 ");
         }
 		setupCommands();
 		setupEvents();

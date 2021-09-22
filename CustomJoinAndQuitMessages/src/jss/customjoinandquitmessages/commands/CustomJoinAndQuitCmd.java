@@ -10,13 +10,13 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.EventUtils;
+import jss.customjoinandquitmessages.utils.EventsUtils;
 import jss.customjoinandquitmessages.utils.Utils;
 
 public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 	
 	private CustomJoinAndQuitMessages plugin;
-	private EventUtils eventUtils = new EventUtils(plugin);
+	private EventsUtils EventsUtils = new EventsUtils(plugin);
 	
 	public CustomJoinAndQuitCmd(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
@@ -29,30 +29,30 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 			if(args.length >= 1) {
 				if(args[0].equalsIgnoreCase("help")) {
 					List<String> list = plugin.Locale().help_1;
-					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
+					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
 					for(int i = 0; i < list.size(); i++) {
 						String text = (String) list.get(i);
-						Utils.sendColorMessage(eventUtils.getConsoleSender(), text);
+						Utils.sendColorMessage(EventsUtils.getConsoleSender(), text);
 					}
-					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				}else if(args[0].equalsIgnoreCase("reload")) {
 					plugin.getPreConfigLoader().loadConfig();
 					plugin.getPreConfigLoader().loadLangs();
 					plugin.reloadConfig();
-					Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().reload);
+					Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().reload);
 				}else if(args[0].equalsIgnoreCase("info")) {
-					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5 <||=-=-=-=-="+Utils.getPrefix()+"&5=-=-=-=-=-=-");
-					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5 <|| &c* &bName: &3"+plugin.name);
-					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5 <|| &c* &bAuthor: &3jonagamerpro1234");
-					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5 <|| &c* &bVersion: &a"+plugin.version);
-					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5 <|| &c* &bUpdate: &e" + plugin.getUpdateVersion());
-					Utils.sendColorMessage(eventUtils.getConsoleSender(), "&5 <||=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <||=-=-=-=-="+Utils.getPrefix()+"&5=-=-=-=-=-=-");
+					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bName: &3"+plugin.name);
+					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bAuthor: &3jonagamerpro1234");
+					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bVersion: &a"+plugin.version);
+					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bUpdate: &e" + plugin.getUpdateVersion());
+					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <||=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				}else {
-					Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Error_Cmd);
+					Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Error_Cmd);
 				}
 				return true;
 			}
-			Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Help_cmd);
+			Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Help_cmd);
 			return false;
 		}
 		Player j = (Player) sender;

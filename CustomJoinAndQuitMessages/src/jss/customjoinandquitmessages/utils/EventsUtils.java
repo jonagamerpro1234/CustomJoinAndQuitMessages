@@ -7,17 +7,11 @@ import org.bukkit.plugin.PluginManager;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 
-/**
- *
- * @author jonagamerpro1234
- * @version 1.0
- *
- */
-public class EventUtils {
+public class EventsUtils {
 	
 	private CustomJoinAndQuitMessages plugin;
 	
-	public EventUtils(CustomJoinAndQuitMessages plugin) {
+	public EventsUtils(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
 	}
 

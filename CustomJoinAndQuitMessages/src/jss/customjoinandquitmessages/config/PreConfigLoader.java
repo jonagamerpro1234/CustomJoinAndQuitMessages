@@ -6,14 +6,14 @@ import java.util.HashMap;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.EventUtils;
+import jss.customjoinandquitmessages.utils.EventsUtils;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.Utils;
 
 public class PreConfigLoader {
 	
 	private CustomJoinAndQuitMessages plugin;
-	private EventUtils eventUtils = new EventUtils(plugin);
+	private EventsUtils EventsUtils = new EventsUtils(plugin);
 	
 	public PreConfigLoader(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
@@ -44,7 +44,7 @@ public class PreConfigLoader {
 	        plugin.getLogger().severe("Could not add locales!");
 	    }
 	    if (!availableLocales.containsKey(Settings.defaultLanguage)) {
-	    	Utils.sendColorMessage(eventUtils.getConsoleSender(), Utils.getPrefix() + "&eLoad File: " + Settings.defaultLanguage + ".yml' not found in /locale folder. Using /locale/en-US.yml");	
+	    	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + "&eLoad File: " + Settings.defaultLanguage + ".yml' not found in /locale folder. Using /locale/en-US.yml");	
 	        Settings.defaultLanguage = "en-US";
 	        availableLocales.put(Settings.defaultLanguage, new Lang(plugin, Settings.defaultLanguage, 0));
 	    }

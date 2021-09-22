@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.events.custom.TitleEvent;
-import jss.customjoinandquitmessages.utils.EventUtils;
+import jss.customjoinandquitmessages.utils.EventsUtils;
 import jss.customjoinandquitmessages.utils.Utils;
 
 
@@ -16,8 +16,8 @@ public class Title extends Nms {
 	
 	public static void sendTitle(Player player ,String title, String subtitle, int fadeIn, int stay, int fadeOut) {
 		TitleEvent titleEvent = new TitleEvent(player, title, subtitle, fadeIn, stay, fadeOut);			
-		EventUtils eventUtils = new EventUtils(plugin);
-		eventUtils.getEventManager().callEvent(titleEvent);
+		EventsUtils EventsUtils = new EventsUtils(plugin);
+		EventsUtils.getEventManager().callEvent(titleEvent);
 		if(titleEvent.isCancelled()) {
 			return;
 		}
