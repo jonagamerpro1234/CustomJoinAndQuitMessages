@@ -111,7 +111,7 @@ public class Utils {
 	    sendEnable(prefix , "&5 <|| &c* &bThe plugin is &d[&aSuccessfully activated&d]");
 	    sendEnable(prefix , "&5 <|| &c* &bVersion: &e[&a" + version + "&e]");
 	    sendEnable(prefix , "&5 <|| &c* &bBy: &e[&bjonagamerpro1234&e]");
-	    sendEnable(prefix , "&5 <|| &c* &bTested Versions &3|&d1.7.x&3|&a1.8.x&3|&a1.9.x&3|&a1.10.x&3|&a1.11.x&3|&a1.12.x&3|&a1.13.x&3|&a1.14.x&3|&a1.15.x&3|&a1.16.x&e|&51.17.x");
+	    sendEnable(prefix , "&5 <|| &c* &bTested Versions &3|&d1.7.x&3|&a1.8.x&3|&a1.9.x&3|&a1.10.x&3|&a1.11.x&3|&a1.12.x&3|&a1.13.x&3|&a1.14.x&3|&a1.15.x&3|&a1.16.x&e|&a1.17.x");
 	    sendEnable(prefix , "&5 <||============================================----");
 	}
 	
@@ -120,7 +120,7 @@ public class Utils {
 	    sendEnable(prefix , "&5 <|| &c* &bThe plugin is &d[&cSuccessfully disabled&c]");
 	    sendEnable(prefix , "&5 <|| &c* &bVersion: &e[&a" + version + "&e]");
 	    sendEnable(prefix , "&5 <|| &c* &bBy: &e[&bjonagamerpro1234&e]");
-	    sendEnable(prefix , "&5 <|| &c* &bTested Versions &3|&d1.7.x&3|&a1.8.x&3|&a1.9.x&3|&a1.10.x&3|&a1.11.x&3|&a1.12.x&3|&a1.13.x&3|&a1.14.x&3|&a1.15.x&3|&a1.16.x&e|&51.17.x");
+	    sendEnable(prefix , "&5 <|| &c* &bTested Versions &3|&d1.7.x&3|&a1.8.x&3|&a1.9.x&3|&a1.10.x&3|&a1.11.x&3|&a1.12.x&3|&a1.13.x&3|&a1.14.x&3|&a1.15.x&3|&a1.16.x&e|&a1.17.x");
 	    sendEnable(prefix , "&5 <||============================================----");	
 	}	
 	
@@ -218,10 +218,11 @@ public class Utils {
     public static String getVar(Player player, String text) {
         text = text.replace("<name>", player.getName());
         text = text.replace("<displayname>", player.getDisplayName());
-        text = text.replace("<Name>", player.getName());
-        text = text.replace("<DisplayName>", player.getDisplayName());
         text = text.replaceAll("<world>", player.getWorld().getName());
-        text = text.replaceAll("<World>", player.getWorld().getName());
+        text = text.replace("<0>", " ");
+        text = text.replace("<xp_level>", "" + player.getExpToLevel());
+        text = text.replace("<xp>", "" + player.getExp());
+        text = text.replace("<ping>", "" + player.getPing());
         text = placeholderReplace(text, player);
         text = getOnlinePlayers(text);
         return text;

@@ -38,7 +38,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				}else if(args[0].equalsIgnoreCase("reload")) {
 					plugin.getPreConfigLoader().loadConfig();
 					plugin.getPreConfigLoader().loadLangs();
-					plugin.reloadConfig();
+					plugin.getConfigFile().reloadConfig();
 					Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().reload);
 				}else if(args[0].equalsIgnoreCase("info")) {
 					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <||=-=-=-=-="+Utils.getPrefix()+"&5=-=-=-=-=-=-");
@@ -75,7 +75,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				if((j.isOp()) || (j.hasPermission("Cjm.Reload"))) {
 					plugin.getPreConfigLoader().loadConfig();
 					plugin.getPreConfigLoader().loadLangs();
-					plugin.reloadConfig();
+					plugin.getConfigFile().reloadConfig();
 					Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().reload);
 				}else {
 					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);

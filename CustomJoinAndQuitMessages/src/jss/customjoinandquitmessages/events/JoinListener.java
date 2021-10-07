@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -60,9 +61,8 @@ public class JoinListener implements Listener {
 				String text = (String) List_Text.get(i);
 				text = Utils.color(text);
 				text = Utils.getVar(p, text);
-				Utils.sendColorMessage(text);
+				Utils.sendColorMessage(p, text);
 			}
-			
 		}
 		
 		if(isEnabled) {
@@ -90,7 +90,7 @@ public class JoinListener implements Listener {
 					boolean isClick = config.getString("Join.ClickEvent.Enabled").equals("true");
 					boolean isTitle = config.getString("Join.Title.Enabled").equals("true");
 					boolean isSound = config.getString("Join.Sound.Enabled").equals("true");
-					boolean isActionBar = config.getString("Join.ActionBar").equals("true");
+					boolean isActionBar = config.getString("Join.ActionBar.Enabled").equals("true");
 					boolean isSoundAll = config.getString("Join.Sound.Send-To-All").equals("true");
 					
 					List<String> Hover_Text = config.getStringList("Join.HoverEvent.Hover");
@@ -162,101 +162,103 @@ public class JoinListener implements Listener {
 			}else if(isGroup) {
 				e.setJoinMessage(null);
 				
-				for(String key : config.getConfigurationSection("Groups").getKeys(false)) {
+				ConfigurationSection sections = config.getConfigurationSection("Groups");
+				
+				for(String section : sections.getKeys(false)) {
 					
-					boolean isNormalType = config.getString("Groups." + key + ".Type").equalsIgnoreCase("normal");
-					boolean isModifyType = config.getString("Groups." + key + ".Type").equalsIgnoreCase("modify");
+					ConfigurationSection key = sections.getConfigurationSection(section);
 					
-					String text = config.getString("Groups." + key + ".Join-Text");
-					String isPermission = config.getString("Groups." + key + ".Permission");
+					boolean isNormalType = key.getString("Type").equalsIgnoreCase("normal");
+					boolean isModifyType = key.getString("Type").equalsIgnoreCase("modify");
+					
+					String text = key.getString("Join-Text");
+					String isPermission = key.getString("Permission");
 					
 					text = Utils.color(text);
 					text = Utils.getVar(p, text);
 					
 					Json json = new Json(p, text);
 					
-					if(isNormalType) {
-						
-						if(p.hasPermission(isPermission));
-						
-						json.sendToAll();
-						return;
-					}else if(isModifyType) {
-						
-						boolean isHover = config.getString("Groups." + key + ".HoverEvent.Enabled").equals("true");
-						boolean isClick = config.getString("Groups." + key + ".ClickEvent.Enabled").equals("true");
-						boolean isTitle = config.getString("Groups." + key + ".Title.Enabled").equals("true");
-						boolean isSound = config.getString("Groups." + key + ".Sound.Enabled").equals("true");
-						boolean isActionBar = config.getString("Groups." + key + ".ActionBar").equals("true");
-						boolean isSoundAll = config.getString("Groups." + key + ".Sound.Send-To-All").equals("true");
-						
-						List<String> Hover_Text = config.getStringList("Groups." + key + ".HoverEvent.Hover");
-						
-						String isClick_Mode = config.getString("Groups." + key + ".ClickEvent.Mode");
-						String Action_Command = config.getString("Groups." + key + ".ClickEvent.Actions.Command");
-						String Action_Url = config.getString("Groups." + key + ".ClickEvent.Actions.Url");
-						String Action_Suggest= config.getString("Groups." + key + ".ClickEvent.Actions.Suggest-Command");
-						String Title_Text = config.getString("Groups." + key + ".Title.Title");
-						String SubTitle_Text = config.getString("Groups." + key + ".Title.SubTitle");
-						String Actionbar_Text = config.getString("Groups." + key + ".ActionBar.Text");
-						String Sound_Name = config.getString("Groups." + key + ".Sound.Name");
-						
-						int FadeIn = config.getInt("Groups." + key + ".Title.FadeIn");
-						int Stay = config.getInt("Groups." + key + ".Title.Stay");
-						int FadeOut = config.getInt("Groups." + key + ".Title.FadeOut");
-						int Sound_Volume = config.getInt("Groups." + key + ".Sound.Volume");
-						
-						float Sound_Pitch = Float.valueOf(config.getString("Groups." + key + ".Sound.Pitch"));
-						
-						if(p.hasPermission(isPermission));
-						
-						if(isHover) {
-							if(isClick) {
-								if(isClick_Mode.equalsIgnoreCase("command")) {
-									json.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
-								}else if(isClick_Mode.equalsIgnoreCase("url")) {
-									json.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
-								}else if(isClick_Mode.equalsIgnoreCase("suggest")) {
-									json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
+					if(p.hasPermission(isPermission)) {
+						if(isNormalType) {
+							json.sendToAll();
+							return;
+						}else if(isModifyType) {
+							
+							boolean isHover = key.getString("HoverEvent.Enabled").equals("true");
+							boolean isClick = key.getString("ClickEvent.Enabled").equals("true");
+							boolean isTitle = key.getString("Title.Enabled").equals("true");
+							boolean isSound = key.getString("Sound.Enabled").equals("true");
+							boolean isActionBar = key.getString("ActionBar").equals("true");
+							boolean isSoundAll = key.getString("Sound.Send-To-All").equals("true");
+							
+							List<String> Hover_Text = key.getStringList("HoverEvent.Hover");
+							
+							String isClick_Mode = key.getString("ClickEvent.Mode");
+							String Action_Command = key.getString("ClickEvent.Actions.Command");
+							String Action_Url = key.getString("ClickEvent.Actions.Url");
+							String Action_Suggest= key.getString("ClickEvent.Actions.Suggest-Command");
+							String Title_Text = key.getString("Title.Title");
+							String SubTitle_Text = key.getString("Title.SubTitle");
+							String Actionbar_Text = key.getString("ActionBar.Text");
+							String Sound_Name = key.getString("Sound.Name");
+							
+							int FadeIn = key.getInt("Title.FadeIn");
+							int Stay = key.getInt("Title.Stay");
+							int FadeOut = key.getInt("Title.FadeOut");
+							int Sound_Volume = key.getInt("Sound.Volume");
+							
+							float Sound_Pitch = Float.valueOf(key.getString("Sound.Pitch"));
+							
+							
+							if(isHover) {
+								if(isClick) {
+									if(isClick_Mode.equalsIgnoreCase("command")) {
+										json.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
+									}else if(isClick_Mode.equalsIgnoreCase("url")) {
+										json.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
+									}else if(isClick_Mode.equalsIgnoreCase("suggest")) {
+										json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
+									}
+								}else {
+									json.setHover(Hover_Text).sendToAll();
 								}
-							}else {
-								json.setHover(Hover_Text).sendToAll();
-							}
-						}else{
-							if(isClick) {
-								if(isClick_Mode.equalsIgnoreCase("command")) {
-									json.setExecuteCommand(Action_Command).sendToAll();
-								}else if(isClick_Mode.equalsIgnoreCase("url")) {
-									json.setOpenURL(Action_Url).sendToAll();
-								}else if(isClick_Mode.equalsIgnoreCase("suggest")) {
-									json.setSuggestCommand(Action_Suggest).sendToAll();
+							}else{
+								if(isClick) {
+									if(isClick_Mode.equalsIgnoreCase("command")) {
+										json.setExecuteCommand(Action_Command).sendToAll();
+									}else if(isClick_Mode.equalsIgnoreCase("url")) {
+										json.setOpenURL(Action_Url).sendToAll();
+									}else if(isClick_Mode.equalsIgnoreCase("suggest")) {
+										json.setSuggestCommand(Action_Suggest).sendToAll();
+									}
+								}else {
+									json.sendToAll();
 								}
-							}else {
-								json.sendToAll();
 							}
-						}
-						
-						if(isTitle) {
-							Titles.sendTitle(p, FadeIn, Stay, FadeOut, Utils.color(Utils.getVar(p, Title_Text)), Utils.color(Utils.getVar(p, SubTitle_Text)));
-						}
-						
-						if(isActionBar) {
-							ActionBar.sendActionBar(p, Utils.color(Utils.getVar(p, Actionbar_Text)));
-						}
-						
-						if(isSound) {
-							 if(isSoundAll) {
-								 Location location = p.getLocation();
-								 p.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
-							 }else {
-								 for(Player pp : Bukkit.getOnlinePlayers()) {
+							
+							if(isTitle) {
+								Titles.sendTitle(p, FadeIn, Stay, FadeOut, Utils.color(Utils.getVar(p, Title_Text)), Utils.color(Utils.getVar(p, SubTitle_Text)));
+							}
+							
+							if(isActionBar) {
+								ActionBar.sendActionBar(p, Utils.color(Utils.getVar(p, Actionbar_Text)));
+							}
+							
+							if(isSound) {
+								 if(isSoundAll) {
 									 Location location = p.getLocation();
-									 pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch); 
+									 p.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
+								 }else {
+									 for(Player pp : Bukkit.getOnlinePlayers()) {
+										 Location location = p.getLocation();
+										 pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch); 
+									 }
 								 }
-							 }
+							}
+							return;
 						}
-					}
-					
+					}					
 				}
 				return;
 			}else if(isNone) {
@@ -266,7 +268,7 @@ public class JoinListener implements Listener {
 		}
 		
 		if(isUpdate) {
-			if(p.isOp() || p.hasPermission("Cjm.Update.Notify")) {
+			if((p.isOp()) || (p.hasPermission("Cjm.Update.Notify"))) {
 				new UpdateChecker(CustomJoinAndQuitMessages.getPlugin(), UpdateSettings.ID).getUpdateVersion(version ->{
 					if(!CustomJoinAndQuitMessages.getPlugin().getDescription().getVersion().equalsIgnoreCase(version)) {
 	                    TextComponent component = new TextComponent(Utils.color(Utils.getPrefixPlayer() + " &aThere is a new version available for download"));

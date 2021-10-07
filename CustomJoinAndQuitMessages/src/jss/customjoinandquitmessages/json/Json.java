@@ -67,7 +67,7 @@ public class Json {
 	}
 	
 	public void send() {
-		TextComponent component = new TextComponent(Utils.color(this.text));
+		TextComponent component = new TextComponent(TextComponent.fromLegacyText(this.text));
 		if(this.hoverText != null) {
 			component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, this.hoverText));
 		} 
@@ -84,7 +84,7 @@ public class Json {
 	}
 	
 	public void sendToAll() {
-		TextComponent component = new TextComponent(Utils.color(this.text));
+		TextComponent component = new TextComponent(TextComponent.fromLegacyText(this.text));
 		if(this.hoverText != null) {
 			component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, this.hoverText));
 		} 
