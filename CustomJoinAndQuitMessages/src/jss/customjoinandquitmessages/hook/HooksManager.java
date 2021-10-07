@@ -7,7 +7,6 @@ public class HooksManager {
 	
 	private CustomJoinAndQuitMessages plugin;
 	private HooksManager manager;
-	private VaultHook vaultHook;
 	private PlaceholderApiHook placeholderApiHook;
 
 	public HooksManager(CustomJoinAndQuitMessages plugin) {
@@ -15,8 +14,7 @@ public class HooksManager {
 	}
 	
 	public void load() {
-		initHooks(new VaultHook(this),
-				new PlaceholderApiHook(this));
+		initHooks( new PlaceholderApiHook(this));
 	}
 	
 	private void initHooks(LoaderHook... hooks) {
@@ -37,7 +35,4 @@ public class HooksManager {
 		return placeholderApiHook;
 	}
 	
-	public VaultHook getVaultHook() {
-		return vaultHook;
-	}
 }

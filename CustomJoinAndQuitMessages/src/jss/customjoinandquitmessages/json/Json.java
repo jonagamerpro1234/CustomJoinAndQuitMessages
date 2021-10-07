@@ -32,37 +32,42 @@ public class Json {
 		return text;
 	}
 	
-	public void setText(String text) {
+	public Json setText(String text) {
 		this.text = text;
+		return this;
 	}
 	
-	public void setHover(List<String> hover) {
+	public Json setHover(List<String> hover) {
 		this.hoverText = new BaseComponent[hover.size()];
 		for(int i = 0; i < hover.size(); i++) {
 			TextComponent component = new TextComponent();
 			if(i == hover.size() -1) {
-				component.setText(Utils.hexcolor(Utils.getVar(this.player, (String)hover.get(i))));
+				component.setText(Utils.color(Utils.getVar(this.player, (String)hover.get(i))));
 			}else {
-				component.setText(Utils.hexcolor(Utils.getVar(this.player, (String)hover.get(i)) + "\n"));
+				component.setText(Utils.color(Utils.getVar(this.player, (String)hover.get(i)) + "\n"));
 			}
 			this.hoverText[i] = component;
 		}
+		return this;
 	}
 
-	public void setSuggestCommand(String suggestCommand) {
+	public Json setSuggestCommand(String suggestCommand) {
 		this.suggestCommand = suggestCommand;
+		return this;
 	}
 
-	public void setExecuteCommand(String executeCommand) {
+	public Json setExecuteCommand(String executeCommand) {
 		this.executeCommand = executeCommand;
+		return this;
 	}
 	
-	public void setOpenURL(String url) {
+	public Json setOpenURL(String url) {
 		this.openUrl = url;
+		return this;
 	}
 	
 	public void send() {
-		TextComponent component = new TextComponent(Utils.hexcolor(this.text));
+		TextComponent component = new TextComponent(Utils.color(this.text));
 		if(this.hoverText != null) {
 			component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, this.hoverText));
 		} 
@@ -79,7 +84,7 @@ public class Json {
 	}
 	
 	public void sendToAll() {
-		TextComponent component = new TextComponent(Utils.hexcolor(this.text));
+		TextComponent component = new TextComponent(Utils.color(this.text));
 		if(this.hoverText != null) {
 			component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, this.hoverText));
 		} 

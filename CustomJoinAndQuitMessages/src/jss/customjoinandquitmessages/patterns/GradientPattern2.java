@@ -1,14 +1,15 @@
-package com.iridium.iridiumcolorapi.patterns;
+package jss.customjoinandquitmessages.patterns;
 
 import com.iridium.iridiumcolorapi.IridiumColorAPI;
+import com.iridium.iridiumcolorapi.patterns.IPattern;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class GradientPattern implements IPattern {
+public class GradientPattern2 implements IPattern {
 
-    Pattern pattern = Pattern.compile("<#:([0-9A-Fa-f]{6})>(.*?)</#:([0-9A-Fa-f]{6})>");
+    Pattern pattern = Pattern.compile("<GRADIENT:([0-9A-Fa-f]{6})>(.*?)</GRADIENT:([0-9A-Fa-f]{6})>");
 
     public String process(String string) {
         Matcher matcher = pattern.matcher(string);

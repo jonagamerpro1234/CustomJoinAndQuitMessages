@@ -3,7 +3,7 @@ package com.iridium.iridiumcolorapi.patterns;
 /**
  * Represents a color pattern which can be applied to a String.
  */
-public interface Pattern {
+public interface IPattern {
 
     /**
      * Applies this pattern to the provided String.

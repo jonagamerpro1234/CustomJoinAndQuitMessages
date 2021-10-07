@@ -29,4 +29,7 @@ public class EventsUtils {
 		return Bukkit.getConsoleSender();
 	}
 	
+	public static ConsoleCommandSender getStaticConsoleSender() {
+		return Bukkit.getConsoleSender();
+	}
 }

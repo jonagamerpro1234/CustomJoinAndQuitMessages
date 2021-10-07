@@ -11,8 +11,7 @@ import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
 import jss.customjoinandquitmessages.config.ConfigFile;
 import jss.customjoinandquitmessages.config.Lang;
 import jss.customjoinandquitmessages.config.PreConfigLoader;
-import jss.customjoinandquitmessages.events.old.JoinListener;
-import jss.customjoinandquitmessages.events.old.SoundsListener;
+import jss.customjoinandquitmessages.events.JoinListener;
 import jss.customjoinandquitmessages.hook.HooksManager;
 import jss.customjoinandquitmessages.utils.EventsUtils;
 import jss.customjoinandquitmessages.utils.Logger;
@@ -103,7 +102,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	
 	public void setupEvents() {
 		new JoinListener(this);
-		new SoundsListener(this);
+		//new SoundsListener(this);
 	}
 	
 	public static CustomJoinAndQuitMessages getPlugin() {

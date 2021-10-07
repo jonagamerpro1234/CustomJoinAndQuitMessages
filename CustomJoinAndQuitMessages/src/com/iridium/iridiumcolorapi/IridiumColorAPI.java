@@ -2,9 +2,15 @@ package com.iridium.iridiumcolorapi;
 
 import com.google.common.collect.ImmutableMap;
 import com.iridium.iridiumcolorapi.patterns.GradientPattern;
-import com.iridium.iridiumcolorapi.patterns.Pattern;
+import com.iridium.iridiumcolorapi.patterns.IPattern;
 import com.iridium.iridiumcolorapi.patterns.RainbowPattern;
 import com.iridium.iridiumcolorapi.patterns.SolidPattern;
+
+import jss.customjoinandquitmessages.patterns.GradientPattern2;
+import jss.customjoinandquitmessages.patterns.PadPattern;
+import jss.customjoinandquitmessages.patterns.PadPattern2;
+import jss.customjoinandquitmessages.patterns.PadPattern3;
+import jss.customjoinandquitmessages.patterns.RainbowPattern2;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
@@ -63,7 +69,8 @@ public class IridiumColorAPI {
      *
      * @since 1.0.2
      */
-    private static final List<Pattern> PATTERNS = Arrays.asList(new GradientPattern(), new SolidPattern(), new RainbowPattern());
+    private static final List<IPattern> PATTERNS = Arrays.asList(new GradientPattern(), new SolidPattern(), new RainbowPattern(),
+    		new PadPattern(), new PadPattern2(), new PadPattern3(), new RainbowPattern2(), new GradientPattern2());
 
     /**
      * Processes a string to add color to it.
@@ -74,7 +81,7 @@ public class IridiumColorAPI {
      */
     @Nonnull
     public static String process(@Nonnull String string) {
-        for (Pattern pattern : PATTERNS) {
+        for (IPattern pattern : PATTERNS) {
             string = pattern.process(string);
         }
         string = ChatColor.translateAlternateColorCodes('&', string);

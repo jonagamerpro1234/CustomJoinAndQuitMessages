@@ -12,6 +12,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.iridium.iridiumcolorapi.IridiumColorAPI;
+
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -35,7 +37,7 @@ public class Utils {
 				match = hex.matcher(text);
 			}
 		}
-		return color(text);
+		return legacycolor(text);
 	}
 
 	public static String setCustomLine(String arg, String color) {
@@ -55,7 +57,16 @@ public class Utils {
 	}
 	
 	public static String color(String text) {
+		if(text == null  || text.isEmpty()) return ""; 
+		return IridiumColorAPI.process(text);
+	}
+	
+	public static String legacycolor(String text) {
 		return ChatColor.translateAlternateColorCodes('&', text);
+	}
+	
+	public static void sendColorConsoleMessage(CommandSender sender, String text) {
+		sender.sendMessage(color(text));
 	}
 	
 	public static String colorless(String text) {
