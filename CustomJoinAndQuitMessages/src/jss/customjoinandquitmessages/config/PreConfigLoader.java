@@ -6,14 +6,14 @@ import java.util.HashMap;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.EventsUtils;
+import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.Utils;
 
 public class PreConfigLoader {
 	
 	private CustomJoinAndQuitMessages plugin;
-	private EventsUtils EventsUtils = new EventsUtils(plugin);
+	private EventUtils EventsUtils = new EventUtils(plugin);
 	
 	public PreConfigLoader(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
@@ -26,6 +26,9 @@ public class PreConfigLoader {
 			Settings.boolean_quit = config.getString("Quit.Enabled").equals("true");
 			Settings.boolean_welcome = config.getString("Welcome.Enabled").equals("true");
 			Settings.boolean_update = config.getString("Config.Update").equals("true");
+			Settings.hook_discordsrv = config.getString("DiscordSRV.Enabled").equals("true");
+			Settings.hook_discordsrv_channelid = config.getString("DiscordSRV.Channel-ID");
+			Settings.hook_discordsrv_use_message = config.getString("DiscordSRV.Use-Message").equals("true");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

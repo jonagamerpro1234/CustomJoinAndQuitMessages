@@ -1,5 +1,5 @@
 package jss.customjoinandquitmessages.utils.interfaces;
 
-public interface LoaderHook {
-	void load();
+public interface IHook {
+	void setup();
 }

@@ -99,11 +99,11 @@ public class Utils {
 	}
 	
 	public static String getPrefix() {
-		return "&e[&dCustomJoinAndQuitMessages&e]&7";
+		return "&e[&dCustomJoinAndQuitMessages&e]&7 ";
 	}
 	
 	public static String getPrefixPlayer() {
-		return "&6[&dCustomJoinAndQuitMessages&6]&7";
+		return "&6[&dCustomJoinAndQuitMessages&6]&7 ";
 	}
 	
 	public static void setEnabled(String version) {
@@ -222,7 +222,6 @@ public class Utils {
         text = text.replace("<0>", " ");
         text = text.replace("<xp_level>", "" + player.getExpToLevel());
         text = text.replace("<xp>", "" + player.getExp());
-        text = text.replace("<ping>", "" + player.getPing());
         text = placeholderReplace(text, player);
         text = getOnlinePlayers(text);
         return text;

@@ -5,7 +5,7 @@ import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 public class Logger {
 	
 	private CustomJoinAndQuitMessages plugin;
-	private EventsUtils eventsUtils = new EventsUtils(plugin);
+	private EventUtils eventsUtils = new EventUtils(plugin);
 	
     public Logger(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
@@ -39,31 +39,31 @@ public class Logger {
     }
 	
     public static void error(String msg) {
-    	Utils.sendColorConsoleMessage(EventsUtils.getStaticConsoleSender(), ERRORPrefix() + " " + msg);
+    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), ERRORPrefix() + " " + msg);
     }
 
     public static void warning(String msg) {
-    	Utils.sendColorConsoleMessage(EventsUtils.getStaticConsoleSender(), WARNINGPrefix() + " " + msg);
+    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), WARNINGPrefix() + " " + msg);
     }
     
     public static void info(String msg) {
-    	Utils.sendColorConsoleMessage(EventsUtils.getStaticConsoleSender(), INFOPrefix() + " " + msg);
+    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), INFOPrefix() + " " + msg);
     }
     
     public static void outLine(String msg) {
-    	Utils.sendColorConsoleMessage(EventsUtils.getStaticConsoleSender(), OUTLINEPrefix() + " " + msg);
+    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), OUTLINEPrefix() + " " + msg);
     }
     
     public static void success(String msg) {
-    	Utils.sendColorConsoleMessage(EventsUtils.getStaticConsoleSender(), SUCCESSPrefix() + " " + msg);
+    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), SUCCESSPrefix() + " " + msg);
     }
     
     public static void debug(String msg) {
-    	Utils.sendColorConsoleMessage(EventsUtils.getStaticConsoleSender(), DEBUGPrefix() + " " + msg);
+    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), DEBUGPrefix() + " " + msg);
     }
     
     public static void defaultMessage(String msg) {
-    	Utils.sendColorConsoleMessage(EventsUtils.getStaticConsoleSender(), Utils.getPrefix() + msg);
+    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + msg);
     }
 	
     private static String ERRORPrefix() {

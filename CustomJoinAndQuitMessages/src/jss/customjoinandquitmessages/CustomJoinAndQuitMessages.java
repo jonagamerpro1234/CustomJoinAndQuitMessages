@@ -12,8 +12,8 @@ import jss.customjoinandquitmessages.config.ConfigFile;
 import jss.customjoinandquitmessages.config.Lang;
 import jss.customjoinandquitmessages.config.PreConfigLoader;
 import jss.customjoinandquitmessages.events.JoinListener;
-import jss.customjoinandquitmessages.hook.HooksManager;
-import jss.customjoinandquitmessages.utils.EventsUtils;
+import jss.customjoinandquitmessages.hook.HookManager;
+import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Logger.Level;
 import jss.customjoinandquitmessages.utils.Settings;
@@ -34,10 +34,10 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
     public boolean useLegacyversions = false;
     public String nmsversion;
 	private Map<String,Lang> availableLangs = new HashMap<>();
-	private EventsUtils EventsUtils = new EventsUtils(this);
+	private EventUtils EventsUtils = new EventUtils(this);
 	private ConfigFile configFile = new ConfigFile(this, "config.yml");
 	private Logger logger = new Logger(this);
-	private HooksManager hooksManager = new HooksManager(this);
+	private HookManager hooksManager = new HookManager(this);
 	private PreConfigLoader preConfigLoader = new PreConfigLoader(this);
 	private String updateVersion;
 	
@@ -102,13 +102,17 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	
 	public void setupEvents() {
 		new JoinListener(this);
-		//new SoundsListener(this);
+	}
+	
+	public void reloadAllFiles() {
+		getConfigFile().reloadConfig();
+		preConfigLoader.loadConfig();
+		preConfigLoader.loadLangs();
 	}
 	
 	public static CustomJoinAndQuitMessages getPlugin() {
 		return plugin;
 	}
-	
 	
 	public Lang Locale() {
 		return availableLangs.get(Settings.defaultLanguage);

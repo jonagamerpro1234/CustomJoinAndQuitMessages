@@ -1,6 +1,6 @@
 # | CustomJoinAndQuitMessage |
 # |   By jonagamerpro1234    |
-# |      Version 1.7.0       |
+# |      Version 1.7.1       |
 # |__________________________|
 # 
 # A simple plugin for personalization of the join and quit messages and more...
@@ -26,8 +26,20 @@ Config:
   Debug: false
   
   # |Type| the type is a way of knowing what is being used whether in the [normal] | [group] | [default] | [none] format
-  Type: group
-    
+  Type: normal
+  
+  # |Show-Chat-In-Console| here you can enable or disable the chat to be seen in the console
+  Show-Chat-In-Console: false
+#
+# |DiscordSRV| Here you can define the discord channel where the messages from minecraft to discord are seen
+# !This characteristic is in the experimental phase!
+DiscordSRV:
+
+  # |Enabled| Here you can enable or disable this feature
+  Enabled: true
+  
+  # |Channel-ID| Here is the id of the channel that is used for the chat
+  Channel-ID: 'none'
 #
 # | Join |
 Join:
@@ -208,17 +220,14 @@ Welcome:
 # currently only join and quit functions are available for the group system
 # to be able to use the group system properly it is necessary to have a permissions plugin with [LuckPerm or others]
 Groups:
-  Default:
+  default:
     
     # |Join-Text| This is where Join customizable message is located
     Join-Text: '&b[<#83FF6F>+&b] <#A157FF><name>'
     
     # |Quit-Text| This is where Quit customizable message is located
     Quit-Text: '&b[<#FF8E8E>+&b] <#A157FF><name>'
-    
-    # |Permission| Here the group permission is defined so that the player can use it
-    Permission: 'my.group.default'
-    
+        
     # |Type| Here you can find two types that are [ normal | modify ]
     Type: modify
   
@@ -310,9 +319,6 @@ Groups:
     
     # |Quit-Text| This is where Quit customizable message is located
     Quit-Text: '&b[<#FF8E8E>+&b] <#A157FF><name>'
-    
-    # |Permission| Here the group permission is defined so that the player can use it
-    Permission: 'my.group.admin'
     
     # |Type| Here you can find two types that are [ normal | modify ]
     Type: normal

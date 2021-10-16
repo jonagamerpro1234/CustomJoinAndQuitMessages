@@ -13,8 +13,8 @@ public class Settings {
 	public static String message_join;
 	public static String message_quit;
 	public static String message_first_join;
-	
-	//---------------------------//
-	public static String message_;
-	public static List<String> message_list;
+
+	public static boolean hook_discordsrv;
+	public static boolean hook_discordsrv_use_message;
+	public static String hook_discordsrv_channelid;
 }

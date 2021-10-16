@@ -1,41 +1,36 @@
 package jss.customjoinandquitmessages.hook;
 
 import org.bukkit.Bukkit;
-import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.EventsUtils;
+import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
-import jss.customjoinandquitmessages.utils.Logger.Level;
 import jss.customjoinandquitmessages.utils.Utils;
-import jss.customjoinandquitmessages.utils.interfaces.LoaderHook;
+import jss.customjoinandquitmessages.utils.interfaces.IHook;
 
-public class PlaceholderApiHook implements LoaderHook{
+public class PlaceholderApiHook implements IHook{
 	
-	private CustomJoinAndQuitMessages plugin;
-	private HooksManager hooksManager;
-	private Logger logger = new Logger(plugin);
-	private EventsUtils EventsUtils = new EventsUtils(plugin);
+	private HookManager hooksManager;
 	private boolean isEnabled;
 	
-	public PlaceholderApiHook(HooksManager hooksManager) {
+	public PlaceholderApiHook(HookManager hooksManager) {
 		this.hooksManager = hooksManager;
 	}
 
-	public void load() {
+	public void setup() {
 		if(!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
 			this.isEnabled = false;
-			logger.Log(Level.WARNING, "placeholderapi not enabled! - Disable Features...");
+			Logger.warning("&ePlaceholderAPI not enabled! - Disable Features...");
 			return;
 		}
 		
 		this.isEnabled = true;
-		Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + "&aLoading placeholderapi features...");
+		Utils.sendColorMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + "&aLoading PlaceholderAPI features...");
 	}
 	
 	public boolean isEnabled() {
 		return this.isEnabled;
 	}
 
-	public HooksManager getHooksManager() {
+	public HookManager getHooksManager() {
 		return hooksManager;
 	}
 

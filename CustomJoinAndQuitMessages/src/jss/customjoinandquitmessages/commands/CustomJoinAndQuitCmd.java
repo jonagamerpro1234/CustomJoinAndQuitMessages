@@ -10,13 +10,13 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.EventsUtils;
+import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Utils;
 
 public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 	
 	private CustomJoinAndQuitMessages plugin;
-	private EventsUtils EventsUtils = new EventsUtils(plugin);
+	private EventUtils EventsUtils = new EventUtils(plugin);
 	
 	public CustomJoinAndQuitCmd(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
