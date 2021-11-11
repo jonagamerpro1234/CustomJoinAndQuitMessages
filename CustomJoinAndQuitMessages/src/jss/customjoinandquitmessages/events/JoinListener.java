@@ -92,7 +92,10 @@ public class JoinListener implements Listener {
 				
 				if(isNormalType) {
 					json.sendToAll();
-					if (discordSRVHHook.isEnabled() != true) {
+					if (discordSRVHHook.isEnabled()) {
+						
+						if(Settings.hook_discordsrv_channelid.equalsIgnoreCase("none")) return;
+						
 						DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
 					}
 					return;
@@ -149,7 +152,7 @@ public class JoinListener implements Listener {
 						}
 					}
 					
-					if (discordSRVHHook.isEnabled() != true) {
+					if (discordSRVHHook.isEnabled()) {
 						DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
 					}
 					
@@ -183,7 +186,7 @@ public class JoinListener implements Listener {
 			}else if(isGroup) {
 				e.setJoinMessage(null);
 					
-				if(vaultHook.isEnabled() != true) {
+				if(vaultHook.isEnabled()) {
 					String key = VaultHook.getVaultHook().getChat().getPrimaryGroup(p);
 
 					boolean isNormalType = config.getString("Groups." + key + ".Type").equalsIgnoreCase("normal");
@@ -202,7 +205,10 @@ public class JoinListener implements Listener {
 
 					if (isNormalType) {
 						json.sendToAll();
-						if (discordSRVHHook.isEnabled() != true) {
+						if (discordSRVHHook.isEnabled()) {
+							
+							if(Settings.hook_discordsrv_channelid.equalsIgnoreCase("none")) return;
+							
 							DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
 						}
 						return;
@@ -260,7 +266,7 @@ public class JoinListener implements Listener {
 							}
 						}
 
-						if (discordSRVHHook.isEnabled() != true) {
+						if (discordSRVHHook.isEnabled()) {
 							DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
 						}
 
@@ -353,7 +359,10 @@ public class JoinListener implements Listener {
 				
 				if(isNormalType) {
 					json.sendToAll();
-					if (discordSRVHHook.isEnabled() != true) {
+					if (discordSRVHHook.isEnabled()) {
+						
+						if(Settings.hook_discordsrv_channelid.equalsIgnoreCase("none")) return;
+						
 						DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
 					}
 					return;
@@ -402,7 +411,10 @@ public class JoinListener implements Listener {
 						}
 					}
 					
-					if (discordSRVHHook.isEnabled() != true) {
+					if (discordSRVHHook.isEnabled()) {
+						
+						if(Settings.hook_discordsrv_channelid.equalsIgnoreCase("none")) return;
+						
 						DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
 					}
 					
@@ -427,7 +439,7 @@ public class JoinListener implements Listener {
 			}else if(isGroup) {
 				e.setQuitMessage(null);
 				
-				if(vaultHook.isEnabled() != true) {
+				if(vaultHook.isEnabled()) {
 					String key = VaultHook.getVaultHook().getChat().getPrimaryGroup(p);
 
 					boolean isNormalType = config.getString("Groups." + key + ".Type").equalsIgnoreCase("normal");
@@ -446,7 +458,10 @@ public class JoinListener implements Listener {
 					
 					if (isNormalType) {
 
-						if (discordSRVHHook.isEnabled() != true) {
+						if (discordSRVHHook.isEnabled()) {
+							
+							if(Settings.hook_discordsrv_channelid.equalsIgnoreCase("none")) return;
+							
 							DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
 						}
 						
@@ -498,7 +513,10 @@ public class JoinListener implements Listener {
 							}
 						}
 
-						if (discordSRVHHook.isEnabled() != true) {
+						if (discordSRVHHook.isEnabled()) {
+							
+							if(Settings.hook_discordsrv_channelid.equalsIgnoreCase("none")) return;
+							
 							DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
 						}
 						

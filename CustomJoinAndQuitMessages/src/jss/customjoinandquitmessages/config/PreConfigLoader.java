@@ -28,7 +28,7 @@ public class PreConfigLoader {
 			Settings.boolean_update = config.getString("Config.Update").equals("true");
 			Settings.hook_discordsrv = config.getString("DiscordSRV.Enabled").equals("true");
 			Settings.hook_discordsrv_channelid = config.getString("DiscordSRV.Channel-ID");
-			Settings.hook_discordsrv_use_message = config.getString("DiscordSRV.Use-Message").equals("true");
+			//Settings.hook_discordsrv_use_message = config.getString("DiscordSRV.Use-Message").equals("true");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
