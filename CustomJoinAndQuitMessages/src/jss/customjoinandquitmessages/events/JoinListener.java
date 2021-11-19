@@ -12,18 +12,17 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import com.cryptomorin.xseries.messages.ActionBar;
-import com.cryptomorin.xseries.messages.Titles;
-
 import github.scarsz.discordsrv.util.DiscordUtil;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.hook.DiscordSRVHHook;
 import jss.customjoinandquitmessages.hook.HookManager;
 import jss.customjoinandquitmessages.hook.VaultHook;
 import jss.customjoinandquitmessages.json.Json;
+import jss.customjoinandquitmessages.utils.ActionBar;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
+import jss.customjoinandquitmessages.utils.Titles;
 import jss.customjoinandquitmessages.utils.UpdateChecker;
 import jss.customjoinandquitmessages.utils.UpdateSettings;
 import jss.customjoinandquitmessages.utils.Utils;

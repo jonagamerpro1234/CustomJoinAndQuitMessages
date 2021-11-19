@@ -1,16 +1,16 @@
-package com.iridium.iridiumcolorapi;
+package jss.customjoinandquitmessages.utils;
 
 import com.google.common.collect.ImmutableMap;
-import com.iridium.iridiumcolorapi.patterns.GradientPattern;
-import com.iridium.iridiumcolorapi.patterns.IPattern;
-import com.iridium.iridiumcolorapi.patterns.RainbowPattern;
-import com.iridium.iridiumcolorapi.patterns.SolidPattern;
 
+import jss.customjoinandquitmessages.patterns.GradientPattern;
 import jss.customjoinandquitmessages.patterns.GradientPattern2;
+import jss.customjoinandquitmessages.patterns.IPattern;
 import jss.customjoinandquitmessages.patterns.PadPattern;
 import jss.customjoinandquitmessages.patterns.PadPattern2;
 import jss.customjoinandquitmessages.patterns.PadPattern3;
+import jss.customjoinandquitmessages.patterns.RainbowPattern;
 import jss.customjoinandquitmessages.patterns.RainbowPattern2;
+import jss.customjoinandquitmessages.patterns.SolidPattern;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;

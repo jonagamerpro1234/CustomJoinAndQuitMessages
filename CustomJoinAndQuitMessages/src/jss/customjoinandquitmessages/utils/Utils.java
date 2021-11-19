@@ -12,8 +12,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.iridium.iridiumcolorapi.IridiumColorAPI;
-
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -27,6 +25,7 @@ public class Utils {
 
 	private final static String prefix = getPrefix();
 	
+	@Deprecated
 	public static String hexcolor(String text) {
 		if((Bukkit.getVersion().contains("1.16")) || (Bukkit.getVersion().contains("1.17"))) {
 			Pattern hex = Pattern.compile("#[a-fA-F0-9]{6}");
@@ -61,7 +60,9 @@ public class Utils {
 		return IridiumColorAPI.process(text);
 	}
 	
+	@Deprecated
 	public static String legacycolor(String text) {
+		if(text == null  || text.isEmpty()) return ""; 
 		return ChatColor.translateAlternateColorCodes('&', text);
 	}
 	
@@ -136,6 +137,7 @@ public class Utils {
 		}
 		return returned;
 	}
+	
 	public static void sendTextComponentHover(Player j, String action, String message, String submessage, String color) {
 		TextComponent msg = new TextComponent(hexcolor(message));
 		msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(action)) , new ComponentBuilder(submessage).color(ChatColor.of(color)).create()));

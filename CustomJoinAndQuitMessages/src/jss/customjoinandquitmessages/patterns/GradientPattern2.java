@@ -1,11 +1,10 @@
 package jss.customjoinandquitmessages.patterns;
 
-import com.iridium.iridiumcolorapi.IridiumColorAPI;
-import com.iridium.iridiumcolorapi.patterns.IPattern;
-
 import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import jss.customjoinandquitmessages.utils.IridiumColorAPI;
 
 public class GradientPattern2 implements IPattern {
 

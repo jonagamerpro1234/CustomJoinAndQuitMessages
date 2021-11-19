@@ -1,4 +1,4 @@
-package com.iridium.iridiumcolorapi.patterns;
+package jss.customjoinandquitmessages.patterns;
 
 /**
  * Represents a color pattern which can be applied to a String.
