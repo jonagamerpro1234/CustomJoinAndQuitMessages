@@ -80,8 +80,7 @@ public class JoinListener implements Listener {
 				
 				String text = config.getString("Join.Text");
 				
-				text = Utils.color(text);
-				text = Utils.getVar(p, text);
+				text = Utils.color(Utils.getVar(p, text));
 				
 				Json json = new Json(p, text);
 				

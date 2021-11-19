@@ -219,6 +219,7 @@ public class Utils {
 	
     public static String getVar(Player player, String text) {
         text = text.replace("<name>", player.getName());
+        text = text.replace("%name%", player.getName());
         text = text.replace("<displayname>", player.getDisplayName());
         text = text.replaceAll("<world>", player.getWorld().getName());
         text = text.replace("<0>", " ");
