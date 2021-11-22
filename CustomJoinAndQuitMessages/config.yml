@@ -134,6 +134,21 @@ Join:
     
     # |Text| here you can set the message that appears in the action bar
     Text: '<GRADIENT:FF8700>Welcome to the server</GRADIENT:00FFAA>'
+  
+  # |FireWork|  
+  FireWork:
+  
+    # |Enabled| Here you can enable or disable this feature
+    Eanbled: true
+    
+    # |Default-FireWork|
+    Default-FireWork: ''
+    
+    #
+    Use-Economy: false
+    
+    #
+    Requiered-Permission: true
 #
 # | Quit | 
 Quit:
