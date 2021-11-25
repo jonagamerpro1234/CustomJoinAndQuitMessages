@@ -10,6 +10,13 @@
 	<url>https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages</url>
 	<description>A simple to use plugin that will allow you to customize the join and quit message, it also brings a message customization option that will allow you to add special actions.</description>
 
+	<licenses>
+		<license>
+			<name>GNU General Public License v3.0</name>
+			<url>https://github.com/jonagamerpro1234/AdvancedChat/blob/main/LICENSE</url>
+		</license>
+	</licenses>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -141,12 +148,15 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
 	</dependencies>
 
 	<issueManagement>
 		<system>GitHub</system>
 		<url>https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/issues</url>
 	</issueManagement>
+
+
 
 	<build>
 		<finalName>CustomJoinAndQuitMessages-${project.version}</finalName>
