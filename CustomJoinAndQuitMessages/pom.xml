@@ -37,6 +37,14 @@
 			<id>Scarsz-Nexus</id>
 			<url>https://nexus.scarsz.me/content/groups/public/</url>
 		</repository>
+		<repository>
+			<id>essentials-releases</id>
+			<url>https://repo.essentialsx.net/releases/</url>
+		</repository>
+		<repository>
+			<id>paper-repo</id>
+			<url>https://papermc.io/repo/repository/maven-public/</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -55,36 +63,40 @@
 			</exclusions>
 		</dependency>
 
-		<!-- BungeeCord -->
+		<!-- BungeeCord Jar -->
 		<dependency>
 			<groupId>net.md-5</groupId>
 			<artifactId>bungeecord-api</artifactId>
 			<version>1.17-R0.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>provided</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>net.md-5</groupId>
-					<artifactId>bungeecord-chat</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
-        <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-api</artifactId>
-            <version>1.17-R0.1-SNAPSHOT</version>
-            <type>javadoc</type>
-            <scope>provided</scope>
-        </dependency>
-        
-        <!-- DiscordSRV -->
+
+		<!-- BungeeCord Javadoc -->
+		<dependency>
+			<groupId>net.md-5</groupId>
+			<artifactId>bungeecord-api</artifactId>
+			<version>1.17-R0.1-SNAPSHOT</version>
+			<type>javadoc</type>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Authme -->
+		<dependency>
+			<groupId>fr.xephi</groupId>
+			<artifactId>authme</artifactId>
+			<version>5.6.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- DiscordSRV -->
 		<dependency>
 			<groupId>com.discordsrv</groupId>
 			<artifactId>discordsrv</artifactId>
 			<version>1.24.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- Vault -->
 		<dependency>
 			<groupId>com.github.MilkBowl</groupId>
@@ -92,7 +104,7 @@
 			<version>1.7</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- LuckPerms -->
 		<dependency>
 			<groupId>net.luckperms</groupId>
@@ -100,7 +112,14 @@
 			<version>5.3</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
+		<!-- XSerie -->
+		<dependency>
+			<groupId>com.github.cryptomorin</groupId>
+			<artifactId>XSeries</artifactId>
+			<version>8.4.0</version>
+		</dependency>
+
 		<!-- PlaceHolderAPI -->
 		<dependency>
 			<groupId>me.clip</groupId>
@@ -108,7 +127,20 @@
 			<version>2.10.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
+		<!-- EssentialsX Discord -->
+		<dependency>
+			<groupId>net.essentialsx</groupId>
+			<artifactId>EssentialsXDiscord</artifactId>
+			<version>2.19.0</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>net.dv8tion</groupId>
+					<artifactId>JDA</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 	</dependencies>
 
 	<issueManagement>
@@ -137,6 +169,22 @@
 				<version>3.2.3</version>
 				<configuration>
 					<createDependencyReducedPom>false</createDependencyReducedPom>
+					<relocations>
+						<relocation>
+							<pattern>com.cryptomorin.xseries</pattern>
+							<shadedPattern>jss.customjoinandquitmessages.utils</shadedPattern>
+						</relocation>
+					</relocations>
+					<filters>
+						<filter>
+							<artifact>*:*</artifact>
+							<excludes>
+								<exclude>com/cryptomorin/xseries/XBiome*</exclude>
+								<exclude>com/cryptomorin/xseries/NMSExtras*</exclude>
+								<exclude>com/cryptomorin/xseries/NoteBlockMusic*</exclude>
+							</excludes>
+						</filter>
+					</filters>
 				</configuration>
 				<executions>
 					<execution>
