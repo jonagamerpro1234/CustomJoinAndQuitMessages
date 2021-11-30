@@ -1,4 +1,4 @@
-package jss.customjoinandquitmessages.events;
+package jss.customjoinandquitmessages.listener;
 
 import java.util.List;
 
@@ -18,6 +18,7 @@ import com.cryptomorin.xseries.messages.Titles;
 import github.scarsz.discordsrv.util.DiscordUtil;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.hook.DiscordSRVHHook;
+import jss.customjoinandquitmessages.hook.EssentialsXDiscordHook;
 import jss.customjoinandquitmessages.hook.HookManager;
 import jss.customjoinandquitmessages.hook.VaultHook;
 import jss.customjoinandquitmessages.json.Json;
@@ -49,6 +50,7 @@ public class JoinListener implements Listener {
 		
 		DiscordSRVHHook discordSRVHHook = HookManager.getInstance().getDiscordSRVHHook();
 		VaultHook vaultHook = HookManager.getInstance().getVaultHook();
+		EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
 		
 		boolean isDefault = config.getString("Config.Type").equalsIgnoreCase("default");
 		boolean isNormal = config.getString("Config.Type").equalsIgnoreCase("normal");
@@ -97,6 +99,14 @@ public class JoinListener implements Listener {
 						
 						DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
 					}
+					
+					if(essentialsXDiscordHook.isEnabled()) {
+						
+						if(Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none")) return;
+						
+						essentialsXDiscordHook.sendJoinMessage(Settings.hook_essentialsDiscord_channelid , Utils.colorless(json.getText()));
+					}
+					
 					return;
 				}else if(isModifyType) {
 					
@@ -210,6 +220,14 @@ public class JoinListener implements Listener {
 							
 							DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
 						}
+						
+						if (essentialsXDiscordHook.isEnabled()) {
+							
+							if(Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none")) return;
+							
+							essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid, Utils.colorless(json.getText()));
+						}
+						
 						return;
 					} else if (isModifyType) {
 
@@ -329,6 +347,7 @@ public class JoinListener implements Listener {
 		
 		DiscordSRVHHook discordSRVHHook = HookManager.getInstance().getDiscordSRVHHook();
 		VaultHook vaultHook = HookManager.getInstance().getVaultHook();
+		EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
 		
 		boolean isDefault = config.getString("Config.Type").equalsIgnoreCase("default");
 		boolean isNormal = config.getString("Config.Type").equalsIgnoreCase("normal");
@@ -364,6 +383,14 @@ public class JoinListener implements Listener {
 						
 						DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
 					}
+					
+					if (essentialsXDiscordHook.isEnabled()) {
+						
+						if(Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none")) return;
+						
+						essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid, Utils.colorless(json.getText()));
+					}
+					
 					return;
 				}else if(isModifyType) {
 					
@@ -464,6 +491,13 @@ public class JoinListener implements Listener {
 							DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
 						}
 						
+						if (essentialsXDiscordHook.isEnabled()) {
+							
+							if(Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none")) return;
+							
+							essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid, Utils.colorless(json.getText()));
+						}
+						
 						return;
 					} else if (isModifyType) {
 
@@ -517,6 +551,13 @@ public class JoinListener implements Listener {
 							if(Settings.hook_discordsrv_channelid.equalsIgnoreCase("none")) return;
 							
 							DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
+						}
+						
+						if (essentialsXDiscordHook.isEnabled()) {
+							
+							if(Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none")) return;
+							
+							essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid, Utils.colorless(json.getText()));
 						}
 						
 						try {

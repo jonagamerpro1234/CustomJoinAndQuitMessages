@@ -17,4 +17,7 @@ public class Settings {
 	public static boolean hook_discordsrv;
 	public static boolean hook_discordsrv_use_message;
 	public static String hook_discordsrv_channelid;
+	public static boolean hook_essentialsDiscord;
+	public static boolean hook_essentialsDiscord_use_default_channel;
+	public static String hook_essentialsDiscord_channelid;
 }

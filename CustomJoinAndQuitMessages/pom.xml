@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jss.customjoinandquitmessages</groupId>
 	<artifactId>CustomJoinAndQuitMessages</artifactId>
-	<version>1.7.3</version>
+	<version>1.7.4</version>
 
 	<name>CustomJoinAndQuitMessages</name>
 	<url>https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages</url>
@@ -60,7 +60,7 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
-			<version>1.17.1-R0.1-SNAPSHOT</version>
+			<version>1.18-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -74,7 +74,7 @@
 		<dependency>
 			<groupId>net.md-5</groupId>
 			<artifactId>bungeecord-api</artifactId>
-			<version>1.17-R0.1-SNAPSHOT</version>
+			<version>1.18-R0.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
@@ -83,7 +83,7 @@
 		<dependency>
 			<groupId>net.md-5</groupId>
 			<artifactId>bungeecord-api</artifactId>
-			<version>1.17-R0.1-SNAPSHOT</version>
+			<version>1.18-R0.1-SNAPSHOT</version>
 			<type>javadoc</type>
 			<scope>provided</scope>
 		</dependency>
@@ -155,8 +155,6 @@
 		<system>GitHub</system>
 		<url>https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/issues</url>
 	</issueManagement>
-
-
 
 	<build>
 		<finalName>CustomJoinAndQuitMessages-${project.version}</finalName>

@@ -41,6 +41,19 @@ DiscordSRV:
   # |Channel-ID| Here is the id of the channel that is used for the chat
   Channel-ID: 'none'
 #
+# |EssentialsDiscord|
+EssentialsDiscord:
+  
+  # |Enabled| Here you can enable or disable this feature
+  Enabled: true
+  
+  # |Channel-ID| Here is the id of the channel that is used for the chat
+  Channel-ID: 'none'
+  
+  #
+  Use-Default-Channels: true 
+
+#
 # | Join |
 Join:
   

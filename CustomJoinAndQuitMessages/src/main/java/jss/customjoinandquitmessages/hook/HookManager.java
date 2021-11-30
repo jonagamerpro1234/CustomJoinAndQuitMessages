@@ -10,6 +10,9 @@ public class HookManager {
 	private PlaceholderApiHook placeholderApiHook = new PlaceholderApiHook(this);
 	private DiscordSRVHHook discordSRVHHook = new DiscordSRVHHook(this);
 	private VaultHook vaultHook = new VaultHook(this);
+	private EssentialsXDiscordHook essentialsXDiscordHook = new EssentialsXDiscordHook(this);
+	private AuthmeHook authmeHook = new AuthmeHook(this);
+	private LuckPermsHook luckPermsHook = new LuckPermsHook(this);
 	private static HookManager instance;
 	
 
@@ -21,7 +24,10 @@ public class HookManager {
 	public void load() {
 		initHooks( new PlaceholderApiHook(this),
 				new DiscordSRVHHook(this),
-				new VaultHook(this));
+				new VaultHook(this),
+				new AuthmeHook(this),
+				new EssentialsXDiscordHook(this),
+				new LuckPermsHook(this));
 	}
 	
 	private void initHooks(IHook... hooks) {
@@ -50,6 +56,18 @@ public class HookManager {
 		return vaultHook;
 	}
 	
+	public EssentialsXDiscordHook getEssentialsXDiscordHook() {
+		return essentialsXDiscordHook;
+	}
+
+	public AuthmeHook getAuthmeHook() {
+		return authmeHook;
+	}
+
+	public LuckPermsHook getLuckPermsHook() {
+		return luckPermsHook;
+	}
+
 	public static HookManager getInstance() {
 		return instance;
 	}
