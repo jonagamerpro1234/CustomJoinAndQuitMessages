@@ -444,6 +444,13 @@ public class JoinListener implements Listener {
 						DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid), Utils.colorless(json.getText()));
 					}
 					
+					if (essentialsXDiscordHook.isEnabled()) {
+						
+						if(Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none")) return;
+						
+						essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid, Utils.colorless(json.getText()));
+					}
+					
 					try {
 						if(isSound) {
 							 if(isSoundAll) {
@@ -464,6 +471,7 @@ public class JoinListener implements Listener {
 				return;
 			}else if(isGroup) {
 				e.setQuitMessage(null);
+				
 				
 				if(vaultHook.isEnabled()) {
 					String key = VaultHook.getVaultHook().getChat().getPrimaryGroup(p);

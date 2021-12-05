@@ -1,20 +1,21 @@
-# | CustomJoinAndQuitMessage |
-# |   By jonagamerpro1234    |
-# |      Version 1.7.3       |
-# |__________________________|
-# 
-# A simple plugin for personalization of the join and quit messages and more...
+
+#    ______    _____   ____    __  ___
+#   / ____/   / /   | / __ \  /  |/  /
+#  / /   __  / / /| |/ / / / / /|_/ /  By jonagamerpro1234
+# / /___/ /_/ / ___ / /_/ / / /  / /   Version 1.7.4
+# \____/\____/_/  |_\___\_\/_/  /_/    Thanks for using CustomJoinAndQuitMessage <3
+#                                    
+# ● A simple plugin for personalization of the join and quit messages and more...
 #
-# |Links|
-# -> Spigot: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-7-x-1-17-x.57006/
-# -> Discord: https://discord.gg/c5GhQDQCK5
-# -> Issue Tracker: https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/issues
-# -> Plugin Statistics: https://bstats.org/plugin/bukkit/CustomJoinAndQuitMessages/6318
+# ● Spigot: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-7-x-1-17-x.57006/
+# ● Discord: https://discord.gg/c5GhQDQCK5
+# ● Issue Tracker: https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/issues
+# ● Plugin Statistics: https://bstats.org/plugin/bukkit/CustomJoinAndQuitMessages/6318
 #
 Config:
 
   # |Config-Version|I would not change anything
-  Config-Verion: 1 
+  Config-Verion: 2
 
   # |Lang| you can use the available languages of the plugin or you can add your own translations [ Default = en-US ]
   Lang: en-US 
@@ -31,28 +32,48 @@ Config:
   # |Show-Chat-In-Console| here you can enable or disable the chat to be seen in the console
   Show-Chat-In-Console: false
 #
-# |DiscordSRV| Here you can define the discord channel where the messages from minecraft to discord are seen
-# !This characteristic is in the experimental phase!
-DiscordSRV:
+# |Hooks|
+Hooks:
+  
+  # |LuckPerms| Here you can configure everything related to LuckPerms and or deactivate or activate functions
+  LuckPerms:
+    
+    # |Enabled| Here you can enable or disable this feature
+    Enabled: true
+    
+    # |Use-Luckperms-In-Groups| When using this option, the groups are discovered with the LuckPerms system
+    Use-Luckperms-In-Groups: true
+  
+  # |Vault| Here you can configure everything related to Vault and or deactivate or activate functions
+  Vault:
+    
+    # |Enabled| Here you can enable or disable this feature
+    Enabled: true
+    
+    # |Use-Vault-In-Groups| When using this option, the groups are discovered with the Vault system
+    Use-Vault-In-Groups: false
+  
+  # |DiscordSRV| Here you can define the discord channel where the messages from minecraft to discord are seen
+  # !This characteristic is in the experimental phase!
+  DiscordSRV:
 
-  # |Enabled| Here you can enable or disable this feature
-  Enabled: true
+    # |Enabled| Here you can enable or disable this feature
+    Enabled: true
   
-  # |Channel-ID| Here is the id of the channel that is used for the chat
-  Channel-ID: 'none'
-#
-# |EssentialsDiscord|
-EssentialsDiscord:
-  
-  # |Enabled| Here you can enable or disable this feature
-  Enabled: true
-  
-  # |Channel-ID| Here is the id of the channel that is used for the chat
-  Channel-ID: 'none'
-  
+    # |Channel-ID| Here is the id of the channel that is used for the chat
+    Channel-ID: 'none'
   #
-  Use-Default-Channels: true 
-
+  # |EssentialsDiscord|
+  EssentialsDiscord:
+  
+    # |Enabled| Here you can enable or disable this feature
+    Enabled: true
+  
+    # |Channel-ID| Here is the id of the channel that is used for the chat
+    Channel-ID: 'none'
+  
+    # |Use-Default-Channel|
+    Use-Default-Channel: true 
 #
 # | Join |
 Join:
