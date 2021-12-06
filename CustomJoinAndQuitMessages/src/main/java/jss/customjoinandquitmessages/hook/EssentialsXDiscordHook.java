@@ -27,7 +27,7 @@ public class EssentialsXDiscordHook implements IHook{
 			return;
 		}
 		
-		if(!Settings.hook_discordsrv) {
+		if(!Settings.hook_essentialsDiscord) {
 			this.isEnabled = false;
 			Logger.warning("&eEssentialsDiscord not enabled! - Disable Features...");
 			return;
@@ -36,6 +36,7 @@ public class EssentialsXDiscordHook implements IHook{
 		this.service = Bukkit.getServicesManager().load(DiscordService.class);
 		this.isEnabled = true;
 		Utils.sendColorMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + "&aLoading EssentialsDiscord features...");	
+		Logger.warning("&e!!These features are still under development and may have bugs!!");
 	}
 	
 	public boolean isEnabled() {

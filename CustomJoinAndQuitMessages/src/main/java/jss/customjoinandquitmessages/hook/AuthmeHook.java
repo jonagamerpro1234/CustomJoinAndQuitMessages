@@ -31,7 +31,8 @@ public class AuthmeHook implements IHook{
 		}
 		
 		this.isEnabled = true;
-		Utils.sendColorMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + "&aLoading Authme features...");	
+		Utils.sendColorMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + "&aLoading Authme features...");
+		Logger.warning("&e!!These features are still under development and may have bugs!!");
 	}
 	
 	public boolean isEnabled() {

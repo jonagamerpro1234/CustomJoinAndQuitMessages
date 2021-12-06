@@ -26,9 +26,16 @@ public class PreConfigLoader {
 			Settings.boolean_quit = config.getString("Quit.Enabled").equals("true");
 			Settings.boolean_welcome = config.getString("Welcome.Enabled").equals("true");
 			Settings.boolean_update = config.getString("Config.Update").equals("true");
-			Settings.hook_discordsrv = config.getString("DiscordSRV.Enabled").equals("true");
-			Settings.hook_discordsrv_channelid = config.getString("DiscordSRV.Channel-ID");
-			//Settings.hook_discordsrv_use_message = config.getString("DiscordSRV.Use-Message").equals("true");
+        	Settings.hook_discordsrv = config.getString("Hooks.DiscordSRV.Enabled").equals("true");
+        	Settings.hook_discordsrv_channelid = config.getString("Hooks.DiscordSRV.Channel-ID");
+        	Settings.hook_essentialsDiscord = config.getString("Hooks.EssentialsDiscord.Enabled").equals("true");
+        	Settings.hook_essentialsDiscord_channelid = config.getString("Hooks.EssentialsDiscord.Channel-ID");
+        	Settings.hook_essentialsDiscord_use_default_channel = config.getString("Hooks.EssentialsDiscord.Use-Default-Channel").equals("true");
+        	Settings.hook_vault = config.getString("Hooks.Vault.Enabled").equals("true");
+        	Settings.hook_vault_use_group = config.getString("Hooks.Vault.Use-Vault-In-Groups").equals("true");
+        	Settings.hook_luckperms = config.getString("Hooks.LuckPerms.Enabled").equals("true");
+        	Settings.hook_luckperms_use_group = config.getString("Hooks.LuckPerms.Use-Luckperms-In-Groups").equals("true");
+        	
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

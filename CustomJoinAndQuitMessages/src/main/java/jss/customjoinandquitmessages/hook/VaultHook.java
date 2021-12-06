@@ -5,6 +5,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.Utils;
 import jss.customjoinandquitmessages.utils.interfaces.IHook;
 import net.milkbowl.vault.chat.Chat;
@@ -31,6 +32,13 @@ public class VaultHook implements IHook{
 			Logger.warning("&eVault not enabled! - Disable Features...");
 			return;
 		}
+		
+		if(!Settings.hook_vault) {
+			this.isEnabled = false;
+			Logger.warning("&eVault not enabled! - Disable Features...");
+			return;
+		}
+		
 		this.isEnabled = true;
 		
         RegisteredServiceProvider<Permission> rspP = Bukkit.getServer().getServicesManager().getRegistration(Permission.class);

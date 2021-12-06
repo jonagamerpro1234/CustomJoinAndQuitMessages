@@ -20,4 +20,8 @@ public class Settings {
 	public static boolean hook_essentialsDiscord;
 	public static boolean hook_essentialsDiscord_use_default_channel;
 	public static String hook_essentialsDiscord_channelid;
+    public static boolean hook_vault;
+    public static boolean hook_vault_use_group;
+    public static boolean hook_luckperms;
+    public static boolean hook_luckperms_use_group;
 }

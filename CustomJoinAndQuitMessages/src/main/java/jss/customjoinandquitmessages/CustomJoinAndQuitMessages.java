@@ -41,6 +41,9 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	private PreConfigLoader preConfigLoader = new PreConfigLoader(this);
 	private String updateVersion;
 	
+	public void onLoad() {
+		Utils.sendLoadTitle(version);
+	}
 	public void onEnable() {
 		plugin = this;
 		Utils.setEnabled(version);
