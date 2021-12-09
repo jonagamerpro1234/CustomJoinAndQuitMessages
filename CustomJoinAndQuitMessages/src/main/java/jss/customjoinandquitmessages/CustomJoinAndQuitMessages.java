@@ -51,18 +51,22 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 		configFile.create();
 		preConfigLoader.loadConfig();
 		if(!preConfigLoader.loadLangs()) {
-			Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&e[&b"+ name +"&e]&c error load lang and config file");
+			Logger.error("&cError load lang files");
+			Logger.warning("&eDisable plugin for error");
+			Bukkit.getPluginManager().disablePlugins();
 			return;
 		}		
 		metrics = new Metrics(this);
         nmsversion = Bukkit.getServer().getClass().getPackage().getName();
         nmsversion = nmsversion.substring(nmsversion.lastIndexOf(".") + 1);
+        
         if (nmsversion.equalsIgnoreCase("v1_8_R1") || nmsversion.equalsIgnoreCase("v1_7_")) { 
         	useLegacyversions = true;
         	if(useLegacyversions) {
         		Utils.sendColorMessage(EventsUtils.getConsoleSender(), " is legacy &e1.7_? &8|&e 1.8_R1");
         	}
         }
+        
         if (nmsversion.equalsIgnoreCase("v1_8_R3")) { 
         	useLegacyversions = true;
         	if(useLegacyversions) {
@@ -78,9 +82,12 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 		hooksManager.load();
 		
 		new UpdateChecker(this, UpdateSettings.ID).getUpdateVersion(version -> {
+			
 			updateVersion = version;
+			
 			if(this.getDescription().getVersion().equalsIgnoreCase(version)) {
 				logger.Log(Level.SUCCESS, "&a" + this.name + " is up to date!");
+				Logger.success("&a" + this.name + " is up to date!");
 			}else {
                 logger.Log(Level.OUTLINE, "&5<||" + Utils.setLine("&5"));
                 logger.Log(Level.WARNING, "&5<||" + "&b" + this.name + " is outdated!");
@@ -113,7 +120,12 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 		preConfigLoader.loadLangs();
 	}
 	
+	@Deprecated
 	public static CustomJoinAndQuitMessages getPlugin() {
+		return plugin;
+	}
+	
+	public static CustomJoinAndQuitMessages getInstance() {
 		return plugin;
 	}
 	

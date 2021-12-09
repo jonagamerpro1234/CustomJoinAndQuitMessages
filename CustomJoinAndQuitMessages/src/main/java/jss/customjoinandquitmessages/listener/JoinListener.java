@@ -217,8 +217,8 @@ public class JoinListener implements Listener {
 		
 		if(isUpdate) {
 			if((p.isOp()) || (p.hasPermission("Cjm.Update.Notify"))) {
-				new UpdateChecker(CustomJoinAndQuitMessages.getPlugin(), UpdateSettings.ID).getUpdateVersion(version ->{
-					if(!CustomJoinAndQuitMessages.getPlugin().getDescription().getVersion().equalsIgnoreCase(version)) {
+				new UpdateChecker(CustomJoinAndQuitMessages.getInstance(), UpdateSettings.ID).getUpdateVersion(version ->{
+					if(!CustomJoinAndQuitMessages.getInstance().getDescription().getVersion().equalsIgnoreCase(version)) {
 	                    TextComponent component = new TextComponent(Utils.color(Utils.getPrefixPlayer() + " &aThere is a new version available for download, Click on this message to copy the link"));
 	                    component.setClickEvent(new ClickEvent(Action.OPEN_URL, UpdateSettings.URL_PlUGIN[0]));
 	                    p.spigot().sendMessage(component);

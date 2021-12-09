@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.utils.Logger;
 
 public class Lang {
 	
@@ -49,9 +50,11 @@ public class Lang {
 		if (!localeDir.exists()) {
 			localeDir.mkdir();
 		}
+		
 		if (localeFile == null) {
 			localeFile = new File(localeDir.getPath(), localeName + ".yml");
 		}
+		
 		if (localeFile.exists()) {
 			locale = YamlConfiguration.loadConfiguration(localeFile);
 		} else {
@@ -60,21 +63,21 @@ public class Lang {
 				localeFile = new File(plugin.getDataFolder() + File.separator + "lang", localeName + ".yml");
 				locale = YamlConfiguration.loadConfiguration(localeFile);
 			} else {
-				plugin.getLogger().severe("Could not find lang file! " + localeName);
+				Logger.error("Could not find lang file! " + localeName);
 			}
 		}
 	}
 
 	private void loadLocale() {
 		String main = "CustomJoinAndQuitMessage";
-		Error_Cmd = locale.getString(main+".Error-Cmd");
-		Error_Console = locale.getString(main+".Error-Console");
-		Error_Sound = locale.getString(main+".Sound-Error");
-		reload = locale.getString(main+".Reload");
-		Help_cmd = locale.getString(main+".Help-Cmd");
-		No_Permission = locale.getString(main+".No-Permission");
-		No_Permission_Label = locale.getString(main+".No-Permission-Label");
-		help_1 = locale.getStringList(main+".Help-Msg");
+		Error_Cmd = locale.getString(main + ".Error-Cmd");
+		Error_Console = locale.getString(main + ".Error-Console");
+		Error_Sound = locale.getString(main + ".Sound-Error");
+		reload = locale.getString(main + ".Reload");
+		Help_cmd = locale.getString(main + ".Help-Cmd");
+		No_Permission = locale.getString(main + ".No-Permission");
+		No_Permission_Label = locale.getString(main + ".No-Permission-Label");
+		help_1 = locale.getStringList(main + ".Help-Msg");
 	}
 
 	public String getLocaleName() {
