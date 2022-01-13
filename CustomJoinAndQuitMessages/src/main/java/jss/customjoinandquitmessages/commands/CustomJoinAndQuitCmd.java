@@ -30,10 +30,9 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				if(args[0].equalsIgnoreCase("help")) {
 					List<String> list = plugin.Locale().help_1;
 					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
-					for(int i = 0; i < list.size(); i++) {
-						String text = (String) list.get(i);
+					list.forEach( text -> {
 						Utils.sendColorMessage(EventsUtils.getConsoleSender(), text);
-					}
+					});
 					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				}else if(args[0].equalsIgnoreCase("reload")) {
 					plugin.getPreConfigLoader().loadConfig();
@@ -44,8 +43,8 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <||=-=-=-=-="+Utils.getPrefix()+"&5=-=-=-=-=-=-");
 					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bName: &3"+plugin.name);
 					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bAuthor: &3jonagamerpro1234");
-					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bVersion: &a"+plugin.version);
-					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bUpdate: &e" + plugin.getUpdateVersion());
+					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bVersion: &a" + plugin.version);
+					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bUpdate: &e" + plugin.useLatestversion);
 					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <||=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				}else {
 					Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Error_Cmd);
@@ -61,10 +60,9 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				if((j.isOp()) ||  (j.hasPermission("Cjm.Help"))) {
 					List<String> list = plugin.Locale().help_1;
 					Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
-					for(int i = 0; i < list.size(); i++) {
-						String text = (String) list.get(i);
+					list.forEach( text -> {
 						Utils.sendColorMessage(j, text);
-					}
+					});
 					Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				}else {
 					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);

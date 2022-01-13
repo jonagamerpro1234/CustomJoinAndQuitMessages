@@ -13,7 +13,7 @@
 	<licenses>
 		<license>
 			<name>GNU General Public License v3.0</name>
-			<url>https://github.com/jonagamerpro1234/AdvancedChat/blob/main/LICENSE</url>
+			<url>https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/blob/main/LICENSE</url>
 		</license>
 	</licenses>
 
@@ -52,6 +52,8 @@
 			<id>paper-repo</id>
 			<url>https://papermc.io/repo/repository/maven-public/</url>
 		</repository>
+
+
 	</repositories>
 
 	<dependencies>
@@ -124,7 +126,7 @@
 		<dependency>
 			<groupId>com.github.cryptomorin</groupId>
 			<artifactId>XSeries</artifactId>
-			<version>8.4.0</version>
+			<version>8.5.0.1</version>
 		</dependency>
 
 		<!-- PlaceHolderAPI -->
@@ -193,6 +195,7 @@
 							</excludes>
 						</filter>
 					</filters>
+					<minimizeJar>true</minimizeJar>
 				</configuration>
 				<executions>
 					<execution>

@@ -7,7 +7,7 @@ import jss.customjoinandquitmessages.utils.IridiumColorAPI;
 
 public class RainbowPattern implements IPattern {
 
-	Pattern pattern = Pattern.compile("<RAINBOW([0-9]{1,3})>(.*?)</RAINBOW>");
+	Pattern pattern = Pattern.compile("<RGB:([0-9]{1,3})>(.*?)</RGB>");
 
     public String process(String string) {
         Matcher matcher = pattern.matcher(string);

@@ -27,8 +27,6 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	public String name = this.jss.getName();
 	public String version = this.jss.getVersion();
 	private static CustomJoinAndQuitMessages plugin;
-	public boolean placeholders = false;
-	public boolean vault = false;
 	public Metrics metrics;
 	public boolean useLatestversion;
     public boolean useLegacyversions = false;
@@ -36,10 +34,11 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	private Map<String,Lang> availableLangs = new HashMap<>();
 	private EventUtils EventsUtils = new EventUtils(this);
 	private ConfigFile configFile = new ConfigFile(this, "config.yml");
-	private Logger logger = new Logger(this);
+	private Logger logger = new Logger();
 	private HookManager hooksManager = new HookManager(this);
 	private PreConfigLoader preConfigLoader = new PreConfigLoader(this);
 	private String updateVersion;
+	private boolean useLegacyConfig = false;
 	
 	public void onLoad() {
 		Utils.sendLoadTitle(version);
@@ -48,14 +47,24 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 		plugin = this;
 		Utils.setEnabled(version);
 		configFile.saveDefaultConfig();
-		configFile.create();
+		configFile.create();		
 		preConfigLoader.loadConfig();
 		if(!preConfigLoader.loadLangs()) {
 			Logger.error("&cError load lang files");
 			Logger.warning("&eDisable plugin for error");
 			Bukkit.getPluginManager().disablePlugins();
 			return;
-		}		
+		}
+		
+		int cfgv = getConfigFile().getConfig().getInt("Config.Config-Version");
+		if(cfgv > 2) {
+			useLegacyConfig = true;
+		}
+		
+		if(useLegacyConfig) {
+			Logger.warning("&eYour config.yml -> [v1] is out of date, update config.yml -> [v2]");
+		}
+		
 		metrics = new Metrics(this);
         nmsversion = Bukkit.getServer().getClass().getPackage().getName();
         nmsversion = nmsversion.substring(nmsversion.lastIndexOf(".") + 1);
@@ -73,9 +82,11 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
         		Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &cdisabled &7method &b1.16");
         	}
         }else if(nmsversion.equalsIgnoreCase("v1_16_R1") || nmsversion.equalsIgnoreCase("v1_16_R2") || nmsversion.equalsIgnoreCase("v1_16_R3")){
-        	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &aenabled &7method &b1.16 ");
+        	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + "&7Use " + nmsversion + " &aenabled &7method &b1.16 ");
         }else if(nmsversion.equalsIgnoreCase("v1_17_R1")) {
-        	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &aenabled &7method &b1.17 ");
+        	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + "&7Use " + nmsversion + " &aenabled &7method &b1.17 ");
+        }else if(nmsversion.equalsIgnoreCase("v1_18_R1")) {
+        	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + "&7Use " + nmsversion + " &aenabled &7method &b1.18 ");
         }
 		setupCommands();
 		setupEvents();
@@ -86,7 +97,6 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 			updateVersion = version;
 			
 			if(this.getDescription().getVersion().equalsIgnoreCase(version)) {
-				logger.Log(Level.SUCCESS, "&a" + this.name + " is up to date!");
 				Logger.success("&a" + this.name + " is up to date!");
 			}else {
                 logger.Log(Level.OUTLINE, "&5<||" + Utils.setLine("&5"));
@@ -102,8 +112,6 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	public void onDisable() {
 		Utils.setDisabled(version);
 		metrics = null;
-		placeholders = false;
-		vault = false;
 	}
 	
 	public void setupCommands() {

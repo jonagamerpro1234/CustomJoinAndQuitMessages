@@ -1,15 +1,6 @@
 package jss.customjoinandquitmessages.utils;
 
-import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-
 public class Logger {
-	
-	private CustomJoinAndQuitMessages plugin;
-	private EventUtils eventsUtils = new EventUtils(plugin);
-	
-    public Logger(CustomJoinAndQuitMessages plugin) {
-		this.plugin = plugin;
-	}
 
 	public void Log(Level level, String msg) {
         if (msg == null) {
@@ -17,74 +8,58 @@ public class Logger {
         }
         switch (level) {
             case ERROR:
-                Utils.sendColorMessage(eventsUtils.getConsoleSender(), "&e[&cERROR&e]&7" + " " + msg);
+                error(msg);
                 break;
             case WARNING:
-                Utils.sendColorMessage(eventsUtils.getConsoleSender(), "&e[&dWARNING&e]&7" + " " + msg);
+                warning(msg);
                 break;
             case INFO:
-                Utils.sendColorMessage(eventsUtils.getConsoleSender(), "&e[&9INFO&e]&7" + " " + msg);
+                info(msg);
                 break;
             case OUTLINE:
-                Utils.sendColorMessage(eventsUtils.getConsoleSender(), "&e[&bOUTLINE&e]&7" + " " + msg);
+                outLine(msg);
                 break;
             case SUCCESS:
-                Utils.sendColorMessage(eventsUtils.getConsoleSender(), "&e[&aSUCCESS&e]&7" + " " + msg);
+                success(msg);
                 break;
             case DEBUG:
-                Utils.sendColorMessage(eventsUtils.getConsoleSender(), "&e[&dDEBUG&e]&7" + " " + msg);
+                debug(msg);
                 break;
+            default:
+            	defaultMessage(msg);
+            	break;
         }
 
     }
 	
     public static void error(String msg) {
-    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), ERRORPrefix() + " " + msg);
+    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(),  Utils.getPrefix() + "&8-> &e[&cERROR&e] &7" + msg);
     }
 
     public static void warning(String msg) {
-    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), WARNINGPrefix() + " " + msg);
+    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + "&8-> &e[&dWARNING&e] &7" + msg);
     }
     
     public static void info(String msg) {
-    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), INFOPrefix() + " " + msg);
+    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + "&8-> &e[&9INFO&e] &7" + msg);
     }
     
     public static void outLine(String msg) {
-    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), OUTLINEPrefix() + " " + msg);
+    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + "&8-> &e[&bOUTLINE&e] &7" + msg);
     }
     
     public static void success(String msg) {
-    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), SUCCESSPrefix() + " " + msg);
+    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + "&8-> &e[&aSUCCESS&e] &7" + msg);
     }
     
     public static void debug(String msg) {
-    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), DEBUGPrefix() + " " + msg);
+    	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + "&8-> &e[&dDEBUG&e] &7" + msg);
     }
     
     public static void defaultMessage(String msg) {
     	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + msg);
     }
-	
-    private static String ERRORPrefix() {
-    	return Utils.color("&e[&cERROR&e]&7");
-    }
-    private static String WARNINGPrefix() {
-    	return Utils.color("&e[&dWARNING&e]&7");
-    }
-    private static String INFOPrefix() {
-    	return Utils.color("&e[&9INFO&e]&7");
-    }
-    private static String OUTLINEPrefix() {
-    	return Utils.color("&e[&bOUTLINE&e]&7");
-    }
-    private static String SUCCESSPrefix() {
-    	return Utils.color("&e[&aSUCCESS&e]&7");
-    }
-    private static String DEBUGPrefix() {
-    	return Utils.color("&e[&dDEBUG&e]&7");
-    }
-	
+		
     public enum Level {
         ERROR, WARNING, INFO, SUCCESS, OUTLINE, DEBUG
     }
