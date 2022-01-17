@@ -69,6 +69,16 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				}
 				return true;
 			}
+			
+			if(args[0].equalsIgnoreCase("display")) {
+				if((j.isOp()) || (j.hasPermission("Cjm.Display"))){
+					
+				}else {
+					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
+				}
+				return true;
+			}
+			
 			if(args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("rl")) {
 				if((j.isOp()) || (j.hasPermission("Cjm.Reload"))) {
 					plugin.getPreConfigLoader().loadConfig();

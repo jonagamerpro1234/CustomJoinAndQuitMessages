@@ -49,44 +49,57 @@ public class JoinListener implements Listener {
 	public void onJoin(PlayerJoinEvent e) {
 		FileConfiguration config = plugin.getConfigFile().getConfig();
 		Player p = e.getPlayer();
-		
-		
-		
+
 		DiscordSRVHHook discordSRVHHook = HookManager.getInstance().getDiscordSRVHHook();
 		VaultHook vaultHook = HookManager.getInstance().getVaultHook();
 		LuckPermsHook luckPermsHook = HookManager.getInstance().getLuckPermsHook();
 		EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
 
-		boolean isDefault = config.getString("Config.Type").equalsIgnoreCase("default");
-		boolean isNormal = config.getString("Config.Type").equalsIgnoreCase("normal");
-		boolean isGroup = config.getString("Config.Type").equalsIgnoreCase("group");
-		boolean isEnabled = config.getString("Join.Enabled").equals("true");
-		boolean isNone = config.getString("Config.Type").equalsIgnoreCase("none");
-		boolean isUpdate = config.getString("Config.Update").equals("true");
-		boolean isWelcome = config.getString("Welcome.Enabled").equals("true");
+		boolean isDefault = Settings.c_type.equalsIgnoreCase("default");
+		boolean isNormal = Settings.c_type.equalsIgnoreCase("normal");
+		boolean isGroup = Settings.c_type.equalsIgnoreCase("group");
+		boolean isNone = Settings.c_type.equalsIgnoreCase("none");
+		
+		if (Settings.boolean_welcome) {
 
-		if (isWelcome) {
-
-			List<String> List_Text = config.getStringList("Welcome.Text");
+			
+			Settings.list_welcome.forEach( (text) -> {
+				Utils.sendColorMessage(p, Utils.getVar(p, text));
+			});
+			
+			/*/List<String> List_Text = config.getStringList("Welcome.Text");
 
 			for (int i = 0; i < List_Text.size(); i++) {
 				String text = (String) List_Text.get(i);
 				text = Utils.color(text);
 				text = Utils.getVar(p, text);
 				Utils.sendColorMessage(p, text);
-			}
+			}*/
 		}
 
-		if (isEnabled) {
+		if (Settings.boolean_join) {
 			if (isDefault) {
 				return;
 			} else if (isNormal) {
 				e.setJoinMessage(null);
 
-				boolean isNormalType = config.getString("Join.Type").equalsIgnoreCase("normal");
-				boolean isModifyType = config.getString("Join.Type").equalsIgnoreCase("modify");
-
-				String text = config.getString("Join.Text");
+				String join = Settings.message_join;
+				String firstjoin = Settings.message_first_join;
+				
+				String text = "";
+				
+				if(Settings.boolean_firstjoin) {
+					if (!p.hasPlayedBefore()) {
+						text = firstjoin;
+					} else {
+						text = join;
+					}
+				}else {
+					text = join;
+				}
+				
+				boolean isNormalType = Settings.join_type.equalsIgnoreCase("normal");
+				boolean isModifyType = Settings.join_type.equalsIgnoreCase("modify");
 
 				text = Utils.color(Utils.getVar(p, text));
 
@@ -225,7 +238,7 @@ public class JoinListener implements Listener {
 			}
 		}
 
-		if (isUpdate) {
+		if (Settings.boolean_update) {
 			if ((p.isOp()) || (p.hasPermission("Cjm.Update.Notify"))) {
 				new UpdateChecker(CustomJoinAndQuitMessages.getInstance(), UpdateSettings.ID)
 						.getUpdateVersion(version -> {
@@ -251,13 +264,12 @@ public class JoinListener implements Listener {
 		LuckPermsHook luckPermsHook = HookManager.getInstance().getLuckPermsHook();
 		EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
 
-		boolean isDefault = config.getString("Config.Type").equalsIgnoreCase("default");
-		boolean isNormal = config.getString("Config.Type").equalsIgnoreCase("normal");
-		boolean isGroup = config.getString("Config.Type").equalsIgnoreCase("group");
-		boolean isEnabled = config.getString("Quit.Enabled").equals("true");
-		boolean isNone = config.getString("Config.Type").equalsIgnoreCase("none");
+		boolean isDefault = Settings.c_type.equalsIgnoreCase("default");
+		boolean isNormal = Settings.c_type.equalsIgnoreCase("normal");
+		boolean isGroup = Settings.c_type.equalsIgnoreCase("group");
+		boolean isNone = Settings.c_type.equalsIgnoreCase("none");
 
-		if (isEnabled) {
+		if (Settings.boolean_quit) {
 			if (isDefault) {
 				return;
 			} else if (isNormal) {
@@ -280,13 +292,18 @@ public class JoinListener implements Listener {
 				if (isNormalType) {
 					json.sendToAll();
 					if (discordSRVHHook.isEnabled()) {
-						if (Settings.hook_discordsrv_channelid.equalsIgnoreCase("none")) return;
-						DiscordUtil.sendMessageBlocking(DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),Utils.colorless(json.getText()));
+						if (Settings.hook_discordsrv_channelid.equalsIgnoreCase("none"))
+							return;
+						DiscordUtil.sendMessageBlocking(
+								DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
+								Utils.colorless(json.getText()));
 					}
 
 					if (essentialsXDiscordHook.isEnabled()) {
-						if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none")) return;
-						essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid, Utils.colorless(json.getText()));
+						if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none"))
+							return;
+						essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid,
+								Utils.colorless(json.getText()));
 					}
 
 					return;

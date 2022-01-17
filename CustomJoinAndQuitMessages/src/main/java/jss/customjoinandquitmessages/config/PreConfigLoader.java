@@ -26,6 +26,12 @@ public class PreConfigLoader {
 			Settings.boolean_quit = config.getString("Quit.Enabled").equals("true");
 			Settings.boolean_welcome = config.getString("Welcome.Enabled").equals("true");
 			Settings.boolean_update = config.getString("Config.Update").equals("true");
+			Settings.c_type = config.getString("Config.Type");
+			Settings.message_join = config.getString("Join.Text");
+			Settings.join_type = config.getString("Join.Type");
+			Settings.boolean_firstjoin = config.getString("Join.First-Join.Enabled").equals("true");
+			Settings.message_first_join = config.getString("Join.First-Join.Text");
+			Settings.list_welcome = config.getStringList("Welcome.Text");
         	Settings.hook_discordsrv = config.getString("Hooks.DiscordSRV.Enabled").equals("true");
         	Settings.hook_discordsrv_channelid = config.getString("Hooks.DiscordSRV.Channel-ID");
         	Settings.hook_essentialsDiscord = config.getString("Hooks.EssentialsDiscord.Enabled").equals("true");
@@ -35,7 +41,6 @@ public class PreConfigLoader {
         	Settings.hook_vault_use_group = config.getString("Hooks.Vault.Use-Vault-In-Groups").equals("true");
         	Settings.hook_luckperms = config.getString("Hooks.LuckPerms.Enabled").equals("true");
         	Settings.hook_luckperms_use_group = config.getString("Hooks.LuckPerms.Use-Luckperms-In-Groups").equals("true");
-        	
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

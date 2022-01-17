@@ -83,6 +83,15 @@ Join:
   # |Text| This is where Join customizable message is located
   Text: '&b[<#83FF6F>+&b] <#A157FF><name>'
   
+  # |First-Join| 
+  First-Join:
+    
+    # |Enabled| Here you can enable or disable this feature
+    Enabled: true
+    
+    # |Text| Here you can set the join message for the first time
+    Text: '&6Welcome to server &a<name>&6 for the first time' 
+  
   # |Type| Here you can find two types that are [ normal | modify ]
   Type: modify
   
