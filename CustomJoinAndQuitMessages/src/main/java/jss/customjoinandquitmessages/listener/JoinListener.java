@@ -191,8 +191,7 @@ public class JoinListener implements Listener {
 					}
 
 					if (isTitle) {
-						Titles.sendTitle(p, FadeIn, Stay, FadeOut, Utils.color(Utils.getVar(p, Title_Text)),
-								Utils.color(Utils.getVar(p, SubTitle_Text)));
+						Titles.sendTitle(p, FadeIn, Stay, FadeOut, Utils.color(Utils.getVar(p, Title_Text)), Utils.color(Utils.getVar(p, SubTitle_Text)));
 					}
 
 					if (isActionBar) {

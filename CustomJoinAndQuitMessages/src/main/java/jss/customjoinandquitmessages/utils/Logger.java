@@ -29,7 +29,6 @@ public class Logger {
             	defaultMessage(msg);
             	break;
         }
-
     }
 	
     public static void error(String msg) {
