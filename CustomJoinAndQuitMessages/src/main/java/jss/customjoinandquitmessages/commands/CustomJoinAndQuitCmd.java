@@ -10,6 +10,8 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.gui.DisplayGui;
+import jss.customjoinandquitmessages.manager.DisplayManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Utils;
 
@@ -73,6 +75,65 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 			if(args[0].equalsIgnoreCase("display")) {
 				if((j.isOp()) || (j.hasPermission("Cjm.Display"))){
 					
+					DisplayGui displayGui = new DisplayGui(j, plugin);
+					DisplayManager displayManager = new DisplayManager(j);
+					
+					if(args.length >= 2) {
+						
+						if(args[1].equalsIgnoreCase("help")) {
+							
+							return true;
+						}
+						
+						if(args[1].equalsIgnoreCase("open")) {
+							displayGui.open();
+							return true;
+						}
+						
+						if(args[1].equalsIgnoreCase("join")) {
+							displayManager.showJoinMessage();
+							return true;
+						}
+						
+						if(args[1].equalsIgnoreCase("quit")) {
+							displayManager.showQuitMessage();
+							return true;
+						}
+						
+						if(args[1].equalsIgnoreCase("title")) {
+							
+							return true;
+						}
+						
+						if(args[1].equalsIgnoreCase("actionbar")) {
+							
+							return true;
+						}
+						
+						if(args[1].equalsIgnoreCase("welcome")) {
+							displayManager.showWelcomeMessage();
+							return true;
+						}
+						
+						if(args[1].equalsIgnoreCase("sound")) {
+							
+							return true;
+						}
+						
+						if(args[1].equalsIgnoreCase("firstjoin")) {
+							displayManager.showFirstJoinMessage();
+							return true;
+						}
+						
+						if(args[1].equalsIgnoreCase("all")) {
+							
+							return true;
+						}
+						
+						Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().Error_Cmd);
+						return true;
+					}
+					Utils.sendColorMessage(j, "&c|!| &cPlease set de option for execute featured");
 				}else {
 					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
 				}
@@ -129,6 +190,20 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				options.add("help");
 				options.add("reload");
 				options.add("info");
+				options.add("display");
+				break;
+			case 2:
+				if(args[0].equalsIgnoreCase("display")) {
+					options.add("help");
+					options.add("open");
+					options.add("firstjoin");
+					options.add("join");
+					options.add("quit");
+					options.add("title");
+					options.add("actionbar");
+					options.add("sound");
+					options.add("welcome");
+				}
 				break;
 			}
 		}

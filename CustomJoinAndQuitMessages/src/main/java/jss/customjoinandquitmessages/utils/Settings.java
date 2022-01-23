@@ -6,6 +6,8 @@ public class Settings {
 	
 	public static String defaultLanguage;
 	
+	public static boolean is_Group_Display = false;
+	
 	public static boolean boolean_update;
 	public static boolean boolean_join;
 	public static boolean boolean_firstjoin;

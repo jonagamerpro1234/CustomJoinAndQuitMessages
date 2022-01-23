@@ -31,6 +31,8 @@ public class PreConfigLoader {
 			Settings.join_type = config.getString("Join.Type");
 			Settings.boolean_firstjoin = config.getString("Join.First-Join.Enabled").equals("true");
 			Settings.message_first_join = config.getString("Join.First-Join.Text");
+			Settings.quit_type = config.getString("Quit.Type");
+			Settings.message_quit = config.getString("Quit.Text");
 			Settings.list_welcome = config.getStringList("Welcome.Text");
         	Settings.hook_discordsrv = config.getString("Hooks.DiscordSRV.Enabled").equals("true");
         	Settings.hook_discordsrv_channelid = config.getString("Hooks.DiscordSRV.Channel-ID");
