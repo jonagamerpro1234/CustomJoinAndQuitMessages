@@ -47,6 +47,7 @@ public class Lang {
 
 	public void reloadlang(final String localeName) {
 		final File localeDir = new File(plugin.getDataFolder() + File.separator + "lang");
+		
 		if (!localeDir.exists()) {
 			localeDir.mkdir();
 		}

@@ -6,14 +6,13 @@ import java.util.HashMap;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.EventUtils;
+import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.Utils;
 
 public class PreConfigLoader {
 	
 	private CustomJoinAndQuitMessages plugin;
-	private EventUtils EventsUtils = new EventUtils(plugin);
 	
 	public PreConfigLoader(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
@@ -22,28 +21,60 @@ public class PreConfigLoader {
 	public void loadConfig() {
 		FileConfiguration config = plugin.getConfigFile().getConfig();
 		try {
-			Settings.boolean_join = config.getString("Join.Enabled").equals("true");
-			Settings.boolean_quit = config.getString("Quit.Enabled").equals("true");
-			Settings.boolean_welcome = config.getString("Welcome.Enabled").equals("true");
-			Settings.boolean_update = config.getString("Config.Update").equals("true");
+			
+			//Other
+			Settings.update = config.getString("Config.Update").equals("true");			
 			Settings.c_type = config.getString("Config.Type");
-			Settings.message_join = config.getString("Join.Text");
+			Settings.is_Group_Display = config.getString("Config.Type").equalsIgnoreCase("group");
+			
+			//Join
+			Settings.join = config.getString("Join.Enabled").equals("true");
+			Settings.join_message = config.getString("Join.Text");
 			Settings.join_type = config.getString("Join.Type");
-			Settings.boolean_firstjoin = config.getString("Join.First-Join.Enabled").equals("true");
-			Settings.message_first_join = config.getString("Join.First-Join.Text");
+			
+			Settings.firstjoin = config.getString("Join.First-Join.Enabled").equals("true");
+			Settings.join_message_first = config.getString("Join.First-Join.Text");
+			
+			Settings.join_actionbar = config.getString("Join.ActionBar.Enabled").equals("true");
+			Settings.join_message_actionbar_text = config.getString("Join.ActionBar.Text");
+			
+			Settings.join_message_title_title = config.getString("Join.Title.Title");
+			Settings.join_message_title_subtitle = config.getString("Join.Title.SubTitle");
+			
+			Settings.join_title_fadein = config.getInt("Join.Title.FadeIn");
+			Settings.join_title_stay = config.getInt("Join.Title.Stay");
+			Settings.join_title_fadeout = config.getInt("Join.Title.FadeOut");
+			
+			Settings.join_sound = config.getString("Join.Sound.Enabled").equals("true");
+			Settings.join_sound_name = config.getString("Join.Sound.Name");
+			Settings.join_sound_pitch = Float.valueOf(config.getString("Join.Sound.Pitch"));
+			Settings.join_sound_vol = config.getInt("Join.Sound.Volume");
+			
+			//Quit
+			Settings.quit = config.getString("Quit.Enabled").equals("true");
 			Settings.quit_type = config.getString("Quit.Type");
-			Settings.message_quit = config.getString("Quit.Text");
+			Settings.quit_message = config.getString("Quit.Text");
+			
+			//Welcome
+			Settings.welcome = config.getString("Welcome.Enabled").equals("true");
 			Settings.list_welcome = config.getStringList("Welcome.Text");
+			
+			//Hooks
         	Settings.hook_discordsrv = config.getString("Hooks.DiscordSRV.Enabled").equals("true");
         	Settings.hook_discordsrv_channelid = config.getString("Hooks.DiscordSRV.Channel-ID");
+        	
         	Settings.hook_essentialsDiscord = config.getString("Hooks.EssentialsDiscord.Enabled").equals("true");
         	Settings.hook_essentialsDiscord_channelid = config.getString("Hooks.EssentialsDiscord.Channel-ID");
         	Settings.hook_essentialsDiscord_use_default_channel = config.getString("Hooks.EssentialsDiscord.Use-Default-Channel").equals("true");
+        	
         	Settings.hook_vault = config.getString("Hooks.Vault.Enabled").equals("true");
         	Settings.hook_vault_use_group = config.getString("Hooks.Vault.Use-Vault-In-Groups").equals("true");
+        	
         	Settings.hook_luckperms = config.getString("Hooks.LuckPerms.Enabled").equals("true");
         	Settings.hook_luckperms_use_group = config.getString("Hooks.LuckPerms.Use-Luckperms-In-Groups").equals("true");
+		
 		}catch(Exception e) {
+			Logger.error("&cThere was an error loading the &b[PreConfigLoader]&7, please reload the plugin");
 			e.printStackTrace();
 		}
 	}
@@ -61,7 +92,7 @@ public class PreConfigLoader {
 	        plugin.getLogger().severe("Could not add locales!");
 	    }
 	    if (!availableLocales.containsKey(Settings.defaultLanguage)) {
-	    	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + "&eLoad File: " + Settings.defaultLanguage + ".yml' not found in /locale folder. Using /locale/en-US.yml");	
+	    	Logger.warning(Utils.getPrefix() + "&eLoad File: " + Settings.defaultLanguage + ".yml' not found in /locale folder. Using /locale/en-US.yml");	
 	        Settings.defaultLanguage = "en-US";
 	        availableLocales.put(Settings.defaultLanguage, new Lang(plugin, Settings.defaultLanguage, 0));
 	    }

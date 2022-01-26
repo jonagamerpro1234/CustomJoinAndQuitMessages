@@ -21,8 +21,7 @@ public class DisplayManager {
 	}
 
 	public void showFirstJoinMessage() {
-		if(!Settings.boolean_firstjoin) {
-			Utils.sendColorMessage(player, "&e[showFirstJoinMessage] &b-> &7This feature is disabled and you will not be able to see the preview");
+		if(!Settings.firstjoin) {
 			Logger.warning("&e[showFirstJoinMessage] &b-> &7This feature is disabled and you will not be able to see the preview"); 
 			return;
 		}
@@ -33,7 +32,7 @@ public class DisplayManager {
 		if (Settings.is_Group_Display) {
 
 		} else {
-			text = Settings.message_first_join;
+			text = Settings.join_message_first;
 		}
 		
 		boolean isNormalType = Settings.join_type.equalsIgnoreCase("normal");
@@ -85,7 +84,7 @@ public class DisplayManager {
 	}
 	
 	public void showJoinMessage() {
-		if(!Settings.boolean_join) {
+		if(!Settings.join) {
 			Logger.warning("&e[showJoinMessage] &b-> &7This feature is disabled and you will not be able to see the preview"); 
 			return;
 		}
@@ -94,7 +93,7 @@ public class DisplayManager {
 		if (Settings.is_Group_Display) {
 
 		} else {
-			text = Settings.message_join;
+			text = Settings.join_message;
 		}
 		
 		boolean isNormalType = Settings.join_type.equalsIgnoreCase("normal");
@@ -146,7 +145,7 @@ public class DisplayManager {
 	}
 
 	public void showQuitMessage() {
-		if(!Settings.boolean_quit) {
+		if(!Settings.quit) {
 			Logger.warning("&e[showQuitMessage] &b-> &7This feature is disabled and you will not be able to see the preview"); 
 			return;
 		}
@@ -156,7 +155,7 @@ public class DisplayManager {
 		if (Settings.is_Group_Display) {
 
 		} else {
-			text = Settings.message_quit;
+			text = Settings.quit_message;
 		}
 		
 		boolean isNormalType = Settings.quit_type.equalsIgnoreCase("normal");
@@ -208,7 +207,7 @@ public class DisplayManager {
 	}
 	
 	public void showWelcomeMessage() {
-		if(!Settings.boolean_welcome) {
+		if(!Settings.welcome) {
 			Logger.warning("&e[showWelcomeMessage] &b-> &7This feature is disabled and you will not be able to see the preview"); 
 			return;
 		}

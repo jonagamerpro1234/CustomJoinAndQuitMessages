@@ -60,35 +60,24 @@ public class JoinListener implements Listener {
 		boolean isGroup = Settings.c_type.equalsIgnoreCase("group");
 		boolean isNone = Settings.c_type.equalsIgnoreCase("none");
 		
-		if (Settings.boolean_welcome) {
-
-			
+		if (Settings.welcome) {
 			Settings.list_welcome.forEach( (text) -> {
 				Utils.sendColorMessage(p, Utils.getVar(p, text));
 			});
-			
-			/*/List<String> List_Text = config.getStringList("Welcome.Text");
-
-			for (int i = 0; i < List_Text.size(); i++) {
-				String text = (String) List_Text.get(i);
-				text = Utils.color(text);
-				text = Utils.getVar(p, text);
-				Utils.sendColorMessage(p, text);
-			}*/
 		}
 
-		if (Settings.boolean_join) {
+		if (Settings.join) {
 			if (isDefault) {
 				return;
 			} else if (isNormal) {
 				e.setJoinMessage(null);
 
-				String join = Settings.message_join;
-				String firstjoin = Settings.message_first_join;
+				String join = Settings.join_message;
+				String firstjoin = Settings.join_message_first;
 				
 				String text = "";
 				
-				if(Settings.boolean_firstjoin) {
+				if(Settings.firstjoin) {
 					if (!p.hasPlayedBefore()) {
 						text = firstjoin;
 					} else {
@@ -237,7 +226,7 @@ public class JoinListener implements Listener {
 			}
 		}
 
-		if (Settings.boolean_update) {
+		if (Settings.update) {
 			if ((p.isOp()) || (p.hasPermission("Cjm.Update.Notify"))) {
 				new UpdateChecker(CustomJoinAndQuitMessages.getInstance(), UpdateSettings.ID)
 						.getUpdateVersion(version -> {
@@ -268,7 +257,7 @@ public class JoinListener implements Listener {
 		boolean isGroup = Settings.c_type.equalsIgnoreCase("group");
 		boolean isNone = Settings.c_type.equalsIgnoreCase("none");
 
-		if (Settings.boolean_quit) {
+		if (Settings.quit) {
 			if (isDefault) {
 				return;
 			} else if (isNormal) {
