@@ -5,6 +5,9 @@ import java.util.List;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import com.cryptomorin.xseries.messages.ActionBar;
+import com.cryptomorin.xseries.messages.Titles;
+
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.json.Json;
 import jss.customjoinandquitmessages.utils.Logger;
@@ -20,6 +23,16 @@ public class DisplayManager {
 		this.player = player;
 	}
 
+	public void showAllMessage() {
+		this.showFirstJoinMessage();
+		this.showJoinMessage();
+		this.showQuitMessage();
+		this.showTitleMessage();
+		this.showActionbar();
+		this.showWelcomeMessage();
+		
+	}
+	
 	public void showFirstJoinMessage() {
 		if(!Settings.firstjoin) {
 			Logger.warning("&e[showFirstJoinMessage] &b-> &7This feature is disabled and you will not be able to see the preview"); 
@@ -217,5 +230,28 @@ public class DisplayManager {
 		});
 	}
 	
+	public void showTitleMessage() {
+		if(!Settings.join_title) {
+			Logger.warning("&e[showTitleMessage] &b-> &7This feature is disabled and you will not be able to see the preview"); 
+			return;
+		}
+		Titles.sendTitle(player, Settings.join_title_fadein, Settings.join_title_stay, Settings.join_title_fadeout, Settings.join_message_title_title, Settings.join_message_title_subtitle);
+	}
+	
+	public void showActionbar() {
+		if(!Settings.join_actionbar) {
+			Logger.warning("&e[showActionbar] &b-> &7This feature is disabled and you will not be able to see the preview"); 
+			return;
+		}
+		ActionBar.sendActionBar(player, Settings.join_message_actionbar_text);
+	}
+	
+	public void showJoinSound() {
+		Utils.sendColorMessage(player, "Test join sound");
+	}
+	
+	public void showQuitSound() {
+		Utils.sendColorMessage(player, "Test quit sound");
+	}
 	
 }

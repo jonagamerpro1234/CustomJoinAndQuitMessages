@@ -101,12 +101,12 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 						}
 						
 						if(args[1].equalsIgnoreCase("title")) {
-							
+							displayManager.showTitleMessage();
 							return true;
 						}
 						
 						if(args[1].equalsIgnoreCase("actionbar")) {
-							
+							displayManager.showActionbar();
 							return true;
 						}
 						
@@ -117,6 +117,24 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 						
 						if(args[1].equalsIgnoreCase("sound")) {
 							
+							
+							if(args.length <= 2) {
+								
+								if(args[2].equalsIgnoreCase("join")) {
+									displayManager.showJoinSound();
+									return true;
+								}
+								
+								if(args[2].equalsIgnoreCase("quit")) {
+									displayManager.showQuitSound();
+									return true;
+								}
+								
+								Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().Error_Cmd);
+								return true;
+							}
+							
+							Utils.sendColorMessage(j, "Please select one of these two options to execute the function <join|quit>");
 							return true;
 						}
 						
@@ -126,7 +144,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 						}
 						
 						if(args[1].equalsIgnoreCase("all")) {
-							
+							displayManager.showAllMessage();
 							return true;
 						}
 						
@@ -203,6 +221,12 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 					options.add("actionbar");
 					options.add("sound");
 					options.add("welcome");
+				}
+				break;
+			case 3:
+				if(args[0].equalsIgnoreCase("sound")) {
+					options.add("join");
+					options.add("quit");
 				}
 				break;
 			}

@@ -1,9 +1,11 @@
 package jss.customjoinandquitmessages;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,7 +14,9 @@ import jss.customjoinandquitmessages.config.ConfigFile;
 import jss.customjoinandquitmessages.config.Lang;
 import jss.customjoinandquitmessages.config.PreConfigLoader;
 import jss.customjoinandquitmessages.hook.HookManager;
+import jss.customjoinandquitmessages.listener.InventoryListener;
 import jss.customjoinandquitmessages.listener.JoinListener;
+import jss.customjoinandquitmessages.manager.InventoryView;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Logger.Level;
@@ -40,8 +44,12 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	private String updateVersion;
 	private boolean useLegacyConfig = false;
 	
+	private ArrayList<InventoryView> inventoryViews;
+	
+	
 	public void onLoad() {
 		Utils.sendLoadTitle(version);
+		inventoryViews = new ArrayList<>();
 	}
 	public void onEnable() {
 		plugin = this;
@@ -120,17 +128,13 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	
 	public void setupEvents() {
 		new JoinListener(this);
+		new InventoryListener(this);
 	}
 	
 	public void reloadAllFiles() {
 		getConfigFile().reloadConfig();
 		preConfigLoader.loadConfig();
 		preConfigLoader.loadLangs();
-	}
-	
-	@Deprecated
-	public static CustomJoinAndQuitMessages getPlugin() {
-		return plugin;
 	}
 	
 	public static CustomJoinAndQuitMessages getInstance() {
@@ -167,5 +171,28 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	
 	public String getUpdateVersion() {
 		return updateVersion;
+	}
+	
+	public void registerInventory(Player player, String inventoryName) {
+		if(getInventoryView(player) == null) {
+			inventoryViews.add(new InventoryView(player, inventoryName));
+		}
+	}
+	
+	public void unregisterInventory(Player player) {
+		for(int i = 0; i < inventoryViews.size(); i++) {
+			if(((InventoryView)inventoryViews.get(i)).getPlayer().getName().equals(player.getName())) {
+				inventoryViews.remove(i);
+			}
+		}
+	}
+	
+	public InventoryView getInventoryView(Player player) {
+		for(int i = 0; i < inventoryViews.size(); i++) {
+			if(((InventoryView) inventoryViews.get(i)).getPlayer().getName().equals(player.getName())) {
+				return (InventoryView) inventoryViews.get(i);
+			}
+		}
+		return null;
 	}
 }

@@ -46,7 +46,7 @@ public class JoinListener implements Listener {
 	}
 
 	@EventHandler
-	public void onJoin(PlayerJoinEvent e) {
+	public void onJoinListener(PlayerJoinEvent e) {
 		FileConfiguration config = plugin.getConfigFile().getConfig();
 		Player p = e.getPlayer();
 
