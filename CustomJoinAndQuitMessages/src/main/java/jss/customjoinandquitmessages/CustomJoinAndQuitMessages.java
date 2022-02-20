@@ -19,7 +19,6 @@ import jss.customjoinandquitmessages.listener.JoinListener;
 import jss.customjoinandquitmessages.manager.InventoryView;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
-import jss.customjoinandquitmessages.utils.Logger.Level;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.UpdateChecker;
 import jss.customjoinandquitmessages.utils.UpdateSettings;
@@ -38,7 +37,6 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	private Map<String,Lang> availableLangs = new HashMap<>();
 	private EventUtils EventsUtils = new EventUtils(this);
 	private ConfigFile configFile = new ConfigFile(this, "config.yml");
-	private Logger logger = new Logger();
 	private HookManager hooksManager = new HookManager(this);
 	private PreConfigLoader preConfigLoader = new PreConfigLoader(this);
 	private String updateVersion;
@@ -107,12 +105,12 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 			if(this.getDescription().getVersion().equalsIgnoreCase(version)) {
 				Logger.success("&a" + this.name + " is up to date!");
 			}else {
-                logger.Log(Level.OUTLINE, "&5<||" + Utils.setLine("&5"));
-                logger.Log(Level.WARNING, "&5<||" + "&b" + this.name + " is outdated!");
-                logger.Log(Level.WARNING, "&5<||" + "&bNewest version: &a" + version);
-                logger.Log(Level.WARNING, "&5<||" + "&bYour version: &d" + UpdateSettings.VERSION);
-                logger.Log(Level.WARNING, "&5<||" + "&bUpdate Here on Spigot: &e" + UpdateSettings.URL_PlUGIN[0]);
-                logger.Log(Level.OUTLINE, "&5<||" + Utils.setLine("&5"));
+				Logger.outLine("&5<||" + Utils.setLine("&5"));
+				Logger.warning("&5<||&b" + this.name + " is outdated!");
+				Logger.warning("&5<||&bNewest version: &a" + version);
+				Logger.warning("&5<||&bYour version: &d" + UpdateSettings.VERSION);
+				Logger.warning("&5<||&bUpdate Here on Spigot: &e" + UpdateSettings.URL_PlUGIN[0]);
+				Logger.outLine("&5<||" + Utils.setLine("&5"));
 			}
 		});
 	}

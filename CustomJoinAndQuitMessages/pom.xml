@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jss.customjoinandquitmessages</groupId>
 	<artifactId>CustomJoinAndQuitMessages</artifactId>
-	<version>1.7.4-Pre.15</version>
+	<version>1.7.4-Pre.16</version>
 
 	<name>CustomJoinAndQuitMessages</name>
 	<url>https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages</url>
@@ -62,7 +62,7 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
-			<version>1.18-R0.1-SNAPSHOT</version>
+			<version>1.18.1-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>

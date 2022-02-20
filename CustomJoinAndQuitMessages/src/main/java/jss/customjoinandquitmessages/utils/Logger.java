@@ -2,35 +2,6 @@ package jss.customjoinandquitmessages.utils;
 
 public class Logger {
 
-	public void Log(Level level, String msg) {
-        if (msg == null) {
-            return;
-        }
-        switch (level) {
-            case ERROR:
-                error(msg);
-                break;
-            case WARNING:
-                warning(msg);
-                break;
-            case INFO:
-                info(msg);
-                break;
-            case OUTLINE:
-                outLine(msg);
-                break;
-            case SUCCESS:
-                success(msg);
-                break;
-            case DEBUG:
-                debug(msg);
-                break;
-            default:
-            	defaultMessage(msg);
-            	break;
-        }
-    }
-	
     public static void error(String msg) {
     	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(),  Utils.getPrefix() + "&8-> &e[&cERROR&e] &7" + msg);
     }
@@ -57,10 +28,6 @@ public class Logger {
     
     public static void defaultMessage(String msg) {
     	Utils.sendColorConsoleMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + msg);
-    }
-		
-    public enum Level {
-        ERROR, WARNING, INFO, SUCCESS, OUTLINE, DEBUG
     }
 	
 }
