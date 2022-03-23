@@ -53,18 +53,18 @@ public class Lang {
 		}
 		
 		if (localeFile == null) {
-			localeFile = new File(localeDir.getPath(), localeName + ".yml");
+			localeFile = new File(localeDir.getPath(), "messages_" + localeName + ".yml");
 		}
 		
 		if (localeFile.exists()) {
 			locale = YamlConfiguration.loadConfiguration(localeFile);
 		} else {
-			if (plugin.getResource("lang/" + localeName + ".yml") != null) {
-				plugin.saveResource("lang/" + localeName + ".yml", true);
-				localeFile = new File(plugin.getDataFolder() + File.separator + "lang", localeName + ".yml");
+			if (plugin.getResource("lang/" + "messages_" + localeName + ".yml") != null) {
+				plugin.saveResource("lang/" + "messages_" + localeName + ".yml", true);
+				localeFile = new File(plugin.getDataFolder() + File.separator + "lang", "messages_" + localeName + ".yml");
 				locale = YamlConfiguration.loadConfiguration(localeFile);
 			} else {
-				Logger.error("Could not find lang file! " + localeName);
+				Logger.error("Could not find lang file! " + "messages_" + localeName);
 			}
 		}
 	}
