@@ -61,9 +61,7 @@ public class JoinListener implements Listener {
 		boolean isNone = Settings.c_type.equalsIgnoreCase("none");
 		
 		if (Settings.welcome) {
-			Settings.list_welcome.forEach( (text) -> {
-				Utils.sendColorMessage(p, Utils.getVar(p, text));
-			});
+			Settings.list_welcome.forEach( (text) -> Utils.sendColorMessage(p, Utils.getVar(p, text)));
 		}
 
 		if (Settings.join) {
@@ -202,7 +200,6 @@ public class JoinListener implements Listener {
 					} catch (Exception ex) {
 						Logger.warning("&eVerify that the sound name is correct or belongs to the version");
 					}
-
 				}
 
 				return;

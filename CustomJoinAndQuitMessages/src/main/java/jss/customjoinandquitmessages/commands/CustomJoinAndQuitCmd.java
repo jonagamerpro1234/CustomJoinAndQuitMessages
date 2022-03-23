@@ -80,11 +80,6 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 					
 					if(args.length >= 2) {
 						
-						if(args[1].equalsIgnoreCase("help")) {
-							
-							return true;
-						}
-						
 						if(args[1].equalsIgnoreCase("open")) {
 							displayGui.open();
 							return true;
@@ -212,7 +207,6 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				break;
 			case 2:
 				if(args[0].equalsIgnoreCase("display")) {
-					options.add("help");
 					options.add("open");
 					options.add("firstjoin");
 					options.add("join");

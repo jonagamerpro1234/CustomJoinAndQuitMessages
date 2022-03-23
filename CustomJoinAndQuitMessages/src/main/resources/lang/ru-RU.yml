@@ -1,0 +1,22 @@
+# | CustomJoinAndQuitMessage |
+# |   By jonagamerpro1234    |
+# |      Version 1.6.0       |
+# |__________________________|
+# 
+# | By E_NeLsOn
+# | Lang Format: ru-RU
+# | Lang: RUssian[RU]
+# | Version: 1.6
+#
+CustomJoinAndQuitMessage:
+  Help-Msg:
+    - '&b/CustomJoinAndQuitMessage &8| &9/Cjm &7это варианты основной команды плагина'
+    - '&b/Cjm &ehelp &7показать это же сообщение'
+    - '&b/Cjm &ereload &7перезагрузить файлы плагина'
+    - '&b/Cjm &einfo &7показывает информацию о плагине'
+  Help-Cmd: '&7Используйте &b/Cjm &6help&7 для более подробной информации'
+  Reload: '&aПерезагрузка прошла успешно'
+  Error-Cmd: '&cНеизвестный аргумент'
+  No-Permission: '&cУ вас недостаточно прав для соверщения этого действия!'
+  No-Permission-Label: 'Обратитесь к владельцу сервера или администратору за помощью для получения дополнительной информации.'
+  Sound-Error: 'звук отсутствует в текущей версии или введено неверное название'
