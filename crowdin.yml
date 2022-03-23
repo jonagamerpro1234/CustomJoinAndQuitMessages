@@ -1,3 +1,3 @@
 files:
-  - source: '**/lang/messages.yml'
-    translation: /messages-%locale%.yml
+  - source: /CustomJoinAndQuitMessages/src/main/resources/lang/messages.yml
+    translation: /CustomJoinAndQuitMessages/src/main/resources/lang/%locale%.yml
