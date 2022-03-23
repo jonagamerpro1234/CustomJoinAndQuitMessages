@@ -1,13 +1,4 @@
-# | CustomJoinAndQuitMessage |
-# |   By jonagamerpro1234    |
-# |      Version 1.7.4       |
-# |__________________________|
-# 
-# | By jonagamerpro1234
-# | Lang Format: es-ES 
-# | Lang: Español[ES]
-# | Version: 1.7
-#
+---
 CustomJoinAndQuitMessage:
   Help-Msg:
     - '&b/CustomJoinAndQuitMessage &8| &9/Cjm &7Este es el comando principal'
@@ -20,4 +11,3 @@ CustomJoinAndQuitMessage:
   No-Permission: '&cNo tienes permiso para hacer eso!'
   No-Permission-Label: '&bSolicite ayuda al propietario del servidor o al administrador para obtener mas informacion..'
   Sound-Error: '&cEl sonido no pertenece a la version actual o el nombre es incorrecto'
-    
