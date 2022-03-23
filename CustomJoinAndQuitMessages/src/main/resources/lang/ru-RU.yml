@@ -1,13 +1,4 @@
-# | CustomJoinAndQuitMessage |
-# |   By jonagamerpro1234    |
-# |      Version 1.6.0       |
-# |__________________________|
-# 
-# | By E_NeLsOn
-# | Lang Format: ru-RU
-# | Lang: RUssian[RU]
-# | Version: 1.6
-#
+---
 CustomJoinAndQuitMessage:
   Help-Msg:
     - '&b/CustomJoinAndQuitMessage &8| &9/Cjm &7это варианты основной команды плагина'
