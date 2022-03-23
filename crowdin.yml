@@ -1,0 +1,3 @@
+files:
+  - source: '**/lang/messages.yml'
+    translation: /messages-%locale%.yml
