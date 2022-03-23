@@ -1,14 +1,4 @@
-# | CustomJoinAndQuitMessage |
-# |   By jonagamerpro1234    |
-# |      Version 1.6.0       |
-# |__________________________|
-# 
-# | 通过 EanLer  | 版: v1.5
-# | 语言格式: zh-CH 
-# | 郎郎: 中文[简化的]
-# | 版: 1.6
-# | 更新资料: jonagamerpro1234 [v1.6.0]
-#
+---
 CustomJoinAndQuitMessage:
   Help-Msg:
     - '&b/CustomJoinAndQuitMessage &8| &9/Cjm &7这些是主要插件命令的变体'
