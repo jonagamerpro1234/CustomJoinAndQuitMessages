@@ -62,9 +62,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				if((j.isOp()) ||  (j.hasPermission("Cjm.Help"))) {
 					List<String> list = plugin.Locale().help_1;
 					Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
-					list.forEach( text -> {
-						Utils.sendColorMessage(j, text);
-					});
+					list.forEach( text -> Utils.sendColorMessage(j, text));
 					Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				}else {
 					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
@@ -129,7 +127,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 								return true;
 							}
 							
-							Utils.sendColorMessage(j, "Please select one of these two options to execute the function <join|quit>");
+							Utils.sendColorMessage(j, "");
 							return true;
 						}
 						
@@ -146,7 +144,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 						Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().Error_Cmd);
 						return true;
 					}
-					Utils.sendColorMessage(j, "&c|!| &cPlease set de option for execute featured");
+					Utils.sendColorMessage(j, "");
 				}else {
 					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
 				}
