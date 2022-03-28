@@ -19,7 +19,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 	
 	private CustomJoinAndQuitMessages plugin;
 	private EventUtils EventsUtils = new EventUtils(plugin);
-	
+		
 	public CustomJoinAndQuitCmd(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
 		plugin.getCommand("CustomJoinAndQuitMessages").setExecutor(this);

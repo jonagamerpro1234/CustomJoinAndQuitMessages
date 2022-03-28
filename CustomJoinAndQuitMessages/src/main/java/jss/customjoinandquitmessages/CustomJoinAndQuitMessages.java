@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
 import jss.customjoinandquitmessages.config.ConfigFile;
 import jss.customjoinandquitmessages.config.Lang;
+import jss.customjoinandquitmessages.config.PlayerFile;
 import jss.customjoinandquitmessages.config.PreConfigLoader;
 import jss.customjoinandquitmessages.hook.HookManager;
 import jss.customjoinandquitmessages.listener.InventoryListener;
@@ -41,14 +42,14 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	private PreConfigLoader preConfigLoader = new PreConfigLoader(this);
 	private String updateVersion;
 	private boolean useLegacyConfig = false;
-	
 	private ArrayList<InventoryView> inventoryViews;
-	
+	private PlayerFile playerFile = new PlayerFile(this, "players.yml");
 	
 	public void onLoad() {
 		Utils.sendLoadTitle(version);
 		inventoryViews = new ArrayList<>();
 	}
+	
 	public void onEnable() {
 		plugin = this;
 		Utils.setEnabled(version);
@@ -70,6 +71,8 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 		if(useLegacyConfig) {
 			Logger.warning("&eYour config.yml -> [v1] is out of date, update config.yml -> [v2]");
 		}
+		
+		
 		
 		metrics = new Metrics(this);
         nmsversion = Bukkit.getServer().getClass().getPackage().getName();
@@ -161,6 +164,10 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 
 	public ConfigFile getConfigFile() {
 		return configFile;
+	}
+	
+	public PlayerFile getPlayerFile() {
+		return playerFile;
 	}
 	
 	public PreConfigLoader getPreConfigLoader() {
