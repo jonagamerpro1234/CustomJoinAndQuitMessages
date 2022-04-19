@@ -11,5 +11,5 @@ CustomJoinAndQuitMessage:
   No-Permission: '&cNo tienes permiso para hacer eso!'
   No-Permission-Label: '&bSolicite ayuda al propietario del servidor o al administrador para obtener mas informacion..'
   Sound-Error: '&cEl sonido no pertenece a la version actual o el nombre es incorrecto'
-  DisplayManager.Error: '&c|!| &cPlease set de option for execute featured'
-  DisplayManager.Sound.Usage: '&7Please select one of these two options to execute the function &e<join|quit>'
+  DisplayManager.Error: '&c|!| &cPor favor, establezca la opción para ejecutar la función'
+  DisplayManager.Sound.Usage: '&7Por favor, seleccione una de estas dos opciones para ejecutar la función &e<join|quit>'
