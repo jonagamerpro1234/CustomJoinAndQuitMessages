@@ -82,7 +82,7 @@ public class PreConfigLoader {
 	public boolean loadLangs() {
 	    Settings.defaultLanguage = plugin.getConfig().getString("Config.Lang", "en-US");
 	    HashMap<String,Lang> availableLocales = new HashMap<String,Lang>();
-	    FileListener fl = new FileListener(plugin);
+	    FileListener fl = new FileListener();
 	    try {
 	        int index = 1;
 	        for (String code: fl.list()) {

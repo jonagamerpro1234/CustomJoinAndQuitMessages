@@ -53,11 +53,15 @@ public class LuckPermsHook implements IHook{
 
 	public String getGroup(Player player){
 		if(player != null) {
-			Logger.debug("N");
+			Logger.debug("Player: N/A");
 		}
 		LuckPerms api = LuckPermsProvider.get();
 		String group = api.getUserManager().getUser(player.getName()).getPrimaryGroup();
 		return group;
+	}
+	
+	public static LuckPerms getApi() {
+		return LuckPermsProvider.get();
 	}
 	
 	public HookManager getHookManager() {

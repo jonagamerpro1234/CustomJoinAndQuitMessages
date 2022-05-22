@@ -138,7 +138,12 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 		preConfigLoader.loadLangs();
 	}
 	
+	@Deprecated
 	public static CustomJoinAndQuitMessages getInstance() {
+		return plugin;
+	}
+	
+	public static CustomJoinAndQuitMessages get() {
 		return plugin;
 	}
 	
@@ -200,4 +205,6 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 		}
 		return null;
 	}
+
+
 }

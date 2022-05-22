@@ -42,15 +42,21 @@ Hooks:
     
     # |Use-Luckperms-In-Groups| When using this option, the groups are discovered with the LuckPerms system
     Use-Luckperms-In-Groups: true
+    
+    # |AutoUpdateGroup| This function allows the plugin to detect if the player has changed rank in a period of time defined in the [Tick] section
+    AutoUpdateGroup:
+      
+      # |Enabled| Here you can enable or disable this feature
+      Enabled: true
+      
+      # |Tick| here you can define the time that the actions are automatically executed [Default = 600], 600 tick = 30 sec
+      Tick: 600
   
   # |Vault| Here you can configure everything related to Vault and or deactivate or activate functions
   Vault:
     
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
-    
-    # |Use-Vault-In-Groups| When using this option, the groups are discovered with the Vault system
-    Use-Vault-In-Groups: false
   
   # |DiscordSRV| Here you can define the discord channel where the messages from minecraft to discord are seen
   # !This characteristic is in the experimental phase!
@@ -63,6 +69,7 @@ Hooks:
     Channel-ID: 'none'
   #
   # |EssentialsDiscord|
+  # !This characteristic is in the experimental phase!
   EssentialsDiscord:
   
     # |Enabled| Here you can enable or disable this feature

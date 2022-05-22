@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Settings {
 	
+	public static boolean hook_luckperms_autoUpdate_group;
 	//Others
 	public static String defaultLanguage;
 	public static boolean is_Group_Display;

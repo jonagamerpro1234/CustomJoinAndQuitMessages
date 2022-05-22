@@ -18,12 +18,8 @@ import jss.customjoinandquitmessages.utils.Logger;
 
 public class FileListener {
 	
-    private final CustomJoinAndQuitMessages plugin;
+    private final CustomJoinAndQuitMessages plugin = CustomJoinAndQuitMessages.getInstance();
     
-    public FileListener(CustomJoinAndQuitMessages plugin) {
-        this.plugin = plugin;
-    }
-
     public List<String> list() throws IOException {
         List<String> result = new ArrayList<String>();
 
@@ -38,7 +34,7 @@ public class FileListener {
                     if (lowercaseName.endsWith(".yml") && name.length() == 9 && name.substring(2,3).equals("-")) {
                         return true;
                     } else {
-                        if (lowercaseName.endsWith(".yml") && !lowercaseName.equals("lang.yml")) {
+                        if (lowercaseName.endsWith(".yml") && !lowercaseName.equals("messages.yml")) {
                         	Logger.warning("&eFile: " + name + "is not in the correct format for a lang file - &bskipping...");
                         }
                         return false;

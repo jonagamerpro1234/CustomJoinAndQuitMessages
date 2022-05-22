@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scheduler.BukkitScheduler;
 
 import com.cryptomorin.xseries.messages.ActionBar;
 import com.cryptomorin.xseries.messages.Titles;
@@ -23,6 +24,7 @@ import jss.customjoinandquitmessages.hook.HookManager;
 import jss.customjoinandquitmessages.hook.LuckPermsHook;
 import jss.customjoinandquitmessages.hook.VaultHook;
 import jss.customjoinandquitmessages.json.Json;
+import jss.customjoinandquitmessages.manager.PlayerManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.GroupHelper;
 import jss.customjoinandquitmessages.utils.Logger;
@@ -38,7 +40,8 @@ public class JoinListener implements Listener {
 
 	private CustomJoinAndQuitMessages plugin;
 	private EventUtils eventsUtils = new EventUtils(plugin);
-
+	private int taskGroupId;
+	
 	public JoinListener(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
 		eventsUtils.getEventManager().registerEvents(this, plugin);
@@ -48,12 +51,27 @@ public class JoinListener implements Listener {
 	@EventHandler
 	public void onJoinListener(PlayerJoinEvent e) {
 		FileConfiguration config = plugin.getConfigFile().getConfig();
-		Player p = e.getPlayer();
-
 		DiscordSRVHHook discordSRVHHook = HookManager.getInstance().getDiscordSRVHHook();
 		VaultHook vaultHook = HookManager.getInstance().getVaultHook();
 		LuckPermsHook luckPermsHook = HookManager.getInstance().getLuckPermsHook();
-		EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
+		EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();		
+		Player p = e.getPlayer();
+
+		String tempGroup = "";
+		
+		if(luckPermsHook.isEnabled()) {
+			Logger.error("&cThe LuckPerms could not be found to activate the group system");
+			Logger.warning("&eplease check that LuckPerms is active or inside your plugins folder");
+		}
+		
+		if(Settings.hook_luckperms_use_group) {
+			tempGroup = LuckPermsHook.getApi().getUserManager().getUser(p.getName()).getPrimaryGroup();
+		}else {
+			tempGroup = "default";
+		}
+		
+		PlayerManager playerManager = new PlayerManager();
+		playerManager.createPlayer(p, tempGroup);
 
 		boolean isDefault = Settings.c_type.equalsIgnoreCase("default");
 		boolean isNormal = Settings.c_type.equalsIgnoreCase("normal");
@@ -63,6 +81,23 @@ public class JoinListener implements Listener {
 		if (Settings.welcome) {
 			Settings.list_welcome.forEach( (text) -> Utils.sendColorMessage(p, Utils.getVar(p, text)));
 		}
+		
+		
+		
+		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+		taskGroupId = scheduler.scheduleSyncRepeatingTask(plugin, new Runnable() {
+			public void run() {
+				if(Settings.hook_luckperms_autoUpdate_group) {
+					if(!playerManager.getGroup(p).equalsIgnoreCase(LuckPermsHook.getApi().getUserManager().getUser(p.getName()).getPrimaryGroup())) {
+						playerManager.setGroup(p, LuckPermsHook.getApi().getUserManager().getUser(p.getName()).getPrimaryGroup());
+					}
+				}else {
+					scheduler.cancelTask(taskGroupId);
+				}
+			}
+		}, 0L, 600L);
+		
+		
 
 		if (Settings.join) {
 			if (isDefault) {
@@ -225,9 +260,9 @@ public class JoinListener implements Listener {
 
 		if (Settings.update) {
 			if ((p.isOp()) || (p.hasPermission("Cjm.Update.Notify"))) {
-				new UpdateChecker(CustomJoinAndQuitMessages.getInstance(), UpdateSettings.ID)
+				new UpdateChecker(CustomJoinAndQuitMessages.get(), UpdateSettings.ID)
 						.getUpdateVersion(version -> {
-							if (!CustomJoinAndQuitMessages.getInstance().getDescription().getVersion()
+							if (!CustomJoinAndQuitMessages.get().getDescription().getVersion()
 									.equalsIgnoreCase(version)) {
 								TextComponent component = new TextComponent(Utils.color(Utils.getPrefixPlayer()
 										+ " &aThere is a new version available for download, Click on this message to copy the link"));
