@@ -1,3 +1,4 @@
+---
 CustomJoinAndQuitMessage:
   Help-Msg:
     - '&b/CustomJoinAndQuitMessage &8| &9/Cjm &7Este es el comando principal'
@@ -12,3 +13,4 @@ CustomJoinAndQuitMessage:
   Sound-Error: '&cEl sonido no pertenece a la version actual o el nombre es incorrecto'
   DisplayManager.Error: '&c|!| &cPor favor, establezca la opción para ejecutar la función'
   DisplayManager.Sound.Usage: '&7Por favor, seleccione una de estas dos opciones para ejecutar la función &e<join|quit>'
+  Groups.NotFoundGroup: '&cThe group could not be found'
