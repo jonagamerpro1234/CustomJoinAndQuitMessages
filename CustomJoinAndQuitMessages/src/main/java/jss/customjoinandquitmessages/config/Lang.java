@@ -28,6 +28,7 @@ public class Lang {
 	public String Error_Cmd;
 	public String Error_Console;
 	public String Error_Sound;
+	public String error_null_group;
 
 	public Lang(final CustomJoinAndQuitMessages plugin, final String localeName, final int index) {
 	        this.plugin = plugin;
@@ -79,6 +80,7 @@ public class Lang {
 		No_Permission = locale.getString(main + ".No-Permission");
 		No_Permission_Label = locale.getString(main + ".No-Permission-Label");
 		help_1 = locale.getStringList(main + ".Help-Msg");
+		error_null_group = locale.getString(main + ".Groups.NotFoundGroup");
 	}
 
 	public String getLocaleName() {

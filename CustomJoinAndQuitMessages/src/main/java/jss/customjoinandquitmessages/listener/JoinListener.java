@@ -82,8 +82,6 @@ public class JoinListener implements Listener {
 			Settings.list_welcome.forEach( (text) -> Utils.sendColorMessage(p, Utils.getVar(p, text)));
 		}
 		
-		
-		
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		taskGroupId = scheduler.scheduleSyncRepeatingTask(plugin, new Runnable() {
 			public void run() {
@@ -98,7 +96,6 @@ public class JoinListener implements Listener {
 		}, 0L, 600L);
 		
 		
-
 		if (Settings.join) {
 			if (isDefault) {
 				return;

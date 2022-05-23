@@ -13,6 +13,7 @@ import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.gui.DisplayGui;
 import jss.customjoinandquitmessages.manager.DisplayManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
+import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Utils;
 
 public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
@@ -32,9 +33,9 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				if(args[0].equalsIgnoreCase("help")) {
 					List<String> list = plugin.Locale().help_1;
 					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
-					list.forEach( text -> {
+					for(String text : list) {
 						Utils.sendColorMessage(EventsUtils.getConsoleSender(), text);
-					});
+					}
 					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				}else if(args[0].equalsIgnoreCase("reload")) {
 					plugin.getPreConfigLoader().loadConfig();
@@ -62,7 +63,9 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				if((j.isOp()) ||  (j.hasPermission("Cjm.Help"))) {
 					List<String> list = plugin.Locale().help_1;
 					Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
-					list.forEach( text -> Utils.sendColorMessage(j, text));
+					for(String text : list) {
+						Utils.sendColorMessage(EventsUtils.getConsoleSender(), text);
+					}
 					Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				}else {
 					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
@@ -79,6 +82,22 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 					if(args.length >= 2) {
 						
 						if(args[1].equalsIgnoreCase("open")) {
+							
+							if(args.length >= 3) {
+								
+								String group = args[2];
+								
+								if(group == null) {
+									Logger.error(group);
+									return true;
+								}
+								
+								displayManager.setGroup(group);
+								
+								displayGui.open();
+								return true;
+							}
+							
 							displayGui.open();
 							return true;
 						}
@@ -216,9 +235,21 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				}
 				break;
 			case 3:
+				if(args[0].equalsIgnoreCase("display")) {
+					for(String groups : plugin.getGroupsFile().getConfig().getKeys(false)) {
+						options.add(groups);
+					}
+				}
 				if(args[0].equalsIgnoreCase("sound")) {
 					options.add("join");
 					options.add("quit");
+				}
+				break;
+			case 4:
+				if(args[0].equalsIgnoreCase("sound")) {
+					for(String groups : plugin.getGroupsFile().getConfig().getKeys(false)) {
+						options.add(groups);
+					}
 				}
 				break;
 			}

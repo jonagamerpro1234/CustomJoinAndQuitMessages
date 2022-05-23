@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
 import jss.customjoinandquitmessages.config.ConfigFile;
+import jss.customjoinandquitmessages.config.GroupsFile;
 import jss.customjoinandquitmessages.config.Lang;
 import jss.customjoinandquitmessages.config.PlayerFile;
 import jss.customjoinandquitmessages.config.PreConfigLoader;
@@ -44,6 +45,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	private boolean useLegacyConfig = false;
 	private ArrayList<InventoryView> inventoryViews;
 	private PlayerFile playerFile = new PlayerFile(this, "players.yml");
+	private GroupsFile groupsFile = new GroupsFile(this, "groups.yml");
 	
 	public void onLoad() {
 		Utils.sendLoadTitle(version);
@@ -51,29 +53,8 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	}
 	
 	public void onEnable() {
-		plugin = this;
 		Utils.setEnabled(version);
-		configFile.saveDefaultConfig();
-		configFile.create();		
-		preConfigLoader.loadConfig();
-		if(!preConfigLoader.loadLangs()) {
-			Logger.error("&cError load lang files");
-			Logger.warning("&eDisable plugin for error");
-			Bukkit.getPluginManager().disablePlugins();
-			return;
-		}
-		
-		int cfgv = getConfigFile().getConfig().getInt("Config.Config-Version");
-		if(cfgv > 2) {
-			useLegacyConfig = true;
-		}
-		
-		if(useLegacyConfig) {
-			Logger.warning("&eYour config.yml -> [v1] is out of date, update config.yml -> [v2]");
-		}
-		
-		
-		
+		plugin = this;
 		metrics = new Metrics(this);
         nmsversion = Bukkit.getServer().getClass().getPackage().getName();
         nmsversion = nmsversion.substring(nmsversion.lastIndexOf(".") + 1);
@@ -94,9 +75,32 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
         	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + "&7Use " + nmsversion + " &aenabled &7method &b1.16 ");
         }else if(nmsversion.equalsIgnoreCase("v1_17_R1")) {
         	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + "&7Use " + nmsversion + " &aenabled &7method &b1.17 ");
-        }else if(nmsversion.equalsIgnoreCase("v1_18_R1")) {
+        }else if(nmsversion.equalsIgnoreCase("v1_18_R1") || nmsversion.equalsIgnoreCase("v1_18_R2")) {
         	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + "&7Use " + nmsversion + " &aenabled &7method &b1.18 ");
         }
+		
+		configFile.saveDefaultConfig();
+		configFile.create();		
+		preConfigLoader.loadConfig();
+		if(!preConfigLoader.loadLangs()) {
+			Logger.error("&cError load lang files");
+			Logger.warning("&eDisable plugin for error");
+			Bukkit.getPluginManager().disablePlugins();
+			return;
+		}
+		
+		int cfgv = getConfigFile().getConfig().getInt("Config.Config-Version");
+		if(cfgv >= 2) {
+			useLegacyConfig = true;
+		}
+		
+		if(useLegacyConfig) {
+			Logger.warning("&eYour config.yml -> [v1] is out of date, update config.yml -> [v2]");
+		}
+		
+		groupsFile.saveDefaultConfig();
+		groupsFile.create();
+
 		setupCommands();
 		setupEvents();
 		hooksManager.load();
@@ -173,6 +177,10 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	
 	public PlayerFile getPlayerFile() {
 		return playerFile;
+	}
+	
+	public GroupsFile getGroupsFile() {
+		return groupsFile;
 	}
 	
 	public PreConfigLoader getPreConfigLoader() {

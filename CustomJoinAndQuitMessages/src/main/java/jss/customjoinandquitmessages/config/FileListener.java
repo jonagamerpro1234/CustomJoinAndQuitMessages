@@ -18,7 +18,7 @@ import jss.customjoinandquitmessages.utils.Logger;
 
 public class FileListener {
 	
-    private final CustomJoinAndQuitMessages plugin = CustomJoinAndQuitMessages.getInstance();
+    private final CustomJoinAndQuitMessages plugin = CustomJoinAndQuitMessages.get();
     
     public List<String> list() throws IOException {
         List<String> result = new ArrayList<String>();

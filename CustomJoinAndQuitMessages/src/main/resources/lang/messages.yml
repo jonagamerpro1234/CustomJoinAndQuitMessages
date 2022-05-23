@@ -12,3 +12,4 @@ CustomJoinAndQuitMessage:
   Sound-Error: 'the sound does not belong to the current version or the name is wrong'
   DisplayManager.Error: '&c|!| &cPlease set de option for execute featured'
   DisplayManager.Sound.Usage: '&7Please select one of these two options to execute the function &e<join|quit>'
+  Groups.NotFoundGroup: '&cThe group could not be found'

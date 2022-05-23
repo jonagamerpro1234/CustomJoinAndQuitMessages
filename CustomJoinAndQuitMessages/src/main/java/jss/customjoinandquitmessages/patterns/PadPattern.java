@@ -7,7 +7,7 @@ import jss.customjoinandquitmessages.utils.IridiumColorAPI;
 
 public class PadPattern implements IPattern {
 
-    Pattern pattern = Pattern.compile("<#([0-9A-Fa-f]{6})>");
+    Pattern pattern = Pattern.compile("<#:([0-9A-Fa-f]{6})>");
 
     public String process(String string) {
         Matcher matcher = pattern.matcher(string);
