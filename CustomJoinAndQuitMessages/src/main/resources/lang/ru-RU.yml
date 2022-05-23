@@ -1,3 +1,4 @@
+---
 CustomJoinAndQuitMessage:
   Help-Msg:
     - '&b/CustomJoinAndQuitMessage &8| &9/Cjm &7это варианты основной команды плагина'
@@ -12,3 +13,4 @@ CustomJoinAndQuitMessage:
   Sound-Error: 'звук отсутствует в текущей версии или введено неверное название'
   DisplayManager.Error: '&c|!| &cПожалуйста, установите опции для исполнения выбранного'
   DisplayManager.Sound.Usage: '&7Пожалуйста, выберите одну из двух опций для выполнения функции &e<join|quit>'
+  Groups.NotFoundGroup: '&cThe group could not be found'
