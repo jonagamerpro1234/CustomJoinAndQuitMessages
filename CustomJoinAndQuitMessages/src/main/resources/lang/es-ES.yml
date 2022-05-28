@@ -1,10 +1,11 @@
+---
 CustomJoinAndQuitMessage:
   Help-Msg:
-    - '&b/CustomJoinAndQuitMessage &8| &9/Cjm &7Este es el comando principal'
-    - '&b/Cjm &ehelp &7Muestra el mensaje este mismo mensaje'
+    - '&b/CustomJoinAndQuitMessage &8| &9/Cjm &7estas son las variantes del comando principal del plugin'
+    - '&b/Cjm &ehelp &7muestra el mensaje este mismo mensaje'
     - '&b/Cjm &ereload &7Recarga los archivos de plugin'
-    - '&b/Cjm &einfo &7Muestra informacion sobre el plugin'
-  Help-Cmd: '&7Usa &b/Cjm &6help&7 Para mas ayuda'
+    - '&b/Cjm &einfo &7muestra informacion importante sobre el plugin'
+  Help-Cmd: '&7Usa &b/Cjm &6help &7para mas ayuda'
   Reload: '&aRecarga Completada'
   Error-Cmd: '&cArgumento desconosido'
   No-Permission: '&cNo tienes permiso para hacer eso!'
@@ -12,3 +13,4 @@ CustomJoinAndQuitMessage:
   Sound-Error: '&cEl sonido no pertenece a la version actual o el nombre es incorrecto'
   DisplayManager.Error: '&c|!| &cPor favor, establezca la opción para ejecutar la función'
   DisplayManager.Sound.Usage: '&7Por favor, seleccione una de estas dos opciones para ejecutar la función &e<join|quit>'
+  Groups.NotFoundGroup: '&cNo se ha podido encontrar el grupo'
