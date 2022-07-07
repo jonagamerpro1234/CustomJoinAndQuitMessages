@@ -6,7 +6,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
-import jss.customjoinandquitmessages.utils.Utils;
+import jss.customjoinandquitmessages.utils.Util;
 import jss.customjoinandquitmessages.utils.interfaces.IHook;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
@@ -55,7 +55,7 @@ public class VaultHook implements IHook{
             economy = rspE.getProvider();
         }
 		
-		Utils.sendColorMessage(EventUtils.getStaticConsoleSender() , Utils.getPrefix() + "&aLoading Vault features...");
+		Util.sendColorMessage(EventUtils.getStaticConsoleSender() , Util.getPrefix() + "&aLoading Vault features...");
 	}
 	
 	public static VaultHook getVaultHook() {

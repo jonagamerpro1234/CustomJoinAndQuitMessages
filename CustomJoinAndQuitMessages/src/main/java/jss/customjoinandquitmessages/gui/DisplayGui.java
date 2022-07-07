@@ -9,7 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.cryptomorin.xseries.XMaterial;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.Utils;
+import jss.customjoinandquitmessages.utils.Util;
 
 public class DisplayGui {
 	
@@ -26,7 +26,7 @@ public class DisplayGui {
 	}
 	
 	public void create() {
-		inv = Bukkit.createInventory(null, 54, Utils.color("&6&lDisplay Option"));
+		inv = Bukkit.createInventory(null, 54, Util.color("&6&lDisplay Option"));
 		
 		for(int i = 0; i < 54; i++) {
 			inv.setItem(i, setDecoration());
@@ -51,55 +51,55 @@ public class DisplayGui {
 		
 		item = XMaterial.RED_STAINED_GLASS.parseItem();
 		meta = item.getItemMeta();
-		meta.setDisplayName(Utils.color("&cGroup - (Coming Soon)"));
+		meta.setDisplayName(Util.color("&cGroup - (Coming Soon)"));
 		item.setItemMeta(meta);
 		inv.setItem(8, item);
 		
 		item = XMaterial.OAK_SIGN.parseItem();
 		meta = item.getItemMeta();
-		meta.setDisplayName(Utils.color("&aJoin Message"));
+		meta.setDisplayName(Util.color("&aJoin Message"));
 		item.setItemMeta(meta);
 		inv.setItem(11, item);
 		
 		item = XMaterial.OAK_SIGN.parseItem();
 		meta = item.getItemMeta();
-		meta.setDisplayName(Utils.color("&aQuit Message"));
+		meta.setDisplayName(Util.color("&aQuit Message"));
 		item.setItemMeta(meta);
 		inv.setItem(13, item);
 		
 		item = XMaterial.OAK_SIGN.parseItem();
 		meta = item.getItemMeta();
-		meta.setDisplayName(Utils.color("&aWelcome Message"));
+		meta.setDisplayName(Util.color("&aWelcome Message"));
 		item.setItemMeta(meta);
 		inv.setItem(15, item);
 		
 		item = XMaterial.OAK_SIGN.parseItem();
 		meta = item.getItemMeta();
-		meta.setDisplayName(Utils.color("&aTitle Message"));
+		meta.setDisplayName(Util.color("&aTitle Message"));
 		item.setItemMeta(meta);
 		inv.setItem(29, item);
 		
 		item = XMaterial.OAK_SIGN.parseItem();
 		meta = item.getItemMeta();
-		meta.setDisplayName(Utils.color("&aActionBar Message"));
+		meta.setDisplayName(Util.color("&aActionBar Message"));
 		item.setItemMeta(meta);
 		inv.setItem(31, item);
 		
 		item = XMaterial.OAK_SIGN.parseItem();
 		meta = item.getItemMeta();
-		meta.setDisplayName(Utils.color("&aFirst Join Message"));
+		meta.setDisplayName(Util.color("&aFirst Join Message"));
 		item.setItemMeta(meta);
 		inv.setItem(33, item);
 		
 		item = XMaterial.NOTE_BLOCK.parseItem();
 		meta = item.getItemMeta();
-		meta.setDisplayName(Utils.color("&aJoin Sound"));
+		meta.setDisplayName(Util.color("&aJoin Sound"));
 		item.setItemMeta(meta);
 		inv.setItem(39, item);
 		
 		item = XMaterial.NOTE_BLOCK.parseItem();
 		meta = item.getItemMeta();
-		meta.setDisplayName(Utils.color("&aQuit Sound"));
+		meta.setDisplayName(Util.color("&aQuit Sound"));
 		item.setItemMeta(meta);
 		inv.setItem(41, item);
 		

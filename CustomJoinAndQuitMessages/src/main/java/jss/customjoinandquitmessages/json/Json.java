@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.bukkit.entity.Player;
 
-import jss.customjoinandquitmessages.utils.Utils;
+import jss.customjoinandquitmessages.utils.Util;
 import net.md_5.bungee.api.chat.*;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
 
@@ -42,9 +42,9 @@ public class Json {
 		for(int i = 0; i < hover.size(); i++) {
 			TextComponent component = new TextComponent();
 			if(i == hover.size() -1) {
-				component.setText(Utils.color(Utils.getVar(this.player, (String)hover.get(i))));
+				component.setText(Util.color(Util.getVar(this.player, (String)hover.get(i))));
 			}else {
-				component.setText(Utils.color(Utils.getVar(this.player, (String)hover.get(i)) + "\n"));
+				component.setText(Util.color(Util.getVar(this.player, (String)hover.get(i)) + "\n"));
 			}
 			this.hoverText[i] = component;
 		}
@@ -97,6 +97,6 @@ public class Json {
 		if(this.openUrl != null) {
 			component.setClickEvent(new ClickEvent(Action.OPEN_URL, this.openUrl));
 		}
-		Utils.sendAllPlayerBaseComponent(component);
+		Util.sendAllPlayerBaseComponent(component);
 	}
 }

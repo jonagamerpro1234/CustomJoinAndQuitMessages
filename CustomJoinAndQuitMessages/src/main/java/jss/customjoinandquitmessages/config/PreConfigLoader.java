@@ -8,7 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
-import jss.customjoinandquitmessages.utils.Utils;
+import jss.customjoinandquitmessages.utils.Util;
 
 public class PreConfigLoader {
 	
@@ -68,10 +68,13 @@ public class PreConfigLoader {
         	Settings.hook_essentialsDiscord_use_default_channel = config.getString("Hooks.EssentialsDiscord.Use-Default-Channel").equals("true");
         	
         	Settings.hook_vault = config.getString("Hooks.Vault.Enabled").equals("true");
-        	Settings.hook_vault_use_group = config.getString("Hooks.Vault.Use-Vault-In-Groups").equals("true");
         	
         	Settings.hook_luckperms = config.getString("Hooks.LuckPerms.Enabled").equals("true");
         	Settings.hook_luckperms_use_group = config.getString("Hooks.LuckPerms.Use-Luckperms-In-Groups").equals("true");
+        	Settings.hook_luckperms_autoUpdate_group = config.getString("Hooks.LuckPerms.AutoUpdateGroup.Enabled").equals("true");
+        	
+        	Settings.hook_essentials = config.getString("Hooks.Essentials.Enabled").equals("true");
+        	Settings.hook_essentials_hideplayervanish = config.getString("Hooks.Essentials.HidePlayerIsVanish").equals("true");
 		
 		}catch(Exception e) {
 			Logger.error("&cThere was an error loading the &b[PreConfigLoader]&7, please reload the plugin");
@@ -92,7 +95,7 @@ public class PreConfigLoader {
 	        plugin.getLogger().severe("Could not add locales!");
 	    }
 	    if (!availableLocales.containsKey(Settings.defaultLanguage)) {
-	    	Logger.warning(Utils.getPrefix() + "&eLoad File: " + Settings.defaultLanguage + ".yml' not found in /locale folder. Using /locale/en-US.yml");	
+	    	Logger.warning(Util.getPrefix() + "&eLoad File: " + Settings.defaultLanguage + ".yml' not found in /locale folder. Using /locale/en-US.yml");	
 	        Settings.defaultLanguage = "en-US";
 	        availableLocales.put(Settings.defaultLanguage, new Lang(plugin, Settings.defaultLanguage, 0));
 	    }

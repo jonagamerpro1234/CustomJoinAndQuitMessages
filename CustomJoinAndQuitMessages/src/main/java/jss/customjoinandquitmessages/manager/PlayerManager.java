@@ -4,7 +4,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.Logger;
 
 public class PlayerManager {
 	
@@ -23,8 +22,6 @@ public class PlayerManager {
 		if(!existsPlayer(player.getName())) {
 			config.set("Players." + player.getName() + ".Group", group);
 			this.save();
-		}else {
-			Logger.debug("&aThe player already exists");
 		}
 	}
 	

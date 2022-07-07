@@ -24,7 +24,7 @@ import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.UpdateChecker;
 import jss.customjoinandquitmessages.utils.UpdateSettings;
-import jss.customjoinandquitmessages.utils.Utils;
+import jss.customjoinandquitmessages.utils.Util;
 
 public class CustomJoinAndQuitMessages extends JavaPlugin{
 
@@ -48,12 +48,12 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 	private GroupsFile groupsFile = new GroupsFile(this, "groups.yml");
 	
 	public void onLoad() {
-		Utils.sendLoadTitle(version);
+		Util.sendLoadTitle(version);
 		inventoryViews = new ArrayList<>();
 	}
 	
 	public void onEnable() {
-		Utils.setEnabled(version);
+		Util.setEnabled(version);
 		plugin = this;
 		metrics = new Metrics(this);
         nmsversion = Bukkit.getServer().getClass().getPackage().getName();
@@ -62,21 +62,21 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
         if (nmsversion.equalsIgnoreCase("v1_8_R1") || nmsversion.equalsIgnoreCase("v1_7_")) { 
         	useLegacyversions = true;
         	if(useLegacyversions) {
-        		Utils.sendColorMessage(EventsUtils.getConsoleSender(), " is legacy &e1.7_? &8|&e 1.8_R1");
+        		Util.sendColorMessage(EventsUtils.getConsoleSender(), " is legacy &e1.7_? &8|&e 1.8_R1");
         	}
         }
         
         if (nmsversion.equalsIgnoreCase("v1_8_R3")) { 
         	useLegacyversions = true;
         	if(useLegacyversions) {
-        		Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + "&7Use " + nmsversion + " &cdisabled &7method &b1.16");
+        		Util.sendColorMessage(EventsUtils.getConsoleSender(), Util.getPrefix() + " " + "&7Use " + nmsversion + " &cdisabled &7method &b1.16");
         	}
         }else if(nmsversion.equalsIgnoreCase("v1_16_R1") || nmsversion.equalsIgnoreCase("v1_16_R2") || nmsversion.equalsIgnoreCase("v1_16_R3")){
-        	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + "&7Use " + nmsversion + " &aenabled &7method &b1.16 ");
+        	Util.sendColorMessage(EventsUtils.getConsoleSender(), Util.getPrefix() + "&7Use " + nmsversion + " &aenabled &7method &b1.16 ");
         }else if(nmsversion.equalsIgnoreCase("v1_17_R1")) {
-        	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + "&7Use " + nmsversion + " &aenabled &7method &b1.17 ");
+        	Util.sendColorMessage(EventsUtils.getConsoleSender(), Util.getPrefix() + "&7Use " + nmsversion + " &aenabled &7method &b1.17 ");
         }else if(nmsversion.equalsIgnoreCase("v1_18_R1") || nmsversion.equalsIgnoreCase("v1_18_R2")) {
-        	Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + "&7Use " + nmsversion + " &aenabled &7method &b1.18 ");
+        	Util.sendColorMessage(EventsUtils.getConsoleSender(), Util.getPrefix() + "&7Use " + nmsversion + " &aenabled &7method &b1.18 ");
         }
 		
 		configFile.saveDefaultConfig();
@@ -112,18 +112,18 @@ public class CustomJoinAndQuitMessages extends JavaPlugin{
 			if(this.getDescription().getVersion().equalsIgnoreCase(version)) {
 				Logger.success("&a" + this.name + " is up to date!");
 			}else {
-				Logger.outLine("&5<||" + Utils.setLine("&5"));
+				Logger.outLine("&5<||" + Util.setLine("&5"));
 				Logger.warning("&5<||&b" + this.name + " is outdated!");
 				Logger.warning("&5<||&bNewest version: &a" + version);
 				Logger.warning("&5<||&bYour version: &d" + UpdateSettings.VERSION);
 				Logger.warning("&5<||&bUpdate Here on Spigot: &e" + UpdateSettings.URL_PlUGIN[0]);
-				Logger.outLine("&5<||" + Utils.setLine("&5"));
+				Logger.outLine("&5<||" + Util.setLine("&5"));
 			}
 		});
 	}
 	
 	public void onDisable() {
-		Utils.setDisabled(version);
+		Util.setDisabled(version);
 		metrics = null;
 	}
 	

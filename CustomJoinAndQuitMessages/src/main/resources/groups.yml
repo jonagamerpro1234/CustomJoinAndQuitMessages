@@ -11,12 +11,12 @@
 # ● Wiki [Working Progress]: 
 #
 default:
+  
+  # |Join| This is where Join customizable message is located
+  Join: '&b[<#83FF6F>+&b] <#A157FF><name>'
     
-  # |Join-Text| This is where Join customizable message is located
-  Join-Text: '&b[<#83FF6F>+&b] <#A157FF><name>'
-    
-  # |Quit-Text| This is where Quit customizable message is located
-  Quit-Text: '&b[<#FF8E8E>+&b] <#A157FF><name>'
+  # |Quit| This is where Quit customizable message is located
+  Quit: '&b[<#83FF6F>-&b] <#A157FF><name>'
 
   # |First-Join| 
   First-Join:

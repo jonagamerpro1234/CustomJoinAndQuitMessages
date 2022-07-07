@@ -12,7 +12,7 @@ import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.json.Json;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
-import jss.customjoinandquitmessages.utils.Utils;
+import jss.customjoinandquitmessages.utils.Util;
 
 public class DisplayManager {
 
@@ -77,35 +77,35 @@ public class DisplayManager {
 			Action_Suggest = config.getString("Join.ClickEvent.Actions.Suggest-Command");
 		}
 		
-		Json json = new Json(player, Utils.color(Utils.getVar(player, text)));
+		Json json = new Json(player, Util.color(Util.getVar(player, text)));
 	
 		if(isNormalType) {
-			json.sendToAll();
+			json.send();
 			return;
 		}else if(isModifyType) {			
 			if (isHover) {
 				if (isClick) {
 					if (isClick_Mode.equalsIgnoreCase("command")) {
-						json.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
+						json.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
 					} else if (isClick_Mode.equalsIgnoreCase("url")) {
-						json.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
+						json.setHover(Hover_Text).setOpenURL(Action_Url).send();
 					} else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-						json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
+						json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
 					}
 				} else {
-					json.setHover(Hover_Text).sendToAll();
+					json.setHover(Hover_Text).send();
 				}
 			} else {
 				if (isClick) {
 					if (isClick_Mode.equalsIgnoreCase("command")) {
-						json.setExecuteCommand(Action_Command).sendToAll();
+						json.setExecuteCommand(Action_Command).send();
 					} else if (isClick_Mode.equalsIgnoreCase("url")) {
-						json.setOpenURL(Action_Url).sendToAll();
+						json.setOpenURL(Action_Url).send();
 					} else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-						json.setSuggestCommand(Action_Suggest).sendToAll();
+						json.setSuggestCommand(Action_Suggest).send();
 					}
 				} else {
-					json.sendToAll();
+					json.send();
 				}
 			}
 		}
@@ -155,35 +155,35 @@ public class DisplayManager {
 			Action_Suggest = config.getString("Join.ClickEvent.Actions.Suggest-Command");
 		}
 		
-		Json json = new Json(player, Utils.color(Utils.getVar(player, text)));
+		Json json = new Json(player, Util.color(Util.getVar(player, text)));
 			
 		if(isNormalType) {
-			json.sendToAll();
+			json.send();
 			return;
 		}else if(isModifyType) {			
 			if (isHover) {
 				if (isClick) {
 					if (isClick_Mode.equalsIgnoreCase("command")) {
-						json.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
+						json.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
 					} else if (isClick_Mode.equalsIgnoreCase("url")) {
-						json.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
+						json.setHover(Hover_Text).setOpenURL(Action_Url).send();
 					} else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-						json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
+						json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
 					}
 				} else {
-					json.setHover(Hover_Text).sendToAll();
+					json.setHover(Hover_Text).send();
 				}
 			} else {
 				if (isClick) {
 					if (isClick_Mode.equalsIgnoreCase("command")) {
-						json.setExecuteCommand(Action_Command).sendToAll();
+						json.setExecuteCommand(Action_Command).send();
 					} else if (isClick_Mode.equalsIgnoreCase("url")) {
-						json.setOpenURL(Action_Url).sendToAll();
+						json.setOpenURL(Action_Url).send();
 					} else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-						json.setSuggestCommand(Action_Suggest).sendToAll();
+						json.setSuggestCommand(Action_Suggest).send();
 					}
 				} else {
-					json.sendToAll();
+					json.send();
 				}
 			}
 		}
@@ -233,35 +233,35 @@ public class DisplayManager {
 			Action_Suggest = config.getString("Quit.ClickEvent.Actions.Suggest-Command");
 		}
 		
-		Json json = new Json(player, Utils.color(Utils.getVar(player, text)));
+		Json json = new Json(player, Util.color(Util.getVar(player, text)));
 		
 		if(isNormalType) {
-			json.sendToAll();
+			json.send();
 			return;
 		}else if(isModifyType) {			
 			if (isHover) {
 				if (isClick) {
 					if (isClick_Mode.equalsIgnoreCase("command")) {
-						json.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
+						json.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
 					} else if (isClick_Mode.equalsIgnoreCase("url")) {
-						json.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
+						json.setHover(Hover_Text).setOpenURL(Action_Url).send();
 					} else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-						json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
+						json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
 					}
 				} else {
-					json.setHover(Hover_Text).sendToAll();
+					json.setHover(Hover_Text).send();
 				}
 			} else {
 				if (isClick) {
 					if (isClick_Mode.equalsIgnoreCase("command")) {
-						json.setExecuteCommand(Action_Command).sendToAll();
+						json.setExecuteCommand(Action_Command).send();
 					} else if (isClick_Mode.equalsIgnoreCase("url")) {
-						json.setOpenURL(Action_Url).sendToAll();
+						json.setOpenURL(Action_Url).send();
 					} else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-						json.setSuggestCommand(Action_Suggest).sendToAll();
+						json.setSuggestCommand(Action_Suggest).send();
 					}
 				} else {
-					json.sendToAll();
+					json.send();
 				}
 			}
 		}
@@ -271,7 +271,7 @@ public class DisplayManager {
 		if(!Settings.welcome) Logger.warning("&e[showWelcomeMessage] &b-> &7This feature is disabled and you will not be able to see the preview"); 
 		
 		Settings.list_welcome.forEach( (text) -> {
-			Utils.sendColorMessage(player, Utils.getVar(player, text));
+			Util.sendColorMessage(player, Util.getVar(player, text));
 		});
 	}
 	
@@ -287,11 +287,11 @@ public class DisplayManager {
 	}
 	
 	public void showJoinSound() {
-		Utils.sendColorMessage(player, "&cTest join sound");
+		Util.sendColorMessage(player, "&cTest join sound");
 	}
 	
 	public void showQuitSound() {
-		Utils.sendColorMessage(player, "&cTest quit sound");
+		Util.sendColorMessage(player, "&cTest quit sound");
 	}
 	
 }

@@ -14,6 +14,7 @@ import org.bukkit.Bukkit;
 import javax.annotation.Nonnull;
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -21,7 +22,9 @@ import java.util.stream.Collectors;
 public class IridiumColorAPI {
 
     private static final int VERSION = getVersion();
+
     private static final boolean SUPPORTS_RGB = VERSION >= 16;
+
     private static final List<String> SPECIAL_COLORS = Arrays.asList("&l", "&n", "&o", "&k", "&m", "§l", "§n", "§o", "§k", "§m");
 
     private static final Map<Color, ChatColor> COLORS = ImmutableMap.<Color, ChatColor>builder()
@@ -43,7 +46,7 @@ public class IridiumColorAPI {
             .put(new Color(16777215), ChatColor.getByChar('f')).build();
 
     private static final List<IPattern> PATTERNS = Arrays.asList(new GradientPattern(), new SolidPattern(), new RainbowPattern(), new PadPattern());
-    
+
     @Nonnull
     public static String process(@Nonnull String string) {
         for (IPattern pattern : PATTERNS) {
@@ -54,18 +57,40 @@ public class IridiumColorAPI {
         return string;
     }
 
+    /**
+     * Processes multiple strings in a collection.
+     *
+     * @param strings The collection of the strings we are processing
+     * @return The list of processed strings
+     * @since 1.0.3
+     */
     @Nonnull
-    public static List<String> process(@Nonnull List<String> strings) {
+    public static List<String> process(@Nonnull Collection<String> strings) {
         return strings.stream()
                 .map(IridiumColorAPI::process)
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Colors a String.
+     *
+     * @param string The string we want to color
+     * @param color  The color we want to set it to
+     * @since 1.0.0
+     */
     @Nonnull
     public static String color(@Nonnull String string, @Nonnull Color color) {
         return (SUPPORTS_RGB ? ChatColor.of(color) : getClosestColor(color)) + string;
     }
 
+    /**
+     * Colors a String with a gradiant.
+     *
+     * @param string The string we want to color
+     * @param start  The starting gradiant
+     * @param end    The ending gradiant
+     * @since 1.0.0
+     */
     @Nonnull
     public static String color(@Nonnull String string, @Nonnull Color start, @Nonnull Color end) {
         String originalString = string;
@@ -115,7 +140,7 @@ public class IridiumColorAPI {
                 stringBuilder.append(colors[outIndex++]).append(specialColors).append(characters[i]);
         }
         return stringBuilder.toString();
-    }	
+    }
 
     @Nonnull
     private static String withoutSpecialChar(@Nonnull String source) {
@@ -188,14 +213,17 @@ public class IridiumColorAPI {
         String version = Bukkit.getVersion();
         Validate.notEmpty(version, "Cannot get major Minecraft version from null or empty string");
 
+        // getVersion()
         int index = version.lastIndexOf("MC:");
         if (index != -1) {
             version = version.substring(index + 4, version.length() - 1);
         } else if (version.endsWith("SNAPSHOT")) {
+            // getBukkitVersion()
             index = version.indexOf('-');
             version = version.substring(0, index);
         }
-        
+
+        // 1.13.2, 1.14.4, etc...
         int lastDot = version.lastIndexOf('.');
         if (version.indexOf('.') != lastDot) version = version.substring(0, lastDot);
 

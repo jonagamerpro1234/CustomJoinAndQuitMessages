@@ -20,18 +20,17 @@ import github.scarsz.discordsrv.util.DiscordUtil;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.hook.DiscordSRVHHook;
 import jss.customjoinandquitmessages.hook.EssentialsXDiscordHook;
+import jss.customjoinandquitmessages.hook.EssentialsXHook;
 import jss.customjoinandquitmessages.hook.HookManager;
 import jss.customjoinandquitmessages.hook.LuckPermsHook;
-import jss.customjoinandquitmessages.hook.VaultHook;
 import jss.customjoinandquitmessages.json.Json;
 import jss.customjoinandquitmessages.manager.PlayerManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
-import jss.customjoinandquitmessages.utils.GroupHelper;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.UpdateChecker;
 import jss.customjoinandquitmessages.utils.UpdateSettings;
-import jss.customjoinandquitmessages.utils.Utils;
+import jss.customjoinandquitmessages.utils.Util;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
@@ -41,7 +40,7 @@ public class JoinListener implements Listener {
 	private CustomJoinAndQuitMessages plugin;
 	private EventUtils eventsUtils = new EventUtils(plugin);
 	private int taskGroupId;
-	
+
 	public JoinListener(CustomJoinAndQuitMessages plugin) {
 		this.plugin = plugin;
 		eventsUtils.getEventManager().registerEvents(this, plugin);
@@ -52,24 +51,25 @@ public class JoinListener implements Listener {
 	public void onJoinListener(PlayerJoinEvent e) {
 		FileConfiguration config = plugin.getConfigFile().getConfig();
 		DiscordSRVHHook discordSRVHHook = HookManager.getInstance().getDiscordSRVHHook();
-		VaultHook vaultHook = HookManager.getInstance().getVaultHook();
+		;
 		LuckPermsHook luckPermsHook = HookManager.getInstance().getLuckPermsHook();
-		EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();		
+		EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
+		EssentialsXHook essentialsXHook = HookManager.get().getEssentialsXHook();
 		Player p = e.getPlayer();
 
 		String tempGroup = "";
-		
-		if(luckPermsHook.isEnabled()) {
+
+		if (luckPermsHook.isEnabled()) {
 			Logger.error("&cThe LuckPerms could not be found to activate the group system");
 			Logger.warning("&eplease check that LuckPerms is active or inside your plugins folder");
 		}
-		
-		if(Settings.hook_luckperms_use_group) {
+
+		if (Settings.hook_luckperms_use_group) {
 			tempGroup = LuckPermsHook.getApi().getUserManager().getUser(p.getName()).getPrimaryGroup();
-		}else {
+		} else {
 			tempGroup = "default";
 		}
-		
+
 		PlayerManager playerManager = new PlayerManager();
 		playerManager.createPlayer(p, tempGroup);
 
@@ -77,25 +77,29 @@ public class JoinListener implements Listener {
 		boolean isNormal = Settings.c_type.equalsIgnoreCase("normal");
 		boolean isGroup = Settings.c_type.equalsIgnoreCase("group");
 		boolean isNone = Settings.c_type.equalsIgnoreCase("none");
-		
+
 		if (Settings.welcome) {
-			Settings.list_welcome.forEach( (text) -> Utils.sendColorMessage(p, Utils.getVar(p, text)));
+			for (String text : Settings.list_welcome)
+				Util.sendColorMessage(p, Util.getVar(p, text));
 		}
-		
-		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-		taskGroupId = scheduler.scheduleSyncRepeatingTask(plugin, new Runnable() {
-			public void run() {
-				if(Settings.hook_luckperms_autoUpdate_group) {
-					if(!playerManager.getGroup(p).equalsIgnoreCase(LuckPermsHook.getApi().getUserManager().getUser(p.getName()).getPrimaryGroup())) {
-						playerManager.setGroup(p, LuckPermsHook.getApi().getUserManager().getUser(p.getName()).getPrimaryGroup());
-					}
-				}else {
-					scheduler.cancelTask(taskGroupId);
+
+		/*
+		 * if(!playerManager.getGroup(p).equalsIgnoreCase(LuckPermsHook.getApi().
+		 * getUserManager().getUser(p.getName()).getPrimaryGroup())) {
+		 * playerManager.setGroup(p,
+		 * LuckPermsHook.getApi().getUserManager().getUser(p.getName()).getPrimaryGroup(
+		 * )); }else { Logger.debug("&eThe player already has the same group!"); }
+		 */
+
+		if (essentialsXHook.isEnabled()) {
+			if (Settings.hook_essentials_hideplayervanish) {
+				if (essentialsXHook.isVanish(p)) {
+					e.setJoinMessage(null);
+					return;
 				}
 			}
-		}, 0L, 600L);
-		
-		
+		}
+
 		if (Settings.join) {
 			if (isDefault) {
 				return;
@@ -104,23 +108,23 @@ public class JoinListener implements Listener {
 
 				String join = Settings.join_message;
 				String firstjoin = Settings.join_message_first;
-				
+
 				String text = "";
-				
-				if(Settings.firstjoin) {
+
+				if (Settings.firstjoin) {
 					if (!p.hasPlayedBefore()) {
 						text = firstjoin;
 					} else {
 						text = join;
 					}
-				}else {
+				} else {
 					text = join;
 				}
-				
+
 				boolean isNormalType = Settings.join_type.equalsIgnoreCase("normal");
 				boolean isModifyType = Settings.join_type.equalsIgnoreCase("modify");
 
-				text = Utils.color(Utils.getVar(p, text));
+				text = Util.color(Util.getVar(p, text));
 
 				Json json = new Json(p, text);
 
@@ -137,16 +141,15 @@ public class JoinListener implements Listener {
 
 						DiscordUtil.sendMessageBlocking(
 								DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
-								Utils.colorless(json.getText()));
+								Util.colorless(json.getText()));
 					}
 
 					if (essentialsXDiscordHook.isEnabled()) {
-
 						if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none"))
 							return;
 
 						essentialsXDiscordHook.sendJoinMessage(Settings.hook_essentialsDiscord_channelid,
-								Utils.colorless(json.getText()));
+								Util.colorless(json.getText()));
 					}
 
 					return;
@@ -206,15 +209,16 @@ public class JoinListener implements Listener {
 					if (discordSRVHHook.isEnabled()) {
 						DiscordUtil.sendMessageBlocking(
 								DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
-								Utils.colorless(json.getText()));
+								Util.colorless(json.getText()));
 					}
 
 					if (isTitle) {
-						Titles.sendTitle(p, FadeIn, Stay, FadeOut, Utils.color(Utils.getVar(p, Title_Text)), Utils.color(Utils.getVar(p, SubTitle_Text)));
+						Titles.sendTitle(p, FadeIn, Stay, FadeOut, Util.color(Util.getVar(p, Title_Text)),
+								Util.color(Util.getVar(p, SubTitle_Text)));
 					}
 
 					if (isActionBar) {
-						ActionBar.sendActionBar(p, Utils.color(Utils.getVar(p, Actionbar_Text)));
+						ActionBar.sendActionBar(p, Util.color(Util.getVar(p, Actionbar_Text)));
 					}
 
 					try {
@@ -238,38 +242,30 @@ public class JoinListener implements Listener {
 			} else if (isGroup) {
 				e.setJoinMessage(null);
 
-				if (Settings.hook_vault_use_group) {
-					GroupHelper.useVaultJoin(vaultHook, discordSRVHHook, essentialsXDiscordHook, config, p);
-					return;
-				}
-
-				if (Settings.hook_luckperms_use_group) {
-					GroupHelper.useLuckPermsJoin(luckPermsHook, discordSRVHHook, essentialsXDiscordHook, config, p);
-					return;
-				}
-
 				return;
 			} else if (isNone) {
 				e.setJoinMessage(null);
 				return;
 			}
 		}
-
+	}
+	
+	public void onUpdate(PlayerJoinEvent e) {
+		Player p = e.getPlayer();
 		if (Settings.update) {
 			if ((p.isOp()) || (p.hasPermission("Cjm.Update.Notify"))) {
-				new UpdateChecker(CustomJoinAndQuitMessages.get(), UpdateSettings.ID)
-						.getUpdateVersion(version -> {
-							if (!CustomJoinAndQuitMessages.get().getDescription().getVersion()
-									.equalsIgnoreCase(version)) {
-								TextComponent component = new TextComponent(Utils.color(Utils.getPrefixPlayer()
-										+ " &aThere is a new version available for download, Click on this message to copy the link"));
-								component.setClickEvent(new ClickEvent(Action.OPEN_URL, UpdateSettings.URL_PlUGIN[0]));
-								p.spigot().sendMessage(component);
-							}
-						});
+				new UpdateChecker(CustomJoinAndQuitMessages.get(), UpdateSettings.ID).getUpdateVersion(version -> {
+					if (!CustomJoinAndQuitMessages.get().getDescription().getVersion().equalsIgnoreCase(version)) {
+						TextComponent component = new TextComponent(Util.color(Util.getPrefixPlayer()
+								+ " &aThere is a new version available for download, Click on this message to copy the link"));
+						component.setClickEvent(new ClickEvent(Action.OPEN_URL, UpdateSettings.URL_PlUGIN[0]));
+						p.spigot().sendMessage(component);
+					}
+				});
 			}
 		}
 	}
+	
 
 	@EventHandler
 	public void onQuit(PlayerQuitEvent e) {
@@ -277,14 +273,22 @@ public class JoinListener implements Listener {
 		Player p = e.getPlayer();
 
 		DiscordSRVHHook discordSRVHHook = HookManager.getInstance().getDiscordSRVHHook();
-		VaultHook vaultHook = HookManager.getInstance().getVaultHook();
-		LuckPermsHook luckPermsHook = HookManager.getInstance().getLuckPermsHook();
 		EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
+		EssentialsXHook essentialsXHook = HookManager.get().getEssentialsXHook();
 
 		boolean isDefault = Settings.c_type.equalsIgnoreCase("default");
 		boolean isNormal = Settings.c_type.equalsIgnoreCase("normal");
 		boolean isGroup = Settings.c_type.equalsIgnoreCase("group");
 		boolean isNone = Settings.c_type.equalsIgnoreCase("none");
+
+		if (essentialsXHook.isEnabled()) {
+			if (Settings.hook_essentials_hideplayervanish) {
+				if (essentialsXHook.isVanish(p)) {
+					e.setQuitMessage(null);
+					return;
+				}
+			}
+		}
 
 		if (Settings.quit) {
 			if (isDefault) {
@@ -297,8 +301,8 @@ public class JoinListener implements Listener {
 
 				String text = config.getString("Quit.Text");
 
-				text = Utils.color(text);
-				text = Utils.getVar(p, text);
+				text = Util.color(text);
+				text = Util.getVar(p, text);
 
 				Json json = new Json(p, text);
 
@@ -313,14 +317,14 @@ public class JoinListener implements Listener {
 							return;
 						DiscordUtil.sendMessageBlocking(
 								DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
-								Utils.colorless(json.getText()));
+								Util.colorless(json.getText()));
 					}
 
 					if (essentialsXDiscordHook.isEnabled()) {
 						if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none"))
 							return;
 						essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid,
-								Utils.colorless(json.getText()));
+								Util.colorless(json.getText()));
 					}
 
 					return;
@@ -376,7 +380,7 @@ public class JoinListener implements Listener {
 
 						DiscordUtil.sendMessageBlocking(
 								DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
-								Utils.colorless(json.getText()));
+								Util.colorless(json.getText()));
 					}
 
 					if (essentialsXDiscordHook.isEnabled()) {
@@ -385,7 +389,7 @@ public class JoinListener implements Listener {
 							return;
 
 						essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid,
-								Utils.colorless(json.getText()));
+								Util.colorless(json.getText()));
 					}
 
 					try {
@@ -408,16 +412,6 @@ public class JoinListener implements Listener {
 				return;
 			} else if (isGroup) {
 				e.setQuitMessage(null);
-
-				if (Settings.hook_vault_use_group) {
-					GroupHelper.useVaultJoin(vaultHook, discordSRVHHook, essentialsXDiscordHook, config, p);
-					return;
-				}
-
-				if (Settings.hook_luckperms_use_group) {
-					GroupHelper.useLuckPermsJoin(luckPermsHook, discordSRVHHook, essentialsXDiscordHook, config, p);
-					return;
-				}
 
 				return;
 			} else if (isNone) {

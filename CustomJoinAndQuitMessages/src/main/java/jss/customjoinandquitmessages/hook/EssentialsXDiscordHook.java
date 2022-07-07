@@ -5,7 +5,7 @@ import org.bukkit.Bukkit;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
-import jss.customjoinandquitmessages.utils.Utils;
+import jss.customjoinandquitmessages.utils.Util;
 import jss.customjoinandquitmessages.utils.interfaces.IHook;
 import net.essentialsx.api.v2.services.discord.DiscordService;
 import net.essentialsx.api.v2.services.discord.MessageType;
@@ -35,7 +35,7 @@ public class EssentialsXDiscordHook implements IHook{
 		
 		this.service = Bukkit.getServicesManager().load(DiscordService.class);
 		this.isEnabled = true;
-		Utils.sendColorMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + "&aLoading EssentialsDiscord features...");	
+		Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix() + "&aLoading EssentialsDiscord features...");	
 		Logger.warning("&e!!These features are still under development and may have bugs!!");
 	}
 	

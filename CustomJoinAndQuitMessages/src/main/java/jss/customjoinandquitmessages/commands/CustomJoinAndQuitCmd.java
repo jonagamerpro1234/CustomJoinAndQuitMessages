@@ -14,7 +14,7 @@ import jss.customjoinandquitmessages.gui.DisplayGui;
 import jss.customjoinandquitmessages.manager.DisplayManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
-import jss.customjoinandquitmessages.utils.Utils;
+import jss.customjoinandquitmessages.utils.Util;
 
 public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 	
@@ -32,43 +32,42 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 			if(args.length >= 1) {
 				if(args[0].equalsIgnoreCase("help")) {
 					List<String> list = plugin.Locale().help_1;
-					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
+					Util.sendColorMessage(EventsUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
 					for(String text : list) {
-						Utils.sendColorMessage(EventsUtils.getConsoleSender(), text);
+						Util.sendColorMessage(EventsUtils.getConsoleSender(), text);
 					}
-					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+					Util.sendColorMessage(EventsUtils.getConsoleSender(), "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				}else if(args[0].equalsIgnoreCase("reload")) {
 					plugin.getPreConfigLoader().loadConfig();
 					plugin.getPreConfigLoader().loadLangs();
 					plugin.getConfigFile().reloadConfig();
-					Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().reload);
+					Util.sendColorMessage(EventsUtils.getConsoleSender(), Util.getPrefix() + " " + plugin.Locale().reload);
 				}else if(args[0].equalsIgnoreCase("info")) {
-					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <||=-=-=-=-="+Utils.getPrefix()+"&5=-=-=-=-=-=-");
-					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bName: &3"+plugin.name);
-					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bAuthor: &3jonagamerpro1234");
-					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bVersion: &a" + plugin.version);
-					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bUpdate: &e" + plugin.useLatestversion);
-					Utils.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <||=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+					Util.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <||=-=-=-=-="+Util.getPrefix()+"&5=-=-=-=-=-=-");
+					Util.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bName: &3"+plugin.name);
+					Util.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bAuthor: &3jonagamerpro1234");
+					Util.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bVersion: &a" + plugin.version);
+					Util.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <|| &c* &bUpdate: &e" + plugin.useLatestversion);
+					Util.sendColorMessage(EventsUtils.getConsoleSender(), "&5 <||=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				}else {
-					Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Error_Cmd);
+					Util.sendColorMessage(EventsUtils.getConsoleSender(), Util.getPrefix() + " " + plugin.Locale().Error_Cmd);
 				}
 				return true;
 			}
-			Utils.sendColorMessage(EventsUtils.getConsoleSender(), Utils.getPrefix() + " " + plugin.Locale().Help_cmd);
+			Util.sendColorMessage(EventsUtils.getConsoleSender(), Util.getPrefix() + " " + plugin.Locale().Help_cmd);
 			return false;
 		}
 		Player j = (Player) sender;
 		if(args.length >= 1) {
 			if(args[0].equalsIgnoreCase("help")) {
 				if((j.isOp()) ||  (j.hasPermission("Cjm.Help"))) {
-					List<String> list = plugin.Locale().help_1;
-					Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
-					for(String text : list) {
-						Utils.sendColorMessage(EventsUtils.getConsoleSender(), text);
+					Util.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d"+plugin.name+"&6]&5=-=-=-=-=-=-=-=-=-=-=-");
+					for(String text : plugin.Locale().help_1) {
+						Util.sendColorMessage(EventsUtils.getConsoleSender(), text);
 					}
-					Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+					Util.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				}else {
-					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
+					Util.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
 				}
 				return true;
 			}
@@ -142,11 +141,11 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 									return true;
 								}
 								
-								Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().Error_Cmd);
+								Util.sendColorMessage(j, Util.getPrefixPlayer() + " " + plugin.Locale().Error_Cmd);
 								return true;
 							}
 							
-							Utils.sendColorMessage(j, "");
+							Util.sendColorMessage(j, "");
 							return true;
 						}
 						
@@ -160,12 +159,12 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 							return true;
 						}
 						
-						Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().Error_Cmd);
+						Util.sendColorMessage(j, Util.getPrefixPlayer() + " " + plugin.Locale().Error_Cmd);
 						return true;
 					}
-					Utils.sendColorMessage(j, "");
+					Util.sendColorMessage(j, "&7Use /Cjm display <option>");
 				}else {
-					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
+					Util.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
 				}
 				return true;
 			}
@@ -175,25 +174,25 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 					plugin.getPreConfigLoader().loadConfig();
 					plugin.getPreConfigLoader().loadLangs();
 					plugin.getConfigFile().reloadConfig();
-					Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().reload);
+					Util.sendColorMessage(j, Util.getPrefixPlayer() + " " + plugin.Locale().reload);
 				}else {
-					Utils.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
+					Util.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
 				}
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("info")) {
-				Utils.sendColorMessage(j, "&5-=-=-=-=-=[&b"+plugin.name+"&5]=-=-=-=-=-=-");
-				Utils.sendColorMessage(j, "&5> &3Name: &b"+plugin.name);
-				Utils.sendColorMessage(j, "&5> &3Author: &6jonagamerpro1234");
-				Utils.sendColorMessage(j, "&5> &3Version: &6"+plugin.version);
-				Utils.sendColorMessage(j, "&5> &3Update: &a" + plugin.getUpdateVersion());
-				Utils.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+				Util.sendColorMessage(j, "&5-=-=-=-=-=[&b"+plugin.name+"&5]=-=-=-=-=-=-");
+				Util.sendColorMessage(j, "&5> &3Name: &b"+plugin.name);
+				Util.sendColorMessage(j, "&5> &3Author: &6jonagamerpro1234");
+				Util.sendColorMessage(j, "&5> &3Version: &6"+plugin.version);
+				Util.sendColorMessage(j, "&5> &3Update: &a" + plugin.getUpdateVersion());
+				Util.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 				return true;
 			}
-			Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().Error_Cmd);
+			Util.sendColorMessage(j, Util.getPrefixPlayer() + " " + plugin.Locale().Error_Cmd);
 			return true;
 		}
-		Utils.sendColorMessage(j, Utils.getPrefixPlayer() + " " + plugin.Locale().Help_cmd);
+		Util.sendColorMessage(j, Util.getPrefixPlayer() + " " + plugin.Locale().Help_cmd);
 		return true;
 	}
 	
@@ -209,7 +208,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				options.add("info");
 				break;
 			}
-			return Utils.TabLimit(options, lastArgs);
+			return Util.setTabLimit(options, lastArgs);
 		}
 
 		Player j = (Player) sender;
@@ -254,6 +253,6 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter{
 				break;
 			}
 		}
-		return Utils.TabLimit(options, lastArgs);
+		return Util.setTabLimit(options, lastArgs);
 	}
 }

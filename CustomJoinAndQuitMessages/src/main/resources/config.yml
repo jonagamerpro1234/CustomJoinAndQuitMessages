@@ -25,7 +25,7 @@ Config:
   # |Debug| shows you important information about the plugin loading 
   Debug: false
   
-  # |Type| the type is a way of knowing what is being used whether in the [normal] | [group] | [default] | [none] format
+  # |Type| the type is a way of knowing what is being used whether in the [normal] | [group] | [none] format
   Type: normal
   
   # |Show-Chat-In-Console| here you can enable or disable the chat to be seen in the console
@@ -67,6 +67,15 @@ Hooks:
   
     # |Channel-ID| Here is the id of the channel that is used for the chat
     Channel-ID: 'none'
+  #
+  # |Essentials|
+  Essentials:
+    
+    # |Enabled| Here you can enable or disable this feature
+    Enabled: true
+    
+    # |HidePlayerIsVanish| This allows you to join or quit the server without the message being shown to other players.
+    HidePlayerIsVanish: true
   #
   # |EssentialsDiscord|
   # !This characteristic is in the experimental phase!

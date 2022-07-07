@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
-import jss.customjoinandquitmessages.utils.Utils;
+import jss.customjoinandquitmessages.utils.Util;
 import jss.customjoinandquitmessages.utils.interfaces.IHook;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
@@ -34,7 +34,7 @@ public class LuckPermsHook implements IHook{
 		}
 		
 		this.isEnabled = true;
-		Utils.sendColorMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + "&aLoading LuckPerms features...");	
+		Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix() + "&aLoading LuckPerms features...");	
 	}
 	
 	public boolean isEnabled() {

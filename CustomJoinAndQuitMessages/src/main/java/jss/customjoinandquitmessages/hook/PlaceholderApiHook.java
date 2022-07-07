@@ -3,7 +3,7 @@ package jss.customjoinandquitmessages.hook;
 import org.bukkit.Bukkit;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
-import jss.customjoinandquitmessages.utils.Utils;
+import jss.customjoinandquitmessages.utils.Util;
 import jss.customjoinandquitmessages.utils.interfaces.IHook;
 
 public class PlaceholderApiHook implements IHook{
@@ -23,7 +23,7 @@ public class PlaceholderApiHook implements IHook{
 		}
 		
 		this.isEnabled = true;
-		Utils.sendColorMessage(EventUtils.getStaticConsoleSender(), Utils.getPrefix() + "&aLoading PlaceholderAPI features...");
+		Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix() + "&aLoading PlaceholderAPI features...");
 	}
 	
 	public boolean isEnabled() {
