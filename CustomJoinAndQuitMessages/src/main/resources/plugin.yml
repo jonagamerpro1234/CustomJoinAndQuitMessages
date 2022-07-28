@@ -1,0 +1,40 @@
+main: jss.customjoinandquitmessages.CustomJoinAndQuitMessages
+name: CustomJoinAndQuitMessages
+version: ${version}
+author: jonagamerpro1234
+api-version: 1.13
+prefix: CustomJoinAndQuitMessages
+website: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-7-x-1-17-x.57006/
+loadbefore: [ Essentials ]
+softdepend: [
+  PlaceholderAPI, DiscordSRV,
+  LuckPerms, EssentialsDiscord,
+  Essentials
+]
+
+commands:
+  CustomJoinAndQuitMessages:
+    description: the main command of cjm
+    aliases:
+      - cjm
+permissions:
+  cjm.Admin:
+    description: give the all permissions
+    children:
+      cjm.update: true
+      cjm.command.reload: true
+      cjm.command.help: true
+      cjm.command.tabcomplete: true
+    default: op
+  cjm.Update:
+    description: allows you to receive notifications of available updates
+    default: op
+  cjm.command.reload:
+    description: allows to use the reload command
+    default: op
+  cjm.command.help:
+    description: gives access to the plugin help command
+    default: op
+  cjm.command.tabcomplete:
+    description: allows you to see the list of available commands
+    default: op

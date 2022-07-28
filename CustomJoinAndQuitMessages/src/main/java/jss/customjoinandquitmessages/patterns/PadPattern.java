@@ -1,9 +1,9 @@
 package jss.customjoinandquitmessages.patterns;
 
+import jss.customjoinandquitmessages.utils.IridiumColorAPI;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import jss.customjoinandquitmessages.utils.IridiumColorAPI;
 
 public class PadPattern implements IPattern {
 

@@ -14,7 +14,7 @@ default:
   
   # |Join| This is where Join customizable message is located
   Join: '&b[<#83FF6F>+&b] <#A157FF><name>'
-    
+
   # |Quit| This is where Quit customizable message is located
   Quit: '&b[<#83FF6F>-&b] <#A157FF><name>'
 
@@ -25,8 +25,8 @@ default:
     Enabled: true
     
     # |Text| Here you can set the join message for the first time
-    Text: '&6Welcome to server &a<name>&6 for the first time' 
-        
+    Text: '&6Welcome to server &a<name>&6 for the first time'
+
   # |Type| Here you can find two types that are [ normal | modify ]
   Type: modify
   
@@ -35,16 +35,16 @@ default:
     
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
-  
+
     # |Hover| This section allows you to define the hover text
     Hover:
       - '&6> &aHello &b<name>'
       - '&6> &e%player_exp_to_level%'
       - '&6> &dadd more lines like these'
-  
+
     # |ClickEvent| This section allows you to modify chat click events
   ClickEvent:
-     
+
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
     
@@ -82,13 +82,13 @@ default:
     
     # |Volume| This is the volume of the sound that you will hear when the chat mentions it
     Volume: 10
-    
+
   # |Title| In this section you can configure the title of the join
   Title:
     
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
-   
+
     # |Title| here you can set the title text
     Title: '<RAINBOW:1>Welcome to Server</RAINBOW>'
     

@@ -1,13 +1,13 @@
 package jss.customjoinandquitmessages.patterns;
 
+import jss.customjoinandquitmessages.utils.IridiumColorAPI;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import jss.customjoinandquitmessages.utils.IridiumColorAPI;
-
 public class RainbowPattern implements IPattern {
 
-	Pattern pattern = Pattern.compile("<RAINBOW:([0-9]{1,3})>(.*?)</RAINBOW>");
+    Pattern pattern = Pattern.compile("<RAINBOW:([0-9]{1,3})>(.*?)</RAINBOW>");
 
     public String process(String string) {
         Matcher matcher = pattern.matcher(string);

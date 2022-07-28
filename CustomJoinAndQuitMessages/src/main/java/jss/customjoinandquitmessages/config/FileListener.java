@@ -1,5 +1,9 @@
 package jss.customjoinandquitmessages.config;
 
+import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.utils.Logger;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -10,16 +14,11 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.bukkit.plugin.java.JavaPlugin;
-
-import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.Logger;
-
 
 public class FileListener {
-	
+
     private final CustomJoinAndQuitMessages plugin = CustomJoinAndQuitMessages.get();
-    
+
     public List<String> list() throws IOException {
         List<String> result = new ArrayList<String>();
 
@@ -28,14 +27,14 @@ public class FileListener {
             FilenameFilter ymlFilter = new FilenameFilter() {
                 public boolean accept(File dir, String name) {
                     String lowercaseName = name.toLowerCase();
-            		if(plugin.getConfig().getString("Config.Debug").equals("true")) {
-            			Logger.debug("&eLoad Lang File: &9" + name);
-            		}
-                    if (lowercaseName.endsWith(".yml") && name.length() == 9 && name.substring(2,3).equals("-")) {
+                    if (plugin.getConfig().getString("Config.Debug").equals("true")) {
+                        Logger.debug("&eLoad Lang File: &9" + name);
+                    }
+                    if (lowercaseName.endsWith(".yml") && name.length() == 9 && name.substring(2, 3).equals("-")) {
                         return true;
                     } else {
                         if (lowercaseName.endsWith(".yml") && !lowercaseName.equals("messages.yml")) {
-                        	Logger.warning("&eFile: " + name + "is not in the correct format for a lang file - &bskipping...");
+                            Logger.warning("&eFile: " + name + "is not in the correct format for a lang file - &bskipping...");
                         }
                         return false;
                     }
@@ -59,7 +58,7 @@ public class FileListener {
         JarFile jar = new JarFile(jarfile);
         Enumeration<JarEntry> entries = jar.entries();
         while (entries.hasMoreElements()) {
-        	
+
             JarEntry entry = entries.nextElement();
             String path = entry.getName();
 
@@ -68,8 +67,8 @@ public class FileListener {
             }
 
             if (entry.getName().endsWith(".yml")) {
-                String name = entry.getName().replace(".yml","").replace("lang/", "");
-                if (name.length() == 5 && name.substring(2,3).equals("-")) {
+                String name = entry.getName().replace(".yml", "").replace("lang/", "");
+                if (name.length() == 5 && name.substring(2, 3).equals("-")) {
                     result.add(name);
                 }
             }

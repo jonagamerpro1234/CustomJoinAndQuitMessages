@@ -4,20 +4,20 @@ import org.bukkit.entity.Player;
 
 public class InventoryView {
 
-	private Player player;
-	private String inventoryName;
-	
-	public InventoryView(Player player, String inventoryName) {
-		this.player = player;
-		this.inventoryName = inventoryName;
-	}
+    private Player player;
+    private String inventoryName;
 
-	public Player getPlayer() {
-		return player;
-	}
+    public InventoryView(Player player, String inventoryName) {
+        this.player = player;
+        this.inventoryName = inventoryName;
+    }
 
-	public String getInventoryName() {
-		return inventoryName;
-	}
-	
+    public Player getPlayer() {
+        return player;
+    }
+
+    public String getInventoryName() {
+        return inventoryName;
+    }
+
 }

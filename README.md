@@ -8,6 +8,7 @@
 [issues]: https://img.shields.io/github/issues/jonagamerpro1234/CustomJoinAndQuitMessages.svg?color=yellow&style=for-the-badge
 [javaversion]: https://img.shields.io/badge/Java-8%2B-red?style=for-the-badge
 [issueslink]: https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/issues
+[]
 
 [![TitleImg]][Spigot]
 

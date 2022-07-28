@@ -1,12 +1,7 @@
 package jss.customjoinandquitmessages.utils;
 
 import com.google.common.collect.ImmutableMap;
-
-import jss.customjoinandquitmessages.patterns.GradientPattern;
-import jss.customjoinandquitmessages.patterns.IPattern;
-import jss.customjoinandquitmessages.patterns.PadPattern;
-import jss.customjoinandquitmessages.patterns.RainbowPattern;
-import jss.customjoinandquitmessages.patterns.SolidPattern;
+import jss.customjoinandquitmessages.patterns.*;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
@@ -94,7 +89,7 @@ public class IridiumColorAPI {
     @Nonnull
     public static String color(@Nonnull String string, @Nonnull Color start, @Nonnull Color end) {
         String originalString = string;
-        
+
         ChatColor[] colors = createGradient(start, end, withoutSpecialChar(string).length());
         return apply(originalString, colors);
     }
@@ -176,7 +171,7 @@ public class IridiumColorAPI {
         int stepR = Math.abs(start.getRed() - end.getRed()) / (step - 1);
         int stepG = Math.abs(start.getGreen() - end.getGreen()) / (step - 1);
         int stepB = Math.abs(start.getBlue() - end.getBlue()) / (step - 1);
-        int[] direction = new int[] {
+        int[] direction = new int[]{
                 start.getRed() < end.getRed() ? +1 : -1,
                 start.getGreen() < end.getGreen() ? +1 : -1,
                 start.getBlue() < end.getBlue() ? +1 : -1

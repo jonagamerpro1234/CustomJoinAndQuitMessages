@@ -17,7 +17,7 @@ Config:
   Config-Verion: 2
 
   # |Lang| you can use the available languages of the plugin or you can add your own translations [ Default = en-US ]
-  Lang: en-US 
+  Lang: en-US
   
   # |Update| This function lets you know if there is a plugin update [Does not disable console messages]
   Update: true
@@ -64,7 +64,7 @@ Hooks:
 
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
-  
+
     # |Channel-ID| Here is the id of the channel that is used for the chat
     Channel-ID: 'none'
   #
@@ -80,15 +80,15 @@ Hooks:
   # |EssentialsDiscord|
   # !This characteristic is in the experimental phase!
   EssentialsDiscord:
-  
+
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
-  
+
     # |Channel-ID| Here is the id of the channel that is used for the chat
     Channel-ID: 'none'
-  
+
     # |Use-Default-Channel|
-    Use-Default-Channel: true 
+    Use-Default-Channel: true
 #
 # | Join |
 Join:
@@ -106,7 +106,7 @@ Join:
     Enabled: true
     
     # |Text| Here you can set the join message for the first time
-    Text: '&6Welcome to server &a<name>&6 for the first time' 
+    Text: '&6Welcome to server &a<name>&6 for the first time'
   
   # |Type| Here you can find two types that are [ normal | modify ]
   Type: modify
@@ -116,7 +116,7 @@ Join:
     
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
-  
+
     # |Hover| This section allows you to define the hover text
     Hover:
       - '&6> &aHello &b<name>'
@@ -125,7 +125,7 @@ Join:
   
   # |ClickEvent| This section allows you to modify chat click events
   ClickEvent:
-     
+
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
     
@@ -162,13 +162,13 @@ Join:
     
     # |Volume| This is the volume of the sound that you will hear when the chat mentions it
     Volume: 20
-    
+
   # |Title| In this section you can configure the title of the join
   Title:
     
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
-   
+
     # |Title| here you can set the title text
     Title: '<RAINBOW:1>Welcome to Server</RAINBOW>'
     
@@ -210,7 +210,7 @@ Quit:
     
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
-  
+
     # |Hover| This section allows you to define the hover text
     Hover:
       - '&6> &aHello &b<name>'
@@ -219,7 +219,7 @@ Quit:
   
   # |ClickEvent| This section allows you to modify chat click events
   ClickEvent:
-     
+
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
     
