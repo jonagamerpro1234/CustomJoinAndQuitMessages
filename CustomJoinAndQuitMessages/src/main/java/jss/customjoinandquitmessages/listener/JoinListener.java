@@ -4,6 +4,7 @@ import com.cryptomorin.xseries.messages.ActionBar;
 import com.cryptomorin.xseries.messages.Titles;
 import github.scarsz.discordsrv.util.DiscordUtil;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.config.PlayerFile;
 import jss.customjoinandquitmessages.hook.*;
 import jss.customjoinandquitmessages.json.Json;
 import jss.customjoinandquitmessages.manager.PlayerManager;
@@ -23,30 +24,27 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 public class JoinListener implements Listener {
 
-    private CustomJoinAndQuitMessages plugin;
-    private EventUtils eventsUtils = new EventUtils(plugin);
-    private int taskGroupId;
+    private final CustomJoinAndQuitMessages plugin = CustomJoinAndQuitMessages.get();
 
-    public JoinListener(CustomJoinAndQuitMessages plugin) {
-        this.plugin = plugin;
+    public JoinListener() {
+        EventUtils eventsUtils = new EventUtils(plugin);
         eventsUtils.getEventManager().registerEvents(this, plugin);
-
     }
 
     @EventHandler
     public void onJoinListener(@NotNull PlayerJoinEvent e) {
         FileConfiguration config = plugin.getConfigFile().getConfig();
         DiscordSRVHHook discordSRVHHook = HookManager.getInstance().getDiscordSRVHHook();
-        ;
         LuckPermsHook luckPermsHook = HookManager.getInstance().getLuckPermsHook();
         EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
         EssentialsXHook essentialsXHook = HookManager.get().getEssentialsXHook();
         Player p = e.getPlayer();
 
-        String tempGroup = "";
+        String tempGroup;
 
         if (luckPermsHook.isEnabled()) {
             Logger.error("&cThe LuckPerms could not be found to activate the group system");
@@ -54,15 +52,16 @@ public class JoinListener implements Listener {
         }
 
         if (Settings.hook_luckperms_use_group) {
-            tempGroup = LuckPermsHook.getApi().getUserManager().getUser(p.getName()).getPrimaryGroup();
+            tempGroup = Objects.requireNonNull(LuckPermsHook.getApi().getUserManager().getUser(p.getName())).getPrimaryGroup();
         } else {
             tempGroup = "default";
         }
 
+        PlayerFile playerFile = new PlayerFile(plugin, p.getName());
+        playerFile.create();
         PlayerManager playerManager = new PlayerManager();
         playerManager.createPlayer(p, tempGroup);
 
-        boolean isDefault = Settings.c_type.equalsIgnoreCase("default");
         boolean isNormal = Settings.c_type.equalsIgnoreCase("normal");
         boolean isGroup = Settings.c_type.equalsIgnoreCase("group");
         boolean isNone = Settings.c_type.equalsIgnoreCase("none");
@@ -72,13 +71,14 @@ public class JoinListener implements Listener {
                 Util.sendColorMessage(p, Util.getVar(p, text));
         }
 
-        /*
-         * if(!playerManager.getGroup(p).equalsIgnoreCase(LuckPermsHook.getApi().
-         * getUserManager().getUser(p.getName()).getPrimaryGroup())) {
-         * playerManager.setGroup(p,
-         * LuckPermsHook.getApi().getUserManager().getUser(p.getName()).getPrimaryGroup(
-         * )); }else { Logger.debug("&eThe player already has the same group!"); }
-         */
+
+        if (!playerManager.getGroup(p).equalsIgnoreCase(Objects.requireNonNull(LuckPermsHook.getApi().
+                getUserManager().getUser(p.getName())).getPrimaryGroup())) {
+            playerManager.setGroup(p, Objects.requireNonNull(LuckPermsHook.getApi().getUserManager().getUser(p.getName())).getPrimaryGroup());
+        } else {
+            Logger.debug("&eThe player already has the same group!");
+        }
+
 
         if (essentialsXHook.isEnabled()) {
             if (Settings.hook_essentials_hideplayervanish) {
@@ -90,15 +90,13 @@ public class JoinListener implements Listener {
         }
 
         if (Settings.join) {
-            if (isDefault) {
-                return;
-            } else if (isNormal) {
+            if (isNormal) {
                 e.setJoinMessage(null);
 
                 String join = Settings.join_message;
                 String firstjoin = Settings.join_message_first;
 
-                String text = "";
+                String text;
 
                 if (Settings.firstjoin) {
                     if (!p.hasPlayedBefore()) {
@@ -117,12 +115,12 @@ public class JoinListener implements Listener {
 
                 Json json = new Json(p, text);
 
-                if (config.getString("Config.Show-Chat-In-Console").equals("true")) {
+                if (config.getBoolean("Config.Show-Chat-In-Console")) {
                     Logger.info(json.getText());
                 }
 
                 if (isNormalType) {
-                    json.sendToAll();
+                    e.setJoinMessage(text);
                     if (discordSRVHHook.isEnabled()) {
 
                         if (Settings.hook_discordsrv_channelid.equalsIgnoreCase("none"))
@@ -140,16 +138,13 @@ public class JoinListener implements Listener {
                         essentialsXDiscordHook.sendJoinMessage(Settings.hook_essentialsDiscord_channelid,
                                 Util.colorless(json.getText()));
                     }
-
-                    return;
                 } else if (isModifyType) {
-
-                    boolean isHover = config.getString("Join.HoverEvent.Enabled").equals("true");
-                    boolean isClick = config.getString("Join.ClickEvent.Enabled").equals("true");
-                    boolean isTitle = config.getString("Join.Title.Enabled").equals("true");
-                    boolean isSound = config.getString("Join.Sound.Enabled").equals("true");
-                    boolean isActionBar = config.getString("Join.ActionBar.Enabled").equals("true");
-                    boolean isSoundAll = config.getString("Join.Sound.Send-To-All").equals("true");
+                    boolean isHover = Objects.equals(config.getString("Join.HoverEvent.Enabled"), "true");
+                    boolean isClick = Objects.equals(config.getString("Join.ClickEvent.Enabled"), "true");
+                    boolean isTitle = Objects.equals(config.getString("Join.Title.Enabled"), "true");
+                    boolean isSound = Objects.equals(config.getString("Join.Sound.Enabled"), "true");
+                    boolean isActionBar = Objects.equals(config.getString("Join.ActionBar.Enabled"), "true");
+                    boolean isSoundAll = Objects.equals(config.getString("Join.Sound.Send-To-All"), "true");
 
                     List<String> Hover_Text = config.getStringList("Join.HoverEvent.Hover");
 
@@ -167,10 +162,11 @@ public class JoinListener implements Listener {
                     int FadeOut = config.getInt("Join.Title.FadeOut");
                     int Sound_Volume = config.getInt("Join.Sound.Volume");
 
-                    float Sound_Pitch = Float.valueOf(config.getString("Join.Sound.Pitch"));
+                    float Sound_Pitch = Float.parseFloat(Objects.requireNonNull(config.getString("Join.Sound.Pitch")));
 
                     if (isHover) {
                         if (isClick) {
+                            assert isClick_Mode != null;
                             if (isClick_Mode.equalsIgnoreCase("command")) {
                                 json.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
                             } else if (isClick_Mode.equalsIgnoreCase("url")) {
@@ -183,6 +179,7 @@ public class JoinListener implements Listener {
                         }
                     } else {
                         if (isClick) {
+                            assert isClick_Mode != null;
                             if (isClick_Mode.equalsIgnoreCase("command")) {
                                 json.setExecuteCommand(Action_Command).sendToAll();
                             } else if (isClick_Mode.equalsIgnoreCase("url")) {
@@ -226,16 +223,20 @@ public class JoinListener implements Listener {
                         Logger.warning("&eVerify that the sound name is correct or belongs to the version");
                     }
                 }
-
             } else if (isGroup) {
                 e.setJoinMessage(null);
-
+                GroupHelper groupHelper = new GroupHelper();
+                groupHelper.setGroup(playerManager.getGroup(p));
+                groupHelper.setDiscord(discordSRVHHook);
+                groupHelper.setEssentials(essentialsXDiscordHook);
+                groupHelper.onJoin(p, config, e);
             } else if (isNone) {
                 e.setJoinMessage(null);
             }
         }
     }
 
+    @EventHandler
     public void onUpdate(@NotNull PlayerJoinEvent e) {
         Player p = e.getPlayer();
         if (Settings.update) {
@@ -254,15 +255,15 @@ public class JoinListener implements Listener {
 
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
+    public void onQuit(@NotNull PlayerQuitEvent e) {
         FileConfiguration config = plugin.getConfigFile().getConfig();
         Player p = e.getPlayer();
 
         DiscordSRVHHook discordSRVHHook = HookManager.getInstance().getDiscordSRVHHook();
         EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
         EssentialsXHook essentialsXHook = HookManager.get().getEssentialsXHook();
+        PlayerManager playerManager = new PlayerManager();
 
-        boolean isDefault = Settings.c_type.equalsIgnoreCase("default");
         boolean isNormal = Settings.c_type.equalsIgnoreCase("normal");
         boolean isGroup = Settings.c_type.equalsIgnoreCase("group");
         boolean isNone = Settings.c_type.equalsIgnoreCase("none");
@@ -277,13 +278,11 @@ public class JoinListener implements Listener {
         }
 
         if (Settings.quit) {
-            if (isDefault) {
-                return;
-            } else if (isNormal) {
+            if (isNormal) {
                 e.setQuitMessage(null);
 
-                boolean isNormalType = config.getString("Quit.Type").equalsIgnoreCase("normal");
-                boolean isModifyType = config.getString("Quit.Type").equalsIgnoreCase("modify");
+                boolean isNormalType = Objects.requireNonNull(config.getString("Quit.Type")).equalsIgnoreCase("normal");
+                boolean isModifyType = Objects.requireNonNull(config.getString("Quit.Type")).equalsIgnoreCase("modify");
 
                 String text = config.getString("Quit.Text");
 
@@ -292,7 +291,7 @@ public class JoinListener implements Listener {
 
                 Json json = new Json(p, text);
 
-                if (config.getString("Config.Show-Chat-In-Console").equals("true")) {
+                if (config.getBoolean("Config.Show-Chat-In-Console")) {
                     Logger.info(json.getText());
                 }
 
@@ -312,14 +311,12 @@ public class JoinListener implements Listener {
                         essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid,
                                 Util.colorless(json.getText()));
                     }
-
-                    return;
                 } else if (isModifyType) {
 
-                    boolean isHover = config.getString("Quit.HoverEvent.Enabled").equals("true");
-                    boolean isClick = config.getString("Quit.ClickEvent.Enabled").equals("true");
-                    boolean isSound = config.getString("Quit.Sound.Enabled").equals("true");
-                    boolean isSoundAll = config.getString("Quit.Sound.Send-To-All").equals("true");
+                    boolean isHover = Objects.equals(config.getString("Quit.HoverEvent.Enabled"), "true");
+                    boolean isClick = Objects.equals(config.getString("Quit.ClickEvent.Enabled"), "true");
+                    boolean isSound = Objects.equals(config.getString("Quit.Sound.Enabled"), "true");
+                    boolean isSoundAll = Objects.equals(config.getString("Quit.Sound.Send-To-All"), "true");
 
                     List<String> Hover_Text = config.getStringList("Quit.HoverEvent.Hover");
 
@@ -330,11 +327,11 @@ public class JoinListener implements Listener {
                     String Sound_Name = config.getString("Quit.Sound.Name");
 
                     int Sound_Volume = config.getInt("Quit.Sound.Volume");
-
-                    float Sound_Pitch = Float.parseFloat(config.getString("Quit.Sound.Pitch"));
+                    float Sound_Pitch = Float.parseFloat(Objects.requireNonNull(config.getString("Quit.Sound.Pitch")));
 
                     if (isHover) {
                         if (isClick) {
+                            assert isClick_Mode != null;
                             if (isClick_Mode.equalsIgnoreCase("command")) {
                                 json.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
                             } else if (isClick_Mode.equalsIgnoreCase("url")) {
@@ -347,6 +344,7 @@ public class JoinListener implements Listener {
                         }
                     } else {
                         if (isClick) {
+                            assert isClick_Mode != null;
                             if (isClick_Mode.equalsIgnoreCase("command")) {
                                 json.setExecuteCommand(Action_Command).sendToAll();
                             } else if (isClick_Mode.equalsIgnoreCase("url")) {
@@ -394,13 +392,12 @@ public class JoinListener implements Listener {
                         Logger.warning("&eVerify that the sound name is correct or belongs to the version");
                     }
                 }
-
             } else if (isGroup) {
-                e.setQuitMessage(null);
-
                 GroupHelper groupHelper = new GroupHelper();
-
-
+                groupHelper.setGroup(playerManager.getGroup(p));
+                groupHelper.setDiscord(discordSRVHHook);
+                groupHelper.setEssentials(essentialsXDiscordHook);
+                groupHelper.onQuit(p, config, e);
             } else if (isNone) {
                 e.setQuitMessage(null);
             }

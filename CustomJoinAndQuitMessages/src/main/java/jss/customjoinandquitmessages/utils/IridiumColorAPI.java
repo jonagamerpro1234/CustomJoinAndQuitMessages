@@ -3,7 +3,7 @@ package jss.customjoinandquitmessages.utils;
 import com.google.common.collect.ImmutableMap;
 import jss.customjoinandquitmessages.patterns.*;
 import net.md_5.bungee.api.ChatColor;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang3.Validate;
 import org.bukkit.Bukkit;
 
 import javax.annotation.Nonnull;
@@ -59,6 +59,7 @@ public class IridiumColorAPI {
      * @return The list of processed strings
      * @since 1.0.3
      */
+    @SuppressWarnings("unused")
     @Nonnull
     public static List<String> process(@Nonnull Collection<String> strings) {
         return strings.stream()
@@ -88,18 +89,14 @@ public class IridiumColorAPI {
      */
     @Nonnull
     public static String color(@Nonnull String string, @Nonnull Color start, @Nonnull Color end) {
-        String originalString = string;
-
         ChatColor[] colors = createGradient(start, end, withoutSpecialChar(string).length());
-        return apply(originalString, colors);
+        return apply(string, colors);
     }
 
     @Nonnull
     public static String rainbow(@Nonnull String string, float saturation) {
-        String originalString = string;
-
         ChatColor[] colors = createRainbow(withoutSpecialChar(string).length(), saturation);
-        return apply(originalString, colors);
+        return apply(string, colors);
     }
 
     @Nonnull
@@ -108,6 +105,7 @@ public class IridiumColorAPI {
                 : getClosestColor(new Color(Integer.parseInt(string, 16)));
     }
 
+    @SuppressWarnings({"RegExpSimplifiable", "unused"})
     @Nonnull
     public static String stripColorFormatting(@Nonnull String string) {
         return string.replaceAll("<#[0-9A-F]{6}>|[&§][a-f0-9lnokm]|<[/]?[A-Z]{5,8}(:[0-9A-F]{6})?[0-9]*>", "");

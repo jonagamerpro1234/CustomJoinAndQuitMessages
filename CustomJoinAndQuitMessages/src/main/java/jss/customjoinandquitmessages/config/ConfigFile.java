@@ -5,13 +5,14 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
-public class ConfigFile extends FileManager{
+public class ConfigFile extends FileManager {
 
-    private CustomJoinAndQuitMessages plugin;
+    private final CustomJoinAndQuitMessages plugin;
     private File file;
     private FileConfiguration config;
-    private String path;
+    private final String path;
 
     public ConfigFile(CustomJoinAndQuitMessages plugin, String path) {
         super(plugin);
@@ -51,20 +52,12 @@ public class ConfigFile extends FileManager{
         this.config = YamlConfiguration.loadConfiguration(this.file);
         Reader defaultConfigStream;
         try {
-            defaultConfigStream = new InputStreamReader(getResources(this.path), "UTF8");
-            if (defaultConfigStream != null) {
-                YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(defaultConfigStream);
-                config.setDefaults(defaultConfig);
-            }
-        } catch (UnsupportedEncodingException ex) {
-            ex.printStackTrace();
+            defaultConfigStream = new InputStreamReader(getResources(this.path), StandardCharsets.UTF_8);
+            YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(defaultConfigStream);
+            config.setDefaults(defaultConfig);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getPath() {
-        return this.path;
     }
 
     public CustomJoinAndQuitMessages getPlugin() {
@@ -80,12 +73,4 @@ public class ConfigFile extends FileManager{
         }
     }
 
-    public void resetConfig() {
-        if (this.file == null) {
-            this.file = new File(getDataFolder(), this.path);
-        }
-        if (!this.file.exists()) {
-            saveResources(this.path, true);
-        }
-    }
 }

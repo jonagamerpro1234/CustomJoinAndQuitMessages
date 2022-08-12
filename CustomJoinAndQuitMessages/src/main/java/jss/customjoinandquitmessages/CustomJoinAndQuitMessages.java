@@ -3,7 +3,6 @@ package jss.customjoinandquitmessages;
 import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
 import jss.customjoinandquitmessages.config.*;
 import jss.customjoinandquitmessages.hook.HookManager;
-import jss.customjoinandquitmessages.listener.InventoryListener;
 import jss.customjoinandquitmessages.listener.JoinListener;
 import jss.customjoinandquitmessages.manager.InventoryView;
 import jss.customjoinandquitmessages.utils.*;
@@ -97,22 +96,19 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
     }
 
     public void setupEvents() {
-        new JoinListener(this);
-        new InventoryListener(this);
+        new JoinListener();
     }
 
     public void reloadAllFiles() {
         getConfigFile().reloadConfig();
+        getGroupsFile().reloadConfig();
+        getPlayerFile().reloadConfig();
         preConfigLoader.loadConfig();
         preConfigLoader.loadLangs();
     }
 
     public Lang Locale() {
         return availableLangs.get(Settings.defaultLanguage);
-    }
-
-    public Map<String, Lang> getAvailableLocales() {
-        return availableLangs;
     }
 
     public void setAvailableLocales(HashMap<String, Lang> availableLangs) {
@@ -131,9 +127,6 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
         return groupsFile;
     }
 
-    public PreConfigLoader getPreConfigLoader() {
-        return preConfigLoader;
-    }
 
     public String getUpdateVersion() {
         return updateVersion;
@@ -145,7 +138,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
         }
     }
 
-    @SuppressWarnings("SuspiciousListRemoveInLoop")
+    @SuppressWarnings({"SuspiciousListRemoveInLoop", "unused"})
     public void unregisterInventory(Player player) {
         for (int i = 0; i < inventoryViews.size(); i++) {
             if (inventoryViews.get(i).getPlayer().getName().equals(player.getName())) {

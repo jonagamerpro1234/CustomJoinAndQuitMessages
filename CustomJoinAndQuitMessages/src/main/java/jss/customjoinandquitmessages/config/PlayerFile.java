@@ -5,17 +5,16 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
-public class PlayerFile extends FileManager implements FileHelper {
+public class PlayerFile extends FileManager {
 
-    private CustomJoinAndQuitMessages plugin;
     private File file;
     private FileConfiguration config;
-    private String path;
+    private final String path;
 
     public PlayerFile(CustomJoinAndQuitMessages plugin, String path) {
         super(plugin);
-        this.plugin = plugin;
         this.file = null;
         this.config = null;
         this.path = path;
@@ -51,41 +50,21 @@ public class PlayerFile extends FileManager implements FileHelper {
         this.config = YamlConfiguration.loadConfiguration(this.file);
         Reader defaultConfigStream;
         try {
-            defaultConfigStream = new InputStreamReader(getResources(this.path), "UTF8");
-            if (defaultConfigStream != null) {
-                YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(defaultConfigStream);
-                config.setDefaults(defaultConfig);
-            }
-        } catch (UnsupportedEncodingException ex) {
+            defaultConfigStream = new InputStreamReader(getResources(this.path), StandardCharsets.UTF_8);
+            YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(defaultConfigStream);
+            config.setDefaults(defaultConfig);
+        } catch (NullPointerException ex) {
             ex.printStackTrace();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
         }
     }
 
-    public String getPath() {
-        return this.path;
-    }
-
-    public CustomJoinAndQuitMessages getPlugin() {
-        return plugin;
-    }
-
+    @SuppressWarnings("unused")
     public void saveDefaultConfig() {
         if (this.file == null) {
             this.file = new File(getDataFolder(), this.path);
         }
         if (!this.file.exists()) {
             saveResources(this.path, false);
-        }
-    }
-
-    public void resetConfig() {
-        if (this.file == null) {
-            this.file = new File(getDataFolder(), this.path);
-        }
-        if (!this.file.exists()) {
-            saveResources(this.path, true);
         }
     }
 }

@@ -1,6 +1,6 @@
 main: jss.customjoinandquitmessages.CustomJoinAndQuitMessages
 name: CustomJoinAndQuitMessages
-version: ${version}
+version: "${version}"
 author: jonagamerpro1234
 api-version: 1.13
 prefix: CustomJoinAndQuitMessages

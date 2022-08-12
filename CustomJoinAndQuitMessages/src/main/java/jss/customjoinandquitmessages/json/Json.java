@@ -6,15 +6,16 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@SuppressWarnings("deprecation")
 public class Json {
 
-    private Player player;
-    private String text;
+    private final Player player;
+    private final String text;
     private BaseComponent[] hoverText;
     private String suggestCommand;
     private String executeCommand;
@@ -34,19 +35,14 @@ public class Json {
         return text;
     }
 
-    public Json setText(String text) {
-        this.text = text;
-        return this;
-    }
-
-    public Json setHover(List<String> hover) {
+    public Json setHover(@NotNull List<String> hover) {
         this.hoverText = new BaseComponent[hover.size()];
         for (int i = 0; i < hover.size(); i++) {
             TextComponent component = new TextComponent();
             if (i == hover.size() - 1) {
-                component.setText(Util.color(Util.getVar(this.player, (String) hover.get(i))));
+                component.setText(Util.color(Util.getVar(this.player, hover.get(i))));
             } else {
-                component.setText(Util.color(Util.getVar(this.player, (String) hover.get(i)) + "\n"));
+                component.setText(Util.color(Util.getVar(this.player, hover.get(i)) + "\n"));
             }
             this.hoverText[i] = component;
         }
@@ -71,7 +67,7 @@ public class Json {
     public void send() {
         TextComponent component = new TextComponent(TextComponent.fromLegacyText(this.text));
         if (this.hoverText != null) {
-            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, this.hoverText));
+            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(hoverText)));
         }
         if (this.executeCommand != null) {
             component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, this.executeCommand));
@@ -88,7 +84,7 @@ public class Json {
     public void sendToAll() {
         TextComponent component = new TextComponent(TextComponent.fromLegacyText(this.text));
         if (this.hoverText != null) {
-            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, this.hoverText));
+            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(hoverText)));
         }
         if (this.executeCommand != null) {
             component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, this.executeCommand));

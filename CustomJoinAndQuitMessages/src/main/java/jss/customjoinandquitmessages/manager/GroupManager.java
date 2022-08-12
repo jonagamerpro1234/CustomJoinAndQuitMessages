@@ -2,28 +2,33 @@ package jss.customjoinandquitmessages.manager;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class GroupManager {
 
     private final FileConfiguration config = CustomJoinAndQuitMessages.get().getGroupsFile().getConfig();
 
-    public static GroupManager get() {
+    @Contract(" -> new")
+    public static @NotNull GroupManager get() {
         return new GroupManager();
     }
 
+    @SuppressWarnings("unused")
     public Set<String> getGroupList() {
-        Set<String> sections = config.getKeys(false);
-        return sections;
+        return config.getKeys(false);
     }
 
     public boolean existsGroup(String group) {
         return config.contains(group);
     }
 
+    @SuppressWarnings("unused")
     public String getGroup(String group) {
         if (existsGroup(group)) {
             return config.getString(group);
@@ -55,7 +60,7 @@ public class GroupManager {
     public boolean isFirstJoin(String group) {
         boolean isHover = false;
         if (existsGroup(group)) {
-            isHover = config.getString(group + ".First-Join.Enabled").equals("true");
+            isHover = config.getBoolean(group + ".First-Join.Enabled");
         }
         return isHover;
     }
@@ -63,7 +68,7 @@ public class GroupManager {
     public boolean isHover(String group) {
         boolean isHover = false;
         if (existsGroup(group)) {
-            isHover = config.getString(group + ".HoverEvent.Enabled").equals("true");
+            isHover = config.getBoolean(group + ".HoverEvent.Enabled");
         }
         return isHover;
     }
@@ -72,13 +77,13 @@ public class GroupManager {
         if (existsGroup(group)) {
             return config.getStringList(group + ".HoverEvent.Hover");
         }
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
 
     public boolean isClick(String group) {
         boolean isclick = false;
         if (existsGroup(group)) {
-            isclick = config.getString(group + ".ClickEvent.Enabled").equals("true");
+            isclick = config.getBoolean(group + ".ClickEvent.Enabled");
         }
         return isclick;
     }
@@ -111,5 +116,106 @@ public class GroupManager {
         return null;
     }
 
+    public String getType(String group){
+        if (existsGroup(group)) {
+            return config.getString(group + ".Type");
+        }
+        return null;
+    }
+
+    public boolean isTitle(String group){
+        boolean istitle = false;
+        if (existsGroup(group)) {
+            istitle = config.getBoolean(group + ".Title.Enabled");
+        }
+        return istitle;
+    }
+
+    public String getTitle(String group){
+        if(existsGroup(group)){
+            return config.getString(group + ".Title.Title");
+        }
+        return null;
+    }
+
+    public String getSubTitle(String group){
+        if(existsGroup(group)){
+            return config.getString(group + ".Title.SubTitle");
+        }
+        return null;
+    }
+
+    public int getFadeIn(String group){
+        if(existsGroup(group)){
+            return config.getInt(group + ".Title.FadeIn");
+        }
+        return 0;
+    }
+
+    public int getStay(String group){
+        if(existsGroup(group)){
+            return config.getInt(group + ".Title.Stay");
+        }
+        return 0;
+    }
+
+    public int getFadeOut(String group){
+        if(existsGroup(group)){
+            return config.getInt(group + ".Title.FadeOut");
+        }
+        return 0;
+    }
+
+    public boolean isActionbar(String group){
+        boolean isactionbar = false;
+        if(existsGroup(group)) {
+            isactionbar = config.getBoolean(group + ".Actionbar.Enabled");
+        }
+        return isactionbar;
+    }
+
+    public String getActionbar(String group){
+        if(existsGroup(group)) {
+            return config.getString(group + ".Actionbar.Text");
+        }
+        return null;
+    }
+
+    public boolean isSound(String group) {
+        boolean issound = false;
+        if(existsGroup(group)) {
+            issound = config.getBoolean(group + "Sound");
+        }
+        return issound;
+    }
+
+    public boolean isSoundAll(String group){
+        boolean issoundall = false;
+        if(existsGroup(group)){
+            issoundall = config.getBoolean(group + "Sound.Send-To-All");
+        }
+        return issoundall;
+    }
+
+    public String getSound(String group){
+        if(existsGroup(group)) {
+            return config.getString(group + ".Sound.Name");
+        }
+        return null;
+    }
+
+    public int getVolume(String group){
+        if(existsGroup(group)){
+            return config.getInt(group + ".Sound.Volume");
+        }
+        return 1;
+    }
+
+    public float getPitch(String group){
+        if(existsGroup(group)){
+            return Float.parseFloat(Objects.requireNonNull(config.getString(group + ".Sound.Pitch")));
+        }
+        return 1.0f;
+    }
 
 }

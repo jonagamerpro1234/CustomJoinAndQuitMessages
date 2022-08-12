@@ -2,13 +2,11 @@ package jss.customjoinandquitmessages.commands;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.Util;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -36,9 +34,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter {
                     }
                     Util.sendColorMessage(sender, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
                 } else if (args[0].equalsIgnoreCase("reload")) {
-                    plugin.getPreConfigLoader().loadConfig();
-                    plugin.getPreConfigLoader().loadLangs();
-                    plugin.getConfigFile().reloadConfig();
+                    plugin.reloadAllFiles();
                     Util.sendColorMessage(sender, Util.getPrefix() + " " + plugin.Locale().reload);
                 } else if (args[0].equalsIgnoreCase("info")) {
                     Util.sendColorMessage(sender, "&5 <||=-=-=-=-=" + Util.getPrefix() + "&5=-=-=-=-=-=-");
@@ -71,9 +67,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter {
             }
             if (args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("rl")) {
                 if ((j.isOp()) || (j.hasPermission("Cjm.Reload"))) {
-                    plugin.getPreConfigLoader().loadConfig();
-                    plugin.getPreConfigLoader().loadLangs();
-                    plugin.getConfigFile().reloadConfig();
+                    plugin.reloadAllFiles();
                     Util.sendColorMessage(j, Util.getPrefixPlayer() + " " + plugin.Locale().reload);
                 } else {
                     Util.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
@@ -113,15 +107,14 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter {
         }
 
         Player j = (Player) sender;
-        if ((j.isOp()) || (j.hasPermission("cjm.command.tabcomplete"))) {
-            switch (args.length) {
-                case 0:
-                case 1:
-                    options.add("help");
-                    options.add("reload");
-                    options.add("info");
-                    break;
-            }
+        if (!j.isOp() || !j.hasPermission("cjm.command.tabcomplete")) return new ArrayList<>();
+        switch (args.length) {
+            case 0:
+            case 1:
+                options.add("help");
+                options.add("reload");
+                options.add("info");
+                break;
         }
         return Util.setTabLimit(options, lastArgs);
     }
