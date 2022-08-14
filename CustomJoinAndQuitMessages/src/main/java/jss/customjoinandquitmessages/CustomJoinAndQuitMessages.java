@@ -4,8 +4,10 @@ import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
 import jss.customjoinandquitmessages.config.*;
 import jss.customjoinandquitmessages.hook.HookManager;
 import jss.customjoinandquitmessages.listener.JoinListener;
+import jss.customjoinandquitmessages.listener.TaskLoader;
 import jss.customjoinandquitmessages.manager.InventoryView;
 import jss.customjoinandquitmessages.utils.*;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -39,22 +41,24 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
     }
 
     public void onEnable() {
-        Util.setEnabled(version);
+        metrics = new Metrics(this,6318);
         plugin = this;
-        metrics = new Metrics(this);
+        Util.setEnabled(version);
+
         configFile.saveDefaultConfig();
         configFile.create();
         preConfigLoader.loadConfig();
 
         if (!preConfigLoader.loadLangs()) {
-            Logger.error("&cError load lang files");
+            Logger.error("&cload lang files");
             Logger.warning("&eDisable plugin for error");
             Bukkit.getPluginManager().disablePlugins();
             return;
         }
 
-        int cfg = getConfigFile().getConfig().getInt("Config.Config-Version");
-        if (cfg >= 2) {
+        String cfg = getConfigFile().getConfig().getString("Config.Config-Version");
+        assert cfg != null;
+        if (!cfg.equals("2")) {
             useLegacyConfig = true;
         }
 
@@ -64,15 +68,12 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
 
         groupsFile.saveDefaultConfig();
         groupsFile.create();
-
-        setupCommands();
-        setupEvents();
         hooksManager.load();
+        setupEvents();
+        setupCommands();
 
         new UpdateChecker(this, UpdateSettings.ID).getUpdateVersion(version -> {
-
             updateVersion = version;
-
             if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
                 Logger.success("&a" + this.name + " is up to date!");
             } else {
@@ -87,8 +88,10 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
     }
 
     public void onDisable() {
-        Util.setDisabled(version);
+        plugin = null;
         metrics = null;
+        getServer().getScheduler().cancelTasks(this);
+        Util.setDisabled(version);
     }
 
     public void setupCommands() {
@@ -97,6 +100,8 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
 
     public void setupEvents() {
         new JoinListener();
+        TaskLoader taskLoader = new TaskLoader(this);
+        taskLoader.onUpdateGroup();
     }
 
     public void reloadAllFiles() {

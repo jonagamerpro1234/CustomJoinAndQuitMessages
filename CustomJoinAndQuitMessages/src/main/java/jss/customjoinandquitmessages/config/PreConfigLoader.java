@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class PreConfigLoader {
 
-    private CustomJoinAndQuitMessages plugin;
+    private final CustomJoinAndQuitMessages plugin;
 
     public PreConfigLoader(CustomJoinAndQuitMessages plugin) {
         this.plugin = plugin;
@@ -66,11 +66,9 @@ public class PreConfigLoader {
             Settings.hook_essentialsDiscord_channelid = config.getString("Hooks.EssentialsDiscord.Channel-ID");
             Settings.hook_essentialsDiscord_use_default_channel = config.getString("Hooks.EssentialsDiscord.Use-Default-Channel").equals("true");
 
-            Settings.hook_vault = config.getString("Hooks.Vault.Enabled").equals("true");
-
             Settings.hook_luckperms = config.getString("Hooks.LuckPerms.Enabled").equals("true");
-            Settings.hook_luckperms_use_group = config.getString("Hooks.LuckPerms.Use-Luckperms-In-Groups").equals("true");
             Settings.hook_luckperms_autoUpdate_group = config.getString("Hooks.LuckPerms.AutoUpdateGroup.Enabled").equals("true");
+            Settings.hook_luckperms_autoUpdate_group_tick = config.getLong("Hooks.LuckPerms.AutoUpdateGroup.Tick");
 
             Settings.hook_essentials = config.getString("Hooks.Essentials.Enabled").equals("true");
             Settings.hook_essentials_hideplayervanish = config.getString("Hooks.Essentials.HidePlayerIsVanish").equals("true");

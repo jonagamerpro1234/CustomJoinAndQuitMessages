@@ -1,6 +1,7 @@
 package jss.customjoinandquitmessages.manager;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.utils.Logger;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -19,21 +20,16 @@ public class GroupManager {
         return new GroupManager();
     }
 
-    @SuppressWarnings("unused")
     public Set<String> getGroupList() {
         return config.getKeys(false);
     }
 
     public boolean existsGroup(String group) {
-        return config.contains(group);
-    }
-
-    @SuppressWarnings("unused")
-    public String getGroup(String group) {
-        if (existsGroup(group)) {
-            return config.getString(group);
+        if(group == null){
+            Logger.error("&cGroup could not be found: &e" + group);
+            return false;
         }
-        return null;
+        return getGroupList().contains(group);
     }
 
     public String getJoin(String group) {
@@ -184,7 +180,7 @@ public class GroupManager {
     public boolean isSound(String group) {
         boolean issound = false;
         if(existsGroup(group)) {
-            issound = config.getBoolean(group + "Sound");
+            issound = config.getBoolean(group + "Sound.Enabled");
         }
         return issound;
     }

@@ -12,8 +12,8 @@ import java.util.function.Consumer;
 
 public class UpdateChecker implements UpdateHelper {
 
-    private CustomJoinAndQuitMessages plugin;
-    private int ID;
+    private final CustomJoinAndQuitMessages plugin;
+    private final int ID;
 
     public UpdateChecker(CustomJoinAndQuitMessages plugin, int ID) {
         this.plugin = plugin;

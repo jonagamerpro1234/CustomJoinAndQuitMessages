@@ -8,15 +8,15 @@
 # ● The group name has to be the same as the range name or the group customization will not work
 # ● For more information you can visit the CustomJoinAndQuitMessages Wiki
 # 
-# ● Wiki [Working Progress]: 
+# ● Wiki [Working Progress]: ---
 #
 default:
-  
+
   # |Join| This is where Join customizable message is located
-  Join: '&b[<#83FF6F>+&b] <#A157FF><name>'
+  Join: '&b[<#:83FF6F>+&b] <#:A157FF><name>'
 
   # |Quit| This is where Quit customizable message is located
-  Quit: '&b[<#83FF6F>-&b] <#A157FF><name>'
+  Quit: '&b[<#:83FF6F>-&b] <#:A157FF><name>'
 
   # |First-Join| 
   First-Join:

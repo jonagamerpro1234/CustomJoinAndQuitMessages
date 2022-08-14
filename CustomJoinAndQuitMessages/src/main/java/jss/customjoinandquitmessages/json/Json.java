@@ -6,7 +6,6 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -67,7 +66,8 @@ public class Json {
     public void send() {
         TextComponent component = new TextComponent(TextComponent.fromLegacyText(this.text));
         if (this.hoverText != null) {
-            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(hoverText)));
+            //noinspection deprecation
+            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverText));
         }
         if (this.executeCommand != null) {
             component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, this.executeCommand));
@@ -84,7 +84,8 @@ public class Json {
     public void sendToAll() {
         TextComponent component = new TextComponent(TextComponent.fromLegacyText(this.text));
         if (this.hoverText != null) {
-            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(hoverText)));
+            //noinspection deprecation
+            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, this.hoverText));
         }
         if (this.executeCommand != null) {
             component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, this.executeCommand));

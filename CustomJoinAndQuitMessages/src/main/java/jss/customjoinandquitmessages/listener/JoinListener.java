@@ -4,7 +4,6 @@ import com.cryptomorin.xseries.messages.ActionBar;
 import com.cryptomorin.xseries.messages.Titles;
 import github.scarsz.discordsrv.util.DiscordUtil;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.config.PlayerFile;
 import jss.customjoinandquitmessages.hook.*;
 import jss.customjoinandquitmessages.json.Json;
 import jss.customjoinandquitmessages.manager.PlayerManager;
@@ -47,20 +46,23 @@ public class JoinListener implements Listener {
         String tempGroup;
 
         if (luckPermsHook.isEnabled()) {
-            Logger.error("&cThe LuckPerms could not be found to activate the group system");
-            Logger.warning("&eplease check that LuckPerms is active or inside your plugins folder");
-        }
-
-        if (Settings.hook_luckperms_use_group) {
             tempGroup = Objects.requireNonNull(LuckPermsHook.getApi().getUserManager().getUser(p.getName())).getPrimaryGroup();
         } else {
             tempGroup = "default";
         }
 
-        PlayerFile playerFile = new PlayerFile(plugin, p.getName());
-        playerFile.create();
         PlayerManager playerManager = new PlayerManager();
         playerManager.createPlayer(p, tempGroup);
+
+        if (luckPermsHook.isEnabled()) {
+            if (!playerManager.getGroup(p).equalsIgnoreCase(Objects.requireNonNull(LuckPermsHook.getApi().
+                    getUserManager().getUser(p.getName())).getPrimaryGroup())) {
+                playerManager.setGroup(p, Objects.requireNonNull(LuckPermsHook.getApi().getUserManager().getUser(p.getName())).getPrimaryGroup());
+            }
+        }else{
+            Logger.error("&cThe LuckPerms could not be found to activate the group system");
+            Logger.warning("&eplease check that LuckPerms is active or inside your plugins folder");
+        }
 
         boolean isNormal = Settings.c_type.equalsIgnoreCase("normal");
         boolean isGroup = Settings.c_type.equalsIgnoreCase("group");
@@ -69,14 +71,6 @@ public class JoinListener implements Listener {
         if (Settings.welcome) {
             for (String text : Settings.list_welcome)
                 Util.sendColorMessage(p, Util.getVar(p, text));
-        }
-
-
-        if (!playerManager.getGroup(p).equalsIgnoreCase(Objects.requireNonNull(LuckPermsHook.getApi().
-                getUserManager().getUser(p.getName())).getPrimaryGroup())) {
-            playerManager.setGroup(p, Objects.requireNonNull(LuckPermsHook.getApi().getUserManager().getUser(p.getName())).getPrimaryGroup());
-        } else {
-            Logger.debug("&eThe player already has the same group!");
         }
 
 
@@ -393,7 +387,7 @@ public class JoinListener implements Listener {
                     }
                 }
             } else if (isGroup) {
-                GroupHelper groupHelper = new GroupHelper();
+                GroupHelper groupHelper = GroupHelper.get();
                 groupHelper.setGroup(playerManager.getGroup(p));
                 groupHelper.setDiscord(discordSRVHHook);
                 groupHelper.setEssentials(essentialsXDiscordHook);

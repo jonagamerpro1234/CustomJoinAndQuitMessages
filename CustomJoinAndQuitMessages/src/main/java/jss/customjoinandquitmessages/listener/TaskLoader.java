@@ -1,6 +1,7 @@
 package jss.customjoinandquitmessages.listener;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.hook.HookManager;
 import jss.customjoinandquitmessages.hook.LuckPermsHook;
 import jss.customjoinandquitmessages.manager.PlayerManager;
 import jss.customjoinandquitmessages.utils.Logger;
@@ -18,11 +19,12 @@ public class TaskLoader {
         this.plugin = plugin;
     }
 
-
     public void onUpdateGroup() {
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-        taskGroupId = scheduler.scheduleSyncRepeatingTask(plugin, new Runnable() {
-            public void run() {
+        taskGroupId = scheduler.scheduleSyncRepeatingTask(plugin, () -> {
+            LuckPermsHook luckPermsHook = HookManager.get().getLuckPermsHook();
+
+            if(luckPermsHook.isEnabled()){
                 if (Settings.hook_luckperms_autoUpdate_group) {
                     for (Player p : Bukkit.getOnlinePlayers()) {
                         PlayerManager playerManager = new PlayerManager();
@@ -35,8 +37,12 @@ public class TaskLoader {
                 } else {
                     scheduler.cancelTask(taskGroupId);
                 }
+            }else{
+                scheduler.cancelTask(taskGroupId);
             }
-        }, 0L, 600L);
+
+
+        }, 200L, Settings.hook_luckperms_autoUpdate_group_tick);
     }
 
 }

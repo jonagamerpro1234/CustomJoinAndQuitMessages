@@ -159,8 +159,6 @@ public class Util {
         text = text.replace("<displayname>", player.getDisplayName());
         text = text.replaceAll("<world>", player.getWorld().getName());
         text = text.replace("<0>", " ");
-        text = text.replace("<xp_level>", "" + player.getExpToLevel());
-        text = text.replace("<xp>", "" + player.getExp());
         text = placeholderReplace(text, player);
         text = getOnlinePlayers(text);
         return text;

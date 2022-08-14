@@ -190,8 +190,8 @@ Quit:
   # |Enabled| Here you can enable or disable this feature
   Enabled: true
   
-  # |Text| This is where Join customizable message is located
-  Text: '&b[<#:FF8E8E>+&b] <#:A157FF><name>'
+  # |Text| This is where Quit customizable message is located
+  Text: '&b[<#:FF8E8E>-&b] <#:A157FF><name>'
   
   # |Type| Here you can find two types that are [ normal | modify ]
   Type: normal

@@ -9,17 +9,20 @@ import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class LuckPermsHook implements IHook {
 
-    private HookManager hookManager;
+    private final HookManager hookManager;
     private boolean isEnabled;
 
     public LuckPermsHook(HookManager hookManager) {
         this.hookManager = hookManager;
     }
 
-    public static LuckPerms getApi() {
+    @Contract(pure = true)
+    public static @NotNull LuckPerms getApi() {
         return LuckPermsProvider.get();
     }
 

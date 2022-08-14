@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jss.customjoinandquitmessages</groupId>
     <artifactId>CustomJoinAndQuitMessages</artifactId>
-    <version>1.7.5-b2</version>
+    <version>1.7.5-b3</version>
 
     <properties>
         <java.version>11</java.version>
@@ -51,6 +51,10 @@
                     <createDependencyReducedPom>false</createDependencyReducedPom>
                     <relocations>
                         <relocation>
+                            <pattern>org.bstats</pattern>
+                            <shadedPattern>jss.customjoinandquitmessages.bstats</shadedPattern>
+                        </relocation>
+                        <relocation>
                             <pattern>com.cryptomorin.xseries</pattern>
                             <shadedPattern>jss.customjoinandquitmessages.utils</shadedPattern>
                         </relocation>
@@ -87,7 +91,6 @@
                             <Version>${project.version}</Version>
                         </manifestEntries>
                     </archive>
-                    <outputDirectory>C:\Users\Alumno\Desktop\LocalHost\Server\IntelliJ\plugins</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
@@ -131,40 +134,18 @@
     </repositories>
 
     <dependencies>
-
-        <!-- Spigot -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.19.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>net.md-5</groupId>
-                    <artifactId>bungeecord-chat</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
-
-        <!-- BungeeCord Jar -->
         <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-api</artifactId>
-            <version>1.19-R0.1-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>provided</scope>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>3.0.0</version>
+            <scope>compile</scope>
         </dependency>
-
-        <!-- BungeeCord Javadoc -->
-        <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-api</artifactId>
-            <version>1.19-R0.1-SNAPSHOT</version>
-            <type>javadoc</type>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- DiscordSRV -->
         <dependency>
             <groupId>com.discordsrv</groupId>
             <artifactId>discordsrv</artifactId>
@@ -181,31 +162,23 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-        <!-- LuckPerms -->
         <dependency>
             <groupId>net.luckperms</groupId>
             <artifactId>api</artifactId>
             <version>5.4</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- XSerie -->
         <dependency>
             <groupId>com.github.cryptomorin</groupId>
             <artifactId>XSeries</artifactId>
             <version>9.0.0</version>
         </dependency>
-
-        <!-- PlaceHolderAPI -->
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
             <version>2.11.2</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- EssentialsX Discord -->
         <dependency>
             <groupId>net.essentialsx</groupId>
             <artifactId>EssentialsX</artifactId>
@@ -226,7 +199,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>net.essentialsx</groupId>
             <artifactId>EssentialsXDiscord</artifactId>

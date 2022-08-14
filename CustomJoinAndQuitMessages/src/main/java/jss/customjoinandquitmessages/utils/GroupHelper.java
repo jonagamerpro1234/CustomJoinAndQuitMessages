@@ -14,17 +14,22 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class GroupHelper {
 
-    private final GroupManager groupManager = GroupManager.get();
+    private final GroupManager groupManager = new GroupManager();
     private String group;
-    private Json json;
     private DiscordSRVHHook discordSRVHHook;
     private EssentialsXDiscordHook essentialsXDiscordHook;
+
+    @Contract(" -> new")
+    public static @NotNull GroupHelper get(){
+        return new GroupHelper();
+    }
 
     public void setGroup(String group) {
         this.group = group;
@@ -39,7 +44,6 @@ public class GroupHelper {
     }
 
     public void onJoin(Player player, FileConfiguration config, PlayerJoinEvent playerJoinEvent) {
-
         String temp = "";
 
         String join = groupManager.getJoin(group);
@@ -58,7 +62,7 @@ public class GroupHelper {
         boolean isNormalType = groupManager.getType(group).equalsIgnoreCase("normal");
         boolean isModifyType = groupManager.getType(group).equalsIgnoreCase("modify");
 
-        json = new Json(player, temp);
+        Json json = new Json(player, temp);
 
         if (config.getBoolean("Config.Show-Chat-In-Console")) {
             Logger.info(json.getText());
@@ -170,12 +174,14 @@ public class GroupHelper {
 
     public void onQuit(Player player, @NotNull FileConfiguration config, PlayerQuitEvent playerQuitEvent) {
         String quit = groupManager.getQuit(group);
-        quit = Util.color(Util.getVar(player, quit));
+
 
         boolean isNormalType = groupManager.getType(group).equalsIgnoreCase("normal");
         boolean isModifyType = groupManager.getType(group).equalsIgnoreCase("modify");
 
-        json = new Json(player, quit);
+        quit = Util.color(Util.getVar(player, quit));
+
+        Json json = new Json(player, quit);
         if (config.getBoolean("Config.Show-Chat-In-Console")) {
             Logger.info(json.getText());
         }
