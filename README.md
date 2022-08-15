@@ -8,7 +8,6 @@
 [issues]: https://img.shields.io/github/issues/jonagamerpro1234/CustomJoinAndQuitMessages.svg?color=yellow&style=for-the-badge
 [javaversion]: https://img.shields.io/badge/Java-11%2B-red?style=for-the-badge
 [issueslink]: https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/issues
-[]
 
 [![TitleImg]][Spigot]
 
@@ -25,6 +24,7 @@ A simple to use plugin that will allow you to customize the join and quit messag
 
 ## Support
 * [Issue Tracker](https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/issues)
+* [Discord](https://discord.gg/c5GhQDQCK5)
 
 ## Quick Links
 * [Spigot Page][Spigot]
