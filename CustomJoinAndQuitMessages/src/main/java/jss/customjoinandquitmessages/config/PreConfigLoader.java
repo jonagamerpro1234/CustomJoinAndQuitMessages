@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class PreConfigLoader {
 
@@ -46,7 +47,7 @@ public class PreConfigLoader {
 
             Settings.join_sound = config.getString("Join.Sound.Enabled").equals("true");
             Settings.join_sound_name = config.getString("Join.Sound.Name");
-            Settings.join_sound_pitch = Float.valueOf(config.getString("Join.Sound.Pitch"));
+            Settings.join_sound_pitch = Float.parseFloat(Objects.requireNonNull(config.getString("Join.Sound.Pitch")));
             Settings.join_sound_vol = config.getInt("Join.Sound.Volume");
 
             //Quit
@@ -66,7 +67,7 @@ public class PreConfigLoader {
             Settings.hook_essentialsDiscord_channelid = config.getString("Hooks.EssentialsDiscord.Channel-ID");
             Settings.hook_essentialsDiscord_use_default_channel = config.getString("Hooks.EssentialsDiscord.Use-Default-Channel").equals("true");
 
-            Settings.hook_luckperms = config.getString("Hooks.LuckPerms.Enabled").equals("true");
+            Settings.hook_luckperms = config.getBoolean("Hooks. LuckPerms.Enabled");
             Settings.hook_luckperms_autoUpdate_group = config.getString("Hooks.LuckPerms.AutoUpdateGroup.Enabled").equals("true");
             Settings.hook_luckperms_autoUpdate_group_tick = config.getLong("Hooks.LuckPerms.AutoUpdateGroup.Tick");
 
@@ -81,7 +82,7 @@ public class PreConfigLoader {
 
     public boolean loadLangs() {
         Settings.defaultLanguage = plugin.getConfig().getString("Config.Lang", "en-US");
-        HashMap<String, Lang> availableLocales = new HashMap<String, Lang>();
+        HashMap<String, Lang> availableLocales = new HashMap<>();
         FileListener fl = new FileListener();
         try {
             int index = 1;

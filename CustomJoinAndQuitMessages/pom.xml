@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jss.customjoinandquitmessages</groupId>
     <artifactId>CustomJoinAndQuitMessages</artifactId>
-    <version>1.7.5-b3</version>
+    <version>1.7.6-b1</version>
 
     <properties>
         <java.version>11</java.version>

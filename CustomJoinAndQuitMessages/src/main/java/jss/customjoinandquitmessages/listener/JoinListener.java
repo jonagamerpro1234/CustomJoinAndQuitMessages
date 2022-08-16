@@ -54,14 +54,16 @@ public class JoinListener implements Listener {
         PlayerManager playerManager = new PlayerManager();
         playerManager.createPlayer(p, tempGroup);
 
-        if (luckPermsHook.isEnabled()) {
-            if (!playerManager.getGroup(p).equalsIgnoreCase(Objects.requireNonNull(LuckPermsHook.getApi().
-                    getUserManager().getUser(p.getName())).getPrimaryGroup())) {
-                playerManager.setGroup(p, Objects.requireNonNull(LuckPermsHook.getApi().getUserManager().getUser(p.getName())).getPrimaryGroup());
+        if (Settings.c_type.equalsIgnoreCase("group")){
+            if (luckPermsHook.isEnabled()) {
+                if (!playerManager.getGroup(p).equalsIgnoreCase(Objects.requireNonNull(LuckPermsHook.getApi().
+                        getUserManager().getUser(p.getName())).getPrimaryGroup())) {
+                    playerManager.setGroup(p, Objects.requireNonNull(LuckPermsHook.getApi().getUserManager().getUser(p.getName())).getPrimaryGroup());
+                }
+            }else{
+                Logger.error("&cThe LuckPerms could not be found to activate the group system");
+                Logger.warning("&eplease check that LuckPerms is active or inside your plugins folder");
             }
-        }else{
-            Logger.error("&cThe LuckPerms could not be found to activate the group system");
-            Logger.warning("&eplease check that LuckPerms is active or inside your plugins folder");
         }
 
         boolean isNormal = Settings.c_type.equalsIgnoreCase("normal");
@@ -247,7 +249,6 @@ public class JoinListener implements Listener {
         }
     }
 
-
     @EventHandler
     public void onQuit(@NotNull PlayerQuitEvent e) {
         FileConfiguration config = plugin.getConfigFile().getConfig();
@@ -290,7 +291,7 @@ public class JoinListener implements Listener {
                 }
 
                 if (isNormalType) {
-                    json.sendToAll();
+                    e.setQuitMessage(text);
                     if (discordSRVHHook.isEnabled()) {
                         if (Settings.hook_discordsrv_channelid.equalsIgnoreCase("none"))
                             return;
@@ -387,6 +388,7 @@ public class JoinListener implements Listener {
                     }
                 }
             } else if (isGroup) {
+                e.setQuitMessage(null);
                 GroupHelper groupHelper = GroupHelper.get();
                 groupHelper.setGroup(playerManager.getGroup(p));
                 groupHelper.setDiscord(discordSRVHHook);

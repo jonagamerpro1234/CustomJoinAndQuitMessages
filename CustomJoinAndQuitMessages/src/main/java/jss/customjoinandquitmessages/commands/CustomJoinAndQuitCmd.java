@@ -76,11 +76,10 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter {
             }
             if (args[0].equalsIgnoreCase("info")) {
                 Util.sendColorMessage(j, "&5-=-=-=-=-=[&b" + plugin.name + "&5]=-=-=-=-=-=-");
-                Util.sendColorMessage(j, "&5> &3Name: &b" + plugin.name);
                 Util.sendColorMessage(j, "&5> &3Author: &6jonagamerpro1234");
                 Util.sendColorMessage(j, "&5> &3Version: &6" + plugin.version);
                 Util.sendColorMessage(j, "&5> &3Last version: &a" + plugin.getUpdateVersion());
-                Util.sendColorMessage(j, "&5> &3Discord: https://discord.gg/c5GhQDQCK5");
+                Util.sendColorMessage(j, "&5> &3Discord: &9 https://discord.gg/c5GhQDQCK5");
                 Util.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
                 return true;
             }
