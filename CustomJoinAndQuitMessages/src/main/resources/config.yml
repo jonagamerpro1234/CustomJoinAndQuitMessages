@@ -13,9 +13,6 @@
 #
 Config:
 
-  # |Config-Version|I would not change anything
-  Config-Version: 2
-
   # |Lang| you can use the available languages of the plugin, or you can add your own translations [ Default = en-US ]
   Lang: en-US
   
@@ -265,6 +262,8 @@ Welcome:
     - '<0>'
     - '<GRADIENT:8200FC>&m=========================================</GRADIENT:00FC95>&r'
 #
+# |File-Version|I would not change anything
+File-Version: 3
 # |> This is the end of the configuration ... [-_-] more things coming soon
 # 
 # | Config File  |

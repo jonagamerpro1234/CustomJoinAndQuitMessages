@@ -56,14 +56,15 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
             return;
         }
 
-        String cfg = getConfigFile().getConfig().getString("Config.Config-Version");
+        String cfg = getConfigFile().getConfig().getString("File-Version");
+        boolean old_cfg = getConfigFile().getConfig().contains("Config.Config-Version");
         assert cfg != null;
-        if (!cfg.equals("2")) {
+        if (!cfg.equals("3") || old_cfg) {
             useLegacyConfig = true;
         }
 
         if (useLegacyConfig) {
-            Logger.warning("&eYour config.yml -> [v1] is out of date, update config.yml -> [v2]");
+            Logger.warning("&eYour config is outdated please update it to avoid possible bugs");
         }
 
         groupsFile.saveDefaultConfig();

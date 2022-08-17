@@ -1,5 +1,6 @@
 package jss.customjoinandquitmessages.utils;
 
+import jss.customjoinandquitmessages.libs.iridiumcolorapi.IridiumColorAPI;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.*;
@@ -184,12 +185,6 @@ public class Util {
         text = text.replace("<online>", "" + playersOnline);
         text = text.replace("<Online>", "" + playersOnline);
         return text;
-    }
-
-    @SuppressWarnings("unused")
-    public static String randomText(@NotNull List<String> list) {
-        Random r = new Random();
-        return list.get(r.nextInt(list.size()));
     }
 
 }

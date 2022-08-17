@@ -16,7 +16,7 @@ public class DisplayManager {
 
     private final FileConfiguration config = CustomJoinAndQuitMessages.get().getConfigFile().getConfig();
     private final FileConfiguration groups = CustomJoinAndQuitMessages.get().getGroupsFile().getConfig();
-    private Player player;
+    private final Player player;
     private String group;
 
     public DisplayManager(Player player) {

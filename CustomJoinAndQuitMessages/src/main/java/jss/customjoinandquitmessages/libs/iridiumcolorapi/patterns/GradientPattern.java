@@ -1,6 +1,7 @@
-package jss.customjoinandquitmessages.patterns;
+package jss.customjoinandquitmessages.libs.iridiumcolorapi.patterns;
 
-import jss.customjoinandquitmessages.utils.IridiumColorAPI;
+import jss.customjoinandquitmessages.libs.iridiumcolorapi.IPattern;
+import jss.customjoinandquitmessages.libs.iridiumcolorapi.IridiumColorAPI;
 
 import java.awt.*;
 import java.util.regex.Matcher;

@@ -17,6 +17,7 @@ import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -30,11 +31,11 @@ public class JoinListener implements Listener {
     private final CustomJoinAndQuitMessages plugin = CustomJoinAndQuitMessages.get();
 
     public JoinListener() {
-        EventUtils eventsUtils = new EventUtils(plugin);
+        EventUtils eventsUtils = new EventUtils();
         eventsUtils.getEventManager().registerEvents(this, plugin);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onJoinListener(@NotNull PlayerJoinEvent e) {
         FileConfiguration config = plugin.getConfigFile().getConfig();
         DiscordSRVHHook discordSRVHHook = HookManager.getInstance().getDiscordSRVHHook();
@@ -232,7 +233,7 @@ public class JoinListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onUpdate(@NotNull PlayerJoinEvent e) {
         Player p = e.getPlayer();
         if (Settings.update) {

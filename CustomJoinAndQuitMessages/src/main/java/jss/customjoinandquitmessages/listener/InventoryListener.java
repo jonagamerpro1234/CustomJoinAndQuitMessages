@@ -11,7 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 public class InventoryListener implements Listener {
 
     private CustomJoinAndQuitMessages plugin;
-    private EventUtils eventUtils = new EventUtils(plugin);
+    private EventUtils eventUtils = new EventUtils();
 
     public InventoryListener(CustomJoinAndQuitMessages plugin) {
         this.plugin = plugin;
