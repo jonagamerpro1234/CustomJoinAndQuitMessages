@@ -1,0 +1,28 @@
+
+
+ChatFormat:
+
+  # Esta funcion desactiva el formato personalizado del plugin y usa el metodo setFormat de spigot, pero no funcionaran los eventos de Hover y Click
+  # [!] Esto permite tener una mejor compatibilidad con otros plugins pero deshabilita algunas funciones del plugin
+  UsaLegacyFormat: false
+
+  Join:
+
+    Enabled: true
+
+    Format: ""
+
+  First-Join:
+
+    Enabled: true
+
+    Format: ""
+
+  Quit:
+
+    Enabled: true
+
+    Format:
+
+
+File-Version: 1
