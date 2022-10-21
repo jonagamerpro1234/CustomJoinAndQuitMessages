@@ -1,0 +1,7 @@
+name: CustomJoinAndQuitMessage
+version: '${project.version}'
+main: jss.customjoinandquitmessage.CustomJoinAndQuitMessage
+api-version: 1.16
+prefix: CustomJoinAndQuitMessage
+loadbefore: [ Essentials ]
+softdepend: [ PlaceholderAPI, LuckPerms, DiscordSRV, Essentials, EssentialsDiscord ]
