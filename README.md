@@ -14,6 +14,9 @@
 [![releasesImg]][releases] [![licenseImg]][license] [![spigotreleases]][spigot] ![javaversion] [![issues]][issueslink]
 
 ## Description
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/da90f760aea148fa95e32465eba8e8e5)](https://app.codacy.com/gh/jonagamerpro1234/CustomJoinAndQuitMessages?utm_source=github.com&utm_medium=referral&utm_content=jonagamerpro1234/CustomJoinAndQuitMessages&utm_campaign=Badge_Grade_Settings)
+
 A simple to use plugin that will allow you to customize the join and quit message, it also brings a message customization option that will allow you to add special actions.
 
 ## Installation
