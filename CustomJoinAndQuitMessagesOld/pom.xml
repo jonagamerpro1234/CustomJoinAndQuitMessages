@@ -1,8 +1,14 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>jss.customjoinandquitmessages</groupId>
-    <artifactId>CustomJoinAndQuitMessages</artifactId>
+
+    <parent>
+        <groupId>jss.customjoinandquitmessages</groupId>
+        <artifactId>CustomJoinAndQuitMessages</artifactId>
+        <version>1.8.0-b0</version>
+    </parent>
+
+    <artifactId>CustomJoinAndQuitMessagesOld</artifactId>
     <version>1.7.6-b1</version>
 
     <properties>
