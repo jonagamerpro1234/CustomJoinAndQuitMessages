@@ -1,4 +1,4 @@
-package jss.customjoinandquitmessage.listeners;
+package jss.customjoinandquitmessage.listeners.chat;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

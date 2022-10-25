@@ -23,9 +23,9 @@ public class Lang {
     private CustomJoinAndQuitMessages plugin;
     private FileConfiguration locale = null;
     private File localeFile = null;
-    private Locale localeObject;
-    private String localeName;
-    private int index;
+    private final Locale localeObject;
+    private final String localeName;
+    private final int index;
 
     public Lang(final CustomJoinAndQuitMessages plugin, final String localeName, final int index) {
         this.plugin = plugin;
