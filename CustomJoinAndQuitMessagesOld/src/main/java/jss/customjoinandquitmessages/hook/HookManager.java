@@ -7,14 +7,12 @@ import org.jetbrains.annotations.NotNull;
 public class HookManager {
 
     private static HookManager instance;
-    private final CustomJoinAndQuitMessages plugin;
     private final DiscordSRVHHook discordSRVHHook = new DiscordSRVHHook(this);
     private final EssentialsXDiscordHook essentialsXDiscordHook = new EssentialsXDiscordHook(this);
     private final EssentialsXHook essentialsXHook = new EssentialsXHook(this);
-    private final LuckPermsHook luckPermsHook = new LuckPermsHook(this);
+    private final LuckPermsHook luckPermsHook = new LuckPermsHook();
 
-    public HookManager(CustomJoinAndQuitMessages plugin) {
-        this.plugin = plugin;
+    public HookManager() {
         instance = this;
     }
 
@@ -31,17 +29,13 @@ public class HookManager {
                 new DiscordSRVHHook(this),
                 new EssentialsXDiscordHook(this),
                 new EssentialsXHook(this),
-                new LuckPermsHook(this));
+                luckPermsHook);
     }
 
     private void initHooks(IHook @NotNull ... hooks) {
         for (IHook hook : hooks) {
             hook.setup();
         }
-    }
-
-    public CustomJoinAndQuitMessages getPlugin() {
-        return plugin;
     }
 
     public DiscordSRVHHook getDiscordSRVHHook() {

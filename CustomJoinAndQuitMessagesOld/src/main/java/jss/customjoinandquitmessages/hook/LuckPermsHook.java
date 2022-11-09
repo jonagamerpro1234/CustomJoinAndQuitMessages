@@ -8,18 +8,13 @@ import jss.customjoinandquitmessages.utils.interfaces.IHook;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class LuckPermsHook implements IHook {
 
-    private final HookManager hookManager;
     private boolean isEnabled;
 
-    public LuckPermsHook(HookManager hookManager) {
-        this.hookManager = hookManager;
-    }
 
     @Contract(pure = true)
     public static @NotNull LuckPerms getApi() {
@@ -30,16 +25,19 @@ public class LuckPermsHook implements IHook {
         if (!Bukkit.getPluginManager().isPluginEnabled("LuckPerms")) {
             Logger.warning("&eLuckPerms not enabled! - Disable Features...");
             this.isEnabled = false;
+            System.out.println("Cjm Softdepend: Luckperms false - check plugin installed in plugin folder");
             return;
         }
 
         if (!Settings.hook_luckperms) {
             this.isEnabled = false;
+            System.out.println("Cjm Softdepend: Luckperms false - Hook Enabled in config");
             Logger.warning("&eLuckPerms not enabled! - Disable Features...");
             return;
         }
 
         this.isEnabled = true;
+        System.out.println("Cjm Softdepend: Luckperms true - The plugin has successfully loaded the dependency");
         Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix() + "&aLoading LuckPerms features...");
     }
 
@@ -47,26 +45,4 @@ public class LuckPermsHook implements IHook {
         return isEnabled;
     }
 
-    public boolean isGroup(Player player, String name) {
-        LuckPerms api = LuckPermsProvider.get();
-        String group = api.getUserManager().getUser(player.getName()).getPrimaryGroup();
-        boolean a = false;
-        if (name.equals(group)) {
-            a = true;
-        }
-        return a;
-    }
-
-    public String getGroup(Player player) {
-        if (player != null) {
-            Logger.debug("Player: N/A");
-        }
-        LuckPerms api = LuckPermsProvider.get();
-        String group = api.getUserManager().getUser(player.getName()).getPrimaryGroup();
-        return group;
-    }
-
-    public HookManager getHookManager() {
-        return hookManager;
-    }
 }

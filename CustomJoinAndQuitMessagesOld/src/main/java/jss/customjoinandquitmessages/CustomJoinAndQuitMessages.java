@@ -27,7 +27,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
     public String version = this.jss.getVersion();
     private Map<String, Lang> availableLangs = new HashMap<>();
     private final ConfigFile configFile = new ConfigFile(this, "config.yml");
-    private final HookManager hooksManager = new HookManager(this);
+    private final HookManager hooksManager = new HookManager();
     private final PreConfigLoader preConfigLoader = new PreConfigLoader(this);
     private String updateVersion;
     private boolean useLegacyConfig = false;
@@ -69,7 +69,9 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
 
         groupsFile.saveDefaultConfig();
         groupsFile.create();
+
         hooksManager.load();
+
         setupEvents();
         setupCommands();
 

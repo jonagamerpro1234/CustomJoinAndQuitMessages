@@ -19,7 +19,6 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class Util {
-
     private final static String prefix = getPrefix();
 
     public static @NotNull String setLine(String color) {
