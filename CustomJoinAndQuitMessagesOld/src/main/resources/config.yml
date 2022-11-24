@@ -20,7 +20,7 @@ Config:
   Update: true
   
   # |Debug| shows you important information about the plugin loading 
-  Debug: false
+  Debug: true
   
   # |Type| the type is a way of knowing what is being used whether in the [normal] | [group] | [none] format
   Type: normal

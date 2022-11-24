@@ -54,7 +54,9 @@ public class JoinListener implements Listener {
         PlayerManager playerManager = new PlayerManager();
         playerManager.createPlayer(p, tempGroup);
 
-        Util.sendColorMessage(p,   Util.getPrefix() + " &eLuckPermHook is: " + luckPermsHook.isEnabled());
+        if(Settings.settings_debug){
+            Logger.debug(" &eLuckPermHook is: " + luckPermsHook.isEnabled());
+        }
 
         if (Settings.c_type.equalsIgnoreCase("group")){
             if (luckPermsHook.isEnabled()) {

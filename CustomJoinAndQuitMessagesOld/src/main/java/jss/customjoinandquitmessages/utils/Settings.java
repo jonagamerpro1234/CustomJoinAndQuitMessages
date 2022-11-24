@@ -10,6 +10,7 @@ public class Settings {
     public static boolean is_Group_Display;
     public static boolean update;
     public static String c_type;
+    public static boolean settings_debug;
 
     //Join section
     public static String join_type;
