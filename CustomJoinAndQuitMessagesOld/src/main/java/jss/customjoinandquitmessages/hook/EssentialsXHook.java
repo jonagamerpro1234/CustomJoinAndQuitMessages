@@ -1,6 +1,7 @@
 package jss.customjoinandquitmessages.hook;
 
 import com.earth2me.essentials.Essentials;
+import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
@@ -34,7 +35,7 @@ public class EssentialsXHook implements IHook {
 
         this.essentials = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
         this.isEnabled = true;
-        Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix() + "&aLoading Essentials features...");
+        Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix(true) + "&aLoading Essentials features...");
         Logger.warning("&e!!These features are still under development and may have bugs!!");
     }
 

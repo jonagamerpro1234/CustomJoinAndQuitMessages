@@ -1,5 +1,6 @@
 package jss.customjoinandquitmessages.hook;
 
+import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
@@ -34,7 +35,7 @@ public class EssentialsXDiscordHook implements IHook {
 
         this.service = Bukkit.getServicesManager().load(DiscordService.class);
         this.isEnabled = true;
-        Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix() + "&aLoading EssentialsDiscord features...");
+        Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix(true) + "&aLoading EssentialsDiscord features...");
         Logger.warning("&e!!These features are still under development and may have bugs!!");
     }
 

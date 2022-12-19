@@ -1,5 +1,6 @@
 package jss.customjoinandquitmessages.hook;
 
+import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Util;
@@ -23,7 +24,7 @@ public class PlaceholderApiHook implements IHook {
         }
 
         this.isEnabled = true;
-        Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix() + "&aLoading PlaceholderAPI features...");
+        Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix(true) + "&aLoading PlaceholderAPI features...");
     }
 
     public boolean isEnabled() {

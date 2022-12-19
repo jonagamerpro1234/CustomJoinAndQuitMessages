@@ -1,6 +1,7 @@
-package jss.customjoinandquitmessages.config;
+package jss.customjoinandquitmessages.config.utils;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.config.Lang;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.Util;
@@ -84,7 +85,7 @@ public class PreConfigLoader {
     public boolean loadLangs() {
         Settings.defaultLanguage = plugin.getConfig().getString("Config.Lang", "en-US");
         HashMap<String, Lang> availableLocales = new HashMap<>();
-        FileListener fl = new FileListener();
+        FileLister fl = new FileLister();
         try {
             int index = 1;
             for (String code : fl.list()) {
@@ -94,7 +95,7 @@ public class PreConfigLoader {
             plugin.getLogger().severe("Could not add locales!");
         }
         if (!availableLocales.containsKey(Settings.defaultLanguage)) {
-            Logger.warning(Util.getPrefix() + "&eLoad File: " + Settings.defaultLanguage + ".yml' not found in /locale folder. Using /locale/en-US.yml");
+            Logger.warning(Util.getPrefix(true) + "&eLoad File: " + Settings.defaultLanguage + ".yml' not found in /locale folder. Using /locale/en-US.yml");
             Settings.defaultLanguage = "en-US";
             availableLocales.put(Settings.defaultLanguage, new Lang(plugin, Settings.defaultLanguage, 0));
         }

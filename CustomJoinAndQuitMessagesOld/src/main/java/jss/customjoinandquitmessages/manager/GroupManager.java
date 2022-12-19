@@ -25,7 +25,7 @@ public class GroupManager {
     }
 
     public boolean existsGroup(String group) {
-        if(group == null){
+        if(group != null){
             Logger.error("&cGroup could not be found: &e" + group);
             return false;
         }

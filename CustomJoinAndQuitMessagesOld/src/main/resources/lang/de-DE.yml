@@ -1,5 +1,5 @@
----
 CustomJoinAndQuitMessage:
+  Prefix: '&e[&dCustomJoinAndQuitMessages&e]'
   Help-Msg:
     - '&b/CustomJoinAndQuitMessage &8| &9/Cjm &7Dies sind die Varianten des Haupt-Plugin-Befehls'
     - '&b/Cjm &ehelp &7zeige die gleiche Nachricht'

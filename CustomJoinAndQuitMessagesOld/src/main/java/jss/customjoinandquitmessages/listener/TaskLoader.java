@@ -1,7 +1,7 @@
 package jss.customjoinandquitmessages.listener;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.hook.HookManager;
+import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.hook.LuckPermsHook;
 import jss.customjoinandquitmessages.manager.PlayerManager;
 import jss.customjoinandquitmessages.utils.Logger;

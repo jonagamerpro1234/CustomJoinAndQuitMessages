@@ -1,5 +1,5 @@
----
 CustomJoinAndQuitMessage:
+  Prefix: '&e[&dCustomJoinAndQuitMessages&e]'
   Help-Msg:
     - '&b/CustomJoinAndQuitMessage &8| &9/Cjm &7это варианты основной команды плагина'
     - '&b/Cjm &ehelp &7показать это же сообщение'

@@ -1,5 +1,5 @@
----
 CustomJoinAndQuitMessage:
+  Prefix: '&e[&dCustomJoinAndQuitMessages&e]'
   Help-Msg:
     - '&b/CustomJoinAndQuitMessage &8| &9/Cjm &7这些是主要插件命令的变体'
     - '&b/Cjm &ehelp &7显示相同的消息'

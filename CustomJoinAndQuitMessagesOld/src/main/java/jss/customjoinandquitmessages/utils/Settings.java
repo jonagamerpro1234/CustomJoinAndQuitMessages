@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Settings {
 
+    public static String messages_prefix;
     public static boolean hook_luckperms_autoUpdate_group;
     //Others
     public static String defaultLanguage;

@@ -11,15 +11,12 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class Util {
-    private final static String prefix = getPrefix();
+    private final static String prefix = getPrefix(true);
 
     public static @NotNull String setLine(String color) {
         return color(color + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
@@ -56,49 +53,25 @@ public class Util {
     }
 
     @Contract(pure = true)
-    public static @NotNull String getPrefix() {
-        return "&e[&dCustomJoinAndQuitMessages&e]&7 ";
+    public static @NotNull String getPrefix(boolean ignore) {
+        String prefix;
+        if(ignore){
+            prefix = "&e[&dCustomJoinAndQuitMessages&e] &7";
+        }else{
+            prefix = Settings.messages_prefix + " &7";
+        }
+        return prefix;
     }
 
-    @Contract(pure = true)
-    public static @NotNull String getPrefixPlayer() {
-        return "&6[&dCustomJoinAndQuitMessages&6]&7 ";
-    }
 
-    public static void sendLoadTitle(String version) {
-        sendEnable("&d   ______    _____   ____    __  ___");
-        sendEnable("&d   / ____/   / /   | / __ \\  /  |/  /");
-        sendEnable("&d  / /   __  / / /| |/ / / / / /|_/ /  &bBy jonagamerpro1234");
-        sendEnable("&d / /___/ /_/ / ___ / /_/ / / /  / /   &bVersion &a" + version);
-        sendEnable("&d \\____/\\____/_/  |_\\___\\_\\/_/  /_/    &aThanks for using CustomJoinAndQuitMessage &c<3");
-    }
-
-    public static void setEnabled(String version) {
-        sendEnable(prefix, "&5 <||============================================----");
-        sendEnable(prefix, "&5 <|| &c* &bThe plugin is &d[&aSuccessfully activated&d]");
-        sendEnable(prefix, "&5 <|| &c* &bVersion: &e[&a" + version + "&e]");
-        sendEnable(prefix, "&5 <|| &c* &bBy: &e[&bjonagamerpro1234&e]");
-        sendEnable(prefix, "&5 <|| &c* &bTested Versions &3|&a1.8.x &3- &a1.19.x&3| &eComing Soon -> &c1.20");
-        sendEnable(prefix, "&5 <||============================================----");
-    }
-
-    public static void setDisabled(String version) {
-        sendEnable(prefix, "&5 <||============================================----");
-        sendEnable(prefix, "&5 <|| &c* &bThe plugin is &d[&cSuccessfully disabled&c]");
-        sendEnable(prefix, "&5 <|| &c* &bVersion: &e[&a" + version + "&e]");
-        sendEnable(prefix, "&5 <|| &c* &bBy: &e[&bjonagamerpro1234&e]");
-        sendEnable(prefix, "&5 <|| &c* &bTested Versions &3|&a1.8.x &3- &a1.19.x&3| &eComing Soon -> &c1.20");
-        sendEnable(prefix, "&5 <|| &a* &eThanks for using CustomJoinAndQuitMessage &c<3");
-        sendEnable(prefix, "&5 <||============================================----");
-    }
-
-    public static @NotNull List<String> setTabLimit(final @NotNull List<String> list, final String inic) {
+    public static @NotNull List<String> setTabLimit(final @NotNull List<String> options, final String lastArgs) {
         final List<String> returned = new ArrayList<>();
-        for (String s : list) {
+
+        for (String s : options) {
             if (s == null) {
                 continue;
             }
-            if (s.toLowerCase().startsWith(inic.toLowerCase())) {
+            if (s.toLowerCase().startsWith(lastArgs.toLowerCase())) {
                 returned.add(s);
             }
         }
@@ -106,15 +79,15 @@ public class Util {
     }
 
     @SuppressWarnings("unused")
-    public static void sendTextComponentHover(@NotNull Player j, String action, String message, String submessage, String color) {
+    public static void sendTextComponentHover(@NotNull Player j, String action, String message, String subMessage, String color) {
         TextComponent msg = new TextComponent(color(message));
-        msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(action)), new ComponentBuilder(submessage).color(ChatColor.of(color)).create()));
+        msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(action)), new ComponentBuilder(subMessage).color(ChatColor.of(color)).create()));
         j.spigot().sendMessage(msg);
     }
 
-    public static void sendTextComponent116Hover(@NotNull Player j, String action, String message, String submessage) {
+    public static void sendTextComponent116Hover(@NotNull Player j, String action, String message, String subMessage) {
         TextComponent msg = new TextComponent(color(message));
-        msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(action)), new ComponentBuilder(color(submessage)).create()));
+        msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(action)), new ComponentBuilder(color(subMessage)).create()));
         j.spigot().sendMessage(msg);
     }
 
@@ -157,33 +130,40 @@ public class Util {
     public static @NotNull String getVar(@NotNull Player player, String text) {
         text = text.replace("<name>", player.getName());
         text = text.replace("<displayname>", player.getDisplayName());
-        text = text.replaceAll("<world>", player.getWorld().getName());
         text = text.replace("<0>", " ");
-        text = placeholderReplace(text, player);
-        text = getOnlinePlayers(text);
+        text = onPlaceholderAPI(player, text);
         return text;
     }
 
-    private static String placeholderReplace(String text, Player player) {
-        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            return PlaceholderAPI.setPlaceholders(player, text);
-        }
-        return text;
+    public static String onPlaceholderAPI(Player player, String text){
+        return Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI") ? PlaceholderAPI.setPlaceholders(player, text) : text;
     }
 
-    public static @NotNull String getOnlinePlayers(String text) {
-        int playersOnline = 0;
-        try {
-            if (Bukkit.class.getMethod("getOnlinePlayers").getReturnType() == Collection.class) {
-                playersOnline = ((Collection<?>) Bukkit.class.getMethod("getOnlinePlayers", new Class[0]).invoke(null, new Object[0])).size();
-            } else {
-                playersOnline = ((Player[]) Bukkit.class.getMethod("getOnlinePlayers", new Class[0]).invoke(null, new Object[0])).length;
-            }
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException ignored) {
-        }
-        text = text.replace("<online>", "" + playersOnline);
-        text = text.replace("<Online>", "" + playersOnline);
-        return text;
+    public static void sendLoadTitle(String version) {
+        sendEnable("&d   ______    _____   ____    __  ___");
+        sendEnable("&d   / ____/   / /   | / __ \\  /  |/  /");
+        sendEnable("&d  / /   __  / / /| |/ / / / / /|_/ /  &bBy jonagamerpro1234");
+        sendEnable("&d / /___/ /_/ / ___ / /_/ / / /  / /   &bVersion &a" + version);
+        sendEnable("&d \\____/\\____/_/  |_\\___\\_\\/_/  /_/    &aThanks for using CustomJoinAndQuitMessage &c<3");
+    }
+
+    public static void setEnabled(String version) {
+        sendEnable(prefix, "&5 <||============================================----");
+        sendEnable(prefix, "&5 <|| &c* &bThe plugin is &d[&aSuccessfully activated&d]");
+        sendEnable(prefix, "&5 <|| &c* &bVersion: &e[&a" + version + "&e]");
+        sendEnable(prefix, "&5 <|| &c* &bBy: &e[&bjonagamerpro1234&e]");
+        sendEnable(prefix, "&5 <|| &c* &bTested Versions &3|&a1.8.x &3- &a1.19.x&3| &eComing Soon -> &c1.20");
+        sendEnable(prefix, "&5 <||============================================----");
+    }
+
+    public static void setDisabled(String version) {
+        sendEnable(prefix, "&5 <||============================================----");
+        sendEnable(prefix, "&5 <|| &c* &bThe plugin is &d[&cSuccessfully disabled&c]");
+        sendEnable(prefix, "&5 <|| &c* &bVersion: &e[&a" + version + "&e]");
+        sendEnable(prefix, "&5 <|| &c* &bBy: &e[&bjonagamerpro1234&e]");
+        sendEnable(prefix, "&5 <|| &c* &bTested Versions &3|&a1.8.x &3- &a1.19.x&3| &eComing Soon -> &c1.20");
+        sendEnable(prefix, "&5 <|| &a* &eThanks for using CustomJoinAndQuitMessage &c<3");
+        sendEnable(prefix, "&5 <||============================================----");
     }
 
 }

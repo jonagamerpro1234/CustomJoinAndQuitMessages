@@ -1,4 +1,4 @@
-package jss.customjoinandquitmessages.config;
+package jss.customjoinandquitmessages.config.utils;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.Logger;
@@ -15,7 +15,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 
-public class FileListener {
+public class FileLister {
 
     private final CustomJoinAndQuitMessages plugin = CustomJoinAndQuitMessages.get();
 

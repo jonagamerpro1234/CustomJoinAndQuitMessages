@@ -2,7 +2,8 @@ package jss.customjoinandquitmessages;
 
 import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
 import jss.customjoinandquitmessages.config.*;
-import jss.customjoinandquitmessages.hook.HookManager;
+import jss.customjoinandquitmessages.config.utils.PreConfigLoader;
+import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.listener.JoinListener;
 import jss.customjoinandquitmessages.listener.TaskLoader;
 import jss.customjoinandquitmessages.manager.InventoryView;

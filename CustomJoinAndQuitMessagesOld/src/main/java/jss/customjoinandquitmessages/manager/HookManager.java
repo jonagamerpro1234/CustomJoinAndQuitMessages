@@ -1,6 +1,6 @@
-package jss.customjoinandquitmessages.hook;
+package jss.customjoinandquitmessages.manager;
 
-import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.hook.*;
 import jss.customjoinandquitmessages.utils.interfaces.IHook;
 import org.jetbrains.annotations.NotNull;
 

@@ -32,7 +32,6 @@ public class DisplayGui {
         setItems();
     }
 
-
     public ItemStack setDecoration() {
         item = XMaterial.BLACK_STAINED_GLASS_PANE.parseItem();
         assert item != null;

@@ -4,8 +4,8 @@ import org.bukkit.entity.Player;
 
 public class InventoryView {
 
-    private Player player;
-    private String inventoryName;
+    private final Player player;
+    private final String inventoryName;
 
     public InventoryView(Player player, String inventoryName) {
         this.player = player;

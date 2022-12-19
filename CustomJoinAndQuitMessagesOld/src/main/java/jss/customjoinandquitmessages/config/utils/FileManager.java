@@ -1,4 +1,4 @@
-package jss.customjoinandquitmessages.config;
+package jss.customjoinandquitmessages.config.utils;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import org.bukkit.plugin.java.JavaPlugin;

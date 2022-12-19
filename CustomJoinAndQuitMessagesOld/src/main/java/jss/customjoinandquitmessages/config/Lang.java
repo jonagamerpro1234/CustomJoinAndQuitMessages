@@ -2,6 +2,7 @@ package jss.customjoinandquitmessages.config;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.Settings;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -69,6 +70,7 @@ public class Lang {
 
     private void loadLocale() {
         String main = "CustomJoinAndQuitMessage";
+        Settings.messages_prefix = locale.getString(main + ".Prefix");
         Error_Cmd = locale.getString(main + ".Error-Cmd");
         Error_Console = locale.getString(main + ".Error-Console");
         Error_Sound = locale.getString(main + ".Sound-Error");

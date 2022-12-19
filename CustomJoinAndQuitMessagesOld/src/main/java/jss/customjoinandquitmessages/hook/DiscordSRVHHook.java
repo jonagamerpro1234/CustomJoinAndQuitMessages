@@ -1,5 +1,6 @@
 package jss.customjoinandquitmessages.hook;
 
+import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
@@ -30,7 +31,7 @@ public class DiscordSRVHHook implements IHook {
         }
 
         this.isEnabled = true;
-        Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix() + "&aLoading DiscordSRV features...");
+        Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix(true) + "&aLoading DiscordSRV features...");
     }
 
     public boolean isEnabled() {

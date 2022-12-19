@@ -1,7 +1,7 @@
 #    ______    _____   ____    __  ___
 #   / ____/   / /   | / __ \  /  |/  /
 #  / /   __  / / /| |/ / / / / /|_/ /  By jonagamerpro1234
-# / /___/ /_/ / ___ / /_/ / / /  / /   Version 1.7.5
+# / /___/ /_/ / ___ / /_/ / / /  / /   Version ${project.version}
 # \____/\____/_/  |_\___\_\/_/  /_/    Thanks for using CustomJoinAndQuitMessage <3
 #                                    
 # ● A simple plugin for personalization of the join and quit messages and more...

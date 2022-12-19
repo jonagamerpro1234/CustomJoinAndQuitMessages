@@ -6,6 +6,7 @@ import github.scarsz.discordsrv.util.DiscordUtil;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.hook.*;
 import jss.customjoinandquitmessages.json.Json;
+import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.manager.PlayerManager;
 import jss.customjoinandquitmessages.utils.*;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -242,7 +243,7 @@ public class JoinListener implements Listener {
             if ((p.isOp()) || (p.hasPermission("Cjm.Update.Notify"))) {
                 new UpdateChecker(CustomJoinAndQuitMessages.get(), UpdateSettings.ID).getUpdateVersion(version -> {
                     if (!CustomJoinAndQuitMessages.get().getDescription().getVersion().equalsIgnoreCase(version)) {
-                        TextComponent component = new TextComponent(Util.color(Util.getPrefixPlayer()
+                        TextComponent component = new TextComponent(Util.color(Util.getPrefix(true)
                                 + " &aThere is a new version available for download, Click on this message to copy the link"));
                         component.setClickEvent(new ClickEvent(Action.OPEN_URL, UpdateSettings.URL_PlUGIN[0]));
                         p.spigot().sendMessage(component);

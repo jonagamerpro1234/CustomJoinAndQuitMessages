@@ -38,7 +38,7 @@ public class LuckPermsHook implements IHook {
 
         this.isEnabled = true;
         System.out.println("Cjm Softdepend: Luckperms true - The plugin has successfully loaded the dependency");
-        Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix() + "&aLoading LuckPerms features...");
+        Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix(true) + "&aLoading LuckPerms features...");
     }
 
     public boolean isEnabled() {
