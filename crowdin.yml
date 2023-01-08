@@ -2,4 +2,4 @@ files:
   - source: /bukkit/src/main/resources/langs/messages.yml
     translation: /bukkit/src/main/resources/langs/%locale_with_underscore%.yml
   - source: /CustomJoinAndQuitMessagesOld/src/main/resources/lang/messages.yml
-    translation: /CustomJoinAndQuitMessagesOld/src/main/resources/%locale_with_underscore%.yml
+    translation: /CustomJoinAndQuitMessagesOld/src/main/resources/lang/%locale_with_underscore%.yml
