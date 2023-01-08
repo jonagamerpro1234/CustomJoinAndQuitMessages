@@ -14,7 +14,7 @@
 Config:
 
   # |Lang| you can use the available languages of the plugin, or you can add your own translations [ Default = en-US ]
-  Lang: en-US
+  Lang: en_US
   
   # |Update| This function lets you know if there is a plugin update [Does not disable console messages]
   Update: true
