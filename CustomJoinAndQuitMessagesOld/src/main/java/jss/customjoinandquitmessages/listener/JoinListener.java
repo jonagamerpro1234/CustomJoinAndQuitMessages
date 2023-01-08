@@ -5,7 +5,7 @@ import com.cryptomorin.xseries.messages.Titles;
 import github.scarsz.discordsrv.util.DiscordUtil;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.hook.*;
-import jss.customjoinandquitmessages.json.Json;
+import jss.customjoinandquitmessages.json.MessageBuilder;
 import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.manager.PlayerManager;
 import jss.customjoinandquitmessages.utils.*;
@@ -113,10 +113,10 @@ public class JoinListener implements Listener {
 
                 text = Util.color(Util.getVar(p, text));
 
-                Json json = new Json(p, text);
+                MessageBuilder messageBuilder = new MessageBuilder(p, text);
 
                 if (config.getBoolean("Config.Show-Chat-In-Console")) {
-                    Logger.info(json.getText());
+                    Logger.info(messageBuilder.getText());
                 }
 
                 if (isNormalType) {
@@ -128,7 +128,7 @@ public class JoinListener implements Listener {
 
                         DiscordUtil.sendMessageBlocking(
                                 DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
-                                Util.colorless(json.getText()));
+                                Util.colorless(messageBuilder.getText()));
                     }
 
                     if (essentialsXDiscordHook.isEnabled()) {
@@ -136,7 +136,7 @@ public class JoinListener implements Listener {
                             return;
 
                         essentialsXDiscordHook.sendJoinMessage(Settings.hook_essentialsDiscord_channelid,
-                                Util.colorless(json.getText()));
+                                Util.colorless(messageBuilder.getText()));
                     }
                 } else if (isModifyType) {
                     boolean isHover = Objects.equals(config.getString("Join.HoverEvent.Enabled"), "true");
@@ -168,34 +168,34 @@ public class JoinListener implements Listener {
                         if (isClick) {
                             assert isClick_Mode != null;
                             if (isClick_Mode.equalsIgnoreCase("command")) {
-                                json.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
+                                messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
                             } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                                json.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
+                                messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
                             } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                                json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
+                                messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
                             }
                         } else {
-                            json.setHover(Hover_Text).sendToAll();
+                            messageBuilder.setHover(Hover_Text).sendToAll();
                         }
                     } else {
                         if (isClick) {
                             assert isClick_Mode != null;
                             if (isClick_Mode.equalsIgnoreCase("command")) {
-                                json.setExecuteCommand(Action_Command).sendToAll();
+                                messageBuilder.setExecuteCommand(Action_Command).sendToAll();
                             } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                                json.setOpenURL(Action_Url).sendToAll();
+                                messageBuilder.setOpenURL(Action_Url).sendToAll();
                             } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                                json.setSuggestCommand(Action_Suggest).sendToAll();
+                                messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
                             }
                         } else {
-                            json.sendToAll();
+                            messageBuilder.sendToAll();
                         }
                     }
 
                     if (discordSRVHHook.isEnabled()) {
                         DiscordUtil.sendMessageBlocking(
                                 DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
-                                Util.colorless(json.getText()));
+                                Util.colorless(messageBuilder.getText()));
                     }
 
                     if (isTitle) {
@@ -288,10 +288,10 @@ public class JoinListener implements Listener {
                 text = Util.color(text);
                 text = Util.getVar(p, text);
 
-                Json json = new Json(p, text);
+                MessageBuilder messageBuilder = new MessageBuilder(p, text);
 
                 if (config.getBoolean("Config.Show-Chat-In-Console")) {
-                    Logger.info(json.getText());
+                    Logger.info(messageBuilder.getText());
                 }
 
                 if (isNormalType) {
@@ -301,14 +301,14 @@ public class JoinListener implements Listener {
                             return;
                         DiscordUtil.sendMessageBlocking(
                                 DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
-                                Util.colorless(json.getText()));
+                                Util.colorless(messageBuilder.getText()));
                     }
 
                     if (essentialsXDiscordHook.isEnabled()) {
                         if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none"))
                             return;
                         essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid,
-                                Util.colorless(json.getText()));
+                                Util.colorless(messageBuilder.getText()));
                     }
                 } else if (isModifyType) {
 
@@ -332,27 +332,27 @@ public class JoinListener implements Listener {
                         if (isClick) {
                             assert isClick_Mode != null;
                             if (isClick_Mode.equalsIgnoreCase("command")) {
-                                json.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
+                                messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
                             } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                                json.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
+                                messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
                             } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                                json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
+                                messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
                             }
                         } else {
-                            json.setHover(Hover_Text).sendToAll();
+                            messageBuilder.setHover(Hover_Text).sendToAll();
                         }
                     } else {
                         if (isClick) {
                             assert isClick_Mode != null;
                             if (isClick_Mode.equalsIgnoreCase("command")) {
-                                json.setExecuteCommand(Action_Command).sendToAll();
+                                messageBuilder.setExecuteCommand(Action_Command).sendToAll();
                             } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                                json.setOpenURL(Action_Url).sendToAll();
+                                messageBuilder.setOpenURL(Action_Url).sendToAll();
                             } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                                json.setSuggestCommand(Action_Suggest).sendToAll();
+                                messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
                             }
                         } else {
-                            json.sendToAll();
+                            messageBuilder.sendToAll();
                         }
                     }
 
@@ -363,7 +363,7 @@ public class JoinListener implements Listener {
 
                         DiscordUtil.sendMessageBlocking(
                                 DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
-                                Util.colorless(json.getText()));
+                                Util.colorless(messageBuilder.getText()));
                     }
 
                     if (essentialsXDiscordHook.isEnabled()) {
@@ -372,7 +372,7 @@ public class JoinListener implements Listener {
                             return;
 
                         essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid,
-                                Util.colorless(json.getText()));
+                                Util.colorless(messageBuilder.getText()));
                     }
 
                     try {

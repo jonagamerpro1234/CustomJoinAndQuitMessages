@@ -3,7 +3,7 @@ package jss.customjoinandquitmessages.manager;
 import com.cryptomorin.xseries.messages.ActionBar;
 import com.cryptomorin.xseries.messages.Titles;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.json.Json;
+import jss.customjoinandquitmessages.json.MessageBuilder;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.Util;
@@ -76,35 +76,35 @@ public class DisplayManager {
             Action_Suggest = config.getString("Join.ClickEvent.Actions.Suggest-Command");
         }
 
-        Json json = new Json(player, Util.color(Util.getVar(player, text)));
+        MessageBuilder messageBuilder = new MessageBuilder(player, Util.color(Util.getVar(player, text)));
 
         if (isNormalType) {
-            json.send();
+            messageBuilder.send();
             return;
         } else if (isModifyType) {
             if (isHover) {
                 if (isClick) {
                     if (isClick_Mode.equalsIgnoreCase("command")) {
-                        json.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
+                        messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
                     } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        json.setHover(Hover_Text).setOpenURL(Action_Url).send();
+                        messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).send();
                     } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
+                        messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
                     }
                 } else {
-                    json.setHover(Hover_Text).send();
+                    messageBuilder.setHover(Hover_Text).send();
                 }
             } else {
                 if (isClick) {
                     if (isClick_Mode.equalsIgnoreCase("command")) {
-                        json.setExecuteCommand(Action_Command).send();
+                        messageBuilder.setExecuteCommand(Action_Command).send();
                     } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        json.setOpenURL(Action_Url).send();
+                        messageBuilder.setOpenURL(Action_Url).send();
                     } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        json.setSuggestCommand(Action_Suggest).send();
+                        messageBuilder.setSuggestCommand(Action_Suggest).send();
                     }
                 } else {
-                    json.send();
+                    messageBuilder.send();
                 }
             }
         }
@@ -155,35 +155,35 @@ public class DisplayManager {
             Action_Suggest = config.getString("Join.ClickEvent.Actions.Suggest-Command");
         }
 
-        Json json = new Json(player, Util.color(Util.getVar(player, text)));
+        MessageBuilder messageBuilder = new MessageBuilder(player, Util.color(Util.getVar(player, text)));
 
         if (isNormalType) {
-            json.send();
+            messageBuilder.send();
             return;
         } else if (isModifyType) {
             if (isHover) {
                 if (isClick) {
                     if (isClick_Mode.equalsIgnoreCase("command")) {
-                        json.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
+                        messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
                     } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        json.setHover(Hover_Text).setOpenURL(Action_Url).send();
+                        messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).send();
                     } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
+                        messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
                     }
                 } else {
-                    json.setHover(Hover_Text).send();
+                    messageBuilder.setHover(Hover_Text).send();
                 }
             } else {
                 if (isClick) {
                     if (isClick_Mode.equalsIgnoreCase("command")) {
-                        json.setExecuteCommand(Action_Command).send();
+                        messageBuilder.setExecuteCommand(Action_Command).send();
                     } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        json.setOpenURL(Action_Url).send();
+                        messageBuilder.setOpenURL(Action_Url).send();
                     } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        json.setSuggestCommand(Action_Suggest).send();
+                        messageBuilder.setSuggestCommand(Action_Suggest).send();
                     }
                 } else {
-                    json.send();
+                    messageBuilder.send();
                 }
             }
         }
@@ -234,35 +234,35 @@ public class DisplayManager {
             Action_Suggest = config.getString("Quit.ClickEvent.Actions.Suggest-Command");
         }
 
-        Json json = new Json(player, Util.color(Util.getVar(player, text)));
+        MessageBuilder messageBuilder = new MessageBuilder(player, Util.color(Util.getVar(player, text)));
 
         if (isNormalType) {
-            json.send();
+            messageBuilder.send();
             return;
         } else if (isModifyType) {
             if (isHover) {
                 if (isClick) {
                     if (isClick_Mode.equalsIgnoreCase("command")) {
-                        json.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
+                        messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
                     } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        json.setHover(Hover_Text).setOpenURL(Action_Url).send();
+                        messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).send();
                     } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
+                        messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
                     }
                 } else {
-                    json.setHover(Hover_Text).send();
+                    messageBuilder.setHover(Hover_Text).send();
                 }
             } else {
                 if (isClick) {
                     if (isClick_Mode.equalsIgnoreCase("command")) {
-                        json.setExecuteCommand(Action_Command).send();
+                        messageBuilder.setExecuteCommand(Action_Command).send();
                     } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        json.setOpenURL(Action_Url).send();
+                        messageBuilder.setOpenURL(Action_Url).send();
                     } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        json.setSuggestCommand(Action_Suggest).send();
+                        messageBuilder.setSuggestCommand(Action_Suggest).send();
                     }
                 } else {
-                    json.send();
+                    messageBuilder.send();
                 }
             }
         }

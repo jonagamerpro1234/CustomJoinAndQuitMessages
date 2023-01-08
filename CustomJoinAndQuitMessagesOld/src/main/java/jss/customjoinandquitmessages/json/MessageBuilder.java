@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class Json {
+public class MessageBuilder {
 
     private final Player player;
     private final String text;
@@ -20,7 +20,7 @@ public class Json {
     private String executeCommand;
     private String openUrl;
 
-    public Json(Player player, String text) {
+    public MessageBuilder(Player player, String text) {
         this.player = player;
         this.text = text;
         this.hoverText = null;
@@ -34,7 +34,7 @@ public class Json {
         return text;
     }
 
-    public Json setHover(@NotNull List<String> hover) {
+    public MessageBuilder setHover(@NotNull List<String> hover) {
         this.hoverText = new BaseComponent[hover.size()];
         for (int i = 0; i < hover.size(); i++) {
             TextComponent component = new TextComponent();
@@ -48,17 +48,17 @@ public class Json {
         return this;
     }
 
-    public Json setSuggestCommand(String suggestCommand) {
+    public MessageBuilder setSuggestCommand(String suggestCommand) {
         this.suggestCommand = suggestCommand;
         return this;
     }
 
-    public Json setExecuteCommand(String executeCommand) {
+    public MessageBuilder setExecuteCommand(String executeCommand) {
         this.executeCommand = executeCommand;
         return this;
     }
 
-    public Json setOpenURL(String url) {
+    public MessageBuilder setOpenURL(String url) {
         this.openUrl = url;
         return this;
     }
