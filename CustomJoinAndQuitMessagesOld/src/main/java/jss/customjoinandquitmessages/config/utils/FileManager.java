@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 public class FileManager {
 
-    private CustomJoinAndQuitMessages plugin;
+    private final CustomJoinAndQuitMessages plugin;
 
     public FileManager(CustomJoinAndQuitMessages plugin) {
         super();
@@ -26,8 +26,8 @@ public class FileManager {
         }
     }
 
-    public void createFolderAndFile(String namefolder, String namefile) {
-        File folder = new File(getDataFolder(), namefolder);
+    public void createFolderAndFile(String nameFolder, String nameFile) {
+        File folder = new File(getDataFolder(), nameFolder);
         if (!folder.exists()) {
             try {
                 folder.mkdir();
@@ -36,7 +36,7 @@ public class FileManager {
             }
         }
 
-        File file = new File(folder, namefile);
+        File file = new File(folder, nameFile);
         if (!file.exists()) {
             try {
                 file.createNewFile();

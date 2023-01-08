@@ -29,7 +29,7 @@ public class FileLister {
         Logger.debug("Path: " + langDir);
 
         if(Files.exists(langDir)) {
-            Pattern langFilePattern = Pattern.compile("^[a-z]{2}(-[A-Z]{2})?\\.yml$");
+            Pattern langFilePattern = Pattern.compile("^[a-z]{2}(_[A-Z]{2})?\\.yml$");
 
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(langDir)) {
 
@@ -77,6 +77,12 @@ public class FileLister {
                 }
             }
         }
+        Logger.debug("List of available languages");
+        for (String s : result){
+            Logger.debug(" * " + s);
+        }
+        Logger.debug("============================");
+
         return result;
     }
 

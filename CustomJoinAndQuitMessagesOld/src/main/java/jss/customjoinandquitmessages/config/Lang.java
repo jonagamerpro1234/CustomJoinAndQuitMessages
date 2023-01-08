@@ -21,7 +21,7 @@ public class Lang {
     public String Error_Console;
     public String Error_Sound;
     public String error_null_group;
-    private CustomJoinAndQuitMessages plugin;
+    private final CustomJoinAndQuitMessages plugin;
     private FileConfiguration locale = null;
     private File localeFile = null;
     private final Locale localeObject;
@@ -32,19 +32,19 @@ public class Lang {
         this.plugin = plugin;
         this.index = index;
         this.localeName = localeName;
-        getlang(localeName);
+        getLang(localeName);
         loadLocale();
         localeObject = new Locale(localeName.substring(0, 2), localeName.substring(3, 5));
     }
 
-    public FileConfiguration getlang(final String localeName) {
+    public FileConfiguration getLang(final String localeName) {
         if (this.locale == null) {
-            reloadlang(localeName);
+            reloadLang(localeName);
         }
         return locale;
     }
 
-    public void reloadlang(final String localeName) {
+    public void reloadLang(final String localeName) {
         final File localeDir = new File(plugin.getDataFolder() + File.separator + "lang");
 
         if (!localeDir.exists()) {
@@ -103,4 +103,5 @@ public class Lang {
     public int getIndex() {
         return index;
     }
+
 }

@@ -95,7 +95,7 @@ public class PreConfigLoader {
             plugin.getLogger().severe("Could not add locales!");
         }
         if (!availableLocales.containsKey(Settings.defaultLanguage)) {
-            Logger.warning(Util.getPrefix(true) + "&eLoad File: " + Settings.defaultLanguage + ".yml' not found in /locale folder. Using /locale/en-US.yml");
+            Logger.warning(Util.getPrefix(true) + "&eLoad File: " + Settings.defaultLanguage + ".yml' not found in /lang/ folder. Using /lang/en-US.yml");
             Settings.defaultLanguage = "en-US";
             availableLocales.put(Settings.defaultLanguage, new Lang(plugin, Settings.defaultLanguage, 0));
         }
