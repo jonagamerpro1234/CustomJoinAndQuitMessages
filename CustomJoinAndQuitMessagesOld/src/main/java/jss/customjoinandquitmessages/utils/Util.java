@@ -17,6 +17,7 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 public class Util {
     private final static String prefix = getPrefix(true);
+    private static final String PERMISSION_PREFIX = "cjm.";
 
     public static @NotNull String setLine(String color) {
         return color(color + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
@@ -164,6 +165,10 @@ public class Util {
         sendEnable(prefix, "&5 <|| &c* &bTested Versions &3|&a1.8.x &3- &a1.19.x&3| &eComing Soon -> &c1.20");
         sendEnable(prefix, "&5 <|| &a* &eThanks for using CustomJoinAndQuitMessage &c<3");
         sendEnable(prefix, "&5 <||============================================----");
+    }
+
+    public static boolean setPerm(@NotNull Player player, String permName){
+        return player.hasPermission(PERMISSION_PREFIX + permName);
     }
 
 }

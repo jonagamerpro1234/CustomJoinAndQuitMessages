@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class MessageBuilder {
-
     private final Player player;
     private final String text;
     private BaseComponent[] hoverText;

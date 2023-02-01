@@ -9,7 +9,9 @@ public class HelpCommand extends SubCommand {
         return "help";
     }
 
-
+    public String permission(){
+        return "";
+    }
     public void onCommand(CommandSender sender, String[] args) {
 
     }

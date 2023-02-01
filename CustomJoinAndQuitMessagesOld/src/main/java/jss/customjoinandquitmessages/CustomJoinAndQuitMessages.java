@@ -76,19 +76,9 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
         setupEvents();
         setupCommands();
 
-        new UpdateChecker(this, UpdateSettings.ID).getUpdateVersion(version -> {
-            updateVersion = version;
-            if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
-                Logger.success("&a" + this.name + " is up to date!");
-            } else {
-                Logger.outLine("&5<||" + Util.setLine("&5"));
-                Logger.warning("&5<||&b" + this.name + " is outdated!");
-                Logger.warning("&5<||&bNewest version: &a" + version);
-                Logger.warning("&5<||&bYour version: &d" + UpdateSettings.VERSION);
-                Logger.warning("&5<||&bUpdate Here on Spigot: &e" + UpdateSettings.URL_PlUGIN[0]);
-                Logger.outLine("&5<||" + Util.setLine("&5"));
-            }
-        });
+        UpdateChecker updateChecker = new UpdateChecker(this);
+        updateChecker.sendSpigotUpdate();
+        updateChecker.sendGithubUpdate();
     }
 
     public void onDisable() {
