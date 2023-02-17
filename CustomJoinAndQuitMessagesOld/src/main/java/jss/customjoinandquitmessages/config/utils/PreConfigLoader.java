@@ -25,7 +25,7 @@ public class PreConfigLoader {
 
             //Other
             Settings.settings_debug = config.getBoolean("Config.Debug");
-            Settings.update = Objects.equals(config.getString("Config.Update"), "true");
+            Settings.update = Objects.equals(config.getString("Config.Update.Enabled"), "true");
             Settings.c_type = config.getString("Config.Type");
             Settings.is_Group_Display = Objects.requireNonNull(config.getString("Config.Type")).equalsIgnoreCase("group");
 

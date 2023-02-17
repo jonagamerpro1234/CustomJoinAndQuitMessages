@@ -8,6 +8,7 @@ import net.md_5.bungee.api.chat.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.MetadataValue;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -169,6 +170,7 @@ public class Util {
         sendEnable(prefix, "&5 <||============================================----");
     }
 
+    @SuppressWarnings("unused")
     public static boolean setPerm(@NotNull Player player, String permName){
         return player.hasPermission(PERMISSION_PREFIX + permName);
     }
@@ -179,6 +181,13 @@ public class Util {
         if(!file.exists()){
             file.mkdir();
         }
+    }
+
+    public static boolean isVanished(@NotNull Player player) {
+        for (MetadataValue meta : player.getMetadata("vanished")) {
+            if (meta.asBoolean()) return true;
+        }
+        return false;
     }
 
 }

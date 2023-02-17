@@ -11,6 +11,7 @@ public class HookManager {
     private final EssentialsXDiscordHook essentialsXDiscordHook = new EssentialsXDiscordHook(this);
     private final EssentialsXHook essentialsXHook = new EssentialsXHook(this);
     private final LuckPermsHook luckPermsHook = new LuckPermsHook();
+    private final SuperVanishHook superVanishHook = new SuperVanishHook();
 
     public HookManager() {
         instance = this;
@@ -26,10 +27,11 @@ public class HookManager {
 
     public void load() {
         initHooks(new PlaceholderApiHook(this),
-                new DiscordSRVHHook(this),
-                new EssentialsXDiscordHook(this),
-                new EssentialsXHook(this),
-                luckPermsHook);
+                discordSRVHHook,
+                essentialsXDiscordHook,
+                essentialsXHook,
+                luckPermsHook,
+                superVanishHook);
     }
 
     private void initHooks(IHook @NotNull ... hooks) {
@@ -52,5 +54,9 @@ public class HookManager {
 
     public LuckPermsHook getLuckPermsHook() {
         return luckPermsHook;
+    }
+
+    public SuperVanishHook getSuperVanishHook() {
+        return superVanishHook;
     }
 }

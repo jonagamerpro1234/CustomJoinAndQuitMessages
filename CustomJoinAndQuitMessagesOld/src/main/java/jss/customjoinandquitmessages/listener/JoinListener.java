@@ -4,10 +4,7 @@ import com.cryptomorin.xseries.messages.ActionBar;
 import com.cryptomorin.xseries.messages.Titles;
 import github.scarsz.discordsrv.util.DiscordUtil;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.hook.DiscordSRVHHook;
-import jss.customjoinandquitmessages.hook.EssentialsXDiscordHook;
-import jss.customjoinandquitmessages.hook.EssentialsXHook;
-import jss.customjoinandquitmessages.hook.LuckPermsHook;
+import jss.customjoinandquitmessages.hook.*;
 import jss.customjoinandquitmessages.json.MessageBuilder;
 import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.manager.PlayerManager;
@@ -48,6 +45,7 @@ public class JoinListener implements Listener {
         LuckPermsHook luckPermsHook = HookManager.getInstance().getLuckPermsHook();
         EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
         EssentialsXHook essentialsXHook = HookManager.get().getEssentialsXHook();
+        SuperVanishHook superVanishHook = HookManager.get().getSuperVanishHook();
         Player p = e.getPlayer();
         String tempGroup;
 
@@ -90,6 +88,18 @@ public class JoinListener implements Listener {
         if (Settings.welcome) {
             for (String text : Settings.list_welcome)
                 Util.sendColorMessage(p, Util.getVar(p, text));
+        }
+
+        if(Util.isVanished(p)){
+            e.setJoinMessage(null);
+            return;
+        }
+
+        if (superVanishHook.isEnabled()){
+            if (superVanishHook.isVanishPlayer(p)){
+                e.setJoinMessage(null);
+                return;
+            }
         }
 
         if (essentialsXHook.isEnabled()) {
@@ -168,7 +178,7 @@ public class JoinListener implements Listener {
                     String Action_Url = config.getString("Join.ClickEvent.Actions.Url");
                     String Action_Suggest = config.getString("Join.ClickEvent.Actions.Suggest-Command");
 
-                    List<String> Action_Dev = config.getStringList("Join.ClickEvent.DevActions");
+                    //List<String> Action_Dev = config.getStringList("Join.ClickEvent.DevActions");
 
                     String Title_Text = config.getString("Join.Title.Title");
                     String SubTitle_Text = config.getString("Join.Title.SubTitle");
@@ -199,7 +209,7 @@ public class JoinListener implements Listener {
 
                         if (isClick) {
 
-                            for(String action : Action_Dev){
+                            /*for(String action : Action_Dev){
 
                                 String[] parts = action.split(":");
                                 String type = parts[0].trim();
@@ -220,9 +230,8 @@ public class JoinListener implements Listener {
                                         break;
                                 }
                             }
-                            messageBuilder.sendToAll();
+                            messageBuilder.sendToAll();*/
 
-                            /** Temp Disabled
                             assert isClick_Mode != null;
                             if (isClick_Mode.equalsIgnoreCase("command")) {
                                 messageBuilder.setExecuteCommand(Action_Command).sendToAll();
@@ -231,7 +240,7 @@ public class JoinListener implements Listener {
                             } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
                                 messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
                             }
-                            */
+
 
                         } else {
                             messageBuilder.sendToAll();
@@ -300,11 +309,24 @@ public class JoinListener implements Listener {
         DiscordSRVHHook discordSRVHHook = HookManager.getInstance().getDiscordSRVHHook();
         EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
         EssentialsXHook essentialsXHook = HookManager.get().getEssentialsXHook();
+        SuperVanishHook superVanishHook = HookManager.get().getSuperVanishHook();
         PlayerManager playerManager = new PlayerManager();
 
         boolean isNormal = Settings.c_type.equalsIgnoreCase("normal");
         boolean isGroup = Settings.c_type.equalsIgnoreCase("group");
         boolean isNone = Settings.c_type.equalsIgnoreCase("none");
+
+        if(Util.isVanished(p)){
+            e.setQuitMessage(null);
+            return;
+        }
+
+        if (superVanishHook.isEnabled()){
+            if (superVanishHook.isVanishPlayer(p)){
+                e.setQuitMessage(null);
+                return;
+            }
+        }
 
         if (essentialsXHook.isEnabled()) {
             if (Settings.hook_essentials_hideplayervanish) {
@@ -442,5 +464,7 @@ public class JoinListener implements Listener {
             }
         }
     }
+
+
 
 }

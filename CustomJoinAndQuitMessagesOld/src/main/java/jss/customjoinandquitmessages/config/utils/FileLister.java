@@ -8,16 +8,12 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Objects;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.regex.Pattern;
 
 
 public class FileLister {
@@ -136,7 +132,6 @@ public class FileLister {
 
         }
         jar.close();
-
 
         Logger.debug("List of available languages");
         for (String s : result){

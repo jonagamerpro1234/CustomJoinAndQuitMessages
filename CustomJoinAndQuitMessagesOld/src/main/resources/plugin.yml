@@ -9,7 +9,8 @@ loadbefore: [ Essentials ]
 softdepend: [
   PlaceholderAPI, DiscordSRV,
   LuckPerms, EssentialsDiscord,
-  Essentials
+  Essentials, SuperVanish,
+  PremiumVanish
 ]
 
 commands:
@@ -18,7 +19,7 @@ commands:
     aliases:
       - cjm
 permissions:
-  cjm.Admin:
+  cjm.admin:
     description: give the all permissions
     children:
       cjm.update: true
@@ -26,7 +27,7 @@ permissions:
       cjm.command.help: true
       cjm.command.tabcomplete: true
     default: op
-  cjm.Update:
+  cjm.update:
     description: allows you to receive notifications of available updates
     default: op
   cjm.command.reload:

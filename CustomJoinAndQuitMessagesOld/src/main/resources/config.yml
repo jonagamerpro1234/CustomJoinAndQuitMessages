@@ -22,13 +22,14 @@ Config:
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
 
+    # !!This feature is not available yet!!
     # |GetUpdateFrom| you will get the updates from [spigot | github] what is the difference, here below is the explanation of why
     # |Spigot| Get only released updates, and you won't receive beta notifications
     # |GitHub| Get only the released and beta updates, and you will be able to receive notifications of both versions
     GetUpdateFrom: Spigot
   
   # |Debug| shows you important information about the plugin loading 
-  Debug: true
+  Debug: false
   
   # |Type| the type is a way of knowing what is being used whether in the [normal] | [group] | [none] format
   Type: normal
@@ -127,7 +128,13 @@ Join:
     
     # |Mode| there are three different modes which are [ command | suggest | url ]
     Mode: command
-    
+
+    # This feature is not available yet
+    DevActions:
+      - '[Suggest]: /help'
+      - '[Execute]: /me hello test'
+      - '[Open]: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-7-x-1-17-x.57006/'
+
     # |Actions| This is where are the available events that you can use
     Actions:
       
@@ -221,11 +228,6 @@ Quit:
     
     # |Mode| there are three different modes which are [ command | suggest | url ]
     Mode: command
-
-    DevActions:
-      - '[Suggest]: /help'
-      - '[Execute]: /me hola test'
-      - '[Open]: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-7-x-1-17-x.57006/'
 
     # |Actions| This is where are the available events that you can use
     Actions:
