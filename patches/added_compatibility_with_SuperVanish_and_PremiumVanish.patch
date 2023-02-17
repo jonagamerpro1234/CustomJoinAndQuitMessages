@@ -1,0 +1,422 @@
+Index: CustomJoinAndQuitMessagesOld/CustomJoinAndQuitMessagesOld.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/CustomJoinAndQuitMessagesOld.iml b/CustomJoinAndQuitMessagesOld/CustomJoinAndQuitMessagesOld.iml
+--- a/CustomJoinAndQuitMessagesOld/CustomJoinAndQuitMessagesOld.iml	(revision 9e2091bbd022d80eeb902dbefe0ff217d003f052)
++++ b/CustomJoinAndQuitMessagesOld/CustomJoinAndQuitMessagesOld.iml	(revision 033b062d7d16226083434d544504c872ef0fa129)
+@@ -89,5 +89,6 @@
+     <orderEntry type="library" scope="PROVIDED" name="Maven: net.essentialsx:EssentialsXDiscord:2.19.0" level="project" />
+     <orderEntry type="library" scope="PROVIDED" name="Maven: club.minnced:discord-webhooks:0.5.6" level="project" />
+     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.12.0" level="project" />
++    <orderEntry type="library" scope="PROVIDED" name="Maven: com.github.LeonMangler:SuperVanish:6.2.6-4" level="project" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: CustomJoinAndQuitMessagesOld/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/pom.xml b/CustomJoinAndQuitMessagesOld/pom.xml
+--- a/CustomJoinAndQuitMessagesOld/pom.xml	(revision 9e2091bbd022d80eeb902dbefe0ff217d003f052)
++++ b/CustomJoinAndQuitMessagesOld/pom.xml	(revision 033b062d7d16226083434d544504c872ef0fa129)
+@@ -9,7 +9,7 @@
+     </parent>
+ 
+     <artifactId>CustomJoinAndQuitMessagesOld</artifactId>
+-    <version>1.8.0-release</version>
++    <version>1.7.8-release</version>
+ 
+     <properties>
+         <java.version>8</java.version>
+@@ -226,6 +226,12 @@
+             <groupId>org.apache.commons</groupId>
+             <artifactId>commons-lang3</artifactId>
+             <version>3.12.0</version>
++        </dependency>
++        <dependency>
++            <groupId>com.github.LeonMangler</groupId>
++            <artifactId>SuperVanish</artifactId>
++            <version>6.2.6-4</version>
++            <scope>provided</scope>
+         </dependency>
+     </dependencies>
+ 
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/FileLister.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/FileLister.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/FileLister.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/FileLister.java	(revision 9e2091bbd022d80eeb902dbefe0ff217d003f052)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/FileLister.java	(revision 033b062d7d16226083434d544504c872ef0fa129)
+@@ -8,16 +8,12 @@
+ import java.io.FilenameFilter;
+ import java.io.IOException;
+ import java.lang.reflect.Method;
+-import java.nio.file.DirectoryStream;
+-import java.nio.file.Files;
+-import java.nio.file.Path;
+ import java.util.ArrayList;
+ import java.util.Enumeration;
+ import java.util.List;
+ import java.util.Objects;
+ import java.util.jar.JarEntry;
+ import java.util.jar.JarFile;
+-import java.util.regex.Pattern;
+ 
+ 
+ public class FileLister {
+@@ -137,7 +133,6 @@
+         }
+         jar.close();
+ 
+-
+         Logger.debug("List of available languages");
+         for (String s : result){
+             Logger.debug(" * " + s);
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/PreConfigLoader.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/PreConfigLoader.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/PreConfigLoader.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/PreConfigLoader.java	(revision 9e2091bbd022d80eeb902dbefe0ff217d003f052)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/PreConfigLoader.java	(revision 033b062d7d16226083434d544504c872ef0fa129)
+@@ -25,7 +25,7 @@
+ 
+             //Other
+             Settings.settings_debug = config.getBoolean("Config.Debug");
+-            Settings.update = Objects.equals(config.getString("Config.Update"), "true");
++            Settings.update = Objects.equals(config.getString("Config.Update.Enabled"), "true");
+             Settings.c_type = config.getString("Config.Type");
+             Settings.is_Group_Display = Objects.requireNonNull(config.getString("Config.Type")).equalsIgnoreCase("group");
+ 
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/SuperVanishHook.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/SuperVanishHook.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/SuperVanishHook.java
+new file mode 100644
+--- /dev/null	(revision 033b062d7d16226083434d544504c872ef0fa129)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/SuperVanishHook.java	(revision 033b062d7d16226083434d544504c872ef0fa129)
+@@ -0,0 +1,34 @@
++package jss.customjoinandquitmessages.hook;
++
++import de.myzelyam.api.vanish.VanishAPI;
++import jss.customjoinandquitmessages.utils.EventUtils;
++import jss.customjoinandquitmessages.utils.Logger;
++import jss.customjoinandquitmessages.utils.Util;
++import jss.customjoinandquitmessages.utils.interfaces.IHook;
++import org.bukkit.Bukkit;
++import org.bukkit.entity.Player;
++
++public class SuperVanishHook implements IHook {
++
++    private boolean isEnabled;
++
++    public void setup() {
++        if (!Bukkit.getPluginManager().isPluginEnabled("SuperVanish") || !Bukkit.getPluginManager().isPluginEnabled("PremiumVanish")) {
++            Logger.warning("&eSuperVanish or PremiumVanish not enabled! - Disable Features...");
++            this.isEnabled = false;
++            return;
++        }
++
++        this.isEnabled = true;
++        Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix(true) + "&aLoading SuperVanish or PremiumVanish features...");
++
++    }
++
++    public boolean isEnabled() {
++        return isEnabled;
++    }
++
++    public boolean isVanishPlayer(Player player){
++       return VanishAPI.isInvisible(player);
++    }
++}
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/listener/JoinListener.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/listener/JoinListener.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/listener/JoinListener.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/listener/JoinListener.java	(revision 9e2091bbd022d80eeb902dbefe0ff217d003f052)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/listener/JoinListener.java	(revision 033b062d7d16226083434d544504c872ef0fa129)
+@@ -4,10 +4,7 @@
+ import com.cryptomorin.xseries.messages.Titles;
+ import github.scarsz.discordsrv.util.DiscordUtil;
+ import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+-import jss.customjoinandquitmessages.hook.DiscordSRVHHook;
+-import jss.customjoinandquitmessages.hook.EssentialsXDiscordHook;
+-import jss.customjoinandquitmessages.hook.EssentialsXHook;
+-import jss.customjoinandquitmessages.hook.LuckPermsHook;
++import jss.customjoinandquitmessages.hook.*;
+ import jss.customjoinandquitmessages.json.MessageBuilder;
+ import jss.customjoinandquitmessages.manager.HookManager;
+ import jss.customjoinandquitmessages.manager.PlayerManager;
+@@ -48,6 +45,7 @@
+         LuckPermsHook luckPermsHook = HookManager.getInstance().getLuckPermsHook();
+         EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
+         EssentialsXHook essentialsXHook = HookManager.get().getEssentialsXHook();
++        SuperVanishHook superVanishHook = HookManager.get().getSuperVanishHook();
+         Player p = e.getPlayer();
+         String tempGroup;
+ 
+@@ -92,6 +90,18 @@
+                 Util.sendColorMessage(p, Util.getVar(p, text));
+         }
+ 
++        if(Util.isVanished(p)){
++            e.setJoinMessage(null);
++            return;
++        }
++
++        if (superVanishHook.isEnabled()){
++            if (superVanishHook.isVanishPlayer(p)){
++                e.setJoinMessage(null);
++                return;
++            }
++        }
++
+         if (essentialsXHook.isEnabled()) {
+             if (Settings.hook_essentials_hideplayervanish) {
+                 if (essentialsXHook.isVanish(p)) {
+@@ -168,7 +178,7 @@
+                     String Action_Url = config.getString("Join.ClickEvent.Actions.Url");
+                     String Action_Suggest = config.getString("Join.ClickEvent.Actions.Suggest-Command");
+ 
+-                    List<String> Action_Dev = config.getStringList("Join.ClickEvent.DevActions");
++                    //List<String> Action_Dev = config.getStringList("Join.ClickEvent.DevActions");
+ 
+                     String Title_Text = config.getString("Join.Title.Title");
+                     String SubTitle_Text = config.getString("Join.Title.SubTitle");
+@@ -199,7 +209,7 @@
+ 
+                         if (isClick) {
+ 
+-                            for(String action : Action_Dev){
++                            /*for(String action : Action_Dev){
+ 
+                                 String[] parts = action.split(":");
+                                 String type = parts[0].trim();
+@@ -220,9 +230,8 @@
+                                         break;
+                                 }
+                             }
+-                            messageBuilder.sendToAll();
++                            messageBuilder.sendToAll();*/
+ 
+-                            /** Temp Disabled
+                             assert isClick_Mode != null;
+                             if (isClick_Mode.equalsIgnoreCase("command")) {
+                                 messageBuilder.setExecuteCommand(Action_Command).sendToAll();
+@@ -231,7 +240,7 @@
+                             } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+                                 messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
+                             }
+-                            */
++
+ 
+                         } else {
+                             messageBuilder.sendToAll();
+@@ -300,12 +309,25 @@
+         DiscordSRVHHook discordSRVHHook = HookManager.getInstance().getDiscordSRVHHook();
+         EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
+         EssentialsXHook essentialsXHook = HookManager.get().getEssentialsXHook();
++        SuperVanishHook superVanishHook = HookManager.get().getSuperVanishHook();
+         PlayerManager playerManager = new PlayerManager();
+ 
+         boolean isNormal = Settings.c_type.equalsIgnoreCase("normal");
+         boolean isGroup = Settings.c_type.equalsIgnoreCase("group");
+         boolean isNone = Settings.c_type.equalsIgnoreCase("none");
+ 
++        if(Util.isVanished(p)){
++            e.setQuitMessage(null);
++            return;
++        }
++
++        if (superVanishHook.isEnabled()){
++            if (superVanishHook.isVanishPlayer(p)){
++                e.setQuitMessage(null);
++                return;
++            }
++        }
++
+         if (essentialsXHook.isEnabled()) {
+             if (Settings.hook_essentials_hideplayervanish) {
+                 if (essentialsXHook.isVanish(p)) {
+@@ -443,4 +465,6 @@
+         }
+     }
+ 
++
++
+ }
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/HookManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/HookManager.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/HookManager.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/HookManager.java	(revision 9e2091bbd022d80eeb902dbefe0ff217d003f052)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/HookManager.java	(revision 033b062d7d16226083434d544504c872ef0fa129)
+@@ -11,6 +11,7 @@
+     private final EssentialsXDiscordHook essentialsXDiscordHook = new EssentialsXDiscordHook(this);
+     private final EssentialsXHook essentialsXHook = new EssentialsXHook(this);
+     private final LuckPermsHook luckPermsHook = new LuckPermsHook();
++    private final SuperVanishHook superVanishHook = new SuperVanishHook();
+ 
+     public HookManager() {
+         instance = this;
+@@ -26,10 +27,11 @@
+ 
+     public void load() {
+         initHooks(new PlaceholderApiHook(this),
+-                new DiscordSRVHHook(this),
+-                new EssentialsXDiscordHook(this),
+-                new EssentialsXHook(this),
+-                luckPermsHook);
++                discordSRVHHook,
++                essentialsXDiscordHook,
++                essentialsXHook,
++                luckPermsHook,
++                superVanishHook);
+     }
+ 
+     private void initHooks(IHook @NotNull ... hooks) {
+@@ -53,4 +55,8 @@
+     public LuckPermsHook getLuckPermsHook() {
+         return luckPermsHook;
+     }
++
++    public SuperVanishHook getSuperVanishHook() {
++        return superVanishHook;
++    }
+ }
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Util.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Util.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Util.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Util.java	(revision 9e2091bbd022d80eeb902dbefe0ff217d003f052)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Util.java	(revision 033b062d7d16226083434d544504c872ef0fa129)
+@@ -8,6 +8,7 @@
+ import org.bukkit.Bukkit;
+ import org.bukkit.command.CommandSender;
+ import org.bukkit.entity.Player;
++import org.bukkit.metadata.MetadataValue;
+ import org.jetbrains.annotations.Contract;
+ import org.jetbrains.annotations.NotNull;
+ import org.jetbrains.annotations.Nullable;
+@@ -169,6 +170,7 @@
+         sendEnable(prefix, "&5 <||============================================----");
+     }
+ 
++    @SuppressWarnings("unused")
+     public static boolean setPerm(@NotNull Player player, String permName){
+         return player.hasPermission(PERMISSION_PREFIX + permName);
+     }
+@@ -181,4 +183,11 @@
+         }
+     }
+ 
++    public static boolean isVanished(@NotNull Player player) {
++        for (MetadataValue meta : player.getMetadata("vanished")) {
++            if (meta.asBoolean()) return true;
++        }
++        return false;
++    }
++
+ }
+Index: CustomJoinAndQuitMessagesOld/src/main/resources/config.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/resources/config.yml b/CustomJoinAndQuitMessagesOld/src/main/resources/config.yml
+--- a/CustomJoinAndQuitMessagesOld/src/main/resources/config.yml	(revision 9e2091bbd022d80eeb902dbefe0ff217d003f052)
++++ b/CustomJoinAndQuitMessagesOld/src/main/resources/config.yml	(revision 033b062d7d16226083434d544504c872ef0fa129)
+@@ -22,13 +22,14 @@
+     # |Enabled| Here you can enable or disable this feature
+     Enabled: true
+ 
++    # !!This feature is not available yet!!
+     # |GetUpdateFrom| you will get the updates from [spigot | github] what is the difference, here below is the explanation of why
+     # |Spigot| Get only released updates, and you won't receive beta notifications
+     # |GitHub| Get only the released and beta updates, and you will be able to receive notifications of both versions
+     GetUpdateFrom: Spigot
+   
+   # |Debug| shows you important information about the plugin loading 
+-  Debug: true
++  Debug: false
+   
+   # |Type| the type is a way of knowing what is being used whether in the [normal] | [group] | [none] format
+   Type: normal
+@@ -127,7 +128,13 @@
+     
+     # |Mode| there are three different modes which are [ command | suggest | url ]
+     Mode: command
+-    
++
++    # This feature is not available yet
++    DevActions:
++      - '[Suggest]: /help'
++      - '[Execute]: /me hello test'
++      - '[Open]: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-7-x-1-17-x.57006/'
++
+     # |Actions| This is where are the available events that you can use
+     Actions:
+       
+@@ -222,11 +229,6 @@
+     # |Mode| there are three different modes which are [ command | suggest | url ]
+     Mode: command
+ 
+-    DevActions:
+-      - '[Suggest]: /help'
+-      - '[Execute]: /me hola test'
+-      - '[Open]: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-7-x-1-17-x.57006/'
+-
+     # |Actions| This is where are the available events that you can use
+     Actions:
+       
+Index: CustomJoinAndQuitMessagesOld/src/main/resources/plugin.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/resources/plugin.yml b/CustomJoinAndQuitMessagesOld/src/main/resources/plugin.yml
+--- a/CustomJoinAndQuitMessagesOld/src/main/resources/plugin.yml	(revision 9e2091bbd022d80eeb902dbefe0ff217d003f052)
++++ b/CustomJoinAndQuitMessagesOld/src/main/resources/plugin.yml	(revision 033b062d7d16226083434d544504c872ef0fa129)
+@@ -9,7 +9,8 @@
+ softdepend: [
+   PlaceholderAPI, DiscordSRV,
+   LuckPerms, EssentialsDiscord,
+-  Essentials
++  Essentials, SuperVanish,
++  PremiumVanish
+ ]
+ 
+ commands:
+@@ -18,7 +19,7 @@
+     aliases:
+       - cjm
+ permissions:
+-  cjm.Admin:
++  cjm.admin:
+     description: give the all permissions
+     children:
+       cjm.update: true
+@@ -26,7 +27,7 @@
+       cjm.command.help: true
+       cjm.command.tabcomplete: true
+     default: op
+-  cjm.Update:
++  cjm.update:
+     description: allows you to receive notifications of available updates
+     default: op
+   cjm.command.reload:
