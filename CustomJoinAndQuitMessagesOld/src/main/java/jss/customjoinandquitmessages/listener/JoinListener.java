@@ -4,14 +4,20 @@ import com.cryptomorin.xseries.messages.ActionBar;
 import com.cryptomorin.xseries.messages.Titles;
 import github.scarsz.discordsrv.util.DiscordUtil;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.hook.*;
+import jss.customjoinandquitmessages.hook.DiscordSRVHHook;
+import jss.customjoinandquitmessages.hook.EssentialsXDiscordHook;
+import jss.customjoinandquitmessages.hook.EssentialsXHook;
+import jss.customjoinandquitmessages.hook.LuckPermsHook;
 import jss.customjoinandquitmessages.json.MessageBuilder;
 import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.manager.PlayerManager;
-import jss.customjoinandquitmessages.utils.*;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ClickEvent.Action;
-import net.md_5.bungee.api.chat.TextComponent;
+import jss.customjoinandquitmessages.storage.PlayerData;
+import jss.customjoinandquitmessages.storage.PlayerJsonStorage;
+import jss.customjoinandquitmessages.update.UpdateChecker;
+import jss.customjoinandquitmessages.utils.GroupHelper;
+import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.Settings;
+import jss.customjoinandquitmessages.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -43,13 +49,19 @@ public class JoinListener implements Listener {
         EssentialsXDiscordHook essentialsXDiscordHook = HookManager.getInstance().getEssentialsXDiscordHook();
         EssentialsXHook essentialsXHook = HookManager.get().getEssentialsXHook();
         Player p = e.getPlayer();
-
         String tempGroup;
 
         if (luckPermsHook.isEnabled()) {
             tempGroup = Objects.requireNonNull(LuckPermsHook.getApi().getUserManager().getUser(p.getName())).getPrimaryGroup();
         } else {
             tempGroup = "default";
+        }
+
+        PlayerJsonStorage playerJsonStorage = new PlayerJsonStorage(plugin);
+        PlayerData playerData = playerJsonStorage.loadPlayerData(p.getName());
+
+        if(playerData == null){
+            playerJsonStorage.savePlayerData(new PlayerData(p.getName()));
         }
 
         PlayerManager playerManager = new PlayerManager();
@@ -115,6 +127,7 @@ public class JoinListener implements Listener {
 
                 MessageBuilder messageBuilder = new MessageBuilder(p, text);
 
+                //Update Logger
                 if (config.getBoolean("Config.Show-Chat-In-Console")) {
                     Logger.info(messageBuilder.getText());
                 }
@@ -138,6 +151,8 @@ public class JoinListener implements Listener {
                         essentialsXDiscordHook.sendJoinMessage(Settings.hook_essentialsDiscord_channelid,
                                 Util.colorless(messageBuilder.getText()));
                     }
+
+                    //Removed IsModifyType in 1.8.0
                 } else if (isModifyType) {
                     boolean isHover = Objects.equals(config.getString("Join.HoverEvent.Enabled"), "true");
                     boolean isClick = Objects.equals(config.getString("Join.ClickEvent.Enabled"), "true");
@@ -152,6 +167,9 @@ public class JoinListener implements Listener {
                     String Action_Command = config.getString("Join.ClickEvent.Actions.Command");
                     String Action_Url = config.getString("Join.ClickEvent.Actions.Url");
                     String Action_Suggest = config.getString("Join.ClickEvent.Actions.Suggest-Command");
+
+                    List<String> Action_Dev = config.getStringList("Join.ClickEvent.DevActions");
+
                     String Title_Text = config.getString("Join.Title.Title");
                     String SubTitle_Text = config.getString("Join.Title.SubTitle");
                     String Actionbar_Text = config.getString("Join.ActionBar.Text");
@@ -178,7 +196,33 @@ public class JoinListener implements Listener {
                             messageBuilder.setHover(Hover_Text).sendToAll();
                         }
                     } else {
+
                         if (isClick) {
+
+                            for(String action : Action_Dev){
+
+                                String[] parts = action.split(":");
+                                String type = parts[0].trim();
+                                String value = parts[1].trim();
+
+                                switch (type){
+                                    case "[Execute]":
+                                        messageBuilder.setExecuteCommand(value);
+                                        break;
+                                    case "[Suggest]":
+                                        messageBuilder.setSuggestCommand(value);
+                                        break;
+                                    case "[Open]":
+                                        messageBuilder.setOpenURL(value);
+                                        break;
+                                    default:
+                                        messageBuilder.sendToAll();
+                                        break;
+                                }
+                            }
+                            messageBuilder.sendToAll();
+
+                            /** Temp Disabled
                             assert isClick_Mode != null;
                             if (isClick_Mode.equalsIgnoreCase("command")) {
                                 messageBuilder.setExecuteCommand(Action_Command).sendToAll();
@@ -187,6 +231,8 @@ public class JoinListener implements Listener {
                             } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
                                 messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
                             }
+                            */
+
                         } else {
                             messageBuilder.sendToAll();
                         }

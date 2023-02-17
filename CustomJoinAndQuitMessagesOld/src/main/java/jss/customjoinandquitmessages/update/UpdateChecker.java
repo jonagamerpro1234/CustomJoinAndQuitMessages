@@ -1,10 +1,13 @@
-package jss.customjoinandquitmessages.utils;
+package jss.customjoinandquitmessages.update;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.Util;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;

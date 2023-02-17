@@ -1,5 +1,6 @@
 package jss.customjoinandquitmessages.utils;
 
+import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.libs.iridiumcolorapi.IridiumColorAPI;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.ChatColor;
@@ -11,6 +12,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -169,6 +171,14 @@ public class Util {
 
     public static boolean setPerm(@NotNull Player player, String permName){
         return player.hasPermission(PERMISSION_PREFIX + permName);
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void createFolder(@NotNull CustomJoinAndQuitMessages plugin, String folderName){
+        File file = new File(plugin.getDataFolder(), folderName);
+        if(!file.exists()){
+            file.mkdir();
+        }
     }
 
 }

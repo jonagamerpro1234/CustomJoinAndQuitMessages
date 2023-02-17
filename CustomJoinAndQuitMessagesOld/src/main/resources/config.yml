@@ -17,7 +17,15 @@ Config:
   Lang: en_US
   
   # |Update| This function lets you know if there is a plugin update [Does not disable console messages]
-  Update: true
+  Update:
+
+    # |Enabled| Here you can enable or disable this feature
+    Enabled: true
+
+    # |GetUpdateFrom| you will get the updates from [spigot | github] what is the difference, here below is the explanation of why
+    # |Spigot| Get only released updates, and you won't receive beta notifications
+    # |GitHub| Get only the released and beta updates, and you will be able to receive notifications of both versions
+    GetUpdateFrom: Spigot
   
   # |Debug| shows you important information about the plugin loading 
   Debug: true
@@ -213,7 +221,12 @@ Quit:
     
     # |Mode| there are three different modes which are [ command | suggest | url ]
     Mode: command
-    
+
+    DevActions:
+      - '[Suggest]: /help'
+      - '[Execute]: /me hola test'
+      - '[Open]: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-7-x-1-17-x.57006/'
+
     # |Actions| This is where are the available events that you can use
     Actions:
       
@@ -225,7 +238,7 @@ Quit:
       
       # |Suggest-Command| Clicking on the chat suggests a command that you define in the config
       Suggest-Command: '/msg <name>'
-  
+
   # |Sound| In this section you can configure the sound of the join
   # |Sound list: https://www.spigotmc.org/wiki/cc-sounds-list/ 
   Sound:
@@ -250,7 +263,9 @@ Welcome:
 
   # |Enabled| Here you can enable or disable this feature
   Enabled: true
-  
+
+  UsePerGroupWelcome: false
+
   # |Text| here you can set your own welcome message when entering
   Text:
     - '<GRADIENT:8200FC>&m=========================================</GRADIENT:00FC95>&r'

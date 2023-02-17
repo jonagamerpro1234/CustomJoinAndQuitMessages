@@ -40,37 +40,34 @@ public class InventoryListener implements Listener {
 
         DisplayManager displayManager = new DisplayManager(j);
 
-        if (slot == 11) {
-            displayManager.showJoinMessage();
+        switch (slot){
+            case 11:
+                displayManager.showJoinMessage();
+                break;
+
+            case 13:
+                displayManager.showQuitMessage();
+                break;
+            case 15:
+                displayManager.showWelcomeMessage();
+                break;
+            case 29:
+                displayManager.showTitleMessage();
+                break;
+            case 31:
+                displayManager.showActionbar();
+                break;
+            case 33:
+                displayManager.showFirstJoinMessage();
+                break;
+            case 39:
+                displayManager.showJoinSound();
+                break;
+            case 41:
+                displayManager.showQuitSound();
+                break;
         }
 
-        if (slot == 13) {
-            displayManager.showQuitMessage();
-        }
-
-        if (slot == 15) {
-            displayManager.showWelcomeMessage();
-        }
-
-        if (slot == 29) {
-            displayManager.showTitleMessage();
-        }
-
-        if (slot == 31) {
-            displayManager.showActionbar();
-        }
-
-        if (slot == 33) {
-            displayManager.showFirstJoinMessage();
-        }
-
-        if (slot == 39) {
-            displayManager.showJoinSound();
-        }
-
-        if (slot == 41) {
-            displayManager.showQuitSound();
-        }
     }
 
 }

@@ -1,4 +1,4 @@
-package jss.customjoinandquitmessages.utils;
+package jss.customjoinandquitmessages.update;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 

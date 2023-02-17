@@ -1,8 +1,8 @@
 package jss.customjoinandquitmessages.listener;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.hook.LuckPermsHook;
+import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.manager.PlayerManager;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
@@ -28,6 +28,7 @@ public class TaskLoader {
 
             if(Settings.c_type.equalsIgnoreCase("group")){
                 if (luckPermsHook.isEnabled() && Settings.hook_luckperms_autoUpdate_group) {
+
                     for (Player p : Bukkit.getOnlinePlayers()) {
                         PlayerManager playerManager = new PlayerManager();
                         if (!playerManager.getGroup(p).equalsIgnoreCase(Objects.requireNonNull(LuckPermsHook.getApi().getUserManager().getUser(p.getName())).getPrimaryGroup())) {
@@ -36,6 +37,7 @@ public class TaskLoader {
                             Logger.debug("&eThe player already has the same group!");
                         }
                     }
+
                 } else {
                     scheduler.cancelTask(taskGroupId);
                 }

@@ -4,6 +4,8 @@ import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.file.DirectoryStream;
@@ -12,6 +14,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Objects;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Pattern;
@@ -24,7 +27,7 @@ public class FileLister {
     public List<String> list() throws IOException {
         List<String> result = new ArrayList<>();
 
-        Path langDir = plugin.getDataFolder().toPath().resolve("lang");
+        /*Path langDir = plugin.getDataFolder().toPath().resolve("lang");
 
         Logger.debug("Path: " + langDir);
 
@@ -44,7 +47,6 @@ public class FileLister {
                     return result;
                 }
             }
-
 
             Path jarFile;
 
@@ -76,25 +78,21 @@ public class FileLister {
 
                 }
             }
-        }
-        Logger.debug("List of available languages");
-        for (String s : result){
-            Logger.debug(" * " + s);
-        }
-        Logger.debug("============================");
+        }*/
 
-        return result;
-    }
 
-        /* Old lines of the method list() v1.7.5 -> removed in v1.7.6-beta.4
-        File localeDir = new File(plugin.getDataFolder(), "lang");
-        if (localeDir.exists()) {
+        File langDir = new File(plugin.getDataFolder(), "lang");
+
+        Logger.debug("Path: " + langDir);
+
+
+        if (langDir.exists()) {
             FilenameFilter ymlFilter = (dir, name) -> {
                 String lowercaseName = name.toLowerCase();
-                if (plugin.getConfig().getString("Config.Debug").equals("true")) {
+                if (plugin.getConfig().getBoolean("Config.Debug")) {
                     Logger.debug("&eLoad Lang File: &9" + name);
                 }
-                if (lowercaseName.endsWith(".yml") && name.length() == 9 && name.substring(2, 3).equals("-")) {
+                if (lowercaseName.endsWith(".yml") && name.length() == 9 && name.substring(2, 3).contains("_")) {
                     return true;
                 } else {
                     if (lowercaseName.endsWith(".yml") && !lowercaseName.equals("messages.yml")) {
@@ -103,13 +101,13 @@ public class FileLister {
                     return false;
                 }
             };
-            for (String fileName : localeDir.list(ymlFilter)) {
+            for (String fileName : Objects.requireNonNull(langDir.list(ymlFilter))) {
                 result.add(fileName.replace(".yml", ""));
             }
             if (!result.isEmpty())
                 return result;
         }
-        File jarfile = null;
+        File jarfile;
         try {
             Method method = JavaPlugin.class.getDeclaredMethod("getFile");
             method.setAccessible(true);
@@ -131,11 +129,24 @@ public class FileLister {
 
             if (entry.getName().endsWith(".yml")) {
                 String name = entry.getName().replace(".yml", "").replace("lang/", "");
-                if (name.length() == 5 && name.substring(2, 3).equals("-")) {
+                if (name.length() == 5 && name.substring(2, 3).contains("_")) {
                     result.add(name);
                 }
             }
 
         }
-        jar.close();*/
+        jar.close();
+
+
+        Logger.debug("List of available languages");
+        for (String s : result){
+            Logger.debug(" * " + s);
+        }
+        Logger.debug("============================");
+
+
+        return result;
+    }
+
+
 }

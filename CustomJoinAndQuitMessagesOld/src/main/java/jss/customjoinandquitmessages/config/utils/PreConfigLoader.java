@@ -83,7 +83,7 @@ public class PreConfigLoader {
     }
 
     public boolean loadLangs() {
-        Settings.defaultLanguage = plugin.getConfig().getString("Config.Lang", "en-US");
+        Settings.defaultLanguage = plugin.getConfig().getString("Config.Lang", "en_US");
         HashMap<String, Lang> availableLocales = new HashMap<>();
         FileLister fl = new FileLister();
         try {
@@ -95,8 +95,8 @@ public class PreConfigLoader {
             plugin.getLogger().severe("Could not add locales!");
         }
         if (!availableLocales.containsKey(Settings.defaultLanguage)) {
-            Logger.warning(Util.getPrefix(true) + "&eLoad File: " + Settings.defaultLanguage + ".yml' not found in /lang/ folder. Using /lang/en-US.yml");
-            Settings.defaultLanguage = "en-US";
+            Logger.warning(Util.getPrefix(true) + "&eLoad File: " + Settings.defaultLanguage + ".yml' not found in /lang/ folder. Using /lang/en_US.yml");
+            Settings.defaultLanguage = "en_US";
             availableLocales.put(Settings.defaultLanguage, new Lang(plugin, Settings.defaultLanguage, 0));
         }
         plugin.setAvailableLocales(availableLocales);

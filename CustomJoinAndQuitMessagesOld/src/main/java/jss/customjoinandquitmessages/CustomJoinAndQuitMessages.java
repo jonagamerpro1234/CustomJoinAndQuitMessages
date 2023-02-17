@@ -1,13 +1,19 @@
 package jss.customjoinandquitmessages;
 
 import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
-import jss.customjoinandquitmessages.config.*;
+import jss.customjoinandquitmessages.config.ConfigFile;
+import jss.customjoinandquitmessages.config.GroupsFile;
+import jss.customjoinandquitmessages.config.Lang;
+import jss.customjoinandquitmessages.config.PlayerFile;
 import jss.customjoinandquitmessages.config.utils.PreConfigLoader;
-import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.listener.JoinListener;
 import jss.customjoinandquitmessages.listener.TaskLoader;
+import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.manager.InventoryView;
-import jss.customjoinandquitmessages.utils.*;
+import jss.customjoinandquitmessages.update.UpdateChecker;
+import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.Settings;
+import jss.customjoinandquitmessages.utils.Util;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -39,6 +45,8 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
     public void onLoad() {
         Util.sendLoadTitle(version);
         inventoryViews = new ArrayList<>();
+
+        Util.createFolder(this,"Players");
     }
 
     public void onEnable() {
@@ -78,7 +86,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
 
         UpdateChecker updateChecker = new UpdateChecker(this);
         updateChecker.sendSpigotUpdate();
-        updateChecker.sendGithubUpdate();
+        //updateChecker.sendGithubUpdate();
     }
 
     public void onDisable() {
