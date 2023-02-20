@@ -1,6 +1,5 @@
 package jss.customjoinandquitmessages.hook;
 
-import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
@@ -10,12 +9,7 @@ import org.bukkit.Bukkit;
 
 public class DiscordSRVHHook implements IHook {
 
-    private HookManager hookManager;
     private boolean isEnabled;
-
-    public DiscordSRVHHook(HookManager hookManager) {
-        this.hookManager = hookManager;
-    }
 
     public void setup() {
         if (!Bukkit.getPluginManager().isPluginEnabled("DiscordSRV")) {
@@ -24,7 +18,7 @@ public class DiscordSRVHHook implements IHook {
             return;
         }
 
-        if (!Settings.hook_discordsrv) {
+        if (!Settings.hook_discordSrv) {
             this.isEnabled = false;
             Logger.warning("&eDiscordSRV not enabled! - Disable Features...");
             return;
@@ -38,7 +32,4 @@ public class DiscordSRVHHook implements IHook {
         return isEnabled;
     }
 
-    public HookManager getHookManager() {
-        return hookManager;
-    }
 }

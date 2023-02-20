@@ -12,8 +12,6 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,7 +41,7 @@ public class GroupHelper {
         this.essentialsXDiscordHook = essentialsXDiscordHook;
     }
 
-    public void onJoin(Player player, FileConfiguration config, PlayerJoinEvent playerJoinEvent) {
+    public void onJoin(Player player, FileConfiguration config) {
         String temp = "";
 
         String join = groupManager.getJoin(group);
@@ -59,125 +57,96 @@ public class GroupHelper {
 
         temp = Util.color(Util.getVar(player, temp));
 
-        boolean isNormalType = groupManager.getType(group).equalsIgnoreCase("normal");
-        boolean isModifyType = groupManager.getType(group).equalsIgnoreCase("modify");
-
         MessageBuilder messageBuilder = new MessageBuilder(player, temp);
 
         if (config.getBoolean("Config.Show-Chat-In-Console")) {
             Logger.info(messageBuilder.getText());
         }
 
-        if (isNormalType) {
-            playerJoinEvent.setJoinMessage(temp);
-            if (discordSRVHHook.isEnabled()) {
+        boolean isHover = groupManager.isHover(group);
+        boolean isClick = groupManager.isClick(group);
+        boolean isTitle = groupManager.isTitle(group);
+        boolean isSound = groupManager.isSound(group);
+        boolean isActionBar = groupManager.isActionbar(group);
+        boolean isSoundAll = groupManager.isSoundAll(group);
 
-                if (Settings.hook_discordsrv_channelid.equalsIgnoreCase("none"))
-                    return;
+        List<String> Hover_Text = groupManager.getHover(group);
 
-                DiscordUtil.sendMessageBlocking(
-                        DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
-                        Util.colorless(messageBuilder.getText()));
-            }
+        String isClick_Mode = groupManager.getClickMode(group);
+        String Action_Command = groupManager.getClickCommand(group);
+        String Action_Url = groupManager.getClickUrl(group);
+        String Action_Suggest = groupManager.getClickSuggestCommand(group);
+        String Title_Text = groupManager.getTitle(group);
+        String SubTitle_Text = groupManager.getSubTitle(group);
+        String Actionbar_Text = groupManager.getActionbar(group);
+        String Sound_Name = groupManager.getSound(group);
 
-            if (essentialsXDiscordHook.isEnabled()) {
-                if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none"))
-                    return;
+        int FadeIn = groupManager.getFadeIn(group);
+        int Stay = groupManager.getStay(group);
+        int FadeOut = groupManager.getFadeOut(group);
+        int Sound_Volume = groupManager.getVolume(group);
+        float Sound_Pitch = groupManager.getPitch(group);
 
-                essentialsXDiscordHook.sendJoinMessage(Settings.hook_essentialsDiscord_channelid,
-                        Util.colorless(messageBuilder.getText()));
-            }
-        } else if (isModifyType) {
-
-            boolean isHover = groupManager.isHover(group);
-            boolean isClick = groupManager.isClick(group);
-            boolean isTitle = groupManager.isTitle(group);
-            boolean isSound = groupManager.isSound(group);
-            boolean isActionBar = groupManager.isActionbar(group);
-            boolean isSoundAll = groupManager.isSoundAll(group);
-
-            List<String> Hover_Text = groupManager.getHover(group);
-
-            String isClick_Mode = groupManager.getClickMode(group);
-            String Action_Command = groupManager.getClickCommand(group);
-            String Action_Url = groupManager.getClickUrl(group);
-            String Action_Suggest = groupManager.getClickSuggestCommand(group);
-            String Title_Text = groupManager.getTitle(group);
-            String SubTitle_Text = groupManager.getSubTitle(group);
-            String Actionbar_Text = groupManager.getActionbar(group);
-            String Sound_Name = groupManager.getSound(group);
-
-            int FadeIn = groupManager.getFadeIn(group);
-            int Stay = groupManager.getStay(group);
-            int FadeOut = groupManager.getFadeOut(group);
-            int Sound_Volume = groupManager.getVolume(group);
-            float Sound_Pitch = groupManager.getPitch(group);
-
-            if (isHover) {
-                if (isClick) {
-                    if (isClick_Mode.equalsIgnoreCase("command")) {
-                        messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
-                    }
-                } else {
-                    messageBuilder.setHover(Hover_Text).sendToAll();
+        if (isHover) {
+            if (isClick) {
+                if (isClick_Mode.equalsIgnoreCase("command")) {
+                    messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
+                } else if (isClick_Mode.equalsIgnoreCase("url")) {
+                    messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
+                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+                    messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
                 }
             } else {
-                if (isClick) {
-                    if (isClick_Mode.equalsIgnoreCase("command")) {
-                        messageBuilder.setExecuteCommand(Action_Command).sendToAll();
-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        messageBuilder.setOpenURL(Action_Url).sendToAll();
-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
-                    }
+                messageBuilder.setHover(Hover_Text).sendToAll();
+            }
+        } else {
+            if (isClick) {
+                if (isClick_Mode.equalsIgnoreCase("command")) {
+                    messageBuilder.setExecuteCommand(Action_Command).sendToAll();
+                } else if (isClick_Mode.equalsIgnoreCase("url")) {
+                    messageBuilder.setOpenURL(Action_Url).sendToAll();
+                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+                    messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
+                }
+            } else {
+                messageBuilder.sendToAll();
+            }
+        }
+
+        if (discordSRVHHook.isEnabled()) {
+            DiscordUtil.sendMessageBlocking(
+                    DiscordUtil.getTextChannelById(Settings.hook_discordSrv_channelId),
+                    Util.colorless(messageBuilder.getText()));
+        }
+
+        if (isTitle) {
+            Titles.sendTitle(player, FadeIn, Stay, FadeOut, Util.color(Util.getVar(player, Title_Text)),
+                    Util.color(Util.getVar(player, SubTitle_Text)));
+        }
+
+        if (isActionBar) {
+            ActionBar.sendActionBar(player, Util.color(Util.getVar(player, Actionbar_Text)));
+        }
+
+        try {
+            if (isSound) {
+                if (isSoundAll) {
+                    Location location = player.getLocation();
+                    player.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
                 } else {
-                    messageBuilder.sendToAll();
-                }
-            }
-
-            if (discordSRVHHook.isEnabled()) {
-                DiscordUtil.sendMessageBlocking(
-                        DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
-                        Util.colorless(messageBuilder.getText()));
-            }
-
-            if (isTitle) {
-                Titles.sendTitle(player, FadeIn, Stay, FadeOut, Util.color(Util.getVar(player, Title_Text)),
-                        Util.color(Util.getVar(player, SubTitle_Text)));
-            }
-
-            if (isActionBar) {
-                ActionBar.sendActionBar(player, Util.color(Util.getVar(player, Actionbar_Text)));
-            }
-
-            try {
-                if (isSound) {
-                    if (isSoundAll) {
+                    for (Player pp : Bukkit.getOnlinePlayers()) {
                         Location location = player.getLocation();
-                        player.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
-                    } else {
-                        for (Player pp : Bukkit.getOnlinePlayers()) {
-                            Location location = player.getLocation();
-                            pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
-                        }
+                        pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
                     }
                 }
-            } catch (Exception ex) {
-                Logger.warning("&eVerify that the sound name is correct or belongs to the version");
             }
+        } catch (Exception ex) {
+            Logger.warning("&eVerify that the sound name is correct or belongs to the version");
         }
     }
 
-    public void onQuit(Player player, @NotNull FileConfiguration config, PlayerQuitEvent playerQuitEvent) {
+    public void onQuit(Player player, @NotNull FileConfiguration config) {
         String quit = groupManager.getQuit(group);
-
-
-        boolean isNormalType = groupManager.getType(group).equalsIgnoreCase("normal");
-        boolean isModifyType = groupManager.getType(group).equalsIgnoreCase("modify");
 
         quit = Util.color(Util.getVar(player, quit));
 
@@ -186,102 +155,82 @@ public class GroupHelper {
             Logger.info(messageBuilder.getText());
         }
 
-        if (isNormalType) {
-            playerQuitEvent.setQuitMessage(quit);
-            if (discordSRVHHook.isEnabled()) {
-                if (Settings.hook_discordsrv_channelid.equalsIgnoreCase("none"))
-                    return;
-                DiscordUtil.sendMessageBlocking(
-                        DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
-                        Util.colorless(messageBuilder.getText()));
-            }
+        boolean isHover = groupManager.isHover(group);
+        boolean isClick = groupManager.isClick(group);
+        boolean isSound = groupManager.isSound(group);
+        boolean isSoundAll = groupManager.isSoundAll(group);
 
-            if (essentialsXDiscordHook.isEnabled()) {
-                if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none"))
-                    return;
-                essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid,
-                        Util.colorless(messageBuilder.getText()));
-            }
-        } else if (isModifyType) {
+        List<String> Hover_Text = groupManager.getHover(group);
 
-            boolean isHover = groupManager.isHover(group);
-            boolean isClick = groupManager.isClick(group);
-            boolean isSound = groupManager.isSound(group);
-            boolean isSoundAll = groupManager.isSoundAll(group);
+        String isClick_Mode = groupManager.getClickMode(group);
+        String Action_Command = groupManager.getClickCommand(group);
+        String Action_Url = groupManager.getClickUrl(group);
+        String Action_Suggest = groupManager.getClickSuggestCommand(group);
+        String Sound_Name = groupManager.getSound(group);
 
-            List<String> Hover_Text = groupManager.getHover(group);
+        int Sound_Volume = groupManager.getVolume(group);
+        float Sound_Pitch = groupManager.getPitch(group);
 
-            String isClick_Mode = groupManager.getClickMode(group);
-            String Action_Command = groupManager.getClickCommand(group);
-            String Action_Url = groupManager.getClickUrl(group);
-            String Action_Suggest = groupManager.getClickSuggestCommand(group);
-            String Sound_Name = groupManager.getSound(group);
-
-            int Sound_Volume = groupManager.getVolume(group);
-            float Sound_Pitch = groupManager.getPitch(group);
-
-            if (isHover) {
-                if (isClick) {
-                    if (isClick_Mode.equalsIgnoreCase("command")) {
-                        messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
-                    }
-                } else {
-                    messageBuilder.setHover(Hover_Text).sendToAll();
+        if (isHover) {
+            if (isClick) {
+                if (isClick_Mode.equalsIgnoreCase("command")) {
+                    messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
+                } else if (isClick_Mode.equalsIgnoreCase("url")) {
+                    messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
+                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+                    messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
                 }
             } else {
-                if (isClick) {
-                    if (isClick_Mode.equalsIgnoreCase("command")) {
-                        messageBuilder.setExecuteCommand(Action_Command).sendToAll();
-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        messageBuilder.setOpenURL(Action_Url).sendToAll();
-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
-                    }
-                } else {
-                    messageBuilder.sendToAll();
+                messageBuilder.setHover(Hover_Text).sendToAll();
+            }
+        } else {
+            if (isClick) {
+                if (isClick_Mode.equalsIgnoreCase("command")) {
+                    messageBuilder.setExecuteCommand(Action_Command).sendToAll();
+                } else if (isClick_Mode.equalsIgnoreCase("url")) {
+                    messageBuilder.setOpenURL(Action_Url).sendToAll();
+                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+                    messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
                 }
-            }
-
-            if (discordSRVHHook.isEnabled()) {
-
-                if (Settings.hook_discordsrv_channelid.equalsIgnoreCase("none"))
-                    return;
-
-                DiscordUtil.sendMessageBlocking(
-                        DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
-                        Util.colorless(messageBuilder.getText()));
-            }
-
-            if (essentialsXDiscordHook.isEnabled()) {
-
-                if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none"))
-                    return;
-
-                essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid,
-                        Util.colorless(messageBuilder.getText()));
-            }
-
-            try {
-                if (isSound) {
-                    if (isSoundAll) {
-                        Location location = player.getLocation();
-                        player.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
-                    } else {
-                        for (Player pp : Bukkit.getOnlinePlayers()) {
-                            Location location = player.getLocation();
-                            pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
-                        }
-                    }
-                }
-            } catch (Exception ex) {
-                Logger.warning("&eVerify that the sound name is correct or belongs to the version");
+            } else {
+                messageBuilder.sendToAll();
             }
         }
 
+        if (discordSRVHHook.isEnabled()) {
+
+            if (Settings.hook_discordSrv_channelId.equalsIgnoreCase("none"))
+                return;
+
+            DiscordUtil.sendMessageBlocking(
+                    DiscordUtil.getTextChannelById(Settings.hook_discordSrv_channelId),
+                    Util.colorless(messageBuilder.getText()));
+        }
+
+        if (essentialsXDiscordHook.isEnabled()) {
+
+            if (Settings.hook_essentialsDiscord_channelId.equalsIgnoreCase("none"))
+                return;
+
+            essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelId,
+                    Util.colorless(messageBuilder.getText()));
+        }
+
+        try {
+            if (isSound) {
+                if (isSoundAll) {
+                    Location location = player.getLocation();
+                    player.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
+                } else {
+                    for (Player pp : Bukkit.getOnlinePlayers()) {
+                        Location location = player.getLocation();
+                        pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            Logger.warning("&eVerify that the sound name is correct or belongs to the version");
+        }
     }
 
 }

@@ -105,9 +105,6 @@ Join:
     # |Text| Here you can set the join message for the first time
     Text: '&6Welcome to server &a<name>&6 for the first time'
   
-  # |Type| Here you can find two types that are [ normal | modify ]
-  Type: modify
-  
   # |HoverEvent| This section allows you to modify the hover events in the chat
   HoverEvent:
     
@@ -128,12 +125,6 @@ Join:
     
     # |Mode| there are three different modes which are [ command | suggest | url ]
     Mode: command
-
-    # This feature is not available yet
-    DevActions:
-      - '[Suggest]: /help'
-      - '[Execute]: /me hello test'
-      - '[Open]: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-7-x-1-17-x.57006/'
 
     # |Actions| This is where are the available events that you can use
     Actions:
@@ -204,9 +195,6 @@ Quit:
   
   # |Text| This is where Quit customizable message is located
   Text: '&b[<#:FF8E8E>-&b] <#:A157FF><name>'
-  
-  # |Type| Here you can find two types that are [ normal | modify ]
-  Type: normal
   
   # |HoverEvent| This section allows you to modify the hover events in the chat
   HoverEvent:
@@ -280,7 +268,7 @@ Welcome:
     - '<GRADIENT:8200FC>&m=========================================</GRADIENT:00FC95>&r'
 #
 # |File-Version|I would not change anything
-File-Version: 3
+File-Version: 4
 # |> This is the end of the configuration ... [-_-] more things coming soon
 # 
 # | Config File  |

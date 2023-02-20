@@ -7,8 +7,8 @@ import org.jetbrains.annotations.NotNull;
 public class HookManager {
 
     private static HookManager instance;
-    private final DiscordSRVHHook discordSRVHHook = new DiscordSRVHHook(this);
-    private final EssentialsXDiscordHook essentialsXDiscordHook = new EssentialsXDiscordHook(this);
+    private final DiscordSRVHHook discordSRVHHook = new DiscordSRVHHook();
+    private final EssentialsXDiscordHook essentialsXDiscordHook = new EssentialsXDiscordHook();
     private final EssentialsXHook essentialsXHook = new EssentialsXHook(this);
     private final LuckPermsHook luckPermsHook = new LuckPermsHook();
     private final SuperVanishHook superVanishHook = new SuperVanishHook();

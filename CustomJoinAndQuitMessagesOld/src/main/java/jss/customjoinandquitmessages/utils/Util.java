@@ -67,10 +67,8 @@ public class Util {
         return prefix;
     }
 
-
     public static @NotNull List<String> setTabLimit(final @NotNull List<String> options, final String lastArgs) {
         final List<String> returned = new ArrayList<>();
-
         for (String s : options) {
             if (s == null) {
                 continue;
@@ -82,23 +80,9 @@ public class Util {
         return returned;
     }
 
-    @SuppressWarnings("unused")
-    public static void sendTextComponentHover(@NotNull Player j, String action, String message, String subMessage, String color) {
-        TextComponent msg = new TextComponent(color(message));
-        msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(action)), new ComponentBuilder(subMessage).color(ChatColor.of(color)).create()));
-        j.spigot().sendMessage(msg);
-    }
-
     public static void sendTextComponent116Hover(@NotNull Player j, String action, String message, String subMessage) {
         TextComponent msg = new TextComponent(color(message));
         msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(action)), new ComponentBuilder(color(subMessage)).create()));
-        j.spigot().sendMessage(msg);
-    }
-
-    @SuppressWarnings("unused")
-    public static void sendTextComponentClick(@NotNull Player j, String action, String message, String arg0) {
-        TextComponent msg = new TextComponent(color(message));
-        msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(getActionClickType(action)), arg0));
         j.spigot().sendMessage(msg);
     }
 
@@ -117,16 +101,6 @@ public class Util {
         }
         if (arg.equalsIgnoreCase("entity")) {
             return "SHOW_ENTITY";
-        }
-        return null;
-    }
-
-    public static @Nullable String getActionClickType(@NotNull String arg) {
-        if (arg.equalsIgnoreCase("url")) {
-            return "OPEN_URL";
-        }
-        if (arg.equalsIgnoreCase("cmd")) {
-            return "RUN_COMMAND";
         }
         return null;
     }

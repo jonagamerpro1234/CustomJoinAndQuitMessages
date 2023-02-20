@@ -1,6 +1,5 @@
 package jss.customjoinandquitmessages.hook;
 
-import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
@@ -12,13 +11,8 @@ import org.bukkit.Bukkit;
 
 public class EssentialsXDiscordHook implements IHook {
 
-    private HookManager hookManager;
     private boolean isEnabled;
     private DiscordService service;
-
-    public EssentialsXDiscordHook(HookManager hookManager) {
-        this.hookManager = hookManager;
-    }
 
     public void setup() {
         if (!Bukkit.getPluginManager().isPluginEnabled("EssentialsDiscord")) {
@@ -43,27 +37,22 @@ public class EssentialsXDiscordHook implements IHook {
         return isEnabled;
     }
 
-    public DiscordService getService() {
-        return service;
-    }
-
+    @SuppressWarnings("unused")
     public void sendJoinMessage(String channelId, String message) {
         if (Settings.hook_essentialsDiscord_use_default_channel) {
             service.sendMessage(MessageType.DefaultTypes.JOIN, message, false);
         } else {
-            service.sendMessage(new MessageType(Settings.hook_essentialsDiscord_channelid), message, false);
+            service.sendMessage(new MessageType(Settings.hook_essentialsDiscord_channelId), message, false);
         }
     }
 
+    @SuppressWarnings("unused")
     public void sendQuitMessage(String channelId, String message) {
         if (Settings.hook_essentialsDiscord_use_default_channel) {
             service.sendMessage(MessageType.DefaultTypes.LEAVE, message, false);
         } else {
-            service.sendMessage(new MessageType(Settings.hook_essentialsDiscord_channelid), message, false);
+            service.sendMessage(new MessageType(Settings.hook_essentialsDiscord_channelId), message, false);
         }
     }
 
-    public HookManager getHookManager() {
-        return hookManager;
-    }
 }

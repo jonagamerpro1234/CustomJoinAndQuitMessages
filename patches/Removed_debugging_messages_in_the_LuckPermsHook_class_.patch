@@ -1,0 +1,29 @@
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/LuckPermsHook.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/LuckPermsHook.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/LuckPermsHook.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/LuckPermsHook.java	(revision 52d1e6b32c970d5470b3f06b418c1d1ef9e3aeb1)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/LuckPermsHook.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
+@@ -25,19 +25,16 @@
+         if (!Bukkit.getPluginManager().isPluginEnabled("LuckPerms")) {
+             Logger.warning("&eLuckPerms not enabled! - Disable Features...");
+             this.isEnabled = false;
+-            System.out.println("Cjm Softdepend: Luckperms false - check plugin installed in plugin folder");
+             return;
+         }
+ 
+         if (!Settings.hook_luckperms) {
+             this.isEnabled = false;
+-            System.out.println("Cjm Softdepend: Luckperms false - Hook Enabled in config");
+-            Logger.warning("&eLuckPerms not enabled! - Disable Features...");
++            System.out.println("Cjm Softdepend: Luckperms false - Hook disabled in config");
+             return;
+         }
+ 
+         this.isEnabled = true;
+-        System.out.println("Cjm Softdepend: Luckperms true - The plugin has successfully loaded the dependency");
+         Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix(true) + "&aLoading LuckPerms features...");
+     }
+ 

@@ -9,6 +9,11 @@ public class InfoCommand extends SubCommand {
         return "info";
     }
 
+    @Override
+    public String permission() {
+        return null;
+    }
+
     public void onCommand(CommandSender sender, String[] args) {
 
     }

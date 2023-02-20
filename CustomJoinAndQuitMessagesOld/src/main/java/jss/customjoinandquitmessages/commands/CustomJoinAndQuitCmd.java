@@ -58,7 +58,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter {
         if (args.length >= 1) {
 
             if (args[0].equalsIgnoreCase("help")) {
-                if ((j.isOp()) || (j.hasPermission("Cjm.Help"))) {
+                if ((j.isOp()) || (j.hasPermission("cjm.command.help"))) {
                     Util.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d" + plugin.name + "&6]&5=-=-=-=-=-=-=-=-=-=-=-");
                     for (String text : plugin.Locale().help_1) {
                         Util.sendColorMessage(j, text);
@@ -71,7 +71,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter {
             }
 
             if (args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("rl")) {
-                if ((j.isOp()) || (j.hasPermission("Cjm.Reload"))) {
+                if ((j.isOp()) || (j.hasPermission(" cjm.command.reload"))) {
                     plugin.reloadAllFiles();
                     Util.sendColorMessage(j, Util.getPrefix(false) + plugin.Locale().reload);
                 } else {

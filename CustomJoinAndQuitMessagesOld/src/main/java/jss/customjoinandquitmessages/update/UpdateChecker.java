@@ -22,6 +22,7 @@ public class UpdateChecker {
         this.plugin = plugin;
     }
 
+    @SuppressWarnings("unused")
     public void sendGithubUpdate(){
         getVersion("github" ,version -> {
             if (plugin.getDescription().getVersion().equalsIgnoreCase(version)) {
@@ -60,7 +61,6 @@ public class UpdateChecker {
                 break;
             case "github":
                 url = UpdateSettings.API_UPDATE[1];
-
                 break;
             default:
                 Logger.error("Invalid source for update check: " + source);
@@ -76,7 +76,7 @@ public class UpdateChecker {
                         String latestRelease = scanner.next();
                         Gson gson = new Gson();
                         JsonObject json= gson.fromJson(latestRelease, JsonObject.class);
-                        String versionName = json.get("name").getAsString();
+                        String versionName = json.get("tag_name").getAsString();
 
                         if(versionName.contains("Beta")){
                             Logger.info("The latest release is a beta version: " + versionName);
@@ -88,10 +88,7 @@ public class UpdateChecker {
                     }else{
                         consumer.accept(scanner.next());
                     }
-
-
                 }
-
             } catch (IOException e) {
                 Logger.error("Could not check for updates: &c" + e.getMessage());
             }

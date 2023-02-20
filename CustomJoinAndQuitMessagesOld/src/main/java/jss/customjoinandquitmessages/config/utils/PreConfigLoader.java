@@ -32,7 +32,6 @@ public class PreConfigLoader {
             //Join
             Settings.join = Objects.equals(config.getString("Join.Enabled"), "true");
             Settings.join_message = config.getString("Join.Text");
-            Settings.join_type = config.getString("Join.Type");
 
             Settings.firstjoin = Objects.equals(config.getString("Join.First-Join.Enabled"), "true");
             Settings.join_message_first = config.getString("Join.First-Join.Text");
@@ -43,9 +42,9 @@ public class PreConfigLoader {
             Settings.join_message_title_title = config.getString("Join.Title.Title");
             Settings.join_message_title_subtitle = config.getString("Join.Title.SubTitle");
 
-            Settings.join_title_fadein = config.getInt("Join.Title.FadeIn");
+            Settings.join_title_fadeIn = config.getInt("Join.Title.FadeIn");
             Settings.join_title_stay = config.getInt("Join.Title.Stay");
-            Settings.join_title_fadeout = config.getInt("Join.Title.FadeOut");
+            Settings.join_title_fadeOut = config.getInt("Join.Title.FadeOut");
 
             Settings.join_sound = Objects.equals(config.getString("Join.Sound.Enabled"), "true");
             Settings.join_sound_name = config.getString("Join.Sound.Name");
@@ -54,7 +53,6 @@ public class PreConfigLoader {
 
             //Quit
             Settings.quit = Objects.equals(config.getString("Quit.Enabled"), "true");
-            Settings.quit_type = config.getString("Quit.Type");
             Settings.quit_message = config.getString("Quit.Text");
 
             //Welcome
@@ -62,11 +60,11 @@ public class PreConfigLoader {
             Settings.list_welcome = config.getStringList("Welcome.Text");
 
             //Hooks
-            Settings.hook_discordsrv = Objects.equals(config.getString("Hooks.DiscordSRV.Enabled"), "true");
-            Settings.hook_discordsrv_channelid = config.getString("Hooks.DiscordSRV.Channel-ID");
+            Settings.hook_discordSrv = Objects.equals(config.getString("Hooks.DiscordSRV.Enabled"), "true");
+            Settings.hook_discordSrv_channelId = config.getString("Hooks.DiscordSRV.Channel-ID");
 
             Settings.hook_essentialsDiscord = Objects.equals(config.getString("Hooks.EssentialsDiscord.Enabled"), "true");
-            Settings.hook_essentialsDiscord_channelid = config.getString("Hooks.EssentialsDiscord.Channel-ID");
+            Settings.hook_essentialsDiscord_channelId = config.getString("Hooks.EssentialsDiscord.Channel-ID");
             Settings.hook_essentialsDiscord_use_default_channel = config.getBoolean("Hooks.EssentialsDiscord.Use-Default-Channel");
 
             Settings.hook_luckperms = config.getBoolean("Hooks.LuckPerms.Enabled");
@@ -74,7 +72,7 @@ public class PreConfigLoader {
             Settings.hook_luckperms_autoUpdate_group_tick = config.getLong("Hooks.LuckPerms.AutoUpdateGroup.Tick");
 
             Settings.hook_essentials = Objects.equals(config.getString("Hooks.Essentials.Enabled"), "true");
-            Settings.hook_essentials_hideplayervanish = config.getBoolean("Hooks.Essentials.HidePlayerIsVanish");
+            Settings.hook_essentials_hidePlayerVanish = config.getBoolean("Hooks.Essentials.HidePlayerIsVanish");
 
         } catch (Exception e) {
             Logger.error("&cThere was an error loading the &b[PreConfigLoader]&7, please reload the plugin");
