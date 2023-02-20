@@ -25,19 +25,16 @@ public class LuckPermsHook implements IHook {
         if (!Bukkit.getPluginManager().isPluginEnabled("LuckPerms")) {
             Logger.warning("&eLuckPerms not enabled! - Disable Features...");
             this.isEnabled = false;
-            System.out.println("Cjm Softdepend: Luckperms false - check plugin installed in plugin folder");
             return;
         }
 
         if (!Settings.hook_luckperms) {
             this.isEnabled = false;
-            System.out.println("Cjm Softdepend: Luckperms false - Hook Enabled in config");
-            Logger.warning("&eLuckPerms not enabled! - Disable Features...");
+            System.out.println("Cjm Softdepend: Luckperms false - Hook disabled in config");
             return;
         }
 
         this.isEnabled = true;
-        System.out.println("Cjm Softdepend: Luckperms true - The plugin has successfully loaded the dependency");
         Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix(true) + "&aLoading LuckPerms features...");
     }
 
