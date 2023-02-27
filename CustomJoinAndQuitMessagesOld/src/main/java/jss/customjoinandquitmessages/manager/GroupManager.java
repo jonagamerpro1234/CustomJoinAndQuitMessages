@@ -77,11 +77,11 @@ public class GroupManager {
     }
 
     public boolean isClick(String group) {
-        boolean isclick = false;
+        boolean isClick = false;
         if (existsGroup(group)) {
-            isclick = config.getBoolean(group + ".ClickEvent.Enabled");
+            isClick = config.getBoolean(group + ".ClickEvent.Enabled");
         }
-        return isclick;
+        return isClick;
     }
 
     public String getClickMode(String group) {
@@ -112,12 +112,6 @@ public class GroupManager {
         return null;
     }
 
-    public String getType(String group){
-        if (existsGroup(group)) {
-            return config.getString(group + ".Type");
-        }
-        return null;
-    }
 
     public boolean isTitle(String group){
         boolean istitle = false;
