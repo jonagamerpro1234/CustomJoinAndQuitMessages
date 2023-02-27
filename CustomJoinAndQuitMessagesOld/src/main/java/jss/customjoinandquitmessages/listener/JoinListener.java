@@ -8,8 +8,6 @@ import jss.customjoinandquitmessages.hook.*;
 import jss.customjoinandquitmessages.json.MessageBuilder;
 import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.manager.PlayerManager;
-import jss.customjoinandquitmessages.storage.PlayerData;
-import jss.customjoinandquitmessages.storage.PlayerJsonStorage;
 import jss.customjoinandquitmessages.update.UpdateChecker;
 import jss.customjoinandquitmessages.utils.GroupHelper;
 import jss.customjoinandquitmessages.utils.Logger;
@@ -53,13 +51,6 @@ public class JoinListener implements Listener {
             tempGroup = Objects.requireNonNull(LuckPermsHook.getApi().getUserManager().getUser(p.getName())).getPrimaryGroup();
         } else {
             tempGroup = "default";
-        }
-
-        PlayerJsonStorage playerJsonStorage = new PlayerJsonStorage(plugin);
-        PlayerData playerData = playerJsonStorage.loadPlayerData(p.getName());
-
-        if(playerData == null){
-            playerJsonStorage.savePlayerData(new PlayerData(p.getName()));
         }
 
         PlayerManager playerManager = new PlayerManager();
@@ -245,7 +236,7 @@ public class JoinListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onQuit(@NotNull PlayerQuitEvent e) {
         FileConfiguration config = plugin.getConfigFile().getConfig();
         Player p = e.getPlayer();

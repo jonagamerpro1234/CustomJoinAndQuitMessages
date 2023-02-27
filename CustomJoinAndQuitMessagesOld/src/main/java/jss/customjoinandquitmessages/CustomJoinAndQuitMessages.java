@@ -28,7 +28,6 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
 
     private static CustomJoinAndQuitMessages plugin;
     public Metrics metrics;
-    public boolean useLatestversion;
     private final PluginDescriptionFile jss = getDescription();
     public String name = this.jss.getName();
     public String version = this.jss.getVersion();
@@ -46,7 +45,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
         Util.sendLoadTitle(version);
         inventoryViews = new ArrayList<>();
 
-        Util.createFolder(this,"Players");
+        //Util.createFolder(this,"Players");
     }
 
     public void onEnable() {
