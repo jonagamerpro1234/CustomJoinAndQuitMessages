@@ -31,7 +31,7 @@ public class PlayerJsonStorage {
                 e.printStackTrace();
             }
         }else {
-            System.out.println("archivo no existe, se procede a crearlo");
+
             try{
                 file.createNewFile();
                 FileWriter writer = new FileWriter(file);

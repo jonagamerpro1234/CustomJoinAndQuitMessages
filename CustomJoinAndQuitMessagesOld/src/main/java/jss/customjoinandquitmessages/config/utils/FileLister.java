@@ -1,7 +1,7 @@
 package jss.customjoinandquitmessages.config.utils;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.logger.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;

@@ -7,6 +7,7 @@ import jss.customjoinandquitmessages.hook.DiscordSRVHHook;
 import jss.customjoinandquitmessages.hook.EssentialsXDiscordHook;
 import jss.customjoinandquitmessages.json.MessageBuilder;
 import jss.customjoinandquitmessages.manager.GroupManager;
+import jss.customjoinandquitmessages.utils.logger.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;

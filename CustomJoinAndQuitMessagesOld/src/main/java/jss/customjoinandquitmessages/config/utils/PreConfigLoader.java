@@ -2,7 +2,7 @@ package jss.customjoinandquitmessages.config.utils;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.config.Lang;
-import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.logger.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.Util;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -25,8 +25,8 @@ public class PreConfigLoader {
 
             //Other
             Settings.settings_debug = config.getBoolean("Config.Debug");
-            Settings.update = Objects.equals(config.getString("Config.Update.Enabled"), "true");
-            Settings.c_type = config.getString("Config.Type");
+            Settings.settings_update = Objects.equals(config.getString("Config.Update.Enabled"), "true");
+            Settings.chatformat_type = config.getString("Config.Type");
             Settings.is_Group_Display = Objects.requireNonNull(config.getString("Config.Type")).equalsIgnoreCase("group");
 
             //Join
@@ -81,7 +81,7 @@ public class PreConfigLoader {
     }
 
     public boolean loadLangs() {
-        Settings.defaultLanguage = plugin.getConfig().getString("Config.Lang", "en_US");
+        Settings.settings_defaultLanguage = plugin.getConfig().getString("Config.Lang", "en_US");
         HashMap<String, Lang> availableLocales = new HashMap<>();
         FileLister fl = new FileLister();
         try {
@@ -92,10 +92,10 @@ public class PreConfigLoader {
         } catch (IOException e1) {
             plugin.getLogger().severe("Could not add locales!");
         }
-        if (!availableLocales.containsKey(Settings.defaultLanguage)) {
-            Logger.warning(Util.getPrefix(true) + "&eLoad File: " + Settings.defaultLanguage + ".yml' not found in /lang/ folder. Using /lang/en_US.yml");
-            Settings.defaultLanguage = "en_US";
-            availableLocales.put(Settings.defaultLanguage, new Lang(plugin, Settings.defaultLanguage, 0));
+        if (!availableLocales.containsKey(Settings.settings_defaultLanguage)) {
+            Logger.warning(Util.getPrefix(true) + "&eLoad File: " + Settings.settings_defaultLanguage + ".yml' not found in /lang/ folder. Using /lang/en_US.yml");
+            Settings.settings_defaultLanguage = "en_US";
+            availableLocales.put(Settings.settings_defaultLanguage, new Lang(plugin, Settings.settings_defaultLanguage, 0));
         }
         plugin.setAvailableLocales(availableLocales);
         return true;

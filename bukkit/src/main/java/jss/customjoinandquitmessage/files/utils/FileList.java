@@ -24,7 +24,7 @@ public class FileList {
 
         List<String> result = new ArrayList<>();
 
-        File dir = new File(plugin.getDataFolder(), "lang");
+        File dir = new File(plugin.getDataFolder(), "langs");
 
         if(dir.exists()){
 

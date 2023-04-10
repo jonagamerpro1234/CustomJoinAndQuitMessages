@@ -9,7 +9,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class PlayerFile extends FileManager {
-
     private File file;
     private FileConfiguration config;
     private final String path;

@@ -64,7 +64,7 @@ Hooks:
 
     # |Channel-ID| Here is the id of the channel that is used for the chat
     Channel-ID: 'none'
-  #
+
   # |Essentials|
   Essentials:
     
@@ -254,6 +254,7 @@ Welcome:
   # |Enabled| Here you can enable or disable this feature
   Enabled: true
 
+  #
   UsePerGroupWelcome: false
 
   # |Text| here you can set your own welcome message when entering

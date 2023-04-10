@@ -7,14 +7,13 @@ public class Settings {
     public static String messages_prefix;
     public static boolean hook_luckperms_autoUpdate_group;
     //Others
-    public static String defaultLanguage;
+    public static String settings_defaultLanguage;
     public static boolean is_Group_Display;
-    public static boolean update;
-    public static String c_type;
+    public static boolean settings_update;
+    public static String chatformat_type;
     public static boolean settings_debug;
 
     //Join section
-
     public static boolean join;
     public static String join_message;
 

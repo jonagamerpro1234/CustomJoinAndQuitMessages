@@ -8,23 +8,25 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.util.Locale;
 
+@SuppressWarnings("ALL")
 public class LangFile {
 
-    private CustomJoinAndQuitMessage plugin;
+    private final CustomJoinAndQuitMessage plugin;
     private FileConfiguration config;
     private File file;
+
     private final Locale localeObj;
     private final String localeName;
-    private final int index;
+    private int index;
 
-    public LangFile(@NotNull String localeName, int index){
+    public LangFile(CustomJoinAndQuitMessage plugin, @NotNull String localeName, int index){
+        this.plugin = plugin;
         this.index = index;
         this.localeName = localeName;
         getConfig(localeName);
         loadMessages();
         localeObj = new Locale(localeName.substring(0,2),localeName.substring(3,5));
     }
-
 
     public FileConfiguration getConfig(final String name) {
         if(config == null){
@@ -61,25 +63,4 @@ public class LangFile {
 
     }
 
-    public String getLocaleName() {
-        return this.localeName;
-    }
-
-    public String getLanguageName() {
-        if (localeObj == null) {
-            return "unknown";
-        }
-        return localeObj.getDisplayLanguage(localeObj);
-    }
-
-    public String getCountryName() {
-        if (localeObj == null) {
-            return "unknown";
-        }
-        return localeObj.getDisplayCountry(localeObj);
-    }
-
-    public int getIndex() {
-        return index;
-    }
 }

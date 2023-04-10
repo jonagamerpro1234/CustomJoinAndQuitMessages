@@ -22,8 +22,8 @@ public class Util {
     private final static String prefix = getPrefix(true);
     private static final String PERMISSION_PREFIX = "cjm.";
 
-    public static @NotNull String setLine(String color) {
-        return color(color + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+    public static @NotNull String setLine() {
+        return color("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
     }
 
     public static @NotNull String color(String text) {

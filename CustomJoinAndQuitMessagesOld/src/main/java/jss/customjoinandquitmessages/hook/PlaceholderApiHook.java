@@ -2,14 +2,15 @@ package jss.customjoinandquitmessages.hook;
 
 import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
-import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.logger.Logger;
 import jss.customjoinandquitmessages.utils.Util;
 import jss.customjoinandquitmessages.utils.interfaces.IHook;
 import org.bukkit.Bukkit;
 
 public class PlaceholderApiHook implements IHook {
 
-    private HookManager hooksManager;
+    @SuppressWarnings("unused")
+    private final HookManager hooksManager;
     private boolean isEnabled;
 
     public PlaceholderApiHook(HookManager hooksManager) {
@@ -29,10 +30,6 @@ public class PlaceholderApiHook implements IHook {
 
     public boolean isEnabled() {
         return this.isEnabled;
-    }
-
-    public HookManager getHooksManager() {
-        return hooksManager;
     }
 
 }

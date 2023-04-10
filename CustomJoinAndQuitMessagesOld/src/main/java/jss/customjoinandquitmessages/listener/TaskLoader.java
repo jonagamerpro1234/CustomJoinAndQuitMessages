@@ -4,7 +4,7 @@ import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.hook.LuckPermsHook;
 import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.manager.PlayerManager;
-import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.logger.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -26,7 +26,7 @@ public class TaskLoader {
         taskGroupId = scheduler.scheduleSyncRepeatingTask(plugin, () -> {
             LuckPermsHook luckPermsHook = HookManager.get().getLuckPermsHook();
 
-            if(Settings.c_type.equalsIgnoreCase("group")){
+            if(Settings.chatformat_type.equalsIgnoreCase("group")){
                 if (luckPermsHook.isEnabled() && Settings.hook_luckperms_autoUpdate_group) {
 
                     for (Player p : Bukkit.getOnlinePlayers()) {

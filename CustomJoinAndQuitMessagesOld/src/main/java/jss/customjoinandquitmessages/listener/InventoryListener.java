@@ -2,7 +2,7 @@ package jss.customjoinandquitmessages.listener;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.manager.DisplayManager;
-import jss.customjoinandquitmessages.manager.InventoryView;
+import jss.customjoinandquitmessages.utils.InventoryView;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;

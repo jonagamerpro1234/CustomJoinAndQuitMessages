@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>CustomJoinAndQuitMessagesOld</artifactId>
-    <version>1.7.9-release</version>
+    <version>1.7.10-beta</version>
 
     <properties>
         <java.version>8</java.version>

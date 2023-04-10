@@ -1,7 +1,40 @@
-name: CustomJoinAndQuitMessage
+name: CustomJoinAndQuitMessages
 version: '${project.version}'
 main: jss.customjoinandquitmessage.CustomJoinAndQuitMessage
 api-version: 1.16
-prefix: CustomJoinAndQuitMessage
+prefix: CustomJoinAndQuitMessages
 loadbefore: [ Essentials ]
-softdepend: [ PlaceholderAPI, LuckPerms, DiscordSRV, Essentials, EssentialsDiscord ]
+softdepend: [
+  PlaceholderAPI, DiscordSRV,
+  LuckPerms, EssentialsDiscord,
+  Essentials, SuperVanish,
+  PremiumVanish
+]
+
+commands:
+  customjoinandquitmessages:
+    description: the main command
+    aliases:
+      - cjm
+
+permissions:
+  cjm.admin:
+    description: give all permission of plugin
+    children:
+      cjm.update: true
+      cjm.command.reload: true
+      cjm.command.help: true
+      cjm.command.tabcomplete: true
+    default: op
+  cjm.update:
+    description: allows you to receive notifications of available updates
+    default: op
+  cjm.command.reload:
+    description: allows to use the reload command
+    default: op
+  cjm.command.help:
+    description: gives access to the plugin help command
+    default: op
+  cjm.command.tabcomplete:
+    description: allows you to see the list of available commands
+    default: op

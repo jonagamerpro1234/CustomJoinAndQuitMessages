@@ -1,7 +1,6 @@
 package jss.customjoinandquitmessages.manager;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.Logger;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -25,10 +24,6 @@ public class GroupManager {
     }
 
     public boolean existsGroup(String group) {
-        if(group != null){
-            Logger.error("&cGroup could not be found: &e" + group);
-            return false;
-        }
         return getGroupList().contains(group);
     }
 
@@ -112,13 +107,12 @@ public class GroupManager {
         return null;
     }
 
-
     public boolean isTitle(String group){
-        boolean istitle = false;
+        boolean isTitle = false;
         if (existsGroup(group)) {
-            istitle = config.getBoolean(group + ".Title.Enabled");
+            isTitle = config.getBoolean(group + ".Title.Enabled");
         }
-        return istitle;
+        return isTitle;
     }
 
     public String getTitle(String group){
@@ -157,11 +151,11 @@ public class GroupManager {
     }
 
     public boolean isActionbar(String group){
-        boolean isactionbar = false;
+        boolean isActionBar = false;
         if(existsGroup(group)) {
-            isactionbar = config.getBoolean(group + ".Actionbar.Enabled");
+            isActionBar = config.getBoolean(group + ".Actionbar.Enabled");
         }
-        return isactionbar;
+        return isActionBar;
     }
 
     public String getActionbar(String group){
@@ -172,19 +166,19 @@ public class GroupManager {
     }
 
     public boolean isSound(String group) {
-        boolean issound = false;
+        boolean isSound = false;
         if(existsGroup(group)) {
-            issound = config.getBoolean(group + "Sound.Enabled");
+            isSound = config.getBoolean(group + "Sound.Enabled");
         }
-        return issound;
+        return isSound;
     }
 
     public boolean isSoundAll(String group){
-        boolean issoundall = false;
+        boolean isSoundAll = false;
         if(existsGroup(group)){
-            issoundall = config.getBoolean(group + "Sound.Send-To-All");
+            isSoundAll = config.getBoolean(group + "Sound.Send-To-All");
         }
-        return issoundall;
+        return isSoundAll;
     }
 
     public String getSound(String group){

@@ -1,7 +1,7 @@
 package jss.customjoinandquitmessages.config;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.logger.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
+@SuppressWarnings("all")
 public class Lang {
 
     public String No_Permission;
@@ -22,7 +23,7 @@ public class Lang {
     public String Error_Sound;
     public String error_null_group;
     private final CustomJoinAndQuitMessages plugin;
-    private FileConfiguration locale = null;
+    private FileConfiguration locale;
     private File localeFile = null;
     private final Locale localeObject;
     private final String localeName;
@@ -70,7 +71,7 @@ public class Lang {
 
     private void loadLocale() {
         String main = "CustomJoinAndQuitMessage";
-        Settings.messages_prefix = locale.getString(main + ".Prefix");
+            Settings.messages_prefix = locale.getString(main + ".Prefix");
         Error_Cmd = locale.getString(main + ".Error-Cmd");
         Error_Console = locale.getString(main + ".Error-Console");
         Error_Sound = locale.getString(main + ".Sound-Error");
@@ -80,28 +81,6 @@ public class Lang {
         No_Permission_Label = locale.getString(main + ".No-Permission-Label");
         help_1 = locale.getStringList(main + ".Help-Msg");
         error_null_group = locale.getString(main + ".Groups.NotFoundGroup");
-    }
-
-    public String getLocaleName() {
-        return this.localeName;
-    }
-
-    public String getLanguageName() {
-        if (localeObject == null) {
-            return "unknown";
-        }
-        return localeObject.getDisplayLanguage(localeObject);
-    }
-
-    public String getCountryName() {
-        if (localeObject == null) {
-            return "unknown";
-        }
-        return localeObject.getDisplayCountry(localeObject);
-    }
-
-    public int getIndex() {
-        return index;
     }
 
 }

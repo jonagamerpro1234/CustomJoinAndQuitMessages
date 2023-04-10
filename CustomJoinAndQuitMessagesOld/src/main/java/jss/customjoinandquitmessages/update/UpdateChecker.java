@@ -3,7 +3,7 @@ package jss.customjoinandquitmessages.update;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.logger.Logger;
 import jss.customjoinandquitmessages.utils.Util;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
@@ -28,12 +28,12 @@ public class UpdateChecker {
             if (plugin.getDescription().getVersion().equalsIgnoreCase(version)) {
                 Logger.success("&a" + plugin.name + " is up to date!");
             } else {
-                Logger.outLine("&5<||" + Util.setLine("&5"));
+                Logger.outLine("&5<||" + Util.setLine());
                 Logger.warning("&5<||&b" + plugin.name + " is outdated!");
                 Logger.warning("&5<||&bNewest version: &a" + version);
                 Logger.warning("&5<||&bYour version: &d" + UpdateSettings.VERSION);
                 Logger.warning("&5<||&bUpdate Here on Github: &e" + UpdateSettings.URL_PlUGIN[1]);
-                Logger.outLine("&5<||" + Util.setLine("&5"));
+                Logger.outLine("&5<||" + Util.setLine());
             }
         });
     }
@@ -43,12 +43,12 @@ public class UpdateChecker {
             if (plugin.getDescription().getVersion().equalsIgnoreCase(version)) {
                 Logger.success("&a" + plugin.name + " is up to date!");
             } else {
-                Logger.outLine("&5<||" + Util.setLine("&5"));
+                Logger.outLine("&5<||" + Util.setLine());
                 Logger.warning("&5<||&b" + plugin.name + " is outdated!");
                 Logger.warning("&5<||&bNewest version: &a" + version);
                 Logger.warning("&5<||&bYour version: &d" + UpdateSettings.VERSION);
                 Logger.warning("&5<||&bUpdate Here on Spigot: &e" + UpdateSettings.URL_PlUGIN[0]);
-                Logger.outLine("&5<||" + Util.setLine("&5"));
+                Logger.outLine("&5<||" + Util.setLine());
             }
         });
     }

@@ -6,12 +6,13 @@ import jss.customjoinandquitmessages.config.GroupsFile;
 import jss.customjoinandquitmessages.config.Lang;
 import jss.customjoinandquitmessages.config.PlayerFile;
 import jss.customjoinandquitmessages.config.utils.PreConfigLoader;
-import jss.customjoinandquitmessages.listener.JoinListener;
+import jss.customjoinandquitmessages.listener.chat.JoinListener;
 import jss.customjoinandquitmessages.listener.TaskLoader;
+import jss.customjoinandquitmessages.listener.chat.QuitListener;
 import jss.customjoinandquitmessages.manager.HookManager;
-import jss.customjoinandquitmessages.manager.InventoryView;
+import jss.customjoinandquitmessages.utils.InventoryView;
 import jss.customjoinandquitmessages.update.UpdateChecker;
-import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.logger.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.Util;
 import org.bstats.bukkit.Metrics;
@@ -20,6 +21,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +37,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
     private final ConfigFile configFile = new ConfigFile(this, "config.yml");
     private final HookManager hooksManager = new HookManager();
     private final PreConfigLoader preConfigLoader = new PreConfigLoader(this);
+    @SuppressWarnings("unused")
     private String updateVersion;
     private boolean useLegacyConfig = false;
     private ArrayList<InventoryView> inventoryViews;
@@ -45,7 +48,11 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
         Util.sendLoadTitle(version);
         inventoryViews = new ArrayList<>();
 
-        //Util.createFolder(this,"Players");
+        File logDirectory = new File(getDataFolder(), "logs");
+        if (!logDirectory.exists()) {
+            //noinspection ResultOfMethodCallIgnored
+            logDirectory.mkdirs();
+        }
     }
 
     public void onEnable() {
@@ -67,7 +74,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
         String cfg = getConfigFile().getConfig().getString("File-Version");
         boolean old_cfg = getConfigFile().getConfig().contains("Config.Config-Version");
         assert cfg != null;
-        if (!cfg.equals("3") || old_cfg) {
+        if (!cfg.equals("4") || old_cfg) {
             useLegacyConfig = true;
         }
 
@@ -85,7 +92,6 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
 
         UpdateChecker updateChecker = new UpdateChecker(this);
         updateChecker.sendSpigotUpdate();
-        //updateChecker.sendGithubUpdate();
     }
 
     public void onDisable() {
@@ -101,6 +107,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
 
     public void setupEvents() {
         new JoinListener();
+        new QuitListener();
         TaskLoader taskLoader = new TaskLoader(this);
         taskLoader.onUpdateGroup();
     }
@@ -114,7 +121,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
     }
 
     public Lang Locale() {
-        return availableLangs.get(Settings.defaultLanguage);
+        return availableLangs.get(Settings.settings_defaultLanguage);
     }
 
     public void setAvailableLocales(HashMap<String, Lang> availableLangs) {
@@ -144,14 +151,6 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
         }
     }
 
-    @SuppressWarnings({"SuspiciousListRemoveInLoop", "unused"})
-    public void unregisterInventory(Player player) {
-        for (int i = 0; i < inventoryViews.size(); i++) {
-            if (inventoryViews.get(i).getPlayer().getName().equals(player.getName())) {
-                inventoryViews.remove(i);
-            }
-        }
-    }
 
     public InventoryView getInventoryView(Player player) {
         for (InventoryView inventoryView : inventoryViews) {
