@@ -26,7 +26,7 @@ public class HookManager {
     }
 
     public void load() {
-        initHooks(new PlaceholderApiHook(this),
+        initHooks(new PlaceholderApiHook(),
                 discordSRVHHook,
                 essentialsXDiscordHook,
                 essentialsXHook,

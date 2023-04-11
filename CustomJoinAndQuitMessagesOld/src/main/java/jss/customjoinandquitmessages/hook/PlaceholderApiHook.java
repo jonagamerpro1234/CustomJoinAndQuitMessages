@@ -1,21 +1,15 @@
 package jss.customjoinandquitmessages.hook;
 
-import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
-import jss.customjoinandquitmessages.utils.logger.Logger;
 import jss.customjoinandquitmessages.utils.Util;
 import jss.customjoinandquitmessages.utils.interfaces.IHook;
+import jss.customjoinandquitmessages.utils.logger.Logger;
 import org.bukkit.Bukkit;
 
 public class PlaceholderApiHook implements IHook {
 
-    @SuppressWarnings("unused")
-    private final HookManager hooksManager;
     private boolean isEnabled;
 
-    public PlaceholderApiHook(HookManager hooksManager) {
-        this.hooksManager = hooksManager;
-    }
 
     public void setup() {
         if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {

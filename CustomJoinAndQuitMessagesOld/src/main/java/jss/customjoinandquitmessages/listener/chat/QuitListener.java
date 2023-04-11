@@ -77,8 +77,7 @@ public class QuitListener implements Listener {
 
                 String text = config.getString("Quit.Text");
 
-                text = Util.color(text);
-                text = Util.getVar(p, text);
+                text = Util.color(Util.getVar(p, text));
 
                 MessageBuilder messageBuilder = new MessageBuilder(p, text);
 
