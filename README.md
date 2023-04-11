@@ -17,10 +17,11 @@
 A simple to use plugin that will allow you to customize the join and quit message, it also brings a message customization option that will allow you to add special actions.
 
 ## Installation
-* download the plugin
-* you turn off your server so that no error occurs
-* drag the plugin into the plugins folder of your server
-* you turn on the server and it would be ready
+1. Stop your server
+2. Download the plugin
+3. Drag the jar file into the plugins folder
+4. Start your server
+5. The plugin is ready for use!
 
 ## Support
 * [Issue Tracker](https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/issues)
