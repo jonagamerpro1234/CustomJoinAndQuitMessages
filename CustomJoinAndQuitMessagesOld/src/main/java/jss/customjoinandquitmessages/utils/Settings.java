@@ -9,6 +9,10 @@ public class Settings {
 
     //Others
     public static String settings_defaultLanguage;
+    public static boolean compress_logs;
+    public static boolean compress_logs_on_shutdown;
+    public static boolean delete_compressed_logs;
+    public static int delete_compressed_logs_after_days;
     public static boolean is_Group_Display;
     public static boolean settings_update;
     public static String chatformat_type;

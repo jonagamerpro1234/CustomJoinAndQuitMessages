@@ -12,10 +12,9 @@ public class FileLogger {
 
     private static final CustomJoinAndQuitMessages plugin = CustomJoinAndQuitMessages.get();
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private static final String LOG_DIRECTORY = "plugins/CustomJoinAndQuitMessages/logs";
 
     private static void log(String message, Throwable exception) {
-        String logFileName = LOG_DIRECTORY + "/" + getLogFileName();
+        String logFileName = LoggerFileUtils.getLogFileName() + getLogFileName();
         String logMessage = "[" + LocalDateTime.now().format(DATE_TIME_FORMATTER) + "] " + message + System.lineSeparator();
         String stackTrace = "";
 

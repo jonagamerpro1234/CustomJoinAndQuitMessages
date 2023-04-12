@@ -36,6 +36,23 @@ Config:
   
   # |Show-Chat-In-Console| here you can enable or disable the chat to be seen in the console
   Show-Chat-In-Console: true
+
+  #
+  Logger:
+
+    #
+    Compress_logs: true
+
+    #
+    Compress_logs_on_shutdown: true
+
+    #
+    Delete_compressed_logs: true
+
+    #
+    Delete_compressed_logs_after_days: 7
+
+
 #
 # |Hooks|
 Hooks:
@@ -254,7 +271,7 @@ Welcome:
   # |Enabled| Here you can enable or disable this feature
   Enabled: true
 
-  #
+  # [!] |Disabled|
   UsePerGroupWelcome: false
 
   # |Text| here you can set your own welcome message when entering
@@ -268,7 +285,7 @@ Welcome:
     - '<0>'
     - '<GRADIENT:8200FC>&m=========================================</GRADIENT:00FC95>&r'
 #
-# |File-Version|I would not change anything
+# |File-Version| I would not change anything
 File-Version: 4
 # |> This is the end of the configuration ... [-_-] more things coming soon
 # 

@@ -10,7 +10,6 @@ public class PlaceholderApiHook implements IHook {
 
     private boolean isEnabled;
 
-
     public void setup() {
         if (!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             this.isEnabled = false;
