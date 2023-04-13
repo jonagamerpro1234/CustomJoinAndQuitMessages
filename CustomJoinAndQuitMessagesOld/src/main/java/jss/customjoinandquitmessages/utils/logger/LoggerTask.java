@@ -5,7 +5,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class LoggerTask extends BukkitRunnable {
 
-
     public void run() {
         if(Settings.compress_logs){
             LoggerFileUtils.compressLogs();
