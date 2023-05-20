@@ -8,7 +8,11 @@ public abstract class SubCommand {
 
     public abstract String permission();
 
+    public abstract boolean requiresPermission();
+
     public abstract void onCommand(CommandSender sender, String[] args);
+
+    public abstract boolean allowConsole();
 
     public abstract boolean isEnabled();
 

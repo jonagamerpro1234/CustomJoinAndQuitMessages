@@ -2,17 +2,25 @@ package jss.customjoinandquitmessage.files.utils;
 
 import jss.customjoinandquitmessage.CustomJoinAndQuitMessage;
 import jss.customjoinandquitmessage.files.LangFile;
+import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.IOException;
 import java.util.HashMap;
 
 public class PreConfigLoader {
 
-    private final CustomJoinAndQuitMessage plugin = CustomJoinAndQuitMessage.get();
+    private final CustomJoinAndQuitMessage plugin;
+
+    public PreConfigLoader(CustomJoinAndQuitMessage plugin) {
+        this.plugin = plugin;
+    }
 
     @SuppressWarnings("unused")
     public void loadConfigs(){
-        Settings.config_Lang = "en_US";
+        FileConfiguration config = plugin.getConfig();
+        Settings.config_Lang =  config.getString("Settings.Lang");
+        Settings.config_Debug = config.getBoolean("Settings.Debug");
+
     }
 
     public boolean loadLangs(){

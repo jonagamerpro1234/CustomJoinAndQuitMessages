@@ -1,6 +1,7 @@
 Prefix: "&e[&dCustomJoinAndQuitMessage&e]"
 NoPermission: "&c你没有权限!"
 UsageMainCommand: "&7使用 &9/Cjm &ehelp &7了解更多信息"
+AllowConsoleCommand: "&cThis command can only be executed in game!"
 UnknownArguments: "&c未知参数!"
 ReloadCommand: "&a已重新加载插件的所有配置文件"
 UsageDisplayCommand: "&7使用 &9/Cjm &edisplay &d<open|section> &7查看预览"

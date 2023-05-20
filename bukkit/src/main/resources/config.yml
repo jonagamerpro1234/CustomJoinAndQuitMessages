@@ -65,7 +65,7 @@ Hooks:
     HidePlayerIsVanish: true
 
     # Here you can define the discord channel where the messages from minecraft to discord are seen
-    # (!) Es necesario tener el plugin de [ EssentialsDiscord ] para que funcione bien todo
+    # (!) Es necesario tener el plugin de [ EssentialsDiscord ] para que funcione
     EssentialsDiscord:
 
       # Here you can enable or disable this feature

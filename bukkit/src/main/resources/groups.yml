@@ -1,5 +1,8 @@
 default:
 
+  # [Experimental] esta funcion puede ser removida en cualquier momento si previo aviso
+  # y puede sufrir cambios repentinos
+  # Oculta los mensajes de los otros grupos si estan en la lista  no se veran
   HideOtherGroups:
 
     Enabled: true
@@ -7,10 +10,12 @@ default:
     List:
       - admin
 
+  # Permite la perzonalizacion de un mensaje de bienvenida que solo lo podran ver los miembros de este grupo
   Welcome:
 
     Enabled: true
 
+    # Aqui puedes perzonalisacion el mensaje de bienvenida que quieres que aparesca para este grupo
     Text:
       - ""
 

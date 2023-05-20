@@ -45,6 +45,11 @@ public class Utils {
         return returned;
     }
 
+    public static boolean hasPerm(@NotNull CommandSender sender, String perm){
+        if(perm == null) sendColorMessage(sender, "[Warning] permission could not be found or it is null, please check if it is not nullpermission could not be found");
+        return sender.hasPermission("cjm." + perm);
+    }
+
     public static void addDelayMessage(int delayTime){
 
     }

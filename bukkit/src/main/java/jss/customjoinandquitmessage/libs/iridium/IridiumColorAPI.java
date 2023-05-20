@@ -112,7 +112,6 @@ public class IridiumColorAPI {
         return workingString;
     }
 
-
     private static ChatColor @NotNull [] createRainbow(int step, float saturation) {
         ChatColor[] colors = new ChatColor[step];
         double colorStep = (1.00 / step);

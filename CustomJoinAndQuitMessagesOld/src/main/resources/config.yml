@@ -129,10 +129,16 @@ Join:
     Enabled: true
 
     # |Hover| This section allows you to define the hover text
-    Hover:
-      - '&6> &aHello &b<name>'
-      - '&6> &e%player_exp_to_level%'
-      - '&6> &dadd more lines like these'
+    Hovers:
+      1:
+        - '&6> &aHello &b<name>'
+        - '&6> &e%player_exp_to_level%'
+        - '&6> &dadd more lines like these'
+      2:
+        - '&6> &aHello &b<name>'
+        - '&6> &e%player_exp_to_level%'
+        - '&6> &dadd more lines like these'
+
   
   # |ClickEvent| This section allows you to modify chat click events
   ClickEvent:

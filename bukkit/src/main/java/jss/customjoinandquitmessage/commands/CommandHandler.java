@@ -5,6 +5,7 @@ import jss.customjoinandquitmessage.commands.subcommands.HelpCommand;
 import jss.customjoinandquitmessage.commands.subcommands.InfoCommand;
 import jss.customjoinandquitmessage.commands.subcommands.ReloadCommand;
 import jss.customjoinandquitmessage.commands.utils.SubCommand;
+import jss.customjoinandquitmessage.files.utils.Settings;
 import jss.customjoinandquitmessage.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -23,7 +24,7 @@ public class CommandHandler implements TabExecutor {
     private final ArrayList<SubCommand> subCommands = new ArrayList<>();
 
     public void register(){
-        PluginCommand pluginCommand = plugin.getCommand("CustomJoinAndQuitMessage");
+        PluginCommand pluginCommand = plugin.getCommand("customjoinandquitmessages");
         assert pluginCommand != null;
         pluginCommand.setExecutor(this);
         pluginCommand.setTabCompleter(this);
@@ -33,29 +34,36 @@ public class CommandHandler implements TabExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String @NotNull [] args) {
-        Player player = (Player) sender;
-
         if(args.length >= 1){
-
             // execute subcommand
-            getSubCommands().forEach( s -> {
+            for(SubCommand s : getSubCommands()){
                 if (args[0].equalsIgnoreCase(s.name())){
                     if (s.isEnabled()){
-                        s.onCommand(sender, args);
-                    }else{
-                     Utils.sendColorMessage(player, s.disabledMessage());
-                    }
-                }
-            });
 
-        }else{
-            // unknown argument
-            Utils.sendColorMessage(player, "&cArgumento desconosido!");
+                        if (!s.allowConsole() && !(sender instanceof Player)) {
+                            Utils.sendColorMessage(sender, Settings.lang_allowConsoleCommand);
+                            return true;
+                        }
+
+                        if (s.requiresPermission() && !sender.hasPermission(s.permission())) {
+                            Utils.sendColorMessage(sender, Settings.lang_nopermission);
+                            return true;
+                        }
+
+                        s.onCommand(sender, args);
+                        return true;
+                    } else {
+                        Utils.sendColorMessage(sender, s.disabledMessage());
+                    }
+                    return true;
+                }
+            }
+
+            Utils.sendColorMessage(sender, Settings.lang_unknownArguments);
             return true;
         }
 
-        //usage main command
-        Utils.sendColorMessage(player, "&7Usa &e/Cjm &9help &7para mas informacion");
+        Utils.sendColorMessage(sender, Settings.lang_usageMainCommand);
         return true;
     }
 
