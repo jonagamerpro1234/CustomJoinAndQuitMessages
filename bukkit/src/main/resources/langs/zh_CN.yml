@@ -1,6 +1,7 @@
 Prefix: "&e[&dCustomJoinAndQuitMessage&e]"
 NoPermission: "&cYou don't have permissions!"
 UsageMainCommand: "&7Use &9/Cjm &ehelp &7for more information"
+AllowConsoleCommand: "&cThis command can only be executed in game!"
 UnknownArguments: "&cUnknown argument!"
 ReloadCommand: "&aAll plugin files have been reloaded"
 UsageDisplayCommand: "&7Usa &9/Cjm &edisplay &d<open|section> &7to see a preview"
