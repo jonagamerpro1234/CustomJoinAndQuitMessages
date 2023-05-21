@@ -14,8 +14,8 @@ public class DisplayGui {
     private Inventory inv;
     private ItemStack item;
     private ItemMeta meta;
-    private Player player;
-    private CustomJoinAndQuitMessages plugin;
+    private final Player player;
+    private final CustomJoinAndQuitMessages plugin;
 
     public DisplayGui(Player player, CustomJoinAndQuitMessages plugin) {
         this.player = player;
@@ -28,17 +28,15 @@ public class DisplayGui {
 
         for (int i = 0; i < 54; i++) {
             inv.setItem(i, setDecoration());
-            if (i == 54) {
-                break;
-            }
         }
         setItems();
     }
 
-
     public ItemStack setDecoration() {
         item = XMaterial.BLACK_STAINED_GLASS_PANE.parseItem();
+        assert item != null;
         meta = item.getItemMeta();
+        assert meta != null;
         meta.setDisplayName(null);
         item.setItemMeta(meta);
         return item;

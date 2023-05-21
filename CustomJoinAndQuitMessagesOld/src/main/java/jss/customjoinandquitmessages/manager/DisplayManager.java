@@ -3,8 +3,8 @@ package jss.customjoinandquitmessages.manager;
 import com.cryptomorin.xseries.messages.ActionBar;
 import com.cryptomorin.xseries.messages.Titles;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.json.Json;
-import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.json.MessageBuilder;
+import jss.customjoinandquitmessages.utils.logger.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.Util;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
+@SuppressWarnings("all")
 public class DisplayManager {
 
     private final FileConfiguration config = CustomJoinAndQuitMessages.get().getConfigFile().getConfig();
@@ -41,8 +42,6 @@ public class DisplayManager {
             Logger.warning("&e[showFirstJoinMessage] &b-> &7This feature is disabled and you will not be able to see the preview");
 
         String text;
-        boolean isNormalType;
-        boolean isModifyType;
         boolean isHover;
         boolean isClick;
         List<String> Hover_Text;
@@ -53,8 +52,6 @@ public class DisplayManager {
 
         if (Settings.is_Group_Display) {
             text = groups.getString(group + ".FirstJoin.Text");
-            isNormalType = groups.getString(group + ".Type").equalsIgnoreCase("normal");
-            isModifyType = groups.getString(group + ".Type").equalsIgnoreCase("modify");
             isHover = groups.getString(group + ".HoverEvent.Enabled").equals("true");
             isClick = groups.getString(group + ".ClickEvent.Enabled").equals("true");
             Hover_Text = groups.getStringList(group + ".HoverEvent.Hover");
@@ -64,8 +61,6 @@ public class DisplayManager {
             Action_Suggest = groups.getString(group + ".ClickEvent.Actions.Suggest-Command");
         } else {
             text = Settings.join_message_first;
-            isNormalType = Settings.join_type.equalsIgnoreCase("normal");
-            isModifyType = Settings.join_type.equalsIgnoreCase("modify");
 
             isHover = config.getString("Join.HoverEvent.Enabled").equals("true");
             isClick = config.getString("Join.ClickEvent.Enabled").equals("true");
@@ -76,36 +71,31 @@ public class DisplayManager {
             Action_Suggest = config.getString("Join.ClickEvent.Actions.Suggest-Command");
         }
 
-        Json json = new Json(player, Util.color(Util.getVar(player, text)));
+        MessageBuilder messageBuilder = new MessageBuilder(player, Util.color(Util.getVar(player, text)));
 
-        if (isNormalType) {
-            json.send();
-            return;
-        } else if (isModifyType) {
-            if (isHover) {
-                if (isClick) {
-                    if (isClick_Mode.equalsIgnoreCase("command")) {
-                        json.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        json.setHover(Hover_Text).setOpenURL(Action_Url).send();
-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
-                    }
-                } else {
-                    json.setHover(Hover_Text).send();
+        if (isHover) {
+            if (isClick) {
+                if (isClick_Mode.equalsIgnoreCase("command")) {
+                    messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
+                } else if (isClick_Mode.equalsIgnoreCase("url")) {
+                    messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).send();
+                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+                    messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
                 }
             } else {
-                if (isClick) {
-                    if (isClick_Mode.equalsIgnoreCase("command")) {
-                        json.setExecuteCommand(Action_Command).send();
-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        json.setOpenURL(Action_Url).send();
-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        json.setSuggestCommand(Action_Suggest).send();
-                    }
-                } else {
-                    json.send();
+                messageBuilder.setHover(Hover_Text).send();
+            }
+        } else {
+            if (isClick) {
+                if (isClick_Mode.equalsIgnoreCase("command")) {
+                    messageBuilder.setExecuteCommand(Action_Command).send();
+                } else if (isClick_Mode.equalsIgnoreCase("url")) {
+                    messageBuilder.setOpenURL(Action_Url).send();
+                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+                    messageBuilder.setSuggestCommand(Action_Suggest).send();
                 }
+            } else {
+                messageBuilder.send();
             }
         }
     }
@@ -127,8 +117,6 @@ public class DisplayManager {
 
         if (Settings.is_Group_Display) {
             text = groups.getString(group + ".Join-Text");
-            isNormalType = groups.getString(group + ".Type").equalsIgnoreCase("normal");
-            isModifyType = groups.getString(group + ".Type").equalsIgnoreCase("modify");
 
             isHover = groups.getString(group + ".HoverEvent.Enabled").equals("true");
             isClick = groups.getString(group + ".ClickEvent.Enabled").equals("true");
@@ -141,8 +129,6 @@ public class DisplayManager {
             Action_Suggest = groups.getString(group + ".ClickEvent.Actions.Suggest-Command");
         } else {
             text = Settings.join_message;
-            isNormalType = Settings.join_type.equalsIgnoreCase("normal");
-            isModifyType = Settings.join_type.equalsIgnoreCase("modify");
 
             isHover = config.getString("Join.HoverEvent.Enabled").equals("true");
             isClick = config.getString("Join.ClickEvent.Enabled").equals("true");
@@ -155,36 +141,31 @@ public class DisplayManager {
             Action_Suggest = config.getString("Join.ClickEvent.Actions.Suggest-Command");
         }
 
-        Json json = new Json(player, Util.color(Util.getVar(player, text)));
+        MessageBuilder messageBuilder = new MessageBuilder(player, Util.color(Util.getVar(player, text)));
 
-        if (isNormalType) {
-            json.send();
-            return;
-        } else if (isModifyType) {
-            if (isHover) {
-                if (isClick) {
-                    if (isClick_Mode.equalsIgnoreCase("command")) {
-                        json.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        json.setHover(Hover_Text).setOpenURL(Action_Url).send();
-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
-                    }
-                } else {
-                    json.setHover(Hover_Text).send();
+        if (isHover) {
+            if (isClick) {
+                if (isClick_Mode.equalsIgnoreCase("command")) {
+                    messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
+                } else if (isClick_Mode.equalsIgnoreCase("url")) {
+                    messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).send();
+                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+                    messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
                 }
             } else {
-                if (isClick) {
-                    if (isClick_Mode.equalsIgnoreCase("command")) {
-                        json.setExecuteCommand(Action_Command).send();
-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        json.setOpenURL(Action_Url).send();
-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        json.setSuggestCommand(Action_Suggest).send();
-                    }
-                } else {
-                    json.send();
+                messageBuilder.setHover(Hover_Text).send();
+            }
+        } else {
+            if (isClick) {
+                if (isClick_Mode.equalsIgnoreCase("command")) {
+                    messageBuilder.setExecuteCommand(Action_Command).send();
+                } else if (isClick_Mode.equalsIgnoreCase("url")) {
+                    messageBuilder.setOpenURL(Action_Url).send();
+                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+                    messageBuilder.setSuggestCommand(Action_Suggest).send();
                 }
+            } else {
+                messageBuilder.send();
             }
         }
     }
@@ -220,8 +201,6 @@ public class DisplayManager {
             Action_Suggest = groups.getString(group + ".ClickEvent.Actions.Suggest-Command");
         } else {
             text = Settings.quit_message;
-            isNormalType = Settings.quit_type.equalsIgnoreCase("normal");
-            isModifyType = Settings.quit_type.equalsIgnoreCase("modify");
 
             isHover = config.getString("Quit.HoverEvent.Enabled").equals("true");
             isClick = config.getString("Quit.ClickEvent.Enabled").equals("true");
@@ -234,38 +213,34 @@ public class DisplayManager {
             Action_Suggest = config.getString("Quit.ClickEvent.Actions.Suggest-Command");
         }
 
-        Json json = new Json(player, Util.color(Util.getVar(player, text)));
+        MessageBuilder messageBuilder = new MessageBuilder(player, Util.color(Util.getVar(player, text)));
 
-        if (isNormalType) {
-            json.send();
-            return;
-        } else if (isModifyType) {
-            if (isHover) {
-                if (isClick) {
-                    if (isClick_Mode.equalsIgnoreCase("command")) {
-                        json.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        json.setHover(Hover_Text).setOpenURL(Action_Url).send();
-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        json.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
-                    }
-                } else {
-                    json.setHover(Hover_Text).send();
+        if (isHover) {
+            if (isClick) {
+                if (isClick_Mode.equalsIgnoreCase("command")) {
+                    messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
+                } else if (isClick_Mode.equalsIgnoreCase("url")) {
+                    messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).send();
+                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+                    messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
                 }
             } else {
-                if (isClick) {
-                    if (isClick_Mode.equalsIgnoreCase("command")) {
-                        json.setExecuteCommand(Action_Command).send();
-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
-                        json.setOpenURL(Action_Url).send();
-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
-                        json.setSuggestCommand(Action_Suggest).send();
-                    }
-                } else {
-                    json.send();
+                messageBuilder.setHover(Hover_Text).send();
+            }
+        } else {
+            if (isClick) {
+                if (isClick_Mode.equalsIgnoreCase("command")) {
+                    messageBuilder.setExecuteCommand(Action_Command).send();
+                } else if (isClick_Mode.equalsIgnoreCase("url")) {
+                    messageBuilder.setOpenURL(Action_Url).send();
+                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+                    messageBuilder.setSuggestCommand(Action_Suggest).send();
                 }
+            } else {
+                messageBuilder.send();
             }
         }
+
     }
 
     public void showWelcomeMessage() {
@@ -281,7 +256,7 @@ public class DisplayManager {
         if (!Settings.join_title)
             Logger.warning("&e[showTitleMessage] &b-> &7This feature is disabled and you will not be able to see the preview");
 
-        Titles.sendTitle(player, Settings.join_title_fadein, Settings.join_title_stay, Settings.join_title_fadeout, Settings.join_message_title_title, Settings.join_message_title_subtitle);
+        Titles.sendTitle(player, Settings.join_title_fadeIn, Settings.join_title_stay, Settings.join_title_fadeOut, Settings.join_message_title_title, Settings.join_message_title_subtitle);
     }
 
     public void showActionbar() {

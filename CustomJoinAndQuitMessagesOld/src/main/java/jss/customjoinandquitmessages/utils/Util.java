@@ -1,5 +1,6 @@
 package jss.customjoinandquitmessages.utils;
 
+import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.libs.iridiumcolorapi.IridiumColorAPI;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.ChatColor;
@@ -7,23 +8,22 @@ import net.md_5.bungee.api.chat.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.MetadataValue;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.InvocationTargetException;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class Util {
+    private final static String prefix = getPrefix(true);
+    private static final String PERMISSION_PREFIX = "cjm.";
 
-    private final static String prefix = getPrefix();
-
-    public static @NotNull String setLine(String color) {
-        return color(color + "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+    public static @NotNull String setLine() {
+        return color("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
     }
 
     public static @NotNull String color(String text) {
@@ -57,13 +57,64 @@ public class Util {
     }
 
     @Contract(pure = true)
-    public static @NotNull String getPrefix() {
-        return "&e[&dCustomJoinAndQuitMessages&e]&7 ";
+    public static @NotNull String getPrefix(boolean ignore) {
+        String prefix;
+        if(ignore){
+            prefix = "&e[&dCustomJoinAndQuitMessages&e] &7";
+        }else{
+            prefix = Settings.messages_prefix + " &7";
+        }
+        return prefix;
     }
 
-    @Contract(pure = true)
-    public static @NotNull String getPrefixPlayer() {
-        return "&6[&dCustomJoinAndQuitMessages&6]&7 ";
+    public static @NotNull List<String> setTabLimit(final @NotNull List<String> options, final String lastArgs) {
+        final List<String> returned = new ArrayList<>();
+        for (String s : options) {
+            if (s == null) {
+                continue;
+            }
+            if (s.toLowerCase().startsWith(lastArgs.toLowerCase())) {
+                returned.add(s);
+            }
+        }
+        return returned;
+    }
+
+    public static void sendTextComponent116Hover(@NotNull Player j, String action, String message, String subMessage) {
+        TextComponent msg = new TextComponent(color(message));
+        msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(action)), new ComponentBuilder(color(subMessage)).create()));
+        j.spigot().sendMessage(msg);
+    }
+
+    public static void sendAllPlayerBaseComponent(BaseComponent component) {
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            p.spigot().sendMessage(component);
+        }
+    }
+
+    public static @Nullable String getActionHoverType(@NotNull String arg) {
+        if (arg.equalsIgnoreCase("text")) {
+            return "SHOW_TEXT";
+        }
+        if (arg.equalsIgnoreCase("item")) {
+            return "SHOW_ITEM";
+        }
+        if (arg.equalsIgnoreCase("entity")) {
+            return "SHOW_ENTITY";
+        }
+        return null;
+    }
+
+    public static @NotNull String getVar(@NotNull Player player, String text) {
+        text = text.replace("<name>", player.getName());
+        text = text.replace("<displayname>", player.getDisplayName());
+        text = text.replace("<0>", " ");
+        text = onPlaceholderAPI(player, text);
+        return text;
+    }
+
+    public static String onPlaceholderAPI(Player player, String text){
+        return Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI") ? PlaceholderAPI.setPlaceholders(player, text) : text;
     }
 
     public static void sendLoadTitle(String version) {
@@ -93,98 +144,24 @@ public class Util {
         sendEnable(prefix, "&5 <||============================================----");
     }
 
-    public static @NotNull List<String> setTabLimit(final @NotNull List<String> list, final String inic) {
-        final List<String> returned = new ArrayList<>();
-        for (String s : list) {
-            if (s == null) {
-                continue;
-            }
-            if (s.toLowerCase().startsWith(inic.toLowerCase())) {
-                returned.add(s);
-            }
-        }
-        return returned;
-    }
-
     @SuppressWarnings("unused")
-    public static void sendTextComponentHover(@NotNull Player j, String action, String message, String submessage, String color) {
-        TextComponent msg = new TextComponent(color(message));
-        msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(action)), new ComponentBuilder(submessage).color(ChatColor.of(color)).create()));
-        j.spigot().sendMessage(msg);
+    public static boolean setPerm(@NotNull Player player, String permName){
+        return player.hasPermission(PERMISSION_PREFIX + permName);
     }
 
-    public static void sendTextComponent116Hover(@NotNull Player j, String action, String message, String submessage) {
-        TextComponent msg = new TextComponent(color(message));
-        msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(action)), new ComponentBuilder(color(submessage)).create()));
-        j.spigot().sendMessage(msg);
-    }
-
-    @SuppressWarnings("unused")
-    public static void sendTextComponentClick(@NotNull Player j, String action, String message, String arg0) {
-        TextComponent msg = new TextComponent(color(message));
-        msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(getActionClickType(action)), arg0));
-        j.spigot().sendMessage(msg);
-    }
-
-    public static void sendAllPlayerBaseComponent(BaseComponent component) {
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            p.spigot().sendMessage(component);
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void createFolder(@NotNull CustomJoinAndQuitMessages plugin, String folderName){
+        File file = new File(plugin.getDataFolder(), folderName);
+        if(!file.exists()){
+            file.mkdir();
         }
     }
 
-    public static @Nullable String getActionHoverType(@NotNull String arg) {
-        if (arg.equalsIgnoreCase("text")) {
-            return "SHOW_TEXT";
+    public static boolean isVanished(@NotNull Player player) {
+        for (MetadataValue meta : player.getMetadata("vanished")) {
+            if (meta.asBoolean()) return true;
         }
-        if (arg.equalsIgnoreCase("item")) {
-            return "SHOW_ITEM";
-        }
-        if (arg.equalsIgnoreCase("entity")) {
-            return "SHOW_ENTITY";
-        }
-        return null;
-    }
-
-    public static @Nullable String getActionClickType(@NotNull String arg) {
-        if (arg.equalsIgnoreCase("url")) {
-            return "OPEN_URL";
-        }
-        if (arg.equalsIgnoreCase("cmd")) {
-            return "RUN_COMMAND";
-        }
-        return null;
-    }
-
-    public static @NotNull String getVar(@NotNull Player player, String text) {
-        text = text.replace("<name>", player.getName());
-        text = text.replace("<displayname>", player.getDisplayName());
-        text = text.replaceAll("<world>", player.getWorld().getName());
-        text = text.replace("<0>", " ");
-        text = placeholderReplace(text, player);
-        text = getOnlinePlayers(text);
-        return text;
-    }
-
-    private static String placeholderReplace(String text, Player player) {
-        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            return PlaceholderAPI.setPlaceholders(player, text);
-        }
-        return text;
-    }
-
-    public static @NotNull String getOnlinePlayers(String text) {
-        int playersOnline = 0;
-        try {
-            if (Bukkit.class.getMethod("getOnlinePlayers").getReturnType() == Collection.class) {
-                playersOnline = ((Collection<?>) Bukkit.class.getMethod("getOnlinePlayers", new Class[0]).invoke(null, new Object[0])).size();
-            } else {
-                playersOnline = ((Player[]) Bukkit.class.getMethod("getOnlinePlayers", new Class[0]).invoke(null, new Object[0])).length;
-            }
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException ignored) {
-        }
-        text = text.replace("<online>", "" + playersOnline);
-        text = text.replace("<Online>", "" + playersOnline);
-        return text;
+        return false;
     }
 
 }

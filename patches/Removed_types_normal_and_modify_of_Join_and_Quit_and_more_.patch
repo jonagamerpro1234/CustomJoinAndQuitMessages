@@ -1,0 +1,1659 @@
+Index: CustomJoinAndQuitMessagesOld/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/pom.xml b/CustomJoinAndQuitMessagesOld/pom.xml
+--- a/CustomJoinAndQuitMessagesOld/pom.xml	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/pom.xml	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -9,7 +9,7 @@
+     </parent>
+ 
+     <artifactId>CustomJoinAndQuitMessagesOld</artifactId>
+-    <version>1.7.8-release</version>
++    <version>1.7.9-release</version>
+ 
+     <properties>
+         <java.version>8</java.version>
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/commands/CustomJoinAndQuitCmd.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/commands/CustomJoinAndQuitCmd.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/commands/CustomJoinAndQuitCmd.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/commands/CustomJoinAndQuitCmd.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/commands/CustomJoinAndQuitCmd.java	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -58,7 +58,7 @@
+         if (args.length >= 1) {
+ 
+             if (args[0].equalsIgnoreCase("help")) {
+-                if ((j.isOp()) || (j.hasPermission("Cjm.Help"))) {
++                if ((j.isOp()) || (j.hasPermission("cjm.command.help"))) {
+                     Util.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d" + plugin.name + "&6]&5=-=-=-=-=-=-=-=-=-=-=-");
+                     for (String text : plugin.Locale().help_1) {
+                         Util.sendColorMessage(j, text);
+@@ -71,7 +71,7 @@
+             }
+ 
+             if (args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("rl")) {
+-                if ((j.isOp()) || (j.hasPermission("Cjm.Reload"))) {
++                if ((j.isOp()) || (j.hasPermission(" cjm.command.reload"))) {
+                     plugin.reloadAllFiles();
+                     Util.sendColorMessage(j, Util.getPrefix(false) + plugin.Locale().reload);
+                 } else {
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/PreConfigLoader.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/PreConfigLoader.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/PreConfigLoader.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/PreConfigLoader.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/config/utils/PreConfigLoader.java	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -32,7 +32,6 @@
+             //Join
+             Settings.join = Objects.equals(config.getString("Join.Enabled"), "true");
+             Settings.join_message = config.getString("Join.Text");
+-            Settings.join_type = config.getString("Join.Type");
+ 
+             Settings.firstjoin = Objects.equals(config.getString("Join.First-Join.Enabled"), "true");
+             Settings.join_message_first = config.getString("Join.First-Join.Text");
+@@ -43,9 +42,9 @@
+             Settings.join_message_title_title = config.getString("Join.Title.Title");
+             Settings.join_message_title_subtitle = config.getString("Join.Title.SubTitle");
+ 
+-            Settings.join_title_fadein = config.getInt("Join.Title.FadeIn");
++            Settings.join_title_fadeIn = config.getInt("Join.Title.FadeIn");
+             Settings.join_title_stay = config.getInt("Join.Title.Stay");
+-            Settings.join_title_fadeout = config.getInt("Join.Title.FadeOut");
++            Settings.join_title_fadeOut = config.getInt("Join.Title.FadeOut");
+ 
+             Settings.join_sound = Objects.equals(config.getString("Join.Sound.Enabled"), "true");
+             Settings.join_sound_name = config.getString("Join.Sound.Name");
+@@ -54,7 +53,6 @@
+ 
+             //Quit
+             Settings.quit = Objects.equals(config.getString("Quit.Enabled"), "true");
+-            Settings.quit_type = config.getString("Quit.Type");
+             Settings.quit_message = config.getString("Quit.Text");
+ 
+             //Welcome
+@@ -62,11 +60,11 @@
+             Settings.list_welcome = config.getStringList("Welcome.Text");
+ 
+             //Hooks
+-            Settings.hook_discordsrv = Objects.equals(config.getString("Hooks.DiscordSRV.Enabled"), "true");
+-            Settings.hook_discordsrv_channelid = config.getString("Hooks.DiscordSRV.Channel-ID");
++            Settings.hook_discordSrv = Objects.equals(config.getString("Hooks.DiscordSRV.Enabled"), "true");
++            Settings.hook_discordSrv_channelId = config.getString("Hooks.DiscordSRV.Channel-ID");
+ 
+             Settings.hook_essentialsDiscord = Objects.equals(config.getString("Hooks.EssentialsDiscord.Enabled"), "true");
+-            Settings.hook_essentialsDiscord_channelid = config.getString("Hooks.EssentialsDiscord.Channel-ID");
++            Settings.hook_essentialsDiscord_channelId = config.getString("Hooks.EssentialsDiscord.Channel-ID");
+             Settings.hook_essentialsDiscord_use_default_channel = config.getBoolean("Hooks.EssentialsDiscord.Use-Default-Channel");
+ 
+             Settings.hook_luckperms = config.getBoolean("Hooks.LuckPerms.Enabled");
+@@ -74,7 +72,7 @@
+             Settings.hook_luckperms_autoUpdate_group_tick = config.getLong("Hooks.LuckPerms.AutoUpdateGroup.Tick");
+ 
+             Settings.hook_essentials = Objects.equals(config.getString("Hooks.Essentials.Enabled"), "true");
+-            Settings.hook_essentials_hideplayervanish = config.getBoolean("Hooks.Essentials.HidePlayerIsVanish");
++            Settings.hook_essentials_hidePlayerVanish = config.getBoolean("Hooks.Essentials.HidePlayerIsVanish");
+ 
+         } catch (Exception e) {
+             Logger.error("&cThere was an error loading the &b[PreConfigLoader]&7, please reload the plugin");
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/DiscordSRVHHook.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/DiscordSRVHHook.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/DiscordSRVHHook.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/DiscordSRVHHook.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/DiscordSRVHHook.java	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -1,6 +1,5 @@
+ package jss.customjoinandquitmessages.hook;
+ 
+-import jss.customjoinandquitmessages.manager.HookManager;
+ import jss.customjoinandquitmessages.utils.EventUtils;
+ import jss.customjoinandquitmessages.utils.Logger;
+ import jss.customjoinandquitmessages.utils.Settings;
+@@ -10,13 +9,8 @@
+ 
+ public class DiscordSRVHHook implements IHook {
+ 
+-    private HookManager hookManager;
+     private boolean isEnabled;
+ 
+-    public DiscordSRVHHook(HookManager hookManager) {
+-        this.hookManager = hookManager;
+-    }
+-
+     public void setup() {
+         if (!Bukkit.getPluginManager().isPluginEnabled("DiscordSRV")) {
+             Logger.warning("&eDiscordSRV not enabled! - Disable Features...");
+@@ -24,7 +18,7 @@
+             return;
+         }
+ 
+-        if (!Settings.hook_discordsrv) {
++        if (!Settings.hook_discordSrv) {
+             this.isEnabled = false;
+             Logger.warning("&eDiscordSRV not enabled! - Disable Features...");
+             return;
+@@ -38,7 +32,4 @@
+         return isEnabled;
+     }
+ 
+-    public HookManager getHookManager() {
+-        return hookManager;
+-    }
+ }
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/EssentialsXDiscordHook.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/EssentialsXDiscordHook.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/EssentialsXDiscordHook.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/EssentialsXDiscordHook.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/EssentialsXDiscordHook.java	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -1,6 +1,5 @@
+ package jss.customjoinandquitmessages.hook;
+ 
+-import jss.customjoinandquitmessages.manager.HookManager;
+ import jss.customjoinandquitmessages.utils.EventUtils;
+ import jss.customjoinandquitmessages.utils.Logger;
+ import jss.customjoinandquitmessages.utils.Settings;
+@@ -12,14 +11,9 @@
+ 
+ public class EssentialsXDiscordHook implements IHook {
+ 
+-    private HookManager hookManager;
+     private boolean isEnabled;
+     private DiscordService service;
+ 
+-    public EssentialsXDiscordHook(HookManager hookManager) {
+-        this.hookManager = hookManager;
+-    }
+-
+     public void setup() {
+         if (!Bukkit.getPluginManager().isPluginEnabled("EssentialsDiscord")) {
+             Logger.warning("&eEssentialsDiscord not enabled! - Disable Features...");
+@@ -43,27 +37,22 @@
+         return isEnabled;
+     }
+ 
+-    public DiscordService getService() {
+-        return service;
+-    }
+-
++    @SuppressWarnings("unused")
+     public void sendJoinMessage(String channelId, String message) {
+         if (Settings.hook_essentialsDiscord_use_default_channel) {
+             service.sendMessage(MessageType.DefaultTypes.JOIN, message, false);
+         } else {
+-            service.sendMessage(new MessageType(Settings.hook_essentialsDiscord_channelid), message, false);
++            service.sendMessage(new MessageType(Settings.hook_essentialsDiscord_channelId), message, false);
+         }
+     }
+ 
++    @SuppressWarnings("unused")
+     public void sendQuitMessage(String channelId, String message) {
+         if (Settings.hook_essentialsDiscord_use_default_channel) {
+             service.sendMessage(MessageType.DefaultTypes.LEAVE, message, false);
+         } else {
+-            service.sendMessage(new MessageType(Settings.hook_essentialsDiscord_channelid), message, false);
++            service.sendMessage(new MessageType(Settings.hook_essentialsDiscord_channelId), message, false);
+         }
+     }
+ 
+-    public HookManager getHookManager() {
+-        return hookManager;
+-    }
+ }
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/listener/JoinListener.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/listener/JoinListener.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/listener/JoinListener.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/listener/JoinListener.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/listener/JoinListener.java	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -103,7 +103,7 @@
+         }
+ 
+         if (essentialsXHook.isEnabled()) {
+-            if (Settings.hook_essentials_hideplayervanish) {
++            if (Settings.hook_essentials_hidePlayerVanish) {
+                 if (essentialsXHook.isVanish(p)) {
+                     e.setJoinMessage(null);
+                     return;
+@@ -115,11 +115,10 @@
+             if (isNormal) {
+                 e.setJoinMessage(null);
+ 
++                String text;
+                 String join = Settings.join_message;
+                 String firstjoin = Settings.join_message_first;
+ 
+-                String text;
+-
+                 if (Settings.firstjoin) {
+                     if (!p.hasPlayedBefore()) {
+                         text = firstjoin;
+@@ -130,161 +129,106 @@
+                     text = join;
+                 }
+ 
+-                boolean isNormalType = Settings.join_type.equalsIgnoreCase("normal");
+-                boolean isModifyType = Settings.join_type.equalsIgnoreCase("modify");
+-
+                 text = Util.color(Util.getVar(p, text));
+-
+                 MessageBuilder messageBuilder = new MessageBuilder(p, text);
+ 
+-                //Update Logger
+                 if (config.getBoolean("Config.Show-Chat-In-Console")) {
+                     Logger.info(messageBuilder.getText());
+                 }
+ 
+-                if (isNormalType) {
+-                    e.setJoinMessage(text);
+-                    if (discordSRVHHook.isEnabled()) {
+-
+-                        if (Settings.hook_discordsrv_channelid.equalsIgnoreCase("none"))
+-                            return;
+-
+-                        DiscordUtil.sendMessageBlocking(
+-                                DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
+-                                Util.colorless(messageBuilder.getText()));
+-                    }
+-
+-                    if (essentialsXDiscordHook.isEnabled()) {
+-                        if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none"))
+-                            return;
+-
+-                        essentialsXDiscordHook.sendJoinMessage(Settings.hook_essentialsDiscord_channelid,
+-                                Util.colorless(messageBuilder.getText()));
+-                    }
+-
+-                    //Removed IsModifyType in 1.8.0
+-                } else if (isModifyType) {
+-                    boolean isHover = Objects.equals(config.getString("Join.HoverEvent.Enabled"), "true");
+-                    boolean isClick = Objects.equals(config.getString("Join.ClickEvent.Enabled"), "true");
+-                    boolean isTitle = Objects.equals(config.getString("Join.Title.Enabled"), "true");
+-                    boolean isSound = Objects.equals(config.getString("Join.Sound.Enabled"), "true");
+-                    boolean isActionBar = Objects.equals(config.getString("Join.ActionBar.Enabled"), "true");
+-                    boolean isSoundAll = Objects.equals(config.getString("Join.Sound.Send-To-All"), "true");
++                boolean isHover = config.getBoolean("Join.HoverEvent.Enabled");
++                boolean isClick = config.getBoolean("Join.ClickEvent.Enabled");
++                boolean isTitle = config.getBoolean("Join.Title.Enabled");
++                boolean isSound = config.getBoolean("Join.Sound.Enabled");
++                boolean isActionBar = config.getBoolean("Join.ActionBar.Enabled");
++                boolean isSoundAll = config.getBoolean("Join.Sound.Send-To-All");
+ 
+-                    List<String> Hover_Text = config.getStringList("Join.HoverEvent.Hover");
++                List<String> Hover_Text = config.getStringList("Join.HoverEvent.Hover");
+ 
+-                    String isClick_Mode = config.getString("Join.ClickEvent.Mode");
+-                    String Action_Command = config.getString("Join.ClickEvent.Actions.Command");
+-                    String Action_Url = config.getString("Join.ClickEvent.Actions.Url");
+-                    String Action_Suggest = config.getString("Join.ClickEvent.Actions.Suggest-Command");
+-
+-                    //List<String> Action_Dev = config.getStringList("Join.ClickEvent.DevActions");
+-
+-                    String Title_Text = config.getString("Join.Title.Title");
+-                    String SubTitle_Text = config.getString("Join.Title.SubTitle");
+-                    String Actionbar_Text = config.getString("Join.ActionBar.Text");
+-                    String Sound_Name = config.getString("Join.Sound.Name");
++                String isClick_Mode = config.getString("Join.ClickEvent.Mode");
++                String Action_Command = config.getString("Join.ClickEvent.Actions.Command");
++                String Action_Url = config.getString("Join.ClickEvent.Actions.Url");
++                String Action_Suggest = config.getString("Join.ClickEvent.Actions.Suggest-Command");
++                String Title_Text = config.getString("Join.Title.Title");
++                String SubTitle_Text = config.getString("Join.Title.SubTitle");
++                String Actionbar_Text = config.getString("Join.ActionBar.Text");
++                String Sound_Name = config.getString("Join.Sound.Name");
+ 
+-                    int FadeIn = config.getInt("Join.Title.FadeIn");
+-                    int Stay = config.getInt("Join.Title.Stay");
+-                    int FadeOut = config.getInt("Join.Title.FadeOut");
+-                    int Sound_Volume = config.getInt("Join.Sound.Volume");
++                int FadeIn = config.getInt("Join.Title.FadeIn");
++                int Stay = config.getInt("Join.Title.Stay");
++                int FadeOut = config.getInt("Join.Title.FadeOut");
++                int Sound_Volume = config.getInt("Join.Sound.Volume");
+ 
+-                    float Sound_Pitch = Float.parseFloat(Objects.requireNonNull(config.getString("Join.Sound.Pitch")));
++                float Sound_Pitch = Float.parseFloat(Objects.requireNonNull(config.getString("Join.Sound.Pitch")));
+ 
+-                    if (isHover) {
+-                        if (isClick) {
+-                            assert isClick_Mode != null;
+-                            if (isClick_Mode.equalsIgnoreCase("command")) {
+-                                messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
+-                            } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                                messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
+-                            } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                                messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
+-                            }
+-                        } else {
+-                            messageBuilder.setHover(Hover_Text).sendToAll();
+-                        }
+-                    } else {
++                if (isHover) {
++                    if (isClick) {
++                        assert isClick_Mode != null;
++                        if (isClick_Mode.equalsIgnoreCase("command")) {
++                            messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
++                        } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                            messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
++                        } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                            messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
++                        }
++                    } else {
++                        messageBuilder.setHover(Hover_Text).sendToAll();
++                    }
++                } else {
+ 
+-                        if (isClick) {
+-
+-                            /*for(String action : Action_Dev){
+-
+-                                String[] parts = action.split(":");
+-                                String type = parts[0].trim();
+-                                String value = parts[1].trim();
+-
+-                                switch (type){
+-                                    case "[Execute]":
+-                                        messageBuilder.setExecuteCommand(value);
+-                                        break;
+-                                    case "[Suggest]":
+-                                        messageBuilder.setSuggestCommand(value);
+-                                        break;
+-                                    case "[Open]":
+-                                        messageBuilder.setOpenURL(value);
+-                                        break;
+-                                    default:
+-                                        messageBuilder.sendToAll();
+-                                        break;
+-                                }
+-                            }
+-                            messageBuilder.sendToAll();*/
+-
+-                            assert isClick_Mode != null;
+-                            if (isClick_Mode.equalsIgnoreCase("command")) {
+-                                messageBuilder.setExecuteCommand(Action_Command).sendToAll();
+-                            } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                                messageBuilder.setOpenURL(Action_Url).sendToAll();
+-                            } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                                messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
+-                            }
+-
+-
+-                        } else {
+-                            messageBuilder.sendToAll();
+-                        }
+-                    }
++                    if (isClick) {
++                        assert isClick_Mode != null;
++                        if (isClick_Mode.equalsIgnoreCase("command")) {
++                            messageBuilder.setExecuteCommand(Action_Command).sendToAll();
++                        } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                            messageBuilder.setOpenURL(Action_Url).sendToAll();
++                        } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                            messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
++                        }
++                    } else {
++                        messageBuilder.sendToAll();
++                    }
++                }
+ 
+-                    if (discordSRVHHook.isEnabled()) {
+-                        DiscordUtil.sendMessageBlocking(
+-                                DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
+-                                Util.colorless(messageBuilder.getText()));
+-                    }
++                if (discordSRVHHook.isEnabled()) {
++                    DiscordUtil.sendMessageBlocking(
++                            DiscordUtil.getTextChannelById(Settings.hook_discordSrv_channelId),
++                            Util.colorless(messageBuilder.getText()));
++                }
+ 
+-                    if (isTitle) {
+-                        Titles.sendTitle(p, FadeIn, Stay, FadeOut, Util.color(Util.getVar(p, Title_Text)),
+-                                Util.color(Util.getVar(p, SubTitle_Text)));
+-                    }
++                if (isTitle) {
++                    Titles.sendTitle(p, FadeIn, Stay, FadeOut, Util.color(Util.getVar(p, Title_Text)),
++                            Util.color(Util.getVar(p, SubTitle_Text)));
++                }
+ 
+-                    if (isActionBar) {
+-                        ActionBar.sendActionBar(p, Util.color(Util.getVar(p, Actionbar_Text)));
+-                    }
++                if (isActionBar) {
++                    ActionBar.sendActionBar(p, Util.color(Util.getVar(p, Actionbar_Text)));
++                }
+ 
+-                    try {
+-                        if (isSound) {
+-                            if (isSoundAll) {
+-                                Location location = p.getLocation();
+-                                p.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
+-                            } else {
+-                                for (Player pp : Bukkit.getOnlinePlayers()) {
+-                                    Location location = p.getLocation();
+-                                    pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
+-                                }
+-                            }
+-                        }
+-                    } catch (Exception ex) {
+-                        Logger.warning("&eVerify that the sound name is correct or belongs to the version");
+-                    }
++                try {
++                    if (isSound) {
++                        if (isSoundAll) {
++                            Location location = p.getLocation();
++                            p.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
++                        } else {
++                            for (Player pp : Bukkit.getOnlinePlayers()) {
++                                Location location = p.getLocation();
++                                pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
++                            }
++                        }
++                    }
++                } catch (Exception ex) {
++                    Logger.warning("&eVerify that the sound name is correct or belongs to the version");
+                 }
++
++
+             } else if (isGroup) {
+                 e.setJoinMessage(null);
+                 GroupHelper groupHelper = new GroupHelper();
+                 groupHelper.setGroup(playerManager.getGroup(p));
+                 groupHelper.setDiscord(discordSRVHHook);
+                 groupHelper.setEssentials(essentialsXDiscordHook);
+-                groupHelper.onJoin(p, config, e);
++                groupHelper.onJoin(p, config);
+             } else if (isNone) {
+                 e.setJoinMessage(null);
+             }
+@@ -295,7 +239,7 @@
+     public void onUpdate(@NotNull PlayerJoinEvent e) {
+         Player p = e.getPlayer();
+         if (Settings.update) {
+-            if ((p.isOp()) || (p.hasPermission("Cjm.Update.Notify"))) {
++            if ((p.isOp()) || (p.hasPermission("cjm.update"))) {
+                 new UpdateChecker(CustomJoinAndQuitMessages.get()).sendSpigotUpdate();
+             }
+         }
+@@ -329,7 +273,7 @@
+         }
+ 
+         if (essentialsXHook.isEnabled()) {
+-            if (Settings.hook_essentials_hideplayervanish) {
++            if (Settings.hook_essentials_hidePlayerVanish) {
+                 if (essentialsXHook.isVanish(p)) {
+                     e.setQuitMessage(null);
+                     return;
+@@ -341,9 +285,6 @@
+             if (isNormal) {
+                 e.setQuitMessage(null);
+ 
+-                boolean isNormalType = Objects.requireNonNull(config.getString("Quit.Type")).equalsIgnoreCase("normal");
+-                boolean isModifyType = Objects.requireNonNull(config.getString("Quit.Type")).equalsIgnoreCase("modify");
+-
+                 String text = config.getString("Quit.Text");
+ 
+                 text = Util.color(text);
+@@ -355,102 +296,81 @@
+                     Logger.info(messageBuilder.getText());
+                 }
+ 
+-                if (isNormalType) {
+-                    e.setQuitMessage(text);
+-                    if (discordSRVHHook.isEnabled()) {
+-                        if (Settings.hook_discordsrv_channelid.equalsIgnoreCase("none"))
+-                            return;
+-                        DiscordUtil.sendMessageBlocking(
+-                                DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
+-                                Util.colorless(messageBuilder.getText()));
+-                    }
+-
+-                    if (essentialsXDiscordHook.isEnabled()) {
+-                        if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none"))
+-                            return;
+-                        essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid,
+-                                Util.colorless(messageBuilder.getText()));
+-                    }
+-                } else if (isModifyType) {
+-
+-                    boolean isHover = Objects.equals(config.getString("Quit.HoverEvent.Enabled"), "true");
+-                    boolean isClick = Objects.equals(config.getString("Quit.ClickEvent.Enabled"), "true");
+-                    boolean isSound = Objects.equals(config.getString("Quit.Sound.Enabled"), "true");
+-                    boolean isSoundAll = Objects.equals(config.getString("Quit.Sound.Send-To-All"), "true");
++                boolean isHover = config.getBoolean("Quit.HoverEvent.Enabled");
++                boolean isClick = config.getBoolean("Quit.ClickEvent.Enabled");
++                boolean isSound = config.getBoolean("Quit.Sound.Enabled");
++                boolean isSoundAll = config.getBoolean("Quit.Sound.Send-To-All");
+ 
+-                    List<String> Hover_Text = config.getStringList("Quit.HoverEvent.Hover");
++                List<String> Hover_Text = config.getStringList("Quit.HoverEvent.Hover");
+ 
+-                    String isClick_Mode = config.getString("Quit.ClickEvent.Mode");
+-                    String Action_Command = config.getString("Quit.ClickEvent.Actions.Command");
+-                    String Action_Url = config.getString("Quit.ClickEvent.Actions.Url");
+-                    String Action_Suggest = config.getString("Quit.ClickEvent.Actions.Suggest-Command");
+-                    String Sound_Name = config.getString("Quit.Sound.Name");
++                String isClick_Mode = config.getString("Quit.ClickEvent.Mode");
++                String Action_Command = config.getString("Quit.ClickEvent.Actions.Command");
++                String Action_Url = config.getString("Quit.ClickEvent.Actions.Url");
++                String Action_Suggest = config.getString("Quit.ClickEvent.Actions.Suggest-Command");
++                String Sound_Name = config.getString("Quit.Sound.Name");
+ 
+-                    int Sound_Volume = config.getInt("Quit.Sound.Volume");
+-                    float Sound_Pitch = Float.parseFloat(Objects.requireNonNull(config.getString("Quit.Sound.Pitch")));
++                int Sound_Volume = config.getInt("Quit.Sound.Volume");
++                float Sound_Pitch = Float.parseFloat(Objects.requireNonNull(config.getString("Quit.Sound.Pitch")));
+ 
+-                    if (isHover) {
+-                        if (isClick) {
+-                            assert isClick_Mode != null;
+-                            if (isClick_Mode.equalsIgnoreCase("command")) {
+-                                messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
+-                            } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                                messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
+-                            } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                                messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
+-                            }
+-                        } else {
+-                            messageBuilder.setHover(Hover_Text).sendToAll();
+-                        }
+-                    } else {
+-                        if (isClick) {
+-                            assert isClick_Mode != null;
+-                            if (isClick_Mode.equalsIgnoreCase("command")) {
+-                                messageBuilder.setExecuteCommand(Action_Command).sendToAll();
+-                            } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                                messageBuilder.setOpenURL(Action_Url).sendToAll();
+-                            } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                                messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
+-                            }
+-                        } else {
+-                            messageBuilder.sendToAll();
+-                        }
+-                    }
++                if (isHover) {
++                    if (isClick) {
++                        assert isClick_Mode != null;
++                        if (isClick_Mode.equalsIgnoreCase("command")) {
++                            messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
++                        } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                            messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
++                        } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                            messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
++                        }
++                    } else {
++                        messageBuilder.setHover(Hover_Text).sendToAll();
++                    }
++                } else {
++                    if (isClick) {
++                        assert isClick_Mode != null;
++                        if (isClick_Mode.equalsIgnoreCase("command")) {
++                            messageBuilder.setExecuteCommand(Action_Command).sendToAll();
++                        } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                            messageBuilder.setOpenURL(Action_Url).sendToAll();
++                        } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                            messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
++                        }
++                    } else {
++                        messageBuilder.sendToAll();
++                    }
++                }
+ 
+-                    if (discordSRVHHook.isEnabled()) {
+-
+-                        if (Settings.hook_discordsrv_channelid.equalsIgnoreCase("none"))
+-                            return;
++                if (discordSRVHHook.isEnabled()) {
++                    if (Settings.hook_discordSrv_channelId.equalsIgnoreCase("none"))
++                        return;
+ 
+-                        DiscordUtil.sendMessageBlocking(
+-                                DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
+-                                Util.colorless(messageBuilder.getText()));
+-                    }
++                    DiscordUtil.sendMessageBlocking(
++                            DiscordUtil.getTextChannelById(Settings.hook_discordSrv_channelId),
++                            Util.colorless(messageBuilder.getText()));
++                }
+ 
+-                    if (essentialsXDiscordHook.isEnabled()) {
+-
+-                        if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none"))
+-                            return;
++                if (essentialsXDiscordHook.isEnabled()) {
++                    if (Settings.hook_essentialsDiscord_channelId.equalsIgnoreCase("none"))
++                        return;
+ 
+-                        essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid,
+-                                Util.colorless(messageBuilder.getText()));
+-                    }
++                    essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelId,
++                            Util.colorless(messageBuilder.getText()));
++                }
+ 
+-                    try {
+-                        if (isSound) {
+-                            if (isSoundAll) {
+-                                Location location = p.getLocation();
+-                                p.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
+-                            } else {
+-                                for (Player pp : Bukkit.getOnlinePlayers()) {
+-                                    Location location = p.getLocation();
+-                                    pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
+-                                }
+-                            }
+-                        }
+-                    } catch (Exception ex) {
+-                        Logger.warning("&eVerify that the sound name is correct or belongs to the version");
+-                    }
++                try {
++                    if (isSound) {
++                        if (isSoundAll) {
++                            Location location = p.getLocation();
++                            p.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
++                        } else {
++                            for (Player pp : Bukkit.getOnlinePlayers()) {
++                                Location location = p.getLocation();
++                                pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
++                            }
++                        }
++                    }
++                } catch (Exception ex) {
++                    Logger.warning("&eVerify that the sound name is correct or belongs to the version");
+                 }
+             } else if (isGroup) {
+                 e.setQuitMessage(null);
+@@ -458,13 +378,11 @@
+                 groupHelper.setGroup(playerManager.getGroup(p));
+                 groupHelper.setDiscord(discordSRVHHook);
+                 groupHelper.setEssentials(essentialsXDiscordHook);
+-                groupHelper.onQuit(p, config, e);
++                groupHelper.onQuit(p, config);
+             } else if (isNone) {
+                 e.setQuitMessage(null);
+             }
+         }
+     }
+ 
+-
+-
+ }
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/DisplayManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/DisplayManager.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/DisplayManager.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/DisplayManager.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/DisplayManager.java	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -12,6 +12,7 @@
+ 
+ import java.util.List;
+ 
++@SuppressWarnings("all")
+ public class DisplayManager {
+ 
+     private final FileConfiguration config = CustomJoinAndQuitMessages.get().getConfigFile().getConfig();
+@@ -41,8 +42,6 @@
+             Logger.warning("&e[showFirstJoinMessage] &b-> &7This feature is disabled and you will not be able to see the preview");
+ 
+         String text;
+-        boolean isNormalType;
+-        boolean isModifyType;
+         boolean isHover;
+         boolean isClick;
+         List<String> Hover_Text;
+@@ -53,8 +52,6 @@
+ 
+         if (Settings.is_Group_Display) {
+             text = groups.getString(group + ".FirstJoin.Text");
+-            isNormalType = groups.getString(group + ".Type").equalsIgnoreCase("normal");
+-            isModifyType = groups.getString(group + ".Type").equalsIgnoreCase("modify");
+             isHover = groups.getString(group + ".HoverEvent.Enabled").equals("true");
+             isClick = groups.getString(group + ".ClickEvent.Enabled").equals("true");
+             Hover_Text = groups.getStringList(group + ".HoverEvent.Hover");
+@@ -64,8 +61,6 @@
+             Action_Suggest = groups.getString(group + ".ClickEvent.Actions.Suggest-Command");
+         } else {
+             text = Settings.join_message_first;
+-            isNormalType = Settings.join_type.equalsIgnoreCase("normal");
+-            isModifyType = Settings.join_type.equalsIgnoreCase("modify");
+ 
+             isHover = config.getString("Join.HoverEvent.Enabled").equals("true");
+             isClick = config.getString("Join.ClickEvent.Enabled").equals("true");
+@@ -78,34 +73,29 @@
+ 
+         MessageBuilder messageBuilder = new MessageBuilder(player, Util.color(Util.getVar(player, text)));
+ 
+-        if (isNormalType) {
+-            messageBuilder.send();
+-            return;
+-        } else if (isModifyType) {
+-            if (isHover) {
+-                if (isClick) {
+-                    if (isClick_Mode.equalsIgnoreCase("command")) {
+-                        messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
+-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                        messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).send();
+-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                        messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
+-                    }
+-                } else {
+-                    messageBuilder.setHover(Hover_Text).send();
+-                }
+-            } else {
+-                if (isClick) {
+-                    if (isClick_Mode.equalsIgnoreCase("command")) {
+-                        messageBuilder.setExecuteCommand(Action_Command).send();
+-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                        messageBuilder.setOpenURL(Action_Url).send();
+-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                        messageBuilder.setSuggestCommand(Action_Suggest).send();
+-                    }
+-                } else {
+-                    messageBuilder.send();
+-                }
++        if (isHover) {
++            if (isClick) {
++                if (isClick_Mode.equalsIgnoreCase("command")) {
++                    messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
++                } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                    messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).send();
++                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                    messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
++                }
++            } else {
++                messageBuilder.setHover(Hover_Text).send();
++            }
++        } else {
++            if (isClick) {
++                if (isClick_Mode.equalsIgnoreCase("command")) {
++                    messageBuilder.setExecuteCommand(Action_Command).send();
++                } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                    messageBuilder.setOpenURL(Action_Url).send();
++                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                    messageBuilder.setSuggestCommand(Action_Suggest).send();
++                }
++            } else {
++                messageBuilder.send();
+             }
+         }
+     }
+@@ -127,8 +117,6 @@
+ 
+         if (Settings.is_Group_Display) {
+             text = groups.getString(group + ".Join-Text");
+-            isNormalType = groups.getString(group + ".Type").equalsIgnoreCase("normal");
+-            isModifyType = groups.getString(group + ".Type").equalsIgnoreCase("modify");
+ 
+             isHover = groups.getString(group + ".HoverEvent.Enabled").equals("true");
+             isClick = groups.getString(group + ".ClickEvent.Enabled").equals("true");
+@@ -141,8 +129,6 @@
+             Action_Suggest = groups.getString(group + ".ClickEvent.Actions.Suggest-Command");
+         } else {
+             text = Settings.join_message;
+-            isNormalType = Settings.join_type.equalsIgnoreCase("normal");
+-            isModifyType = Settings.join_type.equalsIgnoreCase("modify");
+ 
+             isHover = config.getString("Join.HoverEvent.Enabled").equals("true");
+             isClick = config.getString("Join.ClickEvent.Enabled").equals("true");
+@@ -157,34 +143,29 @@
+ 
+         MessageBuilder messageBuilder = new MessageBuilder(player, Util.color(Util.getVar(player, text)));
+ 
+-        if (isNormalType) {
+-            messageBuilder.send();
+-            return;
+-        } else if (isModifyType) {
+-            if (isHover) {
+-                if (isClick) {
+-                    if (isClick_Mode.equalsIgnoreCase("command")) {
+-                        messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
+-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                        messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).send();
+-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                        messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
+-                    }
+-                } else {
+-                    messageBuilder.setHover(Hover_Text).send();
+-                }
+-            } else {
+-                if (isClick) {
+-                    if (isClick_Mode.equalsIgnoreCase("command")) {
+-                        messageBuilder.setExecuteCommand(Action_Command).send();
+-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                        messageBuilder.setOpenURL(Action_Url).send();
+-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                        messageBuilder.setSuggestCommand(Action_Suggest).send();
+-                    }
+-                } else {
+-                    messageBuilder.send();
+-                }
++        if (isHover) {
++            if (isClick) {
++                if (isClick_Mode.equalsIgnoreCase("command")) {
++                    messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
++                } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                    messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).send();
++                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                    messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
++                }
++            } else {
++                messageBuilder.setHover(Hover_Text).send();
++            }
++        } else {
++            if (isClick) {
++                if (isClick_Mode.equalsIgnoreCase("command")) {
++                    messageBuilder.setExecuteCommand(Action_Command).send();
++                } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                    messageBuilder.setOpenURL(Action_Url).send();
++                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                    messageBuilder.setSuggestCommand(Action_Suggest).send();
++                }
++            } else {
++                messageBuilder.send();
+             }
+         }
+     }
+@@ -220,8 +201,6 @@
+             Action_Suggest = groups.getString(group + ".ClickEvent.Actions.Suggest-Command");
+         } else {
+             text = Settings.quit_message;
+-            isNormalType = Settings.quit_type.equalsIgnoreCase("normal");
+-            isModifyType = Settings.quit_type.equalsIgnoreCase("modify");
+ 
+             isHover = config.getString("Quit.HoverEvent.Enabled").equals("true");
+             isClick = config.getString("Quit.ClickEvent.Enabled").equals("true");
+@@ -236,36 +215,32 @@
+ 
+         MessageBuilder messageBuilder = new MessageBuilder(player, Util.color(Util.getVar(player, text)));
+ 
+-        if (isNormalType) {
+-            messageBuilder.send();
+-            return;
+-        } else if (isModifyType) {
+-            if (isHover) {
+-                if (isClick) {
+-                    if (isClick_Mode.equalsIgnoreCase("command")) {
+-                        messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
+-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                        messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).send();
+-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                        messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
+-                    }
+-                } else {
+-                    messageBuilder.setHover(Hover_Text).send();
+-                }
+-            } else {
+-                if (isClick) {
+-                    if (isClick_Mode.equalsIgnoreCase("command")) {
+-                        messageBuilder.setExecuteCommand(Action_Command).send();
+-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                        messageBuilder.setOpenURL(Action_Url).send();
+-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                        messageBuilder.setSuggestCommand(Action_Suggest).send();
+-                    }
+-                } else {
+-                    messageBuilder.send();
+-                }
++        if (isHover) {
++            if (isClick) {
++                if (isClick_Mode.equalsIgnoreCase("command")) {
++                    messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).send();
++                } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                    messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).send();
++                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                    messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).send();
++                }
++            } else {
++                messageBuilder.setHover(Hover_Text).send();
++            }
++        } else {
++            if (isClick) {
++                if (isClick_Mode.equalsIgnoreCase("command")) {
++                    messageBuilder.setExecuteCommand(Action_Command).send();
++                } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                    messageBuilder.setOpenURL(Action_Url).send();
++                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                    messageBuilder.setSuggestCommand(Action_Suggest).send();
++                }
++            } else {
++                messageBuilder.send();
+             }
+         }
++
+     }
+ 
+     public void showWelcomeMessage() {
+@@ -281,7 +256,7 @@
+         if (!Settings.join_title)
+             Logger.warning("&e[showTitleMessage] &b-> &7This feature is disabled and you will not be able to see the preview");
+ 
+-        Titles.sendTitle(player, Settings.join_title_fadein, Settings.join_title_stay, Settings.join_title_fadeout, Settings.join_message_title_title, Settings.join_message_title_subtitle);
++        Titles.sendTitle(player, Settings.join_title_fadeIn, Settings.join_title_stay, Settings.join_title_fadeOut, Settings.join_message_title_title, Settings.join_message_title_subtitle);
+     }
+ 
+     public void showActionbar() {
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/HookManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/HookManager.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/HookManager.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/HookManager.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/manager/HookManager.java	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -7,8 +7,8 @@
+ public class HookManager {
+ 
+     private static HookManager instance;
+-    private final DiscordSRVHHook discordSRVHHook = new DiscordSRVHHook(this);
+-    private final EssentialsXDiscordHook essentialsXDiscordHook = new EssentialsXDiscordHook(this);
++    private final DiscordSRVHHook discordSRVHHook = new DiscordSRVHHook();
++    private final EssentialsXDiscordHook essentialsXDiscordHook = new EssentialsXDiscordHook();
+     private final EssentialsXHook essentialsXHook = new EssentialsXHook(this);
+     private final LuckPermsHook luckPermsHook = new LuckPermsHook();
+     private final SuperVanishHook superVanishHook = new SuperVanishHook();
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/update/UpdateChecker.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/update/UpdateChecker.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/update/UpdateChecker.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/update/UpdateChecker.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/update/UpdateChecker.java	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -22,6 +22,7 @@
+         this.plugin = plugin;
+     }
+ 
++    @SuppressWarnings("unused")
+     public void sendGithubUpdate(){
+         getVersion("github" ,version -> {
+             if (plugin.getDescription().getVersion().equalsIgnoreCase(version)) {
+@@ -60,7 +61,6 @@
+                 break;
+             case "github":
+                 url = UpdateSettings.API_UPDATE[1];
+-
+                 break;
+             default:
+                 Logger.error("Invalid source for update check: " + source);
+@@ -76,7 +76,7 @@
+                         String latestRelease = scanner.next();
+                         Gson gson = new Gson();
+                         JsonObject json= gson.fromJson(latestRelease, JsonObject.class);
+-                        String versionName = json.get("name").getAsString();
++                        String versionName = json.get("tag_name").getAsString();
+ 
+                         if(versionName.contains("Beta")){
+                             Logger.info("The latest release is a beta version: " + versionName);
+@@ -88,10 +88,7 @@
+                     }else{
+                         consumer.accept(scanner.next());
+                     }
+-
+-
+                 }
+-
+             } catch (IOException e) {
+                 Logger.error("Could not check for updates: &c" + e.getMessage());
+             }
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/GroupHelper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/GroupHelper.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/GroupHelper.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/GroupHelper.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/GroupHelper.java	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -12,8 +12,6 @@
+ import org.bukkit.Sound;
+ import org.bukkit.configuration.file.FileConfiguration;
+ import org.bukkit.entity.Player;
+-import org.bukkit.event.player.PlayerJoinEvent;
+-import org.bukkit.event.player.PlayerQuitEvent;
+ import org.jetbrains.annotations.Contract;
+ import org.jetbrains.annotations.NotNull;
+ 
+@@ -43,7 +41,7 @@
+         this.essentialsXDiscordHook = essentialsXDiscordHook;
+     }
+ 
+-    public void onJoin(Player player, FileConfiguration config, PlayerJoinEvent playerJoinEvent) {
++    public void onJoin(Player player, FileConfiguration config) {
+         String temp = "";
+ 
+         String join = groupManager.getJoin(group);
+@@ -59,126 +57,97 @@
+ 
+         temp = Util.color(Util.getVar(player, temp));
+ 
+-        boolean isNormalType = groupManager.getType(group).equalsIgnoreCase("normal");
+-        boolean isModifyType = groupManager.getType(group).equalsIgnoreCase("modify");
+-
+         MessageBuilder messageBuilder = new MessageBuilder(player, temp);
+ 
+         if (config.getBoolean("Config.Show-Chat-In-Console")) {
+             Logger.info(messageBuilder.getText());
+         }
+ 
+-        if (isNormalType) {
+-            playerJoinEvent.setJoinMessage(temp);
+-            if (discordSRVHHook.isEnabled()) {
+-
+-                if (Settings.hook_discordsrv_channelid.equalsIgnoreCase("none"))
+-                    return;
+-
+-                DiscordUtil.sendMessageBlocking(
+-                        DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
+-                        Util.colorless(messageBuilder.getText()));
+-            }
+-
+-            if (essentialsXDiscordHook.isEnabled()) {
+-                if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none"))
+-                    return;
+-
+-                essentialsXDiscordHook.sendJoinMessage(Settings.hook_essentialsDiscord_channelid,
+-                        Util.colorless(messageBuilder.getText()));
+-            }
+-        } else if (isModifyType) {
+-
+-            boolean isHover = groupManager.isHover(group);
+-            boolean isClick = groupManager.isClick(group);
+-            boolean isTitle = groupManager.isTitle(group);
+-            boolean isSound = groupManager.isSound(group);
+-            boolean isActionBar = groupManager.isActionbar(group);
+-            boolean isSoundAll = groupManager.isSoundAll(group);
++        boolean isHover = groupManager.isHover(group);
++        boolean isClick = groupManager.isClick(group);
++        boolean isTitle = groupManager.isTitle(group);
++        boolean isSound = groupManager.isSound(group);
++        boolean isActionBar = groupManager.isActionbar(group);
++        boolean isSoundAll = groupManager.isSoundAll(group);
+ 
+-            List<String> Hover_Text = groupManager.getHover(group);
++        List<String> Hover_Text = groupManager.getHover(group);
+ 
+-            String isClick_Mode = groupManager.getClickMode(group);
+-            String Action_Command = groupManager.getClickCommand(group);
+-            String Action_Url = groupManager.getClickUrl(group);
+-            String Action_Suggest = groupManager.getClickSuggestCommand(group);
+-            String Title_Text = groupManager.getTitle(group);
+-            String SubTitle_Text = groupManager.getSubTitle(group);
+-            String Actionbar_Text = groupManager.getActionbar(group);
+-            String Sound_Name = groupManager.getSound(group);
++        String isClick_Mode = groupManager.getClickMode(group);
++        String Action_Command = groupManager.getClickCommand(group);
++        String Action_Url = groupManager.getClickUrl(group);
++        String Action_Suggest = groupManager.getClickSuggestCommand(group);
++        String Title_Text = groupManager.getTitle(group);
++        String SubTitle_Text = groupManager.getSubTitle(group);
++        String Actionbar_Text = groupManager.getActionbar(group);
++        String Sound_Name = groupManager.getSound(group);
+ 
+-            int FadeIn = groupManager.getFadeIn(group);
+-            int Stay = groupManager.getStay(group);
+-            int FadeOut = groupManager.getFadeOut(group);
+-            int Sound_Volume = groupManager.getVolume(group);
+-            float Sound_Pitch = groupManager.getPitch(group);
++        int FadeIn = groupManager.getFadeIn(group);
++        int Stay = groupManager.getStay(group);
++        int FadeOut = groupManager.getFadeOut(group);
++        int Sound_Volume = groupManager.getVolume(group);
++        float Sound_Pitch = groupManager.getPitch(group);
+ 
+-            if (isHover) {
+-                if (isClick) {
+-                    if (isClick_Mode.equalsIgnoreCase("command")) {
+-                        messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
+-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                        messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
+-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                        messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
+-                    }
+-                } else {
+-                    messageBuilder.setHover(Hover_Text).sendToAll();
+-                }
+-            } else {
+-                if (isClick) {
+-                    if (isClick_Mode.equalsIgnoreCase("command")) {
+-                        messageBuilder.setExecuteCommand(Action_Command).sendToAll();
+-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                        messageBuilder.setOpenURL(Action_Url).sendToAll();
+-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                        messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
+-                    }
+-                } else {
+-                    messageBuilder.sendToAll();
+-                }
+-            }
++        if (isHover) {
++            if (isClick) {
++                if (isClick_Mode.equalsIgnoreCase("command")) {
++                    messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
++                } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                    messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
++                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                    messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
++                }
++            } else {
++                messageBuilder.setHover(Hover_Text).sendToAll();
++            }
++        } else {
++            if (isClick) {
++                if (isClick_Mode.equalsIgnoreCase("command")) {
++                    messageBuilder.setExecuteCommand(Action_Command).sendToAll();
++                } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                    messageBuilder.setOpenURL(Action_Url).sendToAll();
++                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                    messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
++                }
++            } else {
++                messageBuilder.sendToAll();
++            }
++        }
+ 
+-            if (discordSRVHHook.isEnabled()) {
+-                DiscordUtil.sendMessageBlocking(
+-                        DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
+-                        Util.colorless(messageBuilder.getText()));
+-            }
++        if (discordSRVHHook.isEnabled()) {
++            DiscordUtil.sendMessageBlocking(
++                    DiscordUtil.getTextChannelById(Settings.hook_discordSrv_channelId),
++                    Util.colorless(messageBuilder.getText()));
++        }
+ 
+-            if (isTitle) {
+-                Titles.sendTitle(player, FadeIn, Stay, FadeOut, Util.color(Util.getVar(player, Title_Text)),
+-                        Util.color(Util.getVar(player, SubTitle_Text)));
+-            }
++        if (isTitle) {
++            Titles.sendTitle(player, FadeIn, Stay, FadeOut, Util.color(Util.getVar(player, Title_Text)),
++                    Util.color(Util.getVar(player, SubTitle_Text)));
++        }
+ 
+-            if (isActionBar) {
+-                ActionBar.sendActionBar(player, Util.color(Util.getVar(player, Actionbar_Text)));
+-            }
++        if (isActionBar) {
++            ActionBar.sendActionBar(player, Util.color(Util.getVar(player, Actionbar_Text)));
++        }
+ 
+-            try {
+-                if (isSound) {
+-                    if (isSoundAll) {
+-                        Location location = player.getLocation();
+-                        player.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
+-                    } else {
+-                        for (Player pp : Bukkit.getOnlinePlayers()) {
+-                            Location location = player.getLocation();
+-                            pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
+-                        }
+-                    }
+-                }
+-            } catch (Exception ex) {
+-                Logger.warning("&eVerify that the sound name is correct or belongs to the version");
+-            }
++        try {
++            if (isSound) {
++                if (isSoundAll) {
++                    Location location = player.getLocation();
++                    player.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
++                } else {
++                    for (Player pp : Bukkit.getOnlinePlayers()) {
++                        Location location = player.getLocation();
++                        pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
++                    }
++                }
++            }
++        } catch (Exception ex) {
++            Logger.warning("&eVerify that the sound name is correct or belongs to the version");
+         }
+     }
+ 
+-    public void onQuit(Player player, @NotNull FileConfiguration config, PlayerQuitEvent playerQuitEvent) {
++    public void onQuit(Player player, @NotNull FileConfiguration config) {
+         String quit = groupManager.getQuit(group);
+ 
+-
+-        boolean isNormalType = groupManager.getType(group).equalsIgnoreCase("normal");
+-        boolean isModifyType = groupManager.getType(group).equalsIgnoreCase("modify");
+-
+         quit = Util.color(Util.getVar(player, quit));
+ 
+         MessageBuilder messageBuilder = new MessageBuilder(player, quit);
+@@ -186,102 +155,82 @@
+             Logger.info(messageBuilder.getText());
+         }
+ 
+-        if (isNormalType) {
+-            playerQuitEvent.setQuitMessage(quit);
+-            if (discordSRVHHook.isEnabled()) {
+-                if (Settings.hook_discordsrv_channelid.equalsIgnoreCase("none"))
+-                    return;
+-                DiscordUtil.sendMessageBlocking(
+-                        DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
+-                        Util.colorless(messageBuilder.getText()));
+-            }
+-
+-            if (essentialsXDiscordHook.isEnabled()) {
+-                if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none"))
+-                    return;
+-                essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid,
+-                        Util.colorless(messageBuilder.getText()));
+-            }
+-        } else if (isModifyType) {
+-
+-            boolean isHover = groupManager.isHover(group);
+-            boolean isClick = groupManager.isClick(group);
+-            boolean isSound = groupManager.isSound(group);
+-            boolean isSoundAll = groupManager.isSoundAll(group);
++        boolean isHover = groupManager.isHover(group);
++        boolean isClick = groupManager.isClick(group);
++        boolean isSound = groupManager.isSound(group);
++        boolean isSoundAll = groupManager.isSoundAll(group);
+ 
+-            List<String> Hover_Text = groupManager.getHover(group);
++        List<String> Hover_Text = groupManager.getHover(group);
+ 
+-            String isClick_Mode = groupManager.getClickMode(group);
+-            String Action_Command = groupManager.getClickCommand(group);
+-            String Action_Url = groupManager.getClickUrl(group);
+-            String Action_Suggest = groupManager.getClickSuggestCommand(group);
+-            String Sound_Name = groupManager.getSound(group);
++        String isClick_Mode = groupManager.getClickMode(group);
++        String Action_Command = groupManager.getClickCommand(group);
++        String Action_Url = groupManager.getClickUrl(group);
++        String Action_Suggest = groupManager.getClickSuggestCommand(group);
++        String Sound_Name = groupManager.getSound(group);
+ 
+-            int Sound_Volume = groupManager.getVolume(group);
+-            float Sound_Pitch = groupManager.getPitch(group);
++        int Sound_Volume = groupManager.getVolume(group);
++        float Sound_Pitch = groupManager.getPitch(group);
+ 
+-            if (isHover) {
+-                if (isClick) {
+-                    if (isClick_Mode.equalsIgnoreCase("command")) {
+-                        messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
+-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                        messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
+-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                        messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
+-                    }
+-                } else {
+-                    messageBuilder.setHover(Hover_Text).sendToAll();
+-                }
+-            } else {
+-                if (isClick) {
+-                    if (isClick_Mode.equalsIgnoreCase("command")) {
+-                        messageBuilder.setExecuteCommand(Action_Command).sendToAll();
+-                    } else if (isClick_Mode.equalsIgnoreCase("url")) {
+-                        messageBuilder.setOpenURL(Action_Url).sendToAll();
+-                    } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
+-                        messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
+-                    }
+-                } else {
+-                    messageBuilder.sendToAll();
+-                }
+-            }
++        if (isHover) {
++            if (isClick) {
++                if (isClick_Mode.equalsIgnoreCase("command")) {
++                    messageBuilder.setHover(Hover_Text).setExecuteCommand(Action_Command).sendToAll();
++                } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                    messageBuilder.setHover(Hover_Text).setOpenURL(Action_Url).sendToAll();
++                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                    messageBuilder.setHover(Hover_Text).setSuggestCommand(Action_Suggest).sendToAll();
++                }
++            } else {
++                messageBuilder.setHover(Hover_Text).sendToAll();
++            }
++        } else {
++            if (isClick) {
++                if (isClick_Mode.equalsIgnoreCase("command")) {
++                    messageBuilder.setExecuteCommand(Action_Command).sendToAll();
++                } else if (isClick_Mode.equalsIgnoreCase("url")) {
++                    messageBuilder.setOpenURL(Action_Url).sendToAll();
++                } else if (isClick_Mode.equalsIgnoreCase("suggest")) {
++                    messageBuilder.setSuggestCommand(Action_Suggest).sendToAll();
++                }
++            } else {
++                messageBuilder.sendToAll();
++            }
++        }
+ 
+-            if (discordSRVHHook.isEnabled()) {
++        if (discordSRVHHook.isEnabled()) {
+ 
+-                if (Settings.hook_discordsrv_channelid.equalsIgnoreCase("none"))
+-                    return;
++            if (Settings.hook_discordSrv_channelId.equalsIgnoreCase("none"))
++                return;
+ 
+-                DiscordUtil.sendMessageBlocking(
+-                        DiscordUtil.getTextChannelById(Settings.hook_discordsrv_channelid),
+-                        Util.colorless(messageBuilder.getText()));
+-            }
++            DiscordUtil.sendMessageBlocking(
++                    DiscordUtil.getTextChannelById(Settings.hook_discordSrv_channelId),
++                    Util.colorless(messageBuilder.getText()));
++        }
+ 
+-            if (essentialsXDiscordHook.isEnabled()) {
++        if (essentialsXDiscordHook.isEnabled()) {
+ 
+-                if (Settings.hook_essentialsDiscord_channelid.equalsIgnoreCase("none"))
+-                    return;
++            if (Settings.hook_essentialsDiscord_channelId.equalsIgnoreCase("none"))
++                return;
+ 
+-                essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelid,
+-                        Util.colorless(messageBuilder.getText()));
+-            }
++            essentialsXDiscordHook.sendQuitMessage(Settings.hook_essentialsDiscord_channelId,
++                    Util.colorless(messageBuilder.getText()));
++        }
+ 
+-            try {
+-                if (isSound) {
+-                    if (isSoundAll) {
+-                        Location location = player.getLocation();
+-                        player.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
+-                    } else {
+-                        for (Player pp : Bukkit.getOnlinePlayers()) {
+-                            Location location = player.getLocation();
+-                            pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
+-                        }
+-                    }
+-                }
+-            } catch (Exception ex) {
+-                Logger.warning("&eVerify that the sound name is correct or belongs to the version");
+-            }
+-        }
++        try {
++            if (isSound) {
++                if (isSoundAll) {
++                    Location location = player.getLocation();
++                    player.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
++                } else {
++                    for (Player pp : Bukkit.getOnlinePlayers()) {
++                        Location location = player.getLocation();
++                        pp.playSound(location, Sound.valueOf(Sound_Name), Sound_Volume, Sound_Pitch);
++                    }
++                }
++            }
++        } catch (Exception ex) {
++            Logger.warning("&eVerify that the sound name is correct or belongs to the version");
++        }
++    }
+ 
+-    }
+-
+ }
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Settings.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Settings.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Settings.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Settings.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Settings.java	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -14,7 +14,6 @@
+     public static boolean settings_debug;
+ 
+     //Join section
+-    public static String join_type;
+ 
+     public static boolean join;
+     public static String join_message;
+@@ -25,9 +24,9 @@
+     public static boolean join_title;
+     public static String join_message_title_title;
+     public static String join_message_title_subtitle;
+-    public static int join_title_fadein;
++    public static int join_title_fadeIn;
+     public static int join_title_stay;
+-    public static int join_title_fadeout;
++    public static int join_title_fadeOut;
+ 
+     public static boolean join_actionbar;
+     public static String join_message_actionbar_text;
+@@ -38,33 +37,23 @@
+     public static int join_sound_vol;
+ 
+     //Quit section
+-
+-    public static String quit_type;
+-
+     public static boolean quit;
+     public static String quit_message;
+ 
+-    public static boolean quit_sound;
+-    public static String quit_sound_name;
+-    public static float quit_sound_pitch;
+-    public static int quit_sound_vol;
+-
+     //Welcome section
+     public static boolean welcome;
+     public static List<String> list_welcome;
+ 
+     //Hooks section
+-    public static boolean hook_discordsrv;
+-    public static boolean hook_discordsrv_use_message;
+-    public static String hook_discordsrv_channelid;
++    public static boolean hook_discordSrv;
++    public static String hook_discordSrv_channelId;
+ 
+     public static boolean hook_essentials;
+-    public static boolean hook_essentials_hideplayervanish;
++    public static boolean hook_essentials_hidePlayerVanish;
+ 
+     public static boolean hook_essentialsDiscord;
+     public static boolean hook_essentialsDiscord_use_default_channel;
+-    public static String hook_essentialsDiscord_channelid;
++    public static String hook_essentialsDiscord_channelId;
+     public static boolean hook_luckperms;
+-    public static boolean hook_luckperms_use_group;
+     public static long hook_luckperms_autoUpdate_group_tick;
+ }
+Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Util.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Util.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Util.java
+--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Util.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/utils/Util.java	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -67,10 +67,8 @@
+         return prefix;
+     }
+ 
+-
+     public static @NotNull List<String> setTabLimit(final @NotNull List<String> options, final String lastArgs) {
+         final List<String> returned = new ArrayList<>();
+-
+         for (String s : options) {
+             if (s == null) {
+                 continue;
+@@ -82,25 +80,11 @@
+         return returned;
+     }
+ 
+-    @SuppressWarnings("unused")
+-    public static void sendTextComponentHover(@NotNull Player j, String action, String message, String subMessage, String color) {
+-        TextComponent msg = new TextComponent(color(message));
+-        msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(action)), new ComponentBuilder(subMessage).color(ChatColor.of(color)).create()));
+-        j.spigot().sendMessage(msg);
+-    }
+-
+     public static void sendTextComponent116Hover(@NotNull Player j, String action, String message, String subMessage) {
+         TextComponent msg = new TextComponent(color(message));
+         msg.setHoverEvent(new HoverEvent(HoverEvent.Action.valueOf(getActionHoverType(action)), new ComponentBuilder(color(subMessage)).create()));
+         j.spigot().sendMessage(msg);
+     }
+-
+-    @SuppressWarnings("unused")
+-    public static void sendTextComponentClick(@NotNull Player j, String action, String message, String arg0) {
+-        TextComponent msg = new TextComponent(color(message));
+-        msg.setClickEvent(new ClickEvent(ClickEvent.Action.valueOf(getActionClickType(action)), arg0));
+-        j.spigot().sendMessage(msg);
+-    }
+ 
+     public static void sendAllPlayerBaseComponent(BaseComponent component) {
+         for (Player p : Bukkit.getOnlinePlayers()) {
+@@ -120,16 +104,6 @@
+         }
+         return null;
+     }
+-
+-    public static @Nullable String getActionClickType(@NotNull String arg) {
+-        if (arg.equalsIgnoreCase("url")) {
+-            return "OPEN_URL";
+-        }
+-        if (arg.equalsIgnoreCase("cmd")) {
+-            return "RUN_COMMAND";
+-        }
+-        return null;
+-    }
+ 
+     public static @NotNull String getVar(@NotNull Player player, String text) {
+         text = text.replace("<name>", player.getName());
+Index: CustomJoinAndQuitMessagesOld/src/main/resources/config.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/resources/config.yml b/CustomJoinAndQuitMessagesOld/src/main/resources/config.yml
+--- a/CustomJoinAndQuitMessagesOld/src/main/resources/config.yml	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/src/main/resources/config.yml	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -105,9 +105,6 @@
+     # |Text| Here you can set the join message for the first time
+     Text: '&6Welcome to server &a<name>&6 for the first time'
+   
+-  # |Type| Here you can find two types that are [ normal | modify ]
+-  Type: modify
+-  
+   # |HoverEvent| This section allows you to modify the hover events in the chat
+   HoverEvent:
+     
+@@ -129,12 +126,6 @@
+     # |Mode| there are three different modes which are [ command | suggest | url ]
+     Mode: command
+ 
+-    # This feature is not available yet
+-    DevActions:
+-      - '[Suggest]: /help'
+-      - '[Execute]: /me hello test'
+-      - '[Open]: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-7-x-1-17-x.57006/'
+-
+     # |Actions| This is where are the available events that you can use
+     Actions:
+       
+@@ -205,9 +196,6 @@
+   # |Text| This is where Quit customizable message is located
+   Text: '&b[<#:FF8E8E>-&b] <#:A157FF><name>'
+   
+-  # |Type| Here you can find two types that are [ normal | modify ]
+-  Type: normal
+-  
+   # |HoverEvent| This section allows you to modify the hover events in the chat
+   HoverEvent:
+     
+@@ -280,7 +268,7 @@
+     - '<GRADIENT:8200FC>&m=========================================</GRADIENT:00FC95>&r'
+ #
+ # |File-Version|I would not change anything
+-File-Version: 3
++File-Version: 4
+ # |> This is the end of the configuration ... [-_-] more things coming soon
+ # 
+ # | Config File  |
+Index: CustomJoinAndQuitMessagesOld/src/main/resources/groups.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/CustomJoinAndQuitMessagesOld/src/main/resources/groups.yml b/CustomJoinAndQuitMessagesOld/src/main/resources/groups.yml
+--- a/CustomJoinAndQuitMessagesOld/src/main/resources/groups.yml	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/CustomJoinAndQuitMessagesOld/src/main/resources/groups.yml	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -32,9 +32,6 @@
+     
+     # |Text| Here you can set the join message for the first time
+     Text: '&6Welcome to server &a<name>&6 for the first time'
+-
+-  # |Type| Here you can find two types that are [ normal | modify ]
+-  Type: modify
+   
+   # |HoverEvent| This section allows you to modify the hover events in the chat
+   HoverEvent:
+Index: bukkit/src/main/java/jss/customjoinandquitmessage/commands/subcommands/InfoCommand.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/bukkit/src/main/java/jss/customjoinandquitmessage/commands/subcommands/InfoCommand.java b/bukkit/src/main/java/jss/customjoinandquitmessage/commands/subcommands/InfoCommand.java
+--- a/bukkit/src/main/java/jss/customjoinandquitmessage/commands/subcommands/InfoCommand.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++++ b/bukkit/src/main/java/jss/customjoinandquitmessage/commands/subcommands/InfoCommand.java	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -9,6 +9,11 @@
+         return "info";
+     }
+ 
++    @Override
++    public String permission() {
++        return null;
++    }
++
+     public void onCommand(CommandSender sender, String[] args) {
+ 
+     }
+Index: patches/Removed_debugging_messages_in_the_LuckPermsHook_class_.patch
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/patches/Removed_debugging_messages_in_the_LuckPermsHook_class_.patch b/patches/Removed_debugging_messages_in_the_LuckPermsHook_class_.patch
+new file mode 100644
+--- /dev/null	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
++++ b/patches/Removed_debugging_messages_in_the_LuckPermsHook_class_.patch	(revision 5436229cc153c4aec4cd6267d80f1e8301022990)
+@@ -0,0 +1,29 @@
++Index: CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/LuckPermsHook.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/LuckPermsHook.java b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/LuckPermsHook.java
++--- a/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/LuckPermsHook.java	(revision 52d1e6b32c970d5470b3f06b418c1d1ef9e3aeb1)
+++++ b/CustomJoinAndQuitMessagesOld/src/main/java/jss/customjoinandquitmessages/hook/LuckPermsHook.java	(revision 60d9051d52d70ed86db8e0fc1a50da61f395e55a)
++@@ -25,19 +25,16 @@
++         if (!Bukkit.getPluginManager().isPluginEnabled("LuckPerms")) {
++             Logger.warning("&eLuckPerms not enabled! - Disable Features...");
++             this.isEnabled = false;
++-            System.out.println("Cjm Softdepend: Luckperms false - check plugin installed in plugin folder");
++             return;
++         }
++ 
++         if (!Settings.hook_luckperms) {
++             this.isEnabled = false;
++-            System.out.println("Cjm Softdepend: Luckperms false - Hook Enabled in config");
++-            Logger.warning("&eLuckPerms not enabled! - Disable Features...");
+++            System.out.println("Cjm Softdepend: Luckperms false - Hook disabled in config");
++             return;
++         }
++ 
++         this.isEnabled = true;
++-        System.out.println("Cjm Softdepend: Luckperms true - The plugin has successfully loaded the dependency");
++         Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix(true) + "&aLoading LuckPerms features...");
++     }
++ 

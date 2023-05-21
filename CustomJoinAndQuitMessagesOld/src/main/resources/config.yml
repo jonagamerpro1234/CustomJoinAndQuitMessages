@@ -1,7 +1,7 @@
 #    ______    _____   ____    __  ___
 #   / ____/   / /   | / __ \  /  |/  /
 #  / /   __  / / /| |/ / / / / /|_/ /  By jonagamerpro1234
-# / /___/ /_/ / ___ / /_/ / / /  / /   Version 1.7.5
+# / /___/ /_/ / ___ / /_/ / / /  / /   Version ${project.version}
 # \____/\____/_/  |_\___\_\/_/  /_/    Thanks for using CustomJoinAndQuitMessage <3
 #                                    
 # ● A simple plugin for personalization of the join and quit messages and more...
@@ -13,11 +13,20 @@
 #
 Config:
 
-  # |Lang| you can use the available languages of the plugin, or you can add your own translations [ Default = en-US ]
-  Lang: en-US
+  # |Lang| you can use the available languages of the plugin, or you can add your own translations [ Default = en_US ]
+  Lang: en_US
   
   # |Update| This function lets you know if there is a plugin update [Does not disable console messages]
-  Update: true
+  Update:
+
+    # |Enabled| Here you can enable or disable this feature
+    Enabled: true
+
+    # !!This feature is not available yet!!
+    # |GetUpdateFrom| you will get the updates from [spigot | github] what is the difference, here below is the explanation of why
+    # |Spigot| Get only released updates, and you won't receive beta notifications
+    # |GitHub| Get only the released and beta updates, and you will be able to receive notifications of both versions
+    GetUpdateFrom: Spigot
   
   # |Debug| shows you important information about the plugin loading 
   Debug: false
@@ -27,6 +36,23 @@ Config:
   
   # |Show-Chat-In-Console| here you can enable or disable the chat to be seen in the console
   Show-Chat-In-Console: true
+
+  #
+  Logger:
+
+    #
+    Compress_logs: true
+
+    #
+    Compress_logs_on_shutdown: true
+
+    #
+    Delete_compressed_logs: true
+
+    #
+    Delete_compressed_logs_after_days: 7
+
+
 #
 # |Hooks|
 Hooks:
@@ -55,7 +81,7 @@ Hooks:
 
     # |Channel-ID| Here is the id of the channel that is used for the chat
     Channel-ID: 'none'
-  #
+
   # |Essentials|
   Essentials:
     
@@ -96,9 +122,6 @@ Join:
     # |Text| Here you can set the join message for the first time
     Text: '&6Welcome to server &a<name>&6 for the first time'
   
-  # |Type| Here you can find two types that are [ normal | modify ]
-  Type: modify
-  
   # |HoverEvent| This section allows you to modify the hover events in the chat
   HoverEvent:
     
@@ -106,10 +129,16 @@ Join:
     Enabled: true
 
     # |Hover| This section allows you to define the hover text
-    Hover:
-      - '&6> &aHello &b<name>'
-      - '&6> &e%player_exp_to_level%'
-      - '&6> &dadd more lines like these'
+    Hovers:
+      1:
+        - '&6> &aHello &b<name>'
+        - '&6> &e%player_exp_to_level%'
+        - '&6> &dadd more lines like these'
+      2:
+        - '&6> &aHello &b<name>'
+        - '&6> &e%player_exp_to_level%'
+        - '&6> &dadd more lines like these'
+
   
   # |ClickEvent| This section allows you to modify chat click events
   ClickEvent:
@@ -119,7 +148,7 @@ Join:
     
     # |Mode| there are three different modes which are [ command | suggest | url ]
     Mode: command
-    
+
     # |Actions| This is where are the available events that you can use
     Actions:
       
@@ -190,9 +219,6 @@ Quit:
   # |Text| This is where Quit customizable message is located
   Text: '&b[<#:FF8E8E>-&b] <#:A157FF><name>'
   
-  # |Type| Here you can find two types that are [ normal | modify ]
-  Type: normal
-  
   # |HoverEvent| This section allows you to modify the hover events in the chat
   HoverEvent:
     
@@ -213,7 +239,7 @@ Quit:
     
     # |Mode| there are three different modes which are [ command | suggest | url ]
     Mode: command
-    
+
     # |Actions| This is where are the available events that you can use
     Actions:
       
@@ -225,7 +251,7 @@ Quit:
       
       # |Suggest-Command| Clicking on the chat suggests a command that you define in the config
       Suggest-Command: '/msg <name>'
-  
+
   # |Sound| In this section you can configure the sound of the join
   # |Sound list: https://www.spigotmc.org/wiki/cc-sounds-list/ 
   Sound:
@@ -250,7 +276,10 @@ Welcome:
 
   # |Enabled| Here you can enable or disable this feature
   Enabled: true
-  
+
+  # [!] |Disabled|
+  UsePerGroupWelcome: false
+
   # |Text| here you can set your own welcome message when entering
   Text:
     - '<GRADIENT:8200FC>&m=========================================</GRADIENT:00FC95>&r'
@@ -262,8 +291,8 @@ Welcome:
     - '<0>'
     - '<GRADIENT:8200FC>&m=========================================</GRADIENT:00FC95>&r'
 #
-# |File-Version|I would not change anything
-File-Version: 3
+# |File-Version| I would not change anything
+File-Version: 4
 # |> This is the end of the configuration ... [-_-] more things coming soon
 # 
 # | Config File  |

@@ -1,6 +1,7 @@
 package jss.customjoinandquitmessages.config;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.config.utils.FileManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 

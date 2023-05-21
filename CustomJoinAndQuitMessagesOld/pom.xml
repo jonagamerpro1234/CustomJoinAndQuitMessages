@@ -9,10 +9,10 @@
     </parent>
 
     <artifactId>CustomJoinAndQuitMessagesOld</artifactId>
-    <version>1.7.6-b1</version>
+    <version>1.7.10-beta</version>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -97,6 +97,7 @@
                             <Version>${project.version}</Version>
                         </manifestEntries>
                     </archive>
+                    <outputDirectory>C:\Users\Alumno\Documents\Server\1.8\plugins</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
@@ -143,7 +144,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19.2-R0.1-SNAPSHOT</version>
+            <version>1.19.3-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -220,6 +221,17 @@
                     <artifactId>bstats-bukkit</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.LeonMangler</groupId>
+            <artifactId>SuperVanish</artifactId>
+            <version>6.2.6-4</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

@@ -26,6 +26,7 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) {
             if (args.length >= 1) {
+
                 if (args[0].equalsIgnoreCase("help")) {
                     List<String> list = plugin.Locale().help_1;
                     Util.sendColorMessage(sender, "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d" + plugin.name + "&6]&5=-=-=-=-=-=-=-=-=-=-=-");
@@ -35,26 +36,29 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter {
                     Util.sendColorMessage(sender, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
                 } else if (args[0].equalsIgnoreCase("reload")) {
                     plugin.reloadAllFiles();
-                    Util.sendColorMessage(sender, Util.getPrefix() + " " + plugin.Locale().reload);
+                    Util.sendColorMessage(sender, Util.getPrefix(false) + plugin.Locale().reload);
                 } else if (args[0].equalsIgnoreCase("info")) {
-                    Util.sendColorMessage(sender, "&5 <||=-=-=-=-=" + Util.getPrefix() + "&5=-=-=-=-=-=-");
-                    Util.sendColorMessage(sender, "&5 <|| &c* &bName: &3" + plugin.name);
-                    Util.sendColorMessage(sender, "&5 <|| &c* &bAuthor: &3jonagamerpro1234");
-                    Util.sendColorMessage(sender, "&5 <|| &c* &bVersion: &a" + plugin.version);
-                    Util.sendColorMessage(sender, "&5 <|| &c* &bUpdate: &e" + plugin.useLatestversion);
-                    Util.sendColorMessage(sender, "&5 <||=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+                    Util.sendColorMessage(sender, "&5-=-=-=-=-=[&b" + plugin.name + "&5]=-=-=-=-=-=-");
+                    Util.sendColorMessage(sender, "&6 ● &bAuthor: &3jonagamerpro1234");
+                    Util.sendColorMessage(sender, "&6 ● &eYour Version: &7" + plugin.version);
+                    Util.sendColorMessage(sender, "&6 ● &aLast version: &7" + plugin.getUpdateVersion());
+                    Util.sendColorMessage(sender, "&6 ● &9Discord: &7https://discord.gg/c5GhQDQCK5");
+                    Util.sendColorMessage(sender, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
                 } else {
-                    Util.sendColorMessage(sender, Util.getPrefix() + " " + plugin.Locale().Error_Cmd);
+                    Util.sendColorMessage(sender, Util.getPrefix(true) + plugin.Locale().Error_Cmd);
                 }
                 return true;
             }
-            Util.sendColorMessage(sender, Util.getPrefix() + " " + plugin.Locale().Help_cmd);
+
+            Util.sendColorMessage(sender, Util.getPrefix(true) + plugin.Locale().Help_cmd);
             return false;
         }
         Player j = (Player) sender;
+
         if (args.length >= 1) {
+
             if (args[0].equalsIgnoreCase("help")) {
-                if ((j.isOp()) || (j.hasPermission("Cjm.Help"))) {
+                if ((j.isOp()) || (j.hasPermission("cjm.command.help"))) {
                     Util.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=&6[&d" + plugin.name + "&6]&5=-=-=-=-=-=-=-=-=-=-=-");
                     for (String text : plugin.Locale().help_1) {
                         Util.sendColorMessage(j, text);
@@ -65,28 +69,32 @@ public class CustomJoinAndQuitCmd implements CommandExecutor, TabCompleter {
                 }
                 return true;
             }
+
             if (args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("rl")) {
-                if ((j.isOp()) || (j.hasPermission("Cjm.Reload"))) {
+                if ((j.isOp()) || (j.hasPermission(" cjm.command.reload"))) {
                     plugin.reloadAllFiles();
-                    Util.sendColorMessage(j, Util.getPrefixPlayer() + " " + plugin.Locale().reload);
+                    Util.sendColorMessage(j, Util.getPrefix(false) + plugin.Locale().reload);
                 } else {
                     Util.sendTextComponent116Hover(j, "TEXT", plugin.Locale().No_Permission, plugin.Locale().No_Permission_Label);
                 }
                 return true;
             }
+
             if (args[0].equalsIgnoreCase("info")) {
                 Util.sendColorMessage(j, "&5-=-=-=-=-=[&b" + plugin.name + "&5]=-=-=-=-=-=-");
-                Util.sendColorMessage(j, "&5> &3Author: &6jonagamerpro1234");
-                Util.sendColorMessage(j, "&5> &3Version: &6" + plugin.version);
-                Util.sendColorMessage(j, "&5> &3Last version: &a" + plugin.getUpdateVersion());
-                Util.sendColorMessage(j, "&5> &3Discord: &9 https://discord.gg/c5GhQDQCK5");
-                Util.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+                Util.sendColorMessage(j, "&6 ● &bAuthor: &3jonagamerpro1234");
+                Util.sendColorMessage(j, "&6 ● &eYour Version: &7" + plugin.version);
+                Util.sendColorMessage(j, "&6 ● &aLast version: &7" + plugin.getUpdateVersion());
+                Util.sendColorMessage(j, "&6 ● &9Discord: &7https://discord.gg/c5GhQDQCK5");
+                Util.sendColorMessage(j, "&5-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
                 return true;
             }
-            Util.sendColorMessage(j, Util.getPrefixPlayer() + " " + plugin.Locale().Error_Cmd);
+
+            Util.sendColorMessage(j, Util.getPrefix(true) + plugin.Locale().Error_Cmd);
             return true;
         }
-        Util.sendColorMessage(j, Util.getPrefixPlayer() + " " + plugin.Locale().Help_cmd);
+
+        Util.sendColorMessage(j, Util.getPrefix(true) + plugin.Locale().Help_cmd);
         return true;
     }
 

@@ -1,6 +1,7 @@
 package jss.customjoinandquitmessage.commands.subcommands;
 
 import jss.customjoinandquitmessage.commands.utils.SubCommand;
+import jss.customjoinandquitmessage.files.utils.Settings;
 import org.bukkit.command.CommandSender;
 
 public class InfoCommand extends SubCommand {
@@ -9,8 +10,21 @@ public class InfoCommand extends SubCommand {
         return "info";
     }
 
+    @Override
+    public String permission() {
+        return null;
+    }
+
+    public boolean requiresPermission() {
+        return false;
+    }
+
     public void onCommand(CommandSender sender, String[] args) {
 
+    }
+
+    public boolean allowConsole() {
+        return true;
     }
 
     public boolean isEnabled() {
@@ -18,6 +32,6 @@ public class InfoCommand extends SubCommand {
     }
 
     public String disabledMessage() {
-        return null;
+        return Settings.lang_disableCommand;
     }
 }

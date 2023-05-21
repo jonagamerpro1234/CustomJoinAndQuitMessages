@@ -1,0 +1,133 @@
+default:
+
+  # [Experimental] esta funcion puede ser removida en cualquier momento si previo aviso
+  # y puede sufrir cambios repentinos
+  # Oculta los mensajes de los otros grupos si estan en la lista  no se veran
+  HideOtherGroups:
+
+    Enabled: true
+
+    List:
+      - admin
+
+  # Permite la perzonalizacion de un mensaje de bienvenida que solo lo podran ver los miembros de este grupo
+  Welcome:
+
+    Enabled: true
+
+    # Aqui puedes perzonalisacion el mensaje de bienvenida que quieres que aparesca para este grupo
+    Text:
+      - ""
+
+  FirstJoin:
+
+    Enabled: true
+
+    Message: ""
+
+  Join:
+
+    Enabled: true
+
+    JoinMessage: "[+] {player} {group}"
+
+    HoverEvent:
+
+      Enabled: true
+
+      #
+      HoverText:
+        - ""
+        - ""
+        - ""
+
+      #
+      ClickEvent:
+
+        #
+        Enabled: true
+
+        #
+        Actions:
+          - "[EXECUTE]: /cjm help"
+          - "[SUGGEST]: /cjm"
+          - "[OPEN_URL]: ---"
+
+      Title:
+
+        Enabled: true
+
+        Title: ""
+
+        SubTitle: ""
+
+        FadeIn: 20
+
+        Stay: 80
+
+        FadeOut: 20
+
+      ActionBar:
+
+        Enabled: true
+
+        Message: ""
+
+      Sound:
+
+        Enabled: true
+
+        SendToAll: true
+
+        # This is the name of the sound you will hear when it is mentioned to you in chat.
+        Name: 'BLOCK_NOTE_BLOCK_PLING'
+
+        # This is the pitch of the sound that you will hear when mentioned in the chat
+        Pitch: 1
+
+        # This is the volume of the sound that you will hear when the chat mentions it
+        Volume: 10
+
+  Quit:
+
+    Enabled: true
+
+    QuitMessage: "[-] {player} {group}"
+
+    HoverEvent:
+
+      Enabled: true
+
+      #
+      HoverText:
+        - ""
+        - ""
+        - ""
+
+      #
+      ClickEvent:
+
+        #
+        Enabled: true
+
+        #
+        Actions:
+          - "[EXECUTE]: /cjm help"
+          - "[SUGGEST]: /cjm"
+          - "[OPEN_URL]: ---"
+
+      Sound:
+
+        Enabled: true
+
+        # When active, the sound will be sent to all players connected to the server
+        SendToAll: true
+
+        # This is the name of the sound you will hear when it is mentioned to you in chat.
+        Name: 'BLOCK_NOTE_BLOCK_PLING'
+
+        # This is the pitch of the sound that you will hear when mentioned in the chat
+        Pitch: 1
+
+        # This is the volume of the sound that you will hear when the chat mentions it
+        Volume: 10

@@ -1,6 +1,7 @@
 package jss.customjoinandquitmessages.config;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
+import jss.customjoinandquitmessages.config.utils.FileManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -8,7 +9,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class PlayerFile extends FileManager {
-
     private File file;
     private FileConfiguration config;
     private final String path;

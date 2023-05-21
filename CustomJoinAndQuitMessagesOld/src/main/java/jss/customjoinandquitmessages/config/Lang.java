@@ -1,7 +1,8 @@
 package jss.customjoinandquitmessages.config;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
-import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.logger.Logger;
+import jss.customjoinandquitmessages.utils.Settings;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -9,6 +10,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
+@SuppressWarnings("all")
 public class Lang {
 
     public String No_Permission;
@@ -20,30 +22,30 @@ public class Lang {
     public String Error_Console;
     public String Error_Sound;
     public String error_null_group;
-    private CustomJoinAndQuitMessages plugin;
-    private FileConfiguration locale = null;
+    private final CustomJoinAndQuitMessages plugin;
+    private FileConfiguration locale;
     private File localeFile = null;
-    private Locale localeObject;
-    private String localeName;
-    private int index;
+    private final Locale localeObject;
+    private final String localeName;
+    private final int index;
 
     public Lang(final CustomJoinAndQuitMessages plugin, final String localeName, final int index) {
         this.plugin = plugin;
         this.index = index;
         this.localeName = localeName;
-        getlang(localeName);
+        getLang(localeName);
         loadLocale();
         localeObject = new Locale(localeName.substring(0, 2), localeName.substring(3, 5));
     }
 
-    public FileConfiguration getlang(final String localeName) {
+    public FileConfiguration getLang(final String localeName) {
         if (this.locale == null) {
-            reloadlang(localeName);
+            reloadLang(localeName);
         }
         return locale;
     }
 
-    public void reloadlang(final String localeName) {
+    public void reloadLang(final String localeName) {
         final File localeDir = new File(plugin.getDataFolder() + File.separator + "lang");
 
         if (!localeDir.exists()) {
@@ -69,6 +71,7 @@ public class Lang {
 
     private void loadLocale() {
         String main = "CustomJoinAndQuitMessage";
+            Settings.messages_prefix = locale.getString(main + ".Prefix");
         Error_Cmd = locale.getString(main + ".Error-Cmd");
         Error_Console = locale.getString(main + ".Error-Console");
         Error_Sound = locale.getString(main + ".Sound-Error");
@@ -80,25 +83,4 @@ public class Lang {
         error_null_group = locale.getString(main + ".Groups.NotFoundGroup");
     }
 
-    public String getLocaleName() {
-        return this.localeName;
-    }
-
-    public String getLanguageName() {
-        if (localeObject == null) {
-            return "unknown";
-        }
-        return localeObject.getDisplayLanguage(localeObject);
-    }
-
-    public String getCountryName() {
-        if (localeObject == null) {
-            return "unknown";
-        }
-        return localeObject.getDisplayCountry(localeObject);
-    }
-
-    public int getIndex() {
-        return index;
-    }
 }

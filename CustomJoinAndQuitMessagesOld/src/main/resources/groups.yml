@@ -1,14 +1,14 @@
 #    ______    _____   ____    __  ___
 #   / ____/   / /   | / __ \  /  |/  /
 #  / /   __  / / /| |/ / / / / /|_/ /  By jonagamerpro1234
-# / /___/ /_/ / ___ / /_/ / / /  / /   Version 1.7.6
+# / /___/ /_/ / ___ / /_/ / / /  / /   Version ${project.version}
 # \____/\____/_/  |_\___\_\/_/  /_/    Thanks for using CustomJoinAndQuitMessage <3
 #                                    
 # ● Here you can add new groups and configure them, but for this to work you need LuckPerms
 # ● The group name has to be the same as the range name or the group customization will not work
 # ● For more information you can visit the CustomJoinAndQuitMessages Wiki
 # 
-# ● Wiki [Working Progress]:
+# ● Wiki [Working Progress]: ---
 #
 default:
 
@@ -32,9 +32,6 @@ default:
     
     # |Text| Here you can set the join message for the first time
     Text: '&6Welcome to server &a<name>&6 for the first time'
-
-  # |Type| Here you can find two types that are [ normal | modify ]
-  Type: modify
   
   # |HoverEvent| This section allows you to modify the hover events in the chat
   HoverEvent:

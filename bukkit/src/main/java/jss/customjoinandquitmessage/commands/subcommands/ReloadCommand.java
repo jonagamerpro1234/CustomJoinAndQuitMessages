@@ -9,9 +9,21 @@ public class ReloadCommand extends SubCommand {
         return "reload";
     }
 
+    @Override
+    public String permission() {
+        return null;
+    }
+
+    public boolean requiresPermission() {
+        return true;
+    }
 
     public void onCommand(CommandSender sender, String[] args) {
 
+    }
+
+    public boolean allowConsole() {
+        return true;
     }
 
     public boolean isEnabled() {

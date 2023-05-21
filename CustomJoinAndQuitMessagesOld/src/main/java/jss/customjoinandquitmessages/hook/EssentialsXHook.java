@@ -1,8 +1,9 @@
 package jss.customjoinandquitmessages.hook;
 
 import com.earth2me.essentials.Essentials;
+import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.utils.EventUtils;
-import jss.customjoinandquitmessages.utils.Logger;
+import jss.customjoinandquitmessages.utils.logger.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.Util;
 import jss.customjoinandquitmessages.utils.interfaces.IHook;
@@ -11,7 +12,7 @@ import org.bukkit.entity.Player;
 
 public class EssentialsXHook implements IHook {
 
-    private HookManager hookManager;
+    private final HookManager hookManager;
     private boolean isEnabled;
     private Essentials essentials;
 
@@ -34,7 +35,7 @@ public class EssentialsXHook implements IHook {
 
         this.essentials = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
         this.isEnabled = true;
-        Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix() + "&aLoading Essentials features...");
+        Util.sendColorMessage(EventUtils.getStaticConsoleSender(), Util.getPrefix(true) + "&aLoading Essentials features...");
         Logger.warning("&e!!These features are still under development and may have bugs!!");
     }
 
@@ -46,7 +47,4 @@ public class EssentialsXHook implements IHook {
         return isEnabled;
     }
 
-    public HookManager getHookManager() {
-        return hookManager;
-    }
 }
