@@ -5,7 +5,7 @@ AllowConsoleCommand: "&cEste comando solo se puede ejecutar dentro del juego!"
 UnknownArguments: "¡&cArgumento desconocido!"
 ReloadCommand: "&aSe han recargado todos los archivos del plugin"
 UsageDisplayCommand: "&7Usa &9/Cjm &edisplay &d<open|section> &7para ver una previsualización"
-UnknownSound: "\"&eEl sonido no es de esta version o esta mal escrito!"
+UnknownSound: "&eEl sonido no es de esta version o esta mal escrito!"
 DisabledCommand: "&cEste comando se encuentra desactivado"
 UpdateAlert:
   Console:
