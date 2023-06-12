@@ -1,25 +1,49 @@
 package jss.customjoinandquitmessage.commands.subcommands;
 
-import jss.customjoinandquitmessage.commands.utils.SubCommand;
+import jss.commandapi.SubCommand;
+import jss.customjoinandquitmessage.CustomJoinAndQuitMessage;
+import jss.customjoinandquitmessage.files.utils.Settings;
+import jss.customjoinandquitmessage.utils.Utils;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 public class ReloadCommand extends SubCommand {
+
+    private static final CustomJoinAndQuitMessage plugin = CustomJoinAndQuitMessage.get();
 
     public String name() {
         return "reload";
     }
 
-    @Override
     public String permission() {
-        return null;
+        return "command.reload";
     }
 
     public boolean requiresPermission() {
         return true;
     }
 
-    public void onCommand(CommandSender sender, String[] args) {
+    public boolean onCommand(CommandSender sender, String @NotNull [] args) {
+        if (args.length >= 1){
 
+            if(args[0].equalsIgnoreCase("config")){
+
+                Utils.sendColorMessage(sender, Settings.lang_reloadCommand);
+                return true;
+            }
+
+            if (args[0].equalsIgnoreCase("lang")){
+
+                Utils.sendColorMessage(sender, Settings.lang_reloadCommand);
+                return true;
+            }
+            Utils.sendColorMessage(sender, Settings.lang_unknownArguments);
+            return true;
+        }
+
+        plugin.reloadAllFiles();
+        Utils.sendColorMessage(sender, Settings.lang_reloadCommand);
+        return true;
     }
 
     public boolean allowConsole() {

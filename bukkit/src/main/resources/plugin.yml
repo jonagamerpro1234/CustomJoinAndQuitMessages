@@ -24,6 +24,7 @@ permissions:
       cjm.update: true
       cjm.command.reload: true
       cjm.command.help: true
+      cjm.command.display: true
       cjm.command.tabcomplete: true
     default: op
   cjm.update:
@@ -37,4 +38,7 @@ permissions:
     default: op
   cjm.command.tabcomplete:
     description: allows you to see the list of available commands
+    default: op
+  cjm.command.display:
+    description: ----
     default: op

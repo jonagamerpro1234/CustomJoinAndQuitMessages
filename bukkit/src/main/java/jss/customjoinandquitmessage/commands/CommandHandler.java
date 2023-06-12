@@ -1,10 +1,11 @@
 package jss.customjoinandquitmessage.commands;
 
+import jss.commandapi.SubCommand;
 import jss.customjoinandquitmessage.CustomJoinAndQuitMessage;
+import jss.customjoinandquitmessage.commands.subcommands.DisplayCommand;
 import jss.customjoinandquitmessage.commands.subcommands.HelpCommand;
 import jss.customjoinandquitmessage.commands.subcommands.InfoCommand;
 import jss.customjoinandquitmessage.commands.subcommands.ReloadCommand;
-import jss.customjoinandquitmessage.commands.utils.SubCommand;
 import jss.customjoinandquitmessage.files.utils.Settings;
 import jss.customjoinandquitmessage.utils.Utils;
 import org.bukkit.command.Command;
@@ -29,13 +30,12 @@ public class CommandHandler implements TabExecutor {
         pluginCommand.setExecutor(this);
         pluginCommand.setTabCompleter(this);
 
-        subCommands.addAll(Arrays.asList(new HelpCommand(), new ReloadCommand(), new InfoCommand()));
+        subCommands.addAll(Arrays.asList(new HelpCommand(), new ReloadCommand(), new InfoCommand(), new DisplayCommand()));
     }
 
-    @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String @NotNull [] args) {
         if(args.length >= 1){
-            // execute subcommand
+
             for(SubCommand s : getSubCommands()){
                 if (args[0].equalsIgnoreCase(s.name())){
                     if (s.isEnabled()){
@@ -45,7 +45,7 @@ public class CommandHandler implements TabExecutor {
                             return true;
                         }
 
-                        if (s.requiresPermission() && !sender.hasPermission(s.permission())) {
+                        if (!sender.isOp() || (s.requiresPermission() && !sender.hasPermission("cjm." + s.permission()))) {
                             Utils.sendColorMessage(sender, Settings.lang_nopermission);
                             return true;
                         }
@@ -67,7 +67,6 @@ public class CommandHandler implements TabExecutor {
         return true;
     }
 
-    @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, String @NotNull [] args) {
         List<String> listOptions = new ArrayList<>();
         String lastArgs = args.length != 0 ? args[args.length - 1] : "";
@@ -83,6 +82,12 @@ public class CommandHandler implements TabExecutor {
                 listOptions.add("info");
                 listOptions.add("help");
                 listOptions.add("reload");
+                break;
+            case 2:
+                if(args[0].equalsIgnoreCase("reload")){
+                    listOptions.add("config");
+                    listOptions.add("lang");
+                }
                 break;
         }
 

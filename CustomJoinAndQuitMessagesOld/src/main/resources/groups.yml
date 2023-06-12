@@ -9,6 +9,7 @@
 # ● For more information you can visit the CustomJoinAndQuitMessages Wiki
 # 
 # ● Wiki [Working Progress]: ---
+# ● Spigot: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-8-1-19-4.57006/
 #
 default:
 
@@ -61,7 +62,7 @@ default:
       Command: '/say <name> hello server'
       
       # |Url| Clicking on the chat opens a link
-      Url: 'https://www.spigotmc.org/resources/custom-join-and-quit-message-1-7-x-1-17-x.57006/'
+      Url: 'https://www.spigotmc.org/resources/custom-join-and-quit-message-1-8-1-19-4.57006/'
       
       # |Suggest-Command| Clicking on the chat suggests a command that you define in the config
       Suggest-Command: '/msg <name>'

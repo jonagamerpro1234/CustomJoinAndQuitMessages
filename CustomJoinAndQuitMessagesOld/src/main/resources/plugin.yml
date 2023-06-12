@@ -4,7 +4,7 @@ version: "${version}"
 author: jonagamerpro1234
 api-version: 1.13
 prefix: CustomJoinAndQuitMessages
-website: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-8-x-1-19-x.57006/
+website: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-8-1-19-4.57006/
 loadbefore: [ Essentials ]
 softdepend: [
   PlaceholderAPI, DiscordSRV,

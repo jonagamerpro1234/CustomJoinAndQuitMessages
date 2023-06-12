@@ -1,6 +1,6 @@
 package jss.customjoinandquitmessage.commands.subcommands;
 
-import jss.customjoinandquitmessage.commands.utils.SubCommand;
+import jss.commandapi.SubCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -11,19 +11,19 @@ public class DisplayCommand extends SubCommand {
         return "display";
     }
 
-    @Override
     public String permission() {
-        return null;
+        return "command.display";
     }
 
     public boolean requiresPermission() {
         return true;
     }
 
-    public void onCommand(CommandSender sender, String[] args) {
+    public boolean onCommand(CommandSender sender, String[] args) {
         if(!(sender instanceof Player)){
 
         }
+        return true;
     }
 
     public boolean allowConsole() {
@@ -31,7 +31,7 @@ public class DisplayCommand extends SubCommand {
     }
 
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public String disabledMessage() {

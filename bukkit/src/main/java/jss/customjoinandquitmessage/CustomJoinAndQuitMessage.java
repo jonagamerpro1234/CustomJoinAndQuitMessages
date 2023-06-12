@@ -46,7 +46,9 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
     }
 
     public void reloadAllFiles(){
-
+        reloadConfig();
+        preConfigLoader.loadConfigs();
+        preConfigLoader.loadLangs();
     }
 
     private void registerListener(Listener @NotNull ...listeners){

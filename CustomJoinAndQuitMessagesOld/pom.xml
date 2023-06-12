@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>CustomJoinAndQuitMessagesOld</artifactId>
-    <version>1.7.10-beta</version>
+    <version>1.7.12-beta</version>
 
     <properties>
         <java.version>8</java.version>
@@ -144,13 +144,13 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19.3-R0.1-SNAPSHOT</version>
+            <version>1.20-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -178,7 +178,7 @@
         <dependency>
             <groupId>com.github.cryptomorin</groupId>
             <artifactId>XSeries</artifactId>
-            <version>9.1.0</version>
+            <version>9.2.0</version>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>

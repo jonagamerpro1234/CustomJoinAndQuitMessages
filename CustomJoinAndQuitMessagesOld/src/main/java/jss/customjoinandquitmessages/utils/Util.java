@@ -130,7 +130,7 @@ public class Util {
         sendEnable(prefix, "&5 <|| &c* &bThe plugin is &d[&aSuccessfully activated&d]");
         sendEnable(prefix, "&5 <|| &c* &bVersion: &e[&a" + version + "&e]");
         sendEnable(prefix, "&5 <|| &c* &bBy: &e[&bjonagamerpro1234&e]");
-        sendEnable(prefix, "&5 <|| &c* &bTested Versions &3|&a1.8.x &3- &a1.19.x&3| &eComing Soon -> &c1.20");
+        sendEnable(prefix, "&5 <|| &c* &bTested Versions &3|&a1.8 &3- &a1.20&3| &eComing Soon -> &c1.21");
         sendEnable(prefix, "&5 <||============================================----");
     }
 
@@ -139,7 +139,7 @@ public class Util {
         sendEnable(prefix, "&5 <|| &c* &bThe plugin is &d[&cSuccessfully disabled&c]");
         sendEnable(prefix, "&5 <|| &c* &bVersion: &e[&a" + version + "&e]");
         sendEnable(prefix, "&5 <|| &c* &bBy: &e[&bjonagamerpro1234&e]");
-        sendEnable(prefix, "&5 <|| &c* &bTested Versions &3|&a1.8.x &3- &a1.19.x&3| &eComing Soon -> &c1.20");
+        sendEnable(prefix, "&5 <|| &c* &bTested Versions &3|&a1.8 &3- &a1.20&3| &eComing Soon -> &c1.21");
         sendEnable(prefix, "&5 <|| &a* &eThanks for using CustomJoinAndQuitMessage &c<3");
         sendEnable(prefix, "&5 <||============================================----");
     }
