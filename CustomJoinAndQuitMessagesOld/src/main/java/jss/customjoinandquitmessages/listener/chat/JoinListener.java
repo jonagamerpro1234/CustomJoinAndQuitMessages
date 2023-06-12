@@ -1,7 +1,5 @@
 package jss.customjoinandquitmessages.listener.chat;
 
-import com.cryptomorin.xseries.messages.ActionBar;
-import com.cryptomorin.xseries.messages.Titles;
 import github.scarsz.discordsrv.util.DiscordUtil;
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.hook.*;
@@ -10,9 +8,10 @@ import jss.customjoinandquitmessages.manager.HookManager;
 import jss.customjoinandquitmessages.manager.PlayerManager;
 import jss.customjoinandquitmessages.update.UpdateChecker;
 import jss.customjoinandquitmessages.utils.GroupHelper;
-import jss.customjoinandquitmessages.utils.logger.Logger;
+import jss.customjoinandquitmessages.utils.MessageUtils;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.Util;
+import jss.customjoinandquitmessages.utils.logger.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -77,7 +76,7 @@ public class JoinListener implements Listener {
 
         if (Settings.welcome) {
             for (String text : Settings.list_welcome)
-                Util.sendColorMessage(p, Util.getVar(p, text));
+                MessageUtils.sendColorMessage(p, Util.getVar(p, text));
         }
 
         if(Util.isVanished(p)){
@@ -144,10 +143,10 @@ public class JoinListener implements Listener {
                 String Actionbar_Text = config.getString("Join.ActionBar.Text");
                 String Sound_Name = config.getString("Join.Sound.Name");
 
-                int FadeIn = config.getInt("Join.Title.FadeIn");
-                int Stay = config.getInt("Join.Title.Stay");
-                int FadeOut = config.getInt("Join.Title.FadeOut");
-                int Sound_Volume = config.getInt("Join.Sound.Volume");
+                long FadeIn = config.getInt("Join.Title.FadeIn");
+                long Stay = config.getInt("Join.Title.Stay");
+                long FadeOut = config.getInt("Join.Title.FadeOut");
+                long Sound_Volume = config.getInt("Join.Sound.Volume");
 
                 float Sound_Pitch = Float.parseFloat(Objects.requireNonNull(config.getString("Join.Sound.Pitch")));
 
@@ -187,12 +186,13 @@ public class JoinListener implements Listener {
                 }
 
                 if (isTitle) {
-                    Titles.sendTitle(p, FadeIn, Stay, FadeOut, Util.color(Util.getVar(p, Title_Text)),
-                            Util.color(Util.getVar(p, SubTitle_Text)));
+                    MessageUtils.showTitle(p, Util.getVar(p, Title_Text), Util.getVar(p, SubTitle_Text), FadeIn,Stay,FadeOut);
+                    //Titles.sendTitle(p, FadeIn, Stay, FadeOut, Util.color(Util.getVar(p, Title_Text)),Util.color(Util.getVar(p, SubTitle_Text)));
                 }
 
                 if (isActionBar) {
-                    ActionBar.sendActionBar(p, Util.color(Util.getVar(p, Actionbar_Text)));
+                    //ActionBar.sendActionBar(p, Util.color(Util.getVar(p, Actionbar_Text)));
+                    MessageUtils.showActionbar(p, Util.getVar(p,Actionbar_Text));
                 }
 
                 try {

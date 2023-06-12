@@ -94,10 +94,10 @@ default:
     Enabled: true
 
     # |Title| here you can set the title text
-    Title: '<RAINBOW:1>Welcome to Server</RAINBOW>'
+    Title: '<rainbow:1>Welcome to Server</rainbow>'
     
     # |SubTitle| here you can set the subtitle text
-    SubTitle: '<GRADIENT:FF0000><name></GRADIENT:00AAFF>'
+    SubTitle: '<gradient:#FF0000:#00AAFF><name></gradient>'
     
     # |FadeIn| here you can set the input time of the title
     FadeIn: 20
@@ -115,6 +115,6 @@ default:
     Enabled: true
     
     # |Text|
-    Text: '<GRADIENT:FF8700>Welcome to the server</GRADIENT:00FFAA>'
+    Text: '<gradient:#FF8700:#00FFAA>Welcome to the server</gradient>'
 
   

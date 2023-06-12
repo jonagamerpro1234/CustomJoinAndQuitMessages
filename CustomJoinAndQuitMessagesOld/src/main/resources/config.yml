@@ -37,7 +37,7 @@ Config:
   # |Show-Chat-In-Console| here you can enable or disable the chat to be seen in the console
   Show-Chat-In-Console: true
 
-  #
+  # Not Implemented
   Logger:
 
     #
@@ -111,7 +111,7 @@ Join:
   Enabled: true
   
   # |Text| This is where Join customizable message is located
-  Text: '&b[<#:83FF6F>+&b] <#:A157FF><name>'
+  Text: '&b[<#83FF6F>+&b] <#A157FF><name>'
   
   # |First-Join| 
   First-Join:
@@ -187,10 +187,10 @@ Join:
     Enabled: true
 
     # |Title| here you can set the title text
-    Title: '<RAINBOW:1>Welcome to Server</RAINBOW>'
+    Title: '<rainbow:1>Welcome to Server</rainbow>'
     
     # |SubTitle| here you can set the subtitle text
-    SubTitle: '<GRADIENT:FF0000><name></GRADIENT:00AAFF>'
+    SubTitle: '<gradient:#FF0000:#00AAFF><name></gradient>'
     
     # |FadeIn| here you can set the input time of the title
     FadeIn: 20
@@ -208,7 +208,7 @@ Join:
     Enabled: true
     
     # |Text| here you can set the message that appears in the action bar
-    Text: '<GRADIENT:FF8700>Welcome to the server</GRADIENT:00FFAA>'
+    Text: '<gradient:#FF8700:#00FFAA>Welcome to the server</gradient>'
 #
 # | Quit | 
 Quit:

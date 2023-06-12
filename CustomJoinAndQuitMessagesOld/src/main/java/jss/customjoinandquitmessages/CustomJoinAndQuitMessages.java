@@ -15,6 +15,7 @@ import jss.customjoinandquitmessages.update.UpdateChecker;
 import jss.customjoinandquitmessages.utils.logger.Logger;
 import jss.customjoinandquitmessages.utils.Settings;
 import jss.customjoinandquitmessages.utils.Util;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -43,6 +44,7 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
     private ArrayList<InventoryView> inventoryViews;
     private final PlayerFile playerFile = new PlayerFile(this, "players.yml");
     private final GroupsFile groupsFile = new GroupsFile(this, "groups.yml");
+    private BukkitAudiences adventure;
 
     public void onLoad() {
         Util.sendLoadTitle(version);
@@ -58,6 +60,8 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
     public void onEnable() {
         metrics = new Metrics(this,6318);
         plugin = this;
+        this.adventure = BukkitAudiences.create(this);
+
         Util.setEnabled(version);
 
         configFile.saveDefaultConfig();
@@ -97,6 +101,12 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
     public void onDisable() {
         plugin = null;
         metrics = null;
+
+        if(this.adventure != null) {
+            this.adventure.close();
+            this.adventure = null;
+        }
+
         getServer().getScheduler().cancelTasks(this);
         Util.setDisabled(version);
     }
@@ -118,6 +128,13 @@ public class CustomJoinAndQuitMessages extends JavaPlugin {
         getPlayerFile().reloadConfig();
         preConfigLoader.loadConfig();
         preConfigLoader.loadLangs();
+    }
+
+    public BukkitAudiences adventure() {
+        if(this.adventure == null) {
+            throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
+        }
+        return this.adventure;
     }
 
     public Lang Locale() {
