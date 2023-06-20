@@ -7,6 +7,7 @@ import jss.customjoinandquitmessage.commands.subcommands.HelpCommand;
 import jss.customjoinandquitmessage.commands.subcommands.InfoCommand;
 import jss.customjoinandquitmessage.commands.subcommands.ReloadCommand;
 import jss.customjoinandquitmessage.files.utils.Settings;
+import jss.customjoinandquitmessage.utils.MessageUtils;
 import jss.customjoinandquitmessage.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -41,29 +42,29 @@ public class CommandHandler implements TabExecutor {
                     if (s.isEnabled()){
 
                         if (!s.allowConsole() && !(sender instanceof Player)) {
-                            Utils.sendColorMessage(sender, Settings.lang_allowConsoleCommand);
+                            MessageUtils.sendColorMessage(sender, Settings.lang_allowConsoleCommand);
                             return true;
                         }
 
                         if (!sender.isOp() || (s.requiresPermission() && !sender.hasPermission("cjm." + s.permission()))) {
-                            Utils.sendColorMessage(sender, Settings.lang_nopermission);
+                            MessageUtils.sendColorMessage(sender, Settings.lang_nopermission);
                             return true;
                         }
 
                         s.onCommand(sender, args);
                         return true;
                     } else {
-                        Utils.sendColorMessage(sender, s.disabledMessage());
+                    MessageUtils.sendColorMessage(sender, s.disabledMessage());
                     }
                     return true;
                 }
             }
 
-            Utils.sendColorMessage(sender, Settings.lang_unknownArguments);
+            MessageUtils.sendColorMessage(sender, Settings.lang_unknownArguments);
             return true;
         }
 
-        Utils.sendColorMessage(sender, Settings.lang_usageMainCommand);
+        MessageUtils.sendColorMessage(sender, Settings.lang_usageMainCommand);
         return true;
     }
 

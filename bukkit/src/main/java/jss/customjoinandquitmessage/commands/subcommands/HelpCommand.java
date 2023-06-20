@@ -2,7 +2,7 @@ package jss.customjoinandquitmessage.commands.subcommands;
 
 import jss.commandapi.SubCommand;
 import jss.customjoinandquitmessage.files.utils.Settings;
-import jss.customjoinandquitmessage.utils.Utils;
+import jss.customjoinandquitmessage.utils.MessageUtils;
 import org.bukkit.command.CommandSender;
 
 public class HelpCommand extends SubCommand {
@@ -21,7 +21,7 @@ public class HelpCommand extends SubCommand {
 
     public boolean onCommand(CommandSender sender, String[] args) {
         for (String s : Settings.lang_helpCommand) {
-            Utils.sendColorMessage(sender, s);
+            MessageUtils.sendColorMessage(sender, s);
         }
         return true;
     }

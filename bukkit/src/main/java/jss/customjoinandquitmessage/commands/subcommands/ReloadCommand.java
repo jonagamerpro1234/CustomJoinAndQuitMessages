@@ -24,15 +24,15 @@ public class ReloadCommand extends SubCommand {
     }
 
     public boolean onCommand(CommandSender sender, String @NotNull [] args) {
-        if (args.length >= 1){
+        if (args.length >= 2){
 
-            if(args[0].equalsIgnoreCase("config")){
+            if(args[1].equalsIgnoreCase("config")){
 
                 Utils.sendColorMessage(sender, Settings.lang_reloadCommand);
                 return true;
             }
 
-            if (args[0].equalsIgnoreCase("lang")){
+            if (args[1].equalsIgnoreCase("lang")){
 
                 Utils.sendColorMessage(sender, Settings.lang_reloadCommand);
                 return true;

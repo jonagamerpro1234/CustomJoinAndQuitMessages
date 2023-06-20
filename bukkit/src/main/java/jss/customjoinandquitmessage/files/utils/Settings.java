@@ -10,8 +10,12 @@ public class Settings {
     public static boolean config_enabledUpdate;
     public static String config_getFromUpdate;
 
+    public static String chatformat_type;
+    public static boolean chatformat_join;
+    public static boolean chatformat_firstjoin;
+    public static String chatformat_joinMessage;
+    public static String chatformat_firstjoinMessage;
 
-    //langs
     public static String lang_prefix;
     public static String lang_nopermission;
     public static String lang_usageMainCommand;

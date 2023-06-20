@@ -31,7 +31,7 @@ public class DisplayCommand extends SubCommand {
     }
 
     public boolean isEnabled() {
-        return true;
+        return false;
     }
 
     public String disabledMessage() {

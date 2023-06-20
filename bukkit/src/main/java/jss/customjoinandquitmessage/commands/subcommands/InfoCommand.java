@@ -11,7 +11,7 @@ public class InfoCommand extends SubCommand {
     }
 
     public String permission() {
-        return null;
+        return "";
     }
 
     public boolean requiresPermission() {

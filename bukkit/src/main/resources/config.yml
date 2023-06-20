@@ -80,13 +80,8 @@ Hooks:
 
 # | ChatFormat |
 # Aqui pordras personalizar los mensajes de entrada y salida del jugador y tambien podras personalizar los mensajes con diversas funciones
-# (!) Para personalizacion de grupos es necesario que cambie el tipo a [ group ]
+# (!) Para personalizacion por grupos es necesario que cambie el tipo a [ group ]
 ChatFormat:
-
-  # Esta funcion desactiva el formato personalizado del plugin y usa el metodo setFormat de spigot, pero no funcionaran los eventos de Hover y Click
-  # [!] Esto permite tener una mejor compatibilidad con otros plugins pero deshabilita algunas funciones del plugin
-  # [!] Esta funcion es experimental, lo que significa que puede sufrir varios cambios o incluso puede ser eliminada definitivamente
-  UsaLegacyFormat: false
 
   # Here you can enable or disable the chat to be seen in the console
   ShowChatInConsole: true
@@ -94,7 +89,7 @@ ChatFormat:
   # Aqui podras configurar el tipo del formato los cuales son
   # |normal| Sirve para la personalizacion general de todos los jugadores de los mensajes de entrada y salida, esto no permite usar las funciones de grupo
   # |group| Sirve para la personalizacion por gropu y desabilita la personalizacion general y permite una personalizacion mejor para cada grupo
-  # (!) Es necesario tener LuckPerms para usar la personalizacion de grupo
+  # (!) Es necesario tener LuckPerms para usar la personalizacion por grupos
   Type: normal
 
   # | Join |
@@ -130,21 +125,21 @@ Welcome:
   Enabled: true
 
   # Permite usa un mensaje de bienvenida por grupo y desactiva el mensaje general de bienvenida
-  UsePerGroupWelcome: false
+  UseWelcomePerGroup: false
 
   # Here you can set your own welcome message when entering
   Text:
-    - '<GRADIENT:8200FC>&m=========================================</GRADIENT:00FC95>&r'
+    - '<gradien:#8200FC:#00FC95>&m=========================================</gradien>&r'
     - '<0>'
     - '&e> &7Welcome To The Server &b<name>'
     - '<0>'
-    - '&e> &cShop: shop-example.com'
+    - '&e> <red>Shop: shop-example.com'
     - '&e> &7Use &b/skin to put on a skin'
     - '<0>'
-    - '<GRADIENT:8200FC>&m=========================================</GRADIENT:00FC95>&r'
+    - '<gradien:#8200FC:#00FC95>&m=========================================</gradien>&r'
 
 # I would not change anything
-File-Version: 4
+File-Version: 5
 
 # |> This is the end of the configuration... [-_-] more things coming soon
 #
