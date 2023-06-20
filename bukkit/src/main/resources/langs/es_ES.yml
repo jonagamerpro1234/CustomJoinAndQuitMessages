@@ -1,11 +1,11 @@
 Prefix: "&e[&dCustomJoinAndQuitMessage&e]"
-NoPermission: "&cNo tienes permisos!"
+NoPermission: "&c<hover:show_text:'<gradient:#ff3700:#ff0004>ask an admin for help for more information'>You don't have permissions!</hover>+"
 UsageMainCommand: "&7Usa &9/Cjm &ehelp &7para más información"
-AllowConsoleCommand: "&cEste comando solo se puede ejecutar dentro del juego!"
+AllowConsoleCommand: "&cThis command can only be executed in game!"
 UnknownArguments: "¡&cArgumento desconocido!"
 ReloadCommand: "&aSe han recargado todos los archivos del plugin"
 UsageDisplayCommand: "&7Usa &9/Cjm &edisplay &d<open|section> &7para ver una previsualización"
-UnknownSound: "&eEl sonido no es de esta version o esta mal escrito!"
+UnknownSound: "\"&eEl sonido no es de esta version o esta mal escrito!"
 DisabledCommand: "&cEste comando se encuentra desactivado"
 UpdateAlert:
   Console:
@@ -21,6 +21,6 @@ UpdateAlert:
     - "&b&nClic &7aqui para ir a la página del plugin"
 HelpCommand:
   - " &6&l* &9/Cjm &ehelp &7muestra este mismo mensaje"
-  - " &6&l* &9/Cjm heredad recarga todos los archivos del plugin"
+  - " &6&l* &9/Cjm &e<click:suggest_command:'/cjm reload'><hover:show_text:'<gray>reload plugin files, <aqua>click to suggest command'>help</hover></click> &7reload all plugin files"
   - " &6&l* &9/Cjm &einfo &7muestra informacion del plugin como los links de soporte..."
   - " &6&l* &9/Cjm &edisplay &7sirve para ver los mensajes y funciones del plugin sin tener que salir del servidor"
