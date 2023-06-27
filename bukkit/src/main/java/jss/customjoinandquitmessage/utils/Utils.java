@@ -46,7 +46,7 @@ public class Utils {
     }
 
     public static boolean hasPerm(@NotNull CommandSender sender, String perm){
-        if(perm == null) sendColorMessage(sender, "[Warning] permission could not be found or it is null, please check if it is not nullpermission could not be found");
+        if(perm == null) sendColorMessage(sender, "[Warning] permission could not be found or it is null, please check if it is not null permission could not be found");
         return sender.hasPermission("cjm." + perm);
     }
 

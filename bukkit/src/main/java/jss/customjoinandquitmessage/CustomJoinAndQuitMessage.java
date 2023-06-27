@@ -5,6 +5,7 @@ import jss.customjoinandquitmessage.files.utils.PreConfigLoader;
 import jss.customjoinandquitmessage.listeners.chat.JoinListener;
 import jss.customjoinandquitmessage.listeners.chat.QuitListener;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -15,10 +16,12 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
 
     private final PluginDescriptionFile jss = getDescription();
     private static CustomJoinAndQuitMessage instance;
+    public final String name = jss.getName();
     public final String version = jss.getVersion();
     public String newestVersion;
     private final PreConfigLoader preConfigLoader = new PreConfigLoader(this);
     private BukkitAudiences adventure;
+    private Metrics metrics;
 
     public void onLoad() {
         instance = this;
@@ -26,6 +29,7 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
 
     public void onEnable() {
         this.adventure = BukkitAudiences.create(this);
+        metrics = new Metrics(this,6318);
         saveDefaultConfig();
 
         if(!preConfigLoader.loadLangs()){
@@ -47,7 +51,7 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
             this.adventure.close();
             this.adventure = null;
         }
-
+        metrics.shutdown();
     }
 
     public void reloadAllFiles(){

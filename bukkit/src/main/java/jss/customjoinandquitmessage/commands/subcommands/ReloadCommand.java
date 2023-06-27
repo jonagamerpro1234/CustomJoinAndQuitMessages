@@ -27,16 +27,15 @@ public class ReloadCommand extends SubCommand {
         if (args.length >= 2){
 
             if(args[1].equalsIgnoreCase("config")){
-
                 Utils.sendColorMessage(sender, Settings.lang_reloadCommand);
                 return true;
             }
 
             if (args[1].equalsIgnoreCase("lang")){
-
                 Utils.sendColorMessage(sender, Settings.lang_reloadCommand);
                 return true;
             }
+
             Utils.sendColorMessage(sender, Settings.lang_unknownArguments);
             return true;
         }

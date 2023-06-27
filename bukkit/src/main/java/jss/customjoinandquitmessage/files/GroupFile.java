@@ -22,10 +22,11 @@ public class GroupFile {
     }
 
     //get config for groups.yml
-    public void get(){
-
+    public FileConfiguration get(){
+        return config;
     }
 
+    //reload groups.yml file
     public void reload(){
 
     }
