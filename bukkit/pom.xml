@@ -76,6 +76,10 @@
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -104,9 +108,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>jss.commandapi</groupId>
-            <artifactId>command-api</artifactId>
-            <version>0.0.3-alpha</version>
+            <groupId>com.github.jonagamerpro1234</groupId>
+            <artifactId>CommandAPI</artifactId>
+            <version>0.0.4-alpha</version>
         </dependency>
         <dependency>
             <groupId>net.kyori</groupId>
