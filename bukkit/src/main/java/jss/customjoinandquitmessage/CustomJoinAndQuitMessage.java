@@ -6,6 +6,8 @@ import jss.customjoinandquitmessage.listeners.chat.JoinListener;
 import jss.customjoinandquitmessage.listeners.chat.QuitListener;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
+import org.bstats.charts.AdvancedPie;
+import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -31,6 +33,10 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
         this.adventure = BukkitAudiences.create(this);
         metrics = new Metrics(this,6318);
         saveDefaultConfig();
+
+        metrics.addCustomChart( new SimplePie("using_the_group_function", () -> {
+            return getConfig().getString("ChatFormat.Type","group");
+        }));
 
         if(!preConfigLoader.loadLangs()){
             Bukkit.getPluginManager().disablePlugins();

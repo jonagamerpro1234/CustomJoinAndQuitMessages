@@ -34,6 +34,8 @@ public class JoinListener implements Listener {
                     }
                 }
 
+
+
             }
 
         }else if (isGroup) {

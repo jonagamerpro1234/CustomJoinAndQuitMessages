@@ -21,6 +21,12 @@ public class PreConfigLoader {
         Settings.config_Lang =  config.getString("Settings.Lang");
         Settings.config_Debug = config.getBoolean("Settings.Debug");
 
+        Settings.chatformat_join = config.getBoolean("ChatFormat.Join.Enabled");
+        Settings.chatformat_firstjoin = config.getBoolean("ChatFormat.First-Join.Enabled");
+        Settings.chatformat_joinMessage = config.getString("ChatFormat.Join.Format");
+        Settings.chatformat_firstjoinMessage = config.getString("ChatFormat.First-Join.Format");
+
+
     }
 
     public boolean loadLangs(){

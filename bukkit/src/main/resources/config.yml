@@ -64,6 +64,8 @@ Hooks:
     # This allows you to join or quit the server without the message being shown to other players.
     HidePlayerIsVanish: true
 
+    DisableSoundJoinAndQuitIsVanish: true
+
     # Here you can define the discord channel where the messages from minecraft to discord are seen
     # (!) Es necesario tener el plugin de [ EssentialsDiscord ] para que funcione
     EssentialsDiscord:
@@ -88,7 +90,7 @@ ChatFormat:
 
   # Aqui podras configurar el tipo del formato los cuales son
   # |normal| Sirve para la personalizacion general de todos los jugadores de los mensajes de entrada y salida, esto no permite usar las funciones de grupo
-  # |group| Sirve para la personalizacion por gropu y desabilita la personalizacion general y permite una personalizacion mejor para cada grupo
+  # |group| Sirve para la personalizacion por grupos y desabilita la personalizacion general y permite una personalizacion mejor para cada grupo
   # (!) Es necesario tener LuckPerms para usar la personalizacion por grupos
   Type: normal
 
@@ -101,6 +103,21 @@ ChatFormat:
     # Aqui puedes definir el mensaje de entra
     Format: "&e[&a+&e] &3{player} &7has joined the server"
 
+    JoinMessageDelay: 0
+
+    Sound:
+
+      # Here you can enable or disable this feature
+      Enabled: true
+
+      SendToAll: true
+
+      Name: ""
+
+      Volume: 10
+
+      Pitch: 1
+
   # | First Join |
   First-Join:
 
@@ -108,6 +125,21 @@ ChatFormat:
     Enabled: true
 
     Format: "&3Welcome to the server, we hope you enjoy your time here and have a good time"
+
+    FirstJoinMessageDelay: 0
+
+    Sound:
+
+      # Here you can enable or disable this feature
+      Enabled: true
+
+      SendToAll: true
+
+      Name: ""
+
+      Volume: 10
+
+      Pitch: 1
 
   # | Quit |
   Quit:
@@ -117,6 +149,19 @@ ChatFormat:
 
     # Aqui puedes definir el mensaje de salida
     Format: "&e[&c-&e] &3{player} &7has left the server"
+
+    Sound:
+
+      # Here you can enable or disable this feature
+      Enabled: true
+
+      SendToAll: true
+
+      Name: ""
+
+      Volume: 10
+
+      Pitch: 1
 
 # |Welcome|
 Welcome:
