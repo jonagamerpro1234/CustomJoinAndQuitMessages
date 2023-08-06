@@ -28,6 +28,7 @@ Settings:
 
     # You will get the updates from [spigot | github] what is the difference, here below is the explanation of why
     # |Spigot| Get only released updates, and you won't receive beta notifications
+    # |Modrinth|
     # |GitHub| Get only the released and beta updates, and you will be able to receive notifications of both versions
     GetFromUpdate: spigot
 
@@ -64,7 +65,8 @@ Hooks:
     # This allows you to join or quit the server without the message being shown to other players.
     HidePlayerIsVanish: true
 
-    DisableSoundJoinAndQuitIsVanish: true
+    #
+    DisableJoinQuitSoundsInVanish: true
 
     # Here you can define the discord channel where the messages from minecraft to discord are seen
     # (!) Es necesario tener el plugin de [ EssentialsDiscord ] para que funcione
@@ -78,7 +80,6 @@ Hooks:
 
       # Usara el canal que se encuentra definido en la configuracion del plugin EssentialsDiscord y ignorara el Channel-Id de CustomJoinAndMessages
       UseDefaultChannel: false
-
 
 # | ChatFormat |
 # Aqui pordras personalizar los mensajes de entrada y salida del jugador y tambien podras personalizar los mensajes con diversas funciones
@@ -103,19 +104,57 @@ ChatFormat:
     # Aqui puedes definir el mensaje de entra
     Format: "&e[&a+&e] &3{player} &7has joined the server"
 
+    #
     JoinMessageDelay: 0
+
+    #
+    Title-Settings:
+
+      # Here you can enable or disable this feature
+      Enabled: true
+
+      #
+      Title: ""
+
+      #
+      SubTitle: ""
+
+      #
+      FadeIn: 20
+
+      #
+      Stay: 40
+
+      #
+      FadeOut: 20
+
+    #
+    Actionbar:
+
+      # Here you can enable or disable this feature
+      Enabled: true
+
+      #
+      Delay: 0
+
+      #
+      Format: ""
 
     Sound:
 
       # Here you can enable or disable this feature
       Enabled: true
 
+      #
       SendToAll: true
 
+      #
       Name: ""
 
+      #
       Volume: 10
 
+      #
       Pitch: 1
 
   # | First Join |
@@ -124,21 +163,61 @@ ChatFormat:
     # Here you can enable or disable this feature
     Enabled: true
 
+    #
     Format: "&3Welcome to the server, we hope you enjoy your time here and have a good time"
 
+    #
     FirstJoinMessageDelay: 0
 
+    #
+    Title-Settings:
+
+      # Here you can enable or disable this feature
+      Enabled: true
+
+      #
+      Title: ""
+
+      #
+      SubTitle: ""
+
+      #
+      FadeIn: 20
+
+      #
+      Stay: 40
+
+      #
+      FadeOut: 20
+
+    #
+    Actionbar:
+
+      # Here you can enable or disable this feature
+      Enabled: true
+
+      #
+      Delay: 0
+
+      #
+      Format: ""
+
+    #
     Sound:
 
       # Here you can enable or disable this feature
       Enabled: true
 
+      #
       SendToAll: true
 
+      #
       Name: ""
 
+      #
       Volume: 10
 
+      #
       Pitch: 1
 
   # | Quit |
@@ -150,17 +229,55 @@ ChatFormat:
     # Aqui puedes definir el mensaje de salida
     Format: "&e[&c-&e] &3{player} &7has left the server"
 
+    #
+    Title-Settings:
+
+      # Here you can enable or disable this feature
+      Enabled: true
+
+      #
+      Title: ""
+
+      #
+      SubTitle: ""
+
+      #
+      FadeIn: 20
+
+      #
+      Stay: 40
+
+      #
+      FadeOut: 20
+
+    #
+    Actionbar:
+
+      # Here you can enable or disable this feature
+      Enabled: true
+
+      #
+      Delay: 0
+
+      #
+      Format: ""
+
+    #
     Sound:
 
       # Here you can enable or disable this feature
       Enabled: true
 
+      #
       SendToAll: true
 
+      #
       Name: ""
 
+      #
       Volume: 10
 
+      #
       Pitch: 1
 
 # |Welcome|
@@ -171,6 +288,9 @@ Welcome:
 
   # Permite usa un mensaje de bienvenida por grupo y desactiva el mensaje general de bienvenida
   UseWelcomePerGroup: false
+
+  #
+  Delay: 0
 
   # Here you can set your own welcome message when entering
   Text:
