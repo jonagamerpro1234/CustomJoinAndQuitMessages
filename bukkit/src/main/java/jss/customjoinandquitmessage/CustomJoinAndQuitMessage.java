@@ -34,9 +34,7 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
         metrics = new Metrics(this,6318);
         saveDefaultConfig();
 
-        metrics.addCustomChart( new SimplePie("using_the_group_function", () -> {
-            return getConfig().getString("ChatFormat.Type","group");
-        }));
+        metrics.addCustomChart( new SimplePie("using_the_group_function", () -> getConfig().getString("ChatFormat.Type","group")));
 
         if(!preConfigLoader.loadLangs()){
             Bukkit.getPluginManager().disablePlugins();
