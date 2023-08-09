@@ -20,12 +20,62 @@ public class PreConfigLoader {
         FileConfiguration config = plugin.getConfig();
         Settings.config_Lang =  config.getString("Settings.Lang");
         Settings.config_Debug = config.getBoolean("Settings.Debug");
+        Settings.chatformat_type = config.getString("ChatFormat.Type");
+        Settings.chatformat_showChatInConsole = config.getBoolean("ChatFormat.ShowChatInConsole");
 
-        Settings.chatformat_join = config.getBoolean("ChatFormat.Join.Enabled");
-        Settings.chatformat_firstjoin = config.getBoolean("ChatFormat.First-Join.Enabled");
-        Settings.chatformat_joinMessage = config.getString("ChatFormat.Join.Format");
-        Settings.chatformat_firstjoinMessage = config.getString("ChatFormat.First-Join.Format");
+        Settings.chatformat_join_enabled = config.getBoolean("ChatFormat.Join.Enabled");
+        Settings.chatformat_join_message = config.getString("ChatFormat.Join.Format");
+        Settings.chatformat_join_delay = config.getInt("ChatFormat.Join.");
+        Settings.chatformat_join_titleSettings_enabled = config.getBoolean("ChatFormat.Join.");
+        Settings.chatformat_join_titleSettings_title = config.getString("ChatFormat.Join.");
+        Settings.chatformat_join_titleSettings_subtitle = config.getString("ChatFormat.Join.");
+        Settings.chatformat_join_titleSettings_fadeIn = config.getInt("ChatFormat.Join.");
+        Settings.chatformat_join_titleSettings_stay = config.getInt("ChatFormat.Join.");
+        Settings.chatformat_join_titleSettings_fadeOut = config.getInt("ChatFormat.Join.");
+        Settings.chatformat_join_actionbar_enabled = config.getBoolean("ChatFormat.Join.");
+        Settings.chatformat_join_actionbar_message = config.getString("ChatFormat.Join.");
+        Settings.chatformat_join_actionbar_delay = config.getInt("ChatFormat.Join.");
+        Settings.chatformat_join_sound_enabled = config.getBoolean("ChatFormat.Join.");
+        Settings.chatformat_join_sound_sendToAll  = config.getBoolean("ChatFormat.Join.");
+        Settings.chatformat_join_sound_name = config.getString("ChatFormat.Join.");
+        Settings.chatformat_join_sound_volume = config.getInt("ChatFormat.Join.");
+        Settings.chatformat_join_sound_pitch = config.getInt("ChatFormat.Join.");
 
+        Settings.chatformat_firstJoin_enabled = config.getBoolean("ChatFormat.First-Join.Enabled");
+        Settings.chatformat_firstJoin_message = config.getString("ChatFormat.First-Join.Format");
+        Settings.chatformat_firstJoin_delay = config.getInt("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_titleSettings_enabled = config.getBoolean("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_titleSettings_title = config.getString("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_titleSettings_subtitle = config.getString("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_titleSettings_fadeIn = config.getInt("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_titleSettings_stay = config.getInt("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_titleSettings_fadeOut = config.getInt("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_actionbar_enabled = config.getBoolean("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_actionbar_message = config.getString("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_actionbar_delay = config.getInt("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_sound_enabled = config.getBoolean("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_sound_sendToAll  = config.getBoolean("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_sound_name = config.getString("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_sound_volume = config.getInt("ChatFormat.First-Join.");
+        Settings.chatformat_firstJoin_sound_pitch = config.getInt("ChatFormat.First-Join.");
+
+        Settings.chatformat_quit_enabled = config.getBoolean("ChatFormat.Quit.Enabled");
+        Settings.chatformat_quit_message = config.getString("ChatFormat.Quit.Format");
+        Settings.chatformat_quit_delay = config.getInt("ChatFormat.Quit.");
+        Settings.chatformat_quit_titleSettings_enabled = config.getBoolean("ChatFormat.Quit.");
+        Settings.chatformat_quit_titleSettings_title = config.getString("ChatFormat.Quit.");
+        Settings.chatformat_quit_titleSettings_subtitle = config.getString("ChatFormat.Quit.");
+        Settings.chatformat_quit_titleSettings_fadeIn = config.getInt("ChatFormat.Quit.");
+        Settings.chatformat_quit_titleSettings_stay = config.getInt("ChatFormat.Quit.");
+        Settings.chatformat_quit_titleSettings_fadeOut = config.getInt("ChatFormat.Quit.");
+        Settings.chatformat_quit_actionbar_enabled = config.getBoolean("ChatFormat.Quit.");
+        Settings.chatformat_quit_actionbar_message = config.getString("ChatFormat.Quit.");
+        Settings.chatformat_quit_actionbar_delay = config.getInt("ChatFormat.Quit.");
+        Settings.chatformat_quit_sound_enabled = config.getBoolean("ChatFormat.Quit.");
+        Settings.chatformat_quit_sound_sendToAll  = config.getBoolean("ChatFormat.Quit.");
+        Settings.chatformat_quit_sound_name = config.getString("ChatFormat.Quit.");
+        Settings.chatformat_quit_sound_volume = config.getInt("ChatFormat.Quit.");
+        Settings.chatformat_quit_sound_pitch = config.getInt("ChatFormat.Quit.");
 
     }
 

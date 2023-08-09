@@ -11,7 +11,6 @@ public class JoinQuitMessageHandlerFactory  {
     private static final JoinQuitMessageHandlerFactory instance = new JoinQuitMessageHandlerFactory();
     private final List<AbstractJoinQuitMessageHandler> handlers = new ArrayList<>();
     private AbstractJoinQuitMessageHandler activeHandler;
-
     private JoinQuitMessageHandlerFactory(){
         handlers.add(new Single());
         handlers.add(new Group());
@@ -29,8 +28,6 @@ public class JoinQuitMessageHandlerFactory  {
                 return;
             }
         }
-
-
     }
 
     public AbstractJoinQuitMessageHandler getActiveHandler() {

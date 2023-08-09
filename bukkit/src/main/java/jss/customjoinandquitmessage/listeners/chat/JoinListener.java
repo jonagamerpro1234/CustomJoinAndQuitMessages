@@ -22,15 +22,15 @@ public class JoinListener implements Listener {
 
         if(isNormal){
 
-            if(Settings.chatformat_join){
+            if(Settings.chatformat_join_enabled){
 
                 String mainMessage;
 
-                if (Settings.chatformat_firstjoin){
+                if (Settings.chatformat_firstJoin_enabled){
                     if(!p.hasPlayedBefore()){
-                        mainMessage = Settings.chatformat_firstjoinMessage;
+                        mainMessage = Settings.chatformat_firstJoin_message;
                     } else {
-                        mainMessage = Settings.chatformat_joinMessage;
+                        mainMessage = Settings.chatformat_join_message;
                     }
                 }
 

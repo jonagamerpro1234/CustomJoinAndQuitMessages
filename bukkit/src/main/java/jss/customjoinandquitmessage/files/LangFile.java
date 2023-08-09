@@ -40,7 +40,6 @@ public class LangFile {
         File dir = new File(plugin.getDataFolder(),"langs");
 
         if(!dir.exists()){
-            // Intentamos crear la carpeta
             if(dir.mkdirs()) {
                 plugin.getLogger().info("Carpeta 'langs' creada correctamente");
             } else {
@@ -63,7 +62,6 @@ public class LangFile {
             }
         }
     }
-
 
     private void loadMessages(){
         Settings.lang_prefix = config.getString("Prefix");
