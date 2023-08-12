@@ -1,7 +1,7 @@
 default:
 
-  # [Experimental] esta funcion puede ser removida en cualquier momento si previo aviso
-  # y puede sufrir cambios repentinos
+  # [Experimental] esta funcion puede ser removida en cualquier momento sin previo aviso
+  # y puede sufrir cambios repentinos, existe la posibilidad de que no se encuentre activa a un
   # Oculta los mensajes de los otros grupos si estan en la lista  no se veran
   HideOtherGroups:
 
@@ -19,115 +19,187 @@ default:
     Text:
       - ""
 
-  FirstJoin:
-
-    Enabled: true
-
-    Message: ""
-
+  # | Join |
   Join:
 
+    # Here you can enable or disable this feature
     Enabled: true
 
-    JoinMessage: "[+] {player} {group}"
+    # Aqui puedes definir el mensaje de entra
+    Format: "&e[&a+&e] &3{player} &7has joined the server"
 
-    HoverEvent:
+    #
+    JoinMessageDelay: 0
 
+    #
+    Title-Settings:
+
+      # Here you can enable or disable this feature
       Enabled: true
 
       #
-      HoverText:
-        - ""
-        - ""
-        - ""
+      Title: ""
 
       #
-      ClickEvent:
+      SubTitle: ""
 
-        #
-        Enabled: true
+      #
+      FadeIn: 20
 
-        #
-        Actions:
-          - "[EXECUTE]: /cjm help"
-          - "[SUGGEST]: /cjm"
-          - "[OPEN_URL]: ---"
+      #
+      Stay: 40
 
-      Title:
+      #
+      FadeOut: 20
 
-        Enabled: true
+    #
+    Actionbar:
 
-        Title: ""
+      # Here you can enable or disable this feature
+      Enabled: true
 
-        SubTitle: ""
+      #
+      Delay: 0
 
-        FadeIn: 20
+      #
+      Format: ""
 
-        Stay: 80
+    Sound:
 
-        FadeOut: 20
+      # Here you can enable or disable this feature
+      Enabled: true
 
-      ActionBar:
+      #
+      SendToAll: true
 
-        Enabled: true
+      #
+      Name: "BLOCK_NOTE_BLOCK_PLING"
 
-        Message: ""
+      #
+      Volume: 10
 
-      Sound:
+      #
+      Pitch: 1
 
-        Enabled: true
+  # | First Join |
+  First-Join:
 
-        SendToAll: true
+    # Here you can enable or disable this feature
+    Enabled: true
 
-        # This is the name of the sound you will hear when it is mentioned to you in chat.
-        Name: 'BLOCK_NOTE_BLOCK_PLING'
+    #
+    Format: "&3Welcome to the server, we hope you enjoy your time here and have a good time"
 
-        # This is the pitch of the sound that you will hear when mentioned in the chat
-        Pitch: 1
+    #
+    FirstJoinMessageDelay: 0
 
-        # This is the volume of the sound that you will hear when the chat mentions it
-        Volume: 10
+    #
+    Title-Settings:
 
+      # Here you can enable or disable this feature
+      Enabled: true
+
+      #
+      Title: ""
+
+      #
+      SubTitle: ""
+
+      #
+      FadeIn: 20
+
+      #
+      Stay: 40
+
+      #
+      FadeOut: 20
+
+    #
+    Actionbar:
+
+      # Here you can enable or disable this feature
+      Enabled: true
+
+      #
+      Delay: 0
+
+      #
+      Format: ""
+
+    #
+    Sound:
+
+      # Here you can enable or disable this feature
+      Enabled: true
+
+      #
+      SendToAll: true
+
+      #
+      Name: "BLOCK_NOTE_BLOCK_PLING"
+
+      #
+      Volume: 10
+
+      #
+      Pitch: 1
+
+  # | Quit |
   Quit:
 
+    # Here you can enable or disable this feature
     Enabled: true
 
-    QuitMessage: "[-] {player} {group}"
+    # Aqui puedes definir el mensaje de salida
+    Format: "&e[&c-&e] &3{player} &7has left the server"
 
-    HoverEvent:
+    #
+    Title-Settings:
 
+      # Here you can enable or disable this feature
       Enabled: true
 
       #
-      HoverText:
-        - ""
-        - ""
-        - ""
+      Title: ""
 
       #
-      ClickEvent:
+      SubTitle: ""
 
-        #
-        Enabled: true
+      #
+      FadeIn: 20
 
-        #
-        Actions:
-          - "[EXECUTE]: /cjm help"
-          - "[SUGGEST]: /cjm"
-          - "[OPEN_URL]: ---"
+      #
+      Stay: 40
 
-      Sound:
+      #
+      FadeOut: 20
 
-        Enabled: true
+    #
+    Actionbar:
 
-        # When active, the sound will be sent to all players connected to the server
-        SendToAll: true
+      # Here you can enable or disable this feature
+      Enabled: true
 
-        # This is the name of the sound you will hear when it is mentioned to you in chat.
-        Name: 'BLOCK_NOTE_BLOCK_PLING'
+      #
+      Delay: 0
 
-        # This is the pitch of the sound that you will hear when mentioned in the chat
-        Pitch: 1
+      #
+      Format: ""
 
-        # This is the volume of the sound that you will hear when the chat mentions it
-        Volume: 10
+    #
+    Sound:
+
+      # Here you can enable or disable this feature
+      Enabled: true
+
+      #
+      SendToAll: true
+
+      #
+      Name: "BLOCK_NOTE_BLOCK_PLING"
+
+      #
+      Volume: 10
+
+      #
+      Pitch: 1
