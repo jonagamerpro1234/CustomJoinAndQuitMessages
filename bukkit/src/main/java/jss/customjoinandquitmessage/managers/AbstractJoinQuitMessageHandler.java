@@ -1,15 +1,17 @@
 package jss.customjoinandquitmessage.managers;
 
+import org.bukkit.entity.Player;
+
 public abstract class AbstractJoinQuitMessageHandler {
 
-    public abstract void handlerJoinAndQuitMessages(boolean isJoin);
+    public abstract void handlerJoinAndQuitMessages(Player player, boolean isJoin);
 
-    public abstract void welcome();
+    public abstract void welcome(Player player);
 
-    public abstract void handlerJoinAndQuitTitle(boolean isJoin);
+    public abstract void handlerJoinAndQuitTitle(Player player, boolean isJoin);
 
-    public abstract void handlerJoinAndQuitActionbar(boolean isJoin);
+    public abstract void handlerJoinAndQuitActionbar(Player player, boolean isJoin);
 
-    public abstract void handlerJoinAndQuitSound(boolean isJoin);
+    public abstract void handlerJoinAndQuitSound(Player player, boolean isJoin);
 
 }
