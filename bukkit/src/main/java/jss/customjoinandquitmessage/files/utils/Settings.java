@@ -4,12 +4,22 @@ import java.util.List;
 
 public class Settings {
 
-    //config
+    //settings
     public static String config_Lang;
     public static boolean config_Debug;
     public static boolean config_enabledUpdate;
     public static String config_getFromUpdate;
-
+    public static boolean luckperms_enabled;
+    public static boolean luckperms_autoUpdateGroup_enabled;
+    public static int luckperms_autoUpdateGroup_tick;
+    public static boolean discordSVR_enabled;
+    public static String discordSVR_channelID;
+    public static boolean essentialsX_enabled;
+    public static boolean essentialsX_hidePlayerIsVanish;
+    public static boolean essentialsX_DisableSoundJoinQuitInVanish;
+    public static boolean essentialsXDiscord_enabled;
+    public static String essentialsXDiscord_channelId;
+    public static boolean essentialsXDiscord_useDefaultChannelID;
     public static String chatformat_type;
     public static boolean chatformat_showChatInConsole;
 

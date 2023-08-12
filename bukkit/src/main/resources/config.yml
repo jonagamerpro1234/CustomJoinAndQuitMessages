@@ -28,7 +28,7 @@ Settings:
 
     # You will get the updates from [spigot | github] what is the difference, here below is the explanation of why
     # |Spigot| Get only released updates, and you won't receive beta notifications
-    # |Modrinth|
+    # |Modrinth| ---
     # |GitHub| Get only the released and beta updates, and you will be able to receive notifications of both versions
     GetFromUpdate: spigot
 
@@ -61,6 +61,8 @@ Hooks:
 
   # Aqui podras cambiar los ajustes de cada implementacion que funciona con EssentialsX
   EssentialsX:
+
+    Enabled: true
 
     # This allows you to join or quit the server without the message being shown to other players.
     HidePlayerIsVanish: true
