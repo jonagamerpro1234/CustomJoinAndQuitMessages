@@ -6,7 +6,6 @@ import jss.customjoinandquitmessage.listeners.chat.JoinListener;
 import jss.customjoinandquitmessage.listeners.chat.QuitListener;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
-import org.bstats.charts.AdvancedPie;
 import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -21,6 +20,7 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
     public final String name = jss.getName();
     public final String version = jss.getVersion();
     public String newestVersion;
+
     private final PreConfigLoader preConfigLoader = new PreConfigLoader(this);
     private BukkitAudiences adventure;
     private Metrics metrics;
@@ -76,6 +76,11 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
         }
         return this.adventure;
     }
+
+    public PreConfigLoader getPreConfigLoader() {
+        return preConfigLoader;
+    }
+
 
     public static CustomJoinAndQuitMessage get(){
         return instance;

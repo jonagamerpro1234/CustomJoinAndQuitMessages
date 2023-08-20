@@ -30,15 +30,38 @@ public class Single extends AbstractJoinQuitMessageHandler {
     }
 
     public void welcome(Player p) {
-        Settings.welcome_message.forEach( s -> MessageUtils.sendColorMessage(p, s));
+        if(Settings.welcome_enabled){
+            if(Settings.welcome_UseWelcomePerGroup){
+               return;
+            }
+            Settings.welcome_message.forEach( s -> MessageUtils.sendColorMessage(p, s));
+        }
     }
 
     public void handlerJoinAndQuitTitle(Player p, boolean isJoin) {
-
+        if(isJoin){
+            if(Settings.chatformat_join_titleSettings_enabled){
+                MessageUtils.showTitle(p,Settings.chatformat_join_titleSettings_title,Settings.chatformat_join_titleSettings_subtitle,
+                        Settings.chatformat_join_titleSettings_fadeIn,Settings.chatformat_join_titleSettings_stay,Settings.chatformat_join_titleSettings_fadeOut);
+            }
+        }else{
+            if(Settings.chatformat_quit_titleSettings_enabled){
+                MessageUtils.showTitle(p,Settings.chatformat_quit_titleSettings_title,Settings.chatformat_quit_titleSettings_subtitle,
+                        Settings.chatformat_quit_titleSettings_fadeIn,Settings.chatformat_quit_titleSettings_stay,Settings.chatformat_quit_titleSettings_fadeOut);
+            }
+        }
     }
 
     public void handlerJoinAndQuitActionbar(Player p, boolean isJoin) {
-
+        if(isJoin){
+            if(Settings.chatformat_join_actionbar_enabled){
+                MessageUtils.showActionbar(p,Settings.chatformat_join_actionbar_message);
+            }
+        }else {
+            if (Settings.chatformat_quit_actionbar_enabled){
+                MessageUtils.showActionbar(p,Settings.chatformat_quit_actionbar_message);
+            }
+        }
     }
 
     public void handlerJoinAndQuitSound(Player p, boolean isJoin) {

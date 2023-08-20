@@ -37,7 +37,7 @@ public class CommandHandler implements TabExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String @NotNull [] args) {
         if(args.length >= 1){
 
-            for(SubCommand s : getSubCommands()){
+            for(SubCommand s :  getSubCommands()){
                 if (args[0].equalsIgnoreCase(s.name())){
                     if (s.isEnabled()){
 

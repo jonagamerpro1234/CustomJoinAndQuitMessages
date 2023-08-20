@@ -27,11 +27,13 @@ public class ReloadCommand extends SubCommand {
         if (args.length >= 2){
 
             if(args[1].equalsIgnoreCase("config")){
+                plugin.getPreConfigLoader().loadConfigs();
                 Utils.sendColorMessage(sender, Settings.lang_reloadCommand);
                 return true;
             }
 
             if (args[1].equalsIgnoreCase("lang")){
+                plugin.getPreConfigLoader().loadLangs();
                 Utils.sendColorMessage(sender, Settings.lang_reloadCommand);
                 return true;
             }
