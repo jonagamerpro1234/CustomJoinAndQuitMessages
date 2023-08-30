@@ -3,6 +3,7 @@ package jss.customjoinandquitmessage.commands.subcommands;
 import jss.commandapi.SubCommand;
 import jss.customjoinandquitmessage.CustomJoinAndQuitMessage;
 import jss.customjoinandquitmessage.files.utils.Settings;
+import jss.customjoinandquitmessage.managers.JoinQuitMessageHandlerFactory;
 import jss.customjoinandquitmessage.utils.Utils;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 public class ReloadCommand extends SubCommand {
 
     private static final CustomJoinAndQuitMessage plugin = CustomJoinAndQuitMessage.get();
+    private final JoinQuitMessageHandlerFactory handlerFactory = JoinQuitMessageHandlerFactory.getInstance();
 
     public String name() {
         return "reload";
@@ -25,6 +27,12 @@ public class ReloadCommand extends SubCommand {
 
     public boolean onCommand(CommandSender sender, String @NotNull [] args) {
         if (args.length >= 2){
+
+            if(args[1].equalsIgnoreCase("handlers")){
+                handlerFactory.updateActiveHandler();
+                Utils.sendColorMessage(sender, Settings.lang_reloadCommand);
+                return true;
+            }
 
             if(args[1].equalsIgnoreCase("config")){
                 plugin.getPreConfigLoader().loadConfigs();
@@ -42,6 +50,7 @@ public class ReloadCommand extends SubCommand {
             return true;
         }
 
+        handlerFactory.updateActiveHandler();
         plugin.reloadAllFiles();
         Utils.sendColorMessage(sender, Settings.lang_reloadCommand);
         return true;
@@ -52,10 +61,10 @@ public class ReloadCommand extends SubCommand {
     }
 
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public String disabledMessage() {
-        return null;
+        return Settings.lang_disableCommand;
     }
 }
