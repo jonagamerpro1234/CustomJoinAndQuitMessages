@@ -2,11 +2,9 @@ package jss.customjoinandquitmessage.commands.subcommands;
 
 import jss.commandapi.SubCommand;
 import jss.customjoinandquitmessage.files.utils.Settings;
-import jss.customjoinandquitmessage.utils.MessageUtils;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
-@SuppressWarnings("unused")
+
 public class DisplayCommand extends SubCommand {
 
     public String name() {
