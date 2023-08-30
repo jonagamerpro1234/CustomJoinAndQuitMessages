@@ -13,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class JoinListener implements Listener {
 
-    private static final CustomJoinAndQuitMessage plugin = CustomJoinAndQuitMessage.get();
     private final JoinQuitMessageHandlerFactory handlerFactory = JoinQuitMessageHandlerFactory.getInstance();
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

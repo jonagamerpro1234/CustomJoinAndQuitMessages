@@ -17,14 +17,6 @@ public class GroupFile {
     private File file;
     private FileConfiguration config;
 
-    public void create() {
-        this.file = new File(plugin.getDataFolder(), "groups.yml");
-        if (!this.file.exists()) {
-            getConfig().options().copyDefaults(true);
-            saveConfig();
-        }
-    }
-
     public FileConfiguration getConfig() {
         if (this.config == null) {
             reloadConfig();

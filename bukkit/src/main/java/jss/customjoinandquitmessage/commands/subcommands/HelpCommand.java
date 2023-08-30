@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 
 public class HelpCommand extends SubCommand {
 
-    private CustomJoinAndQuitMessage plugin = CustomJoinAndQuitMessage.get();
+    private final CustomJoinAndQuitMessage plugin = CustomJoinAndQuitMessage.get();
 
     public String name() {
         return "help";
