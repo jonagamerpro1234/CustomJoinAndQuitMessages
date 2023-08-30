@@ -88,13 +88,13 @@ public class CommandHandler implements TabExecutor {
                 if(args[0].equalsIgnoreCase("reload")){
                     listOptions.add("config");
                     listOptions.add("lang");
+                    listOptions.add("handlers");
                 }
                 break;
         }
 
         return Utils.setLimitTab(listOptions, lastArgs);
     }
-
 
     public ArrayList<SubCommand> getSubCommands() {
         return subCommands;
