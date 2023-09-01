@@ -1,6 +1,6 @@
 Prefix: "&e[&dCustomJoinAndQuitMessage&e]"
-NoPermission: "&c<hover:show_text:'<gradient:#ff3700:#ff0004>ask an admin for help for more information'>You don't have permissions!</hover>"
-UsageMainCommand: "&7Use &9/Cjm &ehelp &7for more information"
+NoPermission: "&c<hover:show_text:'<gradient:#ff3700:#ff0004>demander à un administrateur pour obtenir de l'aide pour plus d'information'>Vous n'avez pas les permissions !</hover>"
+UsageMainCommand: "&7Utilisation &b/Cjm &6help &7pour plus d'informations"
 AllowConsoleCommand: "&cThis command can only be executed in game!"
 UnknownArguments: "&cUnknown argument!"
 ReloadCommand: "&aAll plugin files have been reloaded"
