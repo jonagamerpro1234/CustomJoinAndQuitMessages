@@ -5,7 +5,7 @@ CustomJoinAndQuitMessage:
     - '&b/Cjm &ehelp &7afficher ce meme message'
     - '&b/Cjm &ereload &7recharger les fichiers du plugin'
     - '&b/Cjm &einfo &7affiche des informations sur le plugin'
-  Help-Cmd: '&7Use &b/Cjm &6help&7 for more information'
+  Help-Cmd: '&7Utiliser &b/Cjm &6help&7 pour plus d''informations'
   Reload: '&aRecharger terminé'
   Error-Cmd: '&cArgument inconnu'
   No-Permission: '&cVous n''avez pas la permission de faire ?a!'
