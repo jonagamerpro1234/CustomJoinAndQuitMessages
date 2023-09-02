@@ -282,14 +282,14 @@ Welcome:
 
   # |Text| here you can set your own welcome message when entering
   Text:
-    - '<GRADIENT:8200FC>&m=========================================</GRADIENT:00FC95>&r'
+    - '<gradient:8200FC:00FC95>&m=========================================</gradient>&r'
     - '<0>'
     - '&e> &7Welcome To The Server &b<name>'
     - '<0>'
     - '&e> &cShop: shop-example.com'
     - '&e> &7Use &b/skin to put on a skin'
     - '<0>'
-    - '<GRADIENT:8200FC>&m=========================================</GRADIENT:00FC95>&r'
+    - '<gradient:8200FC:00FC95>&m=========================================</gradient>&r'
 #
 # |File-Version| I would not change anything
 File-Version: 4

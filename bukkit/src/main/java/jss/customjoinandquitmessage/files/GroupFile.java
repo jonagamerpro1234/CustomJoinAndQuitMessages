@@ -2,9 +2,14 @@ package jss.customjoinandquitmessage.files;
 
 import jss.customjoinandquitmessage.CustomJoinAndQuitMessage;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class GroupFile {
 
@@ -12,25 +17,45 @@ public class GroupFile {
     private File file;
     private FileConfiguration config;
 
-    //create groups.yml file
-    public void createFile() throws IOException {
-        this.file = new File(plugin.getDataFolder(), "groups.yml");
+    public FileConfiguration getConfig() {
+        if (this.config == null) {
+            reloadConfig();
+        }
+        return this.config;
+    }
 
-        if(!file.exists()){
-            file.createNewFile();
+    public void saveConfig() {
+        try {
+            this.config.save(this.file);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
-    //get config for groups.yml
-    public FileConfiguration get(){
-        return config;
+    public void reloadConfig() {
+        if (this.config == null) {
+            this.file = new File(plugin.getDataFolder(), "groups.yml");
+        }
+        this.config = YamlConfiguration.loadConfiguration(this.file);
+        Reader defaultConfigStream;
+        try {
+            defaultConfigStream = new InputStreamReader(Objects.requireNonNull(plugin.getResource("groups.yml")), StandardCharsets.UTF_8);
+            YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(defaultConfigStream);
+            config.setDefaults(defaultConfig);
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+
+
+        }
     }
 
-    //reload groups.yml file
-    public void reload(){
-
+    public void saveDefaultConfig() {
+        if (this.file == null) {
+            this.file = new File(plugin.getDataFolder(), "groups.yml");
+        }
+        if (!this.file.exists()) {
+            plugin.saveResource("groups.yml", false);
+        }
     }
 
-
-    
 }

@@ -1,9 +1,11 @@
 package jss.customjoinandquitmessage;
 
 import jss.customjoinandquitmessage.commands.CommandHandler;
+import jss.customjoinandquitmessage.files.GroupFile;
 import jss.customjoinandquitmessage.files.utils.PreConfigLoader;
 import jss.customjoinandquitmessage.listeners.chat.JoinListener;
 import jss.customjoinandquitmessage.listeners.chat.QuitListener;
+import jss.customjoinandquitmessage.managers.JoinQuitMessageHandlerFactory;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
@@ -24,21 +26,30 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
     private final PreConfigLoader preConfigLoader = new PreConfigLoader(this);
     private BukkitAudiences adventure;
     private Metrics metrics;
+    public GroupFile groupFile;
 
     public void onLoad() {
         instance = this;
+
     }
 
     public void onEnable() {
         this.adventure = BukkitAudiences.create(this);
+
         metrics = new Metrics(this,6318);
+
         saveDefaultConfig();
-
-        metrics.addCustomChart( new SimplePie("using_the_group_function", () -> getConfig().getString("ChatFormat.Type","group")));
-
+        preConfigLoader.loadConfigs();
         if(!preConfigLoader.loadLangs()){
             Bukkit.getPluginManager().disablePlugins();
         }
+
+        groupFile = new GroupFile();
+        groupFile.saveDefaultConfig();
+
+        metrics.addCustomChart( new SimplePie("using_the_group_function", () -> getConfig().getString("ChatFormat.Type","group")));
+
+        new JoinQuitMessageHandlerFactory();
 
         registerListener(
                 new JoinListener(),
@@ -81,8 +92,8 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
         return preConfigLoader;
     }
 
-
     public static CustomJoinAndQuitMessage get(){
         return instance;
     }
+
 }

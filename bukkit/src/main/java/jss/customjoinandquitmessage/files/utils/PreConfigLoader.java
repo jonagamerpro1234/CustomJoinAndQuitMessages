@@ -15,7 +15,6 @@ public class PreConfigLoader {
         this.plugin = plugin;
     }
 
-    @SuppressWarnings("unused")
     public void loadConfigs(){
         FileConfiguration config = plugin.getConfig();
         Settings.config_Lang =  config.getString("Settings.Lang");
@@ -98,7 +97,7 @@ public class PreConfigLoader {
         }
 
         if(!availableLangs.containsKey(Settings.config_Lang)){
-            Settings.config_Lang = "en_US";
+            //Settings.config_Lang = "en_US";
             availableLangs.put(Settings.config_Lang, new LangFile(plugin, Settings.config_Lang,0));
         }
         return true;

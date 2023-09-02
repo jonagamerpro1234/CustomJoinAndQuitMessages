@@ -72,7 +72,7 @@ public class LangFile {
         Settings.lang_reloadCommand = config.getString("ReloadCommand");
         Settings.lang_usageDisplayCommand = config.getString("UsageDisplayCommand");
         Settings.lang_unknownSound = config.getString("UnknownSound");
-        Settings.lang_disableCommand = config.getString("DisableCommand");
+        Settings.lang_disableCommand = config.getString("DisabledCommand");
         Settings.lang_updateAlert_console = config.getStringList("UpdateAlert.Console");
         Settings.lang_updateAlert_player = config.getStringList("UpdateAlert.Player");
         Settings.lang_helpCommand = config.getStringList("HelpCommand");
