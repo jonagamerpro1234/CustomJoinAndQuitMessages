@@ -1,6 +1,5 @@
 package jss.customjoinandquitmessage.listeners.chat;
 
-import jss.customjoinandquitmessage.CustomJoinAndQuitMessage;
 import jss.customjoinandquitmessage.files.utils.Settings;
 import jss.customjoinandquitmessage.managers.JoinQuitMessageHandlerFactory;
 import jss.customjoinandquitmessage.utils.MessageUtils;
@@ -31,7 +30,7 @@ public class JoinListener implements Listener {
             handlerFactory.getActiveHandler().handlerJoinAndQuitActionbar(p,true);
         }else if (isGroup) {
             e.setJoinMessage(null);
-            MessageUtils.sendColorMessage(p,"Test group");
+            MessageUtils.sendColorMessage(p,"<red>Disable");
         }
 
     }

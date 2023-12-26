@@ -4,12 +4,16 @@ import com.google.common.collect.ImmutableMap;
 import jss.customjoinandquitmessage.CustomJoinAndQuitMessage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.Tag;
 import net.kyori.adventure.title.Title;
 import net.kyori.adventure.util.Ticks;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -84,17 +88,25 @@ public class MessageUtils {
 
     // Send a colorized message to a Player
     public static void sendColorMessage(@NotNull Player player, String message){
-        plugin.adventure().player(player).sendMessage(colorize(message));
+        plugin.adventure().player(player).sendMessage(colorize(addTags(message,player)));
     }
 
     public static void showTitle(Player player, String title, String subtitle, long fadeIn, long stay, long fadeOut){
         Title.Times titleTimes = Title.Times.times(Ticks.duration(fadeIn),Ticks.duration(stay),Ticks.duration(fadeOut));
-        Title titleText = Title.title(colorize(title),colorize(subtitle), titleTimes);
+        Title titleText = Title.title(colorize(addTags(title,player)),colorize(addTags(subtitle,player)), titleTimes);
 
         plugin.adventure().player(player).showTitle(titleText);
     }
 
     public static void showActionbar(Player player, String message){
-        plugin.adventure().player(player).sendActionBar(colorize(message));
+        plugin.adventure().player(player).sendActionBar(colorize(addTags(message,player)));
     }
+
+    public static @NotNull String addTags(String message, @NotNull Player player){
+        message = message.replace("{player}", player.getName());
+        message = message.replace("{0}", " ");
+        return message;
+    }
+
+
 }

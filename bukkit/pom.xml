@@ -57,7 +57,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
-                    <outputDirectory>C:\Users\Alumno\Documents\Server\1.8\plugins</outputDirectory>
+                    <finalName>customjoinandquitmessages-${project.version}</finalName>
                 </configuration>
             </plugin>
         </plugins>
