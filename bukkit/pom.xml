@@ -13,6 +13,7 @@
     <artifactId>Bukkit</artifactId>
     <packaging>jar</packaging>
     <name>Bukkit</name>
+    <version>1.8.0-b1</version>
 
     <properties>
         <java.version>1.8</java.version>

@@ -97,7 +97,7 @@ public class PreConfigLoader {
         }
 
         if(!availableLangs.containsKey(Settings.config_Lang)){
-            //Settings.config_Lang = "en_US";
+            //[debug] Settings.config_Lang = "en_US";
             availableLangs.put(Settings.config_Lang, new LangFile(plugin, Settings.config_Lang,0));
         }
         return true;

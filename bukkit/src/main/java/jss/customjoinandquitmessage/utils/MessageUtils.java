@@ -4,16 +4,12 @@ import com.google.common.collect.ImmutableMap;
 import jss.customjoinandquitmessage.CustomJoinAndQuitMessage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.tag.Tag;
 import net.kyori.adventure.title.Title;
 import net.kyori.adventure.util.Ticks;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -105,6 +101,7 @@ public class MessageUtils {
     public static @NotNull String addTags(String message, @NotNull Player player){
         message = message.replace("{player}", player.getName());
         message = message.replace("{0}", " ");
+        message = Utils.onPlaceholderAPI(player, message);
         return message;
     }
 
