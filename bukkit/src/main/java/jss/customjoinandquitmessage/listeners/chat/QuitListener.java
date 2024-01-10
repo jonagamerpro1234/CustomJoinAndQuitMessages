@@ -26,10 +26,14 @@ public class QuitListener implements Listener {
             e.setQuitMessage(null);
             handlerFactory.getActiveHandler().handlerJoinAndQuitMessages(p,false);
             handlerFactory.getActiveHandler().handlerJoinAndQuitTitle(p,false);
-            handlerFactory.getActiveHandler().handlerJoinAndQuitActionbar(p,false );
+            handlerFactory.getActiveHandler().handlerJoinAndQuitActionbar(p,false);
+            handlerFactory.getActiveHandler().handlerJoinAndQuitSound(p,false);
         }else if (isGroup) {
             e.setQuitMessage(null);
-            MessageUtils.sendColorMessage(p,"Test group");
+            handlerFactory.getActiveHandler().handlerJoinAndQuitMessages(p,false);
+            handlerFactory.getActiveHandler().handlerJoinAndQuitTitle(p,false);
+            handlerFactory.getActiveHandler().handlerJoinAndQuitActionbar(p,false);
+            handlerFactory.getActiveHandler().handlerJoinAndQuitSound(p,false);
         }
     }
 }

@@ -14,10 +14,9 @@ softdepend: [
 
 commands:
   customjoinandquitmessages:
-    description: the main command
+    description: the main command plugin
     aliases:
       - cjm
-
 permissions:
   cjm.admin:
     description: give all permission of plugin

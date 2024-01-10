@@ -26,7 +26,7 @@ public class CommandHandler implements TabExecutor {
     private final ArrayList<SubCommand> subCommands = new ArrayList<>();
 
     public void register(){
-        PluginCommand pluginCommand = plugin.getCommand("customjoinandquitmessages");
+        PluginCommand pluginCommand = this.plugin.getCommand("customjoinandquitmessages");
         assert pluginCommand != null;
         pluginCommand.setExecutor(this);
         pluginCommand.setTabCompleter(this);

@@ -6,6 +6,7 @@ import jss.customjoinandquitmessage.files.utils.PreConfigLoader;
 import jss.customjoinandquitmessage.listeners.chat.JoinListener;
 import jss.customjoinandquitmessage.listeners.chat.QuitListener;
 import jss.customjoinandquitmessage.managers.JoinQuitMessageHandlerFactory;
+import jss.customjoinandquitmessage.utils.Utils;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
@@ -28,11 +29,8 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
     private Metrics metrics;
     public GroupFile groupFile;
 
-    public void onLoad() {
-        instance = this;
-    }
-
     public void onEnable() {
+        instance = this;
         this.adventure = BukkitAudiences.create(this);
 
         metrics = new Metrics(this,6318);
@@ -55,8 +53,10 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
                 new QuitListener()
         );
 
-        CommandHandler commandHandler = new CommandHandler();
-        commandHandler.register();
+         /* CommandHandler commandHandler = new CommandHandler();
+        commandHandler.register();*/
+
+        Utils.sendUpdate();
     }
 
     public void onDisable() {
