@@ -21,9 +21,10 @@ UpdateAlert:
     - "&aVersion &e{newversion} &ais now available for download"
     - "&b&nClick &7here to go to the plugin page"
 HelpCommand:
+  - " "
   - " &6&l* &r&9/Cjm &e<click:suggest_command:'/cjm help'><hover:show_text:'<gray>Muestra mas iformacion de los comandos, <aqua>click to suggest command'>help</hover></click> &7shows this same message"
   - " &6&l* &r&9/Cjm &e<click:suggest_command:'/cjm reload'><hover:show_text:'<gray>reload plugin files, <aqua>click to suggest command'>reload</hover></click> &7reload all plugin files"
   - " &6&l* &r&9/Cjm &e<click:suggest_command:'/cjm info'><hover:show_text:'<gray>Muestra informacion del plugin, <aqua>click to suggest command'>info</hover></click> &7shows plugin information like support links..."
   - " &6&l* &r&9/Cjm &e<click:suggest_command:'/cjm display'><hover:show_text:'<gray>Ayuda a previsualizar los mensajes y tambien a escuchar los sonidos<br>sin tener que salir del servidor, <aqua>click to suggest command'>display</hover></click> &7it is used to see the messages and functions of the plugin without having to leave the server"
   - " "
-  - " &<yellow>[!] &7pasar el cursor sobre los comandos para ver mas informacion"
+  - " &<yellow>[!] &7pasa el cursor sobre los comandos para ver mas informacion"
