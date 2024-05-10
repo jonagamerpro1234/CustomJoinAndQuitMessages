@@ -6,7 +6,8 @@
 #
 # ● A simple plugin for personalization of the join and quit messages and more...
 #
-# ● Spigot: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-8-x-1-19-x.57006/
+# ● Spigot: https://www.spigotmc.org/resources/custom-join-and-quit-message.57006/
+# ● Modrinth: https://modrinth.com/plugin/customjoinandquitmessages
 # ● Discord: https://discord.gg/c5GhQDQCK5
 # ● Issue Tracker: https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/issues
 # ● Plugin Statistics: https://bstats.org/plugin/bukkit/CustomJoinAndQuitMessages/6318
@@ -17,6 +18,9 @@ Settings:
   # Shows you important information about the plugin loading
   Debug: true
 
+  # DevMode this mode show dev command and more functions
+  DevMode: true
+
   # You can use the available languages of the plugin, or you can add your own translations [ Default = en_US ]
   Lang: en_US
 
@@ -26,13 +30,13 @@ Settings:
     # Here you can enable or disable this feature
     Enabled: true
 
-    # You will get the updates from [spigot | github] what is the difference, here below is the explanation of why
+    # You will get the updates from [spigot | gitHub] what is the difference, here below is the explanation of why
     # |Spigot| Get only released updates, and you won't receive beta notifications
-    # |Modrinth| ---
+    # |Modrinth| Coming Soon
     # |GitHub| Get only the released and beta updates, and you will be able to receive notifications of both versions
     GetFromUpdate: spigot
 
-# | Hooks |
+# | Hooks | Work in progress
 Hooks:
 
   # Here you can configure everything related to LuckPerms and or deactivate or activate functions
@@ -47,6 +51,9 @@ Hooks:
       # Here you can enable or disable this feature
       Enabled: true
 
+      # Delay time for the group update task to start
+      Delay: 0
+
       # Here you can define the time that the actions are automatically executed [Default = 600], 600 tick = 30 sec
       Tick: 600
 
@@ -59,7 +66,7 @@ Hooks:
     # Here is the id of the channel that is used for the chat
     Channel-Id: "none"
 
-  # Aqui podras cambiar los ajustes de cada implementacion que funciona con EssentialsX
+  # Here you can change the settings of each implementation that works with EssentialsX
   EssentialsX:
 
     Enabled: true
@@ -71,7 +78,7 @@ Hooks:
     DisableJoinQuitSoundsInVanish: true
 
     # Here you can define the discord channel where the messages from minecraft to discord are seen
-    # (!) Es necesario tener el plugin de [ EssentialsDiscord ] para que funcione
+    # (!) You need to have the [Essentials Discord] plugin for it to work
     EssentialsDiscord:
 
       # Here you can enable or disable this feature
@@ -80,21 +87,21 @@ Hooks:
       # Here is the id of the channel that is used for the chat
       Channel-Id: "none"
 
-      # Usara el canal que se encuentra definido en la configuracion del plugin EssentialsDiscord y ignorara el Channel-Id de CustomJoinAndMessages
+      # It will use the channel that is defined in the EssentialsDiscord plugin configuration and ignore the Channel-Id of CustomJoinAndMessages
       UseDefaultChannel: false
 
 # | ChatFormat |
-# Aqui pordras personalizar los mensajes de entrada y salida del jugador y tambien podras personalizar los mensajes con diversas funciones
-# (!) Para personalizacion por grupos es necesario que cambie el tipo a [ group ]
+# Here you can customize the player's entry and exit messages, and you can also customize the messages with various functions
+# (!) For group customization you need to change the type to [ group ]
 ChatFormat:
 
   # Here you can enable or disable the chat to be seen in the console
   ShowChatInConsole: true
 
-  # Aqui podras configurar el tipo del formato los cuales son
-  # |normal| Sirve para la personalizacion general de todos los jugadores de los mensajes de entrada y salida, esto no permite usar las funciones de grupo
-  # |group| Sirve para la personalizacion por grupos y desabilita la personalizacion general y permite una personalizacion mejor para cada grupo
-  # (!) Es necesario tener LuckPerms para usar la personalizacion por grupos
+  # Here you can configure the type of the format which are
+  # |normal| It is used for the general customization of all players' input and output messages, this does not allow the use of group functions.
+  # |group| It is used for customization by groups and disables general customization and allows better customization for each group
+  # (!) It is necessary to have LuckPerms to use group customization
   Type: normal
 
   # | Join |
@@ -103,60 +110,62 @@ ChatFormat:
     # Here you can enable or disable this feature
     Enabled: true
 
-    # Aqui puedes definir el mensaje de entra
+    # Here you can define the input message
     Format: "&e[&a+&e] &3{player} &7has joined the server"
 
-    #
+    #[Coming Soon]
     JoinMessageDelay: 0
 
-    #
+    # In this section you can configure the title of the join
     Title-Settings:
 
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
-      Title: ""
+      # here you can set the title text
+      Title: "<aqua>Welcome to the server"
 
-      #
-      SubTitle: ""
+      # here you can set the subtitle text
+      SubTitle: "{player}"
 
-      #
+      # here you can set the input time of the title
       FadeIn: 20
 
-      #
+      # here you can set how long the title stays
       Stay: 40
 
-      #
+      # here you can set the title output time
       FadeOut: 20
 
-    #
+    # In this section you can configure the Actionbar of the join
     Actionbar:
 
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      #[Coming Soon]
       Delay: 0
 
-      #
-      Format: ""
+      # here you can set the message that appears in the action bar
+      Format: "<gradient:#8afff5:#ff1430>Welcome to server {player}</gradient>"
 
+    # |Sound| In this section you can configure the sound of the join
+    # |Sound list: https://www.spigotmc.org/wiki/cc-sounds-list/
     Sound:
 
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      # When active, the sound will be sent to all players connected to the server
       SendToAll: true
 
-      #
+      # This is the name of the sound you will hear when it is mentioned to you in chat
       Name: "BLOCK_NOTE_BLOCK_PLING"
 
-      #
+      # This is the volume of the sound that you will hear when the chat mentions it
       Volume: 10
 
-      #
+      # This is the pitch of the sound that you will hear when mentioned in the chat
       Pitch: 1
 
   # | First Join |
@@ -168,58 +177,59 @@ ChatFormat:
     #
     Format: "&3Welcome to the server, we hope you enjoy your time here and have a good time"
 
-    #
+    #[Coming Soon]
     FirstJoinMessageDelay: 0
 
-    #
+    # In this section you can configure the title of the join
     Title-Settings:
 
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      # here you can set the title text
       Title: ""
 
-      #
+      # here you can set the subtitle text
       SubTitle: ""
 
-      #
+      # here you can set the input time of the title
       FadeIn: 20
 
-      #
+      # here you can set how long the title stays
       Stay: 40
 
-      #
+      # here you can set the title output time
       FadeOut: 20
 
-    #
+    # In this section you can configure the Actionbar of the first join
     Actionbar:
 
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      #[Coming Soon]
       Delay: 0
 
-      #
-      Format: ""
+      # here you can set the message that appears in the action bar
+      Format: "<red>Welcome to the &bserver"
 
-    #
+    # |Sound| In this section you can configure the sound of the first join
+    # |Sound list: https://www.spigotmc.org/wiki/cc-sounds-list/
     Sound:
 
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      # When active, the sound will be sent to all players connected to the server
       SendToAll: true
 
-      #
+      # This is the name of the sound you will hear when it is mentioned to you in chat
       Name: "BLOCK_NOTE_BLOCK_PLING"
 
-      #
+      # This is the volume of the sound that you will hear when the chat mentions it
       Volume: 10
 
-      #
+      # This is the pitch of the sound that you will hear when mentioned in the chat
       Pitch: 1
 
   # | Quit |
@@ -228,7 +238,7 @@ ChatFormat:
     # Here you can enable or disable this feature
     Enabled: true
 
-    # Aqui puedes definir el mensaje de salida
+    # Here you can define the output message
     Format: "&e[&c-&e] &3{player} &7has left the server"
 
     #
@@ -237,49 +247,50 @@ ChatFormat:
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      # here you can set the title text
       Title: ""
 
-      #
+      # here you can set the subtitle text
       SubTitle: ""
 
-      #
+      # here you can set the input time of the title
       FadeIn: 20
 
-      #
+      # here you can set how long the title stays
       Stay: 40
 
-      #
+      # here you can set the title output time
       FadeOut: 20
 
-    #
+    # In this section you can configure the Actionbar of the quit
     Actionbar:
 
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      #[Coming Soon]
       Delay: 0
 
-      #
-      Format: ""
+      # here you can set the message that appears in the action bar
+      Format: "<red>Welcome to the &bserver"
 
-    #
+    # |Sound| In this section you can configure the sound of the quit
+    # |Sound list: https://www.spigotmc.org/wiki/cc-sounds-list/
     Sound:
 
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      # [Experimental] When active, the sound will be sent to all players connected to the server
       SendToAll: true
 
-      #
+      # This is the name of the sound you will hear when it is mentioned to you in chat
       Name: "BLOCK_NOTE_BLOCK_PLING"
 
-      #
+      # This is the volume of the sound that you will hear when the chat mentions it
       Volume: 10
 
-      #
+      # This is the pitch of the sound that you will hear when mentioned in the chat
       Pitch: 1
 
 # |Welcome|
@@ -288,22 +299,22 @@ Welcome:
   # Here you can enable or disable this feature
   Enabled: true
 
-  # Permite usa un mensaje de bienvenida por grupo y desactiva el mensaje general de bienvenida
+  # Allows you to use one welcome message per group and disable the general welcome message
   UseWelcomePerGroup: false
 
-  #
+  #[Coming Soon]
   Delay: 0
 
   # Here you can set your own welcome message when entering
   Text:
-    - '<gradien:#8200FC:#00FC95>&m=========================================</gradien>&r'
-    - '<0>'
+    - '<gradient:#8200FC:#00FC95>&m=========================================</gradient>&r'
+    - '{0}'
     - '&e> &7Welcome To The Server &b<name>'
-    - '<0>'
+    - '{0}'
     - '&e> <red>Shop: shop-example.com'
     - '&e> &7Use &b/skin to put on a skin'
-    - '<0>'
-    - '<gradien:#8200FC:#00FC95>&m=========================================</gradien>&r'
+    - '{0}'
+    - '<gradient:#8200FC:#00FC95>&m=========================================</gradient>&r'
 
 # I would not change anything
 File-Version: 5

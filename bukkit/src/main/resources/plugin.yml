@@ -3,6 +3,7 @@ version: '${project.version}'
 main: jss.customjoinandquitmessage.CustomJoinAndQuitMessage
 api-version: 1.16
 prefix: CustomJoinAndQuitMessages
+folia-supported: true
 loadbefore: [ Essentials ]
 softdepend: [
   PlaceholderAPI, DiscordSRV,
@@ -13,10 +14,9 @@ softdepend: [
 
 commands:
   customjoinandquitmessages:
-    description: the main command
+    description: the main command plugin
     aliases:
       - cjm
-
 permissions:
   cjm.admin:
     description: give all permission of plugin
@@ -40,5 +40,5 @@ permissions:
     description: allows you to see the list of available commands
     default: op
   cjm.command.display:
-    description: ----
+    description: coming soon
     default: op

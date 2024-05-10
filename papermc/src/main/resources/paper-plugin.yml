@@ -1,0 +1,5 @@
+name: papermc
+version: '${project.version}'
+main: jss.customjoinandquitmessages.paper.Main
+api-version: '1.20'
+folia-supported: true

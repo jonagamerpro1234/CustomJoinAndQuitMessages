@@ -2,7 +2,6 @@ package jss.customjoinandquitmessage.listeners.chat;
 
 import jss.customjoinandquitmessage.files.utils.Settings;
 import jss.customjoinandquitmessage.managers.JoinQuitMessageHandlerFactory;
-import jss.customjoinandquitmessage.utils.MessageUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -26,10 +25,14 @@ public class QuitListener implements Listener {
             e.setQuitMessage(null);
             handlerFactory.getActiveHandler().handlerJoinAndQuitMessages(p,false);
             handlerFactory.getActiveHandler().handlerJoinAndQuitTitle(p,false);
-            handlerFactory.getActiveHandler().handlerJoinAndQuitActionbar(p,false );
+            handlerFactory.getActiveHandler().handlerJoinAndQuitActionbar(p,false);
+            handlerFactory.getActiveHandler().handlerJoinAndQuitSound(p,false);
         }else if (isGroup) {
             e.setQuitMessage(null);
-            MessageUtils.sendColorMessage(p,"Test group");
+            handlerFactory.getActiveHandler().handlerJoinAndQuitMessages(p,false);
+            handlerFactory.getActiveHandler().handlerJoinAndQuitTitle(p,false);
+            handlerFactory.getActiveHandler().handlerJoinAndQuitActionbar(p,false);
+            handlerFactory.getActiveHandler().handlerJoinAndQuitSound(p,false);
         }
     }
 }
