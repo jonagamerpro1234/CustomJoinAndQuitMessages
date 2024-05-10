@@ -23,7 +23,7 @@ UpdateAlert:
 HelpCommand:
   - "&6&l* &r&9/Cjm &e<click:suggest_command:'/cjm help'><hover:show_text:'<gray>显示更多命令信息，<aqua>点击建议的命令'>help</hover></click> &7显示这个相同的消息\n"
   - "&6&l* &r&9/Cjm &e<click:suggest_command:'/cjm reload'><hover:show_text:'<gray>重新加载插件文件，<aqua>点击建议命令'>reload</hover></click> &7重新加载所有插件文件"
-  - " &6&l* &r&9/Cjm &e<click:suggest_command:'/cjm info'><hover:show_text:'<gray>Muestra informacion del plugin, <aqua>click to suggest command'>info</hover></click> &7shows plugin information like support links..."
+  - " &6&l* &r&9/Cjm &e<click:suggest_command:'/cjm info'><hover:show_text:'<gray>显示插件信息, <aqua>点击建议命令'>info</hover></click> &7如赞助链接...
   - "&6&l* &r&9/Cjm &e<click:suggest_command:'/cjm display'><hover:show_text:'<gray>帮助预览消息和听声音<br>无需离开服务器，<aqua>点击建议命令'>display</hover></click> &7它用于查看插件的消息和功能，无需离开服务器"
   - " "
   - "&<yellow>[!] &7将鼠标悬停在命令上以查看更多信息"
