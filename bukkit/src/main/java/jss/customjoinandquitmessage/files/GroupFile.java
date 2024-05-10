@@ -11,6 +11,7 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
+@SuppressWarnings("All")
 public class GroupFile {
 
     private final CustomJoinAndQuitMessage plugin = CustomJoinAndQuitMessage.get();
@@ -44,8 +45,6 @@ public class GroupFile {
             config.setDefaults(defaultConfig);
         } catch (NullPointerException ex) {
             ex.printStackTrace();
-
-
         }
     }
 

@@ -75,7 +75,7 @@ public class Utils {
 
                 in.close();
 
-                // Parsear la respuesta JSON y trabajar con los datos según tus necesidades.
+
                 String jsonResponse = response.toString();
                 System.out.println("Respuesta de Modrinth API: " + jsonResponse);
             } else {

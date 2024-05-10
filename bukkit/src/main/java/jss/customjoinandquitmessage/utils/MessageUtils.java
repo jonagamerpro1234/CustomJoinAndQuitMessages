@@ -2,8 +2,12 @@ package jss.customjoinandquitmessage.utils;
 
 import com.google.common.collect.ImmutableMap;
 import jss.customjoinandquitmessage.CustomJoinAndQuitMessage;
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.Tag;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.title.Title;
 import net.kyori.adventure.util.Ticks;
 import org.bukkit.command.CommandSender;
@@ -98,12 +102,33 @@ public class MessageUtils {
         plugin.adventure().player(player).sendActionBar(colorize(addTags(message,player)));
     }
 
+    //Test
+    private static @NotNull TagResolver papiTag(final @NotNull Player player) {
+        return TagResolver.resolver("papi", (argumentQueue, context) -> {
+
+            // Get the string placeholder that they want to use.
+            final String papiPlaceholder = argumentQueue.popOr("papi tag requires an argument").value();
+
+            // Then get PAPI to parse the placeholder for the given player.
+            final String parsedPlaceholder = PlaceholderAPI.setPlaceholders(player, '%' + papiPlaceholder + '%');
+
+            // We need to turn this ugly legacy string into a nice component.
+            final Component componentPlaceholder = LegacyComponentSerializer.legacySection().deserialize(parsedPlaceholder);
+
+            // Finally, return the tag instance to insert the placeholder!
+            return Tag.selfClosingInserting(componentPlaceholder);
+        });
+    }
+
     public static @NotNull String addTags(String message, @NotNull Player player){
         message = message.replace("{player}", player.getName());
         message = message.replace("{0}", " ");
+        message = message.replace("{version}", plugin.version);
+        message = message.replace("{spigot}","https://www.spigotmc.org/resources/custom-join-and-quit-message.57006/");
+        message = message.replace("{github}", "https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/releases");
+        message = message.replace("{modrith}", "https://modrinth.com/plugin/customjoinandquitmessages");
         message = Utils.onPlaceholderAPI(player, message);
+        //message = miniMessage.stripTags (message, papiTag(player));
         return message;
     }
-
-
 }

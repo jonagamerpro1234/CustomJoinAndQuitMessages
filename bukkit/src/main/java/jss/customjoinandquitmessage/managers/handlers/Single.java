@@ -4,6 +4,7 @@ import jss.customjoinandquitmessage.files.utils.Settings;
 import jss.customjoinandquitmessage.managers.AbstractJoinQuitMessageHandler;
 import jss.customjoinandquitmessage.utils.MessageUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class Single extends AbstractJoinQuitMessageHandler {
@@ -26,6 +27,7 @@ public class Single extends AbstractJoinQuitMessageHandler {
 
             }
         }else{
+            if(!Settings.chatformat_quit_enabled) return;
             MessageUtils.sendColorMessage(p, Settings.chatformat_quit_message);
         }
     }
@@ -73,13 +75,13 @@ public class Single extends AbstractJoinQuitMessageHandler {
                         p2.playSound(p2.getLocation(), Settings.chatformat_join_sound_name, Settings.chatformat_join_sound_pitch, Settings.chatformat_join_sound_volume);
                     }
                 }else{
-                    p.playSound(p.getLocation(), Settings.chatformat_join_sound_name, Settings.chatformat_join_sound_pitch, Settings.chatformat_join_sound_volume);
+                    p.playSound(p.getLocation(), Sound.valueOf(Settings.chatformat_join_sound_name), Settings.chatformat_join_sound_pitch, Settings.chatformat_join_sound_volume);
                 }
             }
         }else{
             if(Settings.chatformat_quit_sound_enabled){
                 for(Player p2 : Bukkit.getOnlinePlayers()){
-                    p2.playSound(p2.getLocation(), Settings.chatformat_quit_sound_name, Settings.chatformat_quit_sound_pitch, Settings.chatformat_quit_sound_volume);
+                    p2.playSound(p2.getLocation(), Sound.valueOf(Settings.chatformat_quit_sound_name), Settings.chatformat_quit_sound_pitch, Settings.chatformat_quit_sound_volume);
                 }
             }
         }

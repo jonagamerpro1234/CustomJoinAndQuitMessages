@@ -6,7 +6,7 @@
 #
 # ● A simple plugin for personalization of the join and quit messages and more...
 #
-# ● Spigot: https://www.spigotmc.org/resources/custom-join-and-quit-message-1-8-x-1-19-x.57006/
+# ● Spigot: https://www.spigotmc.org/resources/custom-join-and-quit-message.57006/
 # ● Modrinth: https://modrinth.com/plugin/customjoinandquitmessages
 # ● Discord: https://discord.gg/c5GhQDQCK5
 # ● Issue Tracker: https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/issues
@@ -17,6 +17,9 @@ Settings:
 
   # Shows you important information about the plugin loading
   Debug: true
+
+  # DevMode this mode show dev command and more functions
+  DevMode: true
 
   # You can use the available languages of the plugin, or you can add your own translations [ Default = en_US ]
   Lang: en_US
@@ -33,7 +36,7 @@ Settings:
     # |GitHub| Get only the released and beta updates, and you will be able to receive notifications of both versions
     GetFromUpdate: spigot
 
-# | Hooks | Disable!!
+# | Hooks | Work in progress
 Hooks:
 
   # Here you can configure everything related to LuckPerms and or deactivate or activate functions
@@ -47,6 +50,9 @@ Hooks:
 
       # Here you can enable or disable this feature
       Enabled: true
+
+      # Delay time for the group update task to start
+      Delay: 0
 
       # Here you can define the time that the actions are automatically executed [Default = 600], 600 tick = 30 sec
       Tick: 600

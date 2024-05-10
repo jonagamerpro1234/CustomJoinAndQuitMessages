@@ -40,5 +40,5 @@ permissions:
     description: allows you to see the list of available commands
     default: op
   cjm.command.display:
-    description: ----
+    description: coming soon
     default: op

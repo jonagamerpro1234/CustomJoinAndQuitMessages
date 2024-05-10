@@ -12,6 +12,7 @@ public class Settings {
     public static boolean luckperms_enabled;
     public static boolean luckperms_autoUpdateGroup_enabled;
     public static int luckperms_autoUpdateGroup_tick;
+    public static int luckperms_autoUpdateGroup_delay;
     public static boolean discordSVR_enabled;
     public static String discordSVR_channelID;
     public static boolean essentialsX_enabled;
@@ -88,7 +89,7 @@ public class Settings {
 
     //Lang
     public static String lang_prefix;
-    public static String lang_nopermission;
+    public static String lang_noPermission;
     public static String lang_usageMainCommand;
     public static String lang_allowConsoleCommand;
     public static String lang_unknownArguments;

@@ -41,9 +41,9 @@ public class LangFile {
 
         if(!dir.exists()){
             if(dir.mkdirs()) {
-                plugin.getLogger().info("Carpeta 'langs' creada correctamente");
+                plugin.getLogger().info("Langs folder created successfully");
             } else {
-                plugin.getLogger().warning("No se pudo crear la carpeta 'langs'");
+                plugin.getLogger().warning("Could not create langs folder");
             }
         }
 
@@ -65,7 +65,7 @@ public class LangFile {
 
     private void loadMessages(){
         Settings.lang_prefix = config.getString("Prefix");
-        Settings.lang_nopermission = config.getString("NoPermission");
+        Settings.lang_noPermission = config.getString("NoPermission");
         Settings.lang_usageMainCommand = config.getString("UsageMainCommand");
         Settings.lang_allowConsoleCommand = config.getString("allowConsoleCommand");
         Settings.lang_unknownArguments = config.getString("UnknownArguments");

@@ -2,7 +2,6 @@ package jss.customjoinandquitmessage.listeners.chat;
 
 import jss.customjoinandquitmessage.files.utils.Settings;
 import jss.customjoinandquitmessage.managers.JoinQuitMessageHandlerFactory;
-import jss.customjoinandquitmessage.utils.MessageUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

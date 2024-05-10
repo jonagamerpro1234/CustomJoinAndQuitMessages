@@ -7,6 +7,8 @@ ReloadCommand: "&aAll plugin files have been reloaded"
 UsageDisplayCommand: "&7Use &9/Cjm &edisplay &d<open|section> &7to see a preview"
 UnknownSound: "&eThe sound is not from this version or is misspelled!"
 DisabledCommand: "&cThis command is disabled"
+DuplicateGroupWarning: "<red>Check the list of groups and verify that the group names are correct!"
+DuplicateGroup: "<red>{groupName}[Duplicate]"
 UpdateAlert:
   Console:
     - "======================================-"
@@ -21,9 +23,11 @@ UpdateAlert:
     - "&aVersion &e{newversion} &ais now available for download"
     - "&b&nClick &7here to go to the plugin page"
 HelpCommand:
+  - " "
   - " &6&l* &r&9/Cjm &e<click:suggest_command:'/cjm help'><hover:show_text:'<gray>Display additional command information, <aqua>click to suggest command'>help</hover></click> &7shows this same message"
-  - " &6&l* &r&9/Cjm &e<click:suggest_command:'/cjm reload'><hover:show_text:'<gray>reload plugin files, <aqua>click to suggest command'>reload</hover></click> &7reload all plugin files\n"
-  - "&6&l* &r&9/Cjm &e<click:suggest_command:'/cjm info'><hover:show_text:'<gray>Show plugin information, <aqua>click to suggest command'>info</hover></click> &7shows plugin information like support links...\n"
-  - "&6&l* &r&9/Cjm &e<click:suggest_command:'/cjm display'><hover:show_text:'<gray>Helps preview messages and also listen to sounds<br>without having to leave the server, <aqua>click to suggest command'>display</hover></click> &7it is used to see the messages and functions of the plugin without having to leave the server\n"
+  - " &6&l* &r&9/Cjm &e<click:suggest_command:'/cjm reload'><hover:show_text:'<gray>reload plugin files, <aqua>click to suggest command'>reload</hover></click> &7reload all plugin files"
+  - " &6&l* &r&9/Cjm &e<click:suggest_command:'/cjm info'><hover:show_text:'<gray>Show plugin information, <aqua>click to suggest command'>info</hover></click> &7shows plugin information like support links..."
+  - " &6&l* &r&9/Cjm &e<click:suggest_command:'/cjm display'><hover:show_text:'<gray>Helps preview messages and also listen to sounds<br>without having to leave the server, <aqua>click to suggest command'>display</hover></click> &7it is used to see the messages and functions of the plugin without having to leave the server"
   - " "
   - " <yellow>[!] &7Hover over the commands to see more information"
+  - " "

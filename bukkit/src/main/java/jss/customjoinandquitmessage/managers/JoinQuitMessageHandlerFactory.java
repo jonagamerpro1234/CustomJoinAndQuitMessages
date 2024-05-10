@@ -50,4 +50,5 @@ public class JoinQuitMessageHandlerFactory {
     public static JoinQuitMessageHandlerFactory getInstance() {
         return instance;
     }
+
 }
