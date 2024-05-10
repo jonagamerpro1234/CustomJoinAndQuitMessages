@@ -30,4 +30,4 @@ HelpCommand:
   - " &6&l* &r&9/Cjm &e<click:suggest_command:'/cjm display'><hover:show_text:'<gray>Helps preview messages and also listen to sounds<br>without having to leave the server, <aqua>click to suggest command'>display</hover></click> &7it is used to see the messages and functions of the plugin without having to leave the server"
   - " "
   - " <yellow>[!] &7Hover over the commands to see more information"
-  - " "
+
