@@ -16,6 +16,7 @@ import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
@@ -102,6 +103,10 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
 
     public PreConfigLoader getPreConfigLoader() {
         return preConfigLoader;
+    }
+
+    public PluginManager getManager(){
+        return  Bukkit.getPluginManager();
     }
 
     public static CustomJoinAndQuitMessage get(){

@@ -1,9 +1,12 @@
 package jss.customjoinandquitmessage.libs.luckperms;
 
+import jss.customjoinandquitmessage.CustomJoinAndQuitMessage;
+
 public class LuckpermsHook {
 
-    public boolean isLuckPerms(){
+    private CustomJoinAndQuitMessage plugin = CustomJoinAndQuitMessage.get();
 
-        return true;
+    public boolean isLuckPerms(){
+        return plugin.getManager().isPluginEnabled("LuckPerms");
     }
 }

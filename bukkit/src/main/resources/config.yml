@@ -36,6 +36,20 @@ Settings:
     # |GitHub| Get only the released and beta updates, and you will be able to receive notifications of both versions
     GetFromUpdate: spigot
 
+Database:
+
+  Enabled: true
+
+  host: "localhost"
+
+  Port: 3306
+
+  database: "devplugin"
+
+  user: "root"
+
+  password: "none"
+
 # | Hooks | Work in progress
 Hooks:
 

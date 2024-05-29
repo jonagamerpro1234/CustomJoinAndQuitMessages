@@ -9,6 +9,15 @@ public class Settings {
     public static boolean config_Debug;
     public static boolean config_enabledUpdate;
     public static String config_getFromUpdate;
+
+    //database
+    public static boolean db_enabled;
+    public static String db_host;
+    public static int db_port;
+    public static String db_user;
+    public static String db_password;
+    public static String db_database_name;
+
     public static boolean luckperms_enabled;
     public static boolean luckperms_autoUpdateGroup_enabled;
     public static int luckperms_autoUpdateGroup_tick;

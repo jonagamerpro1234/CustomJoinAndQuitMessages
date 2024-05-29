@@ -4,12 +4,13 @@ import org.bukkit.configuration.ConfigurationSection;
 
 public class GroupManager extends GroupHelper {
 
-    public String getJoinMessage(String group){
+    public String getFormatMessage(String group, String section){
         if (availableGroups().contains(group)) {
+            return config.getString(group + "." + section +".Format");
+        }else{
 
-
+            return "N/A";
         }
-        return "";
     }
 
 }

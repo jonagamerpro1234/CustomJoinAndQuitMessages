@@ -17,16 +17,28 @@ public class PreConfigLoader {
 
     public void loadConfigs(){
         FileConfiguration config = plugin.getConfig();
+
+        //General Settings
         Settings.config_Lang =  config.getString("Settings.Lang");
         Settings.config_Debug = config.getBoolean("Settings.Debug");
         Settings.chatformat_type = config.getString("ChatFormat.Type");
         Settings.chatformat_showChatInConsole = config.getBoolean("ChatFormat.ShowChatInConsole");
 
+        //DataBase
+        Settings.db_enabled = config.getBoolean("Database.Enabled");
+        Settings.db_host = config.getString("Database.host");
+        Settings.db_port = config.getInt("Database.port");
+        Settings.db_user = config.getString("Database.user");
+        Settings.db_password = config.getString("Database.password", "");
+        Settings.db_database_name = config.getString("Database.database");
+
+        //Luckperms Hook
         Settings.luckperms_enabled = config.getBoolean("Hooks.LuckPerms.Enabled");
         Settings.luckperms_autoUpdateGroup_enabled = config.getBoolean("Hooks.LuckPerms.AutoUpdateGroup.Enabled");
         Settings.luckperms_autoUpdateGroup_delay = config.getInt("Hooks.LuckPerms.AutoUpdateGroup.Delay");
         Settings.luckperms_autoUpdateGroup_tick = config.getInt("Hooks.LuckPerms.AutoUpdateGroup.Tick");
 
+        //ChatFormat
         Settings.chatformat_join_enabled = config.getBoolean("ChatFormat.Join.Enabled");
         Settings.chatformat_join_message = config.getString("ChatFormat.Join.Format");
         Settings.chatformat_join_delay = config.getInt("ChatFormat.Join.JoinMessageDelay");
