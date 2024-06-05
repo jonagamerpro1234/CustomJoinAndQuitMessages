@@ -40,15 +40,15 @@ Database:
 
   Enabled: true
 
-  host: "localhost"
+  Host: "localhost"
 
   Port: 3306
 
-  database: "devplugin"
+  Database: "devplugin"
 
-  user: "root"
+  User: "root"
 
-  password: "none"
+  Password: ""
 
 # | Hooks | Work in progress
 Hooks:

@@ -26,11 +26,11 @@ public class PreConfigLoader {
 
         //DataBase
         Settings.db_enabled = config.getBoolean("Database.Enabled");
-        Settings.db_host = config.getString("Database.host");
-        Settings.db_port = config.getInt("Database.port");
-        Settings.db_user = config.getString("Database.user");
-        Settings.db_password = config.getString("Database.password", "");
-        Settings.db_database_name = config.getString("Database.database");
+        Settings.db_host = config.getString("Database.Host");
+        Settings.db_port = config.getInt("Database.Port");
+        Settings.db_user = config.getString("Database.User");
+        Settings.db_password = config.getString("Database.Password", "");
+        Settings.db_database_name = config.getString("Database.Database");
 
         //Luckperms Hook
         Settings.luckperms_enabled = config.getBoolean("Hooks.LuckPerms.Enabled");

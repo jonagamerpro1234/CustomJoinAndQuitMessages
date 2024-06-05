@@ -10,6 +10,10 @@ import jss.customjoinandquitmessage.listeners.chat.JoinListener;
 import jss.customjoinandquitmessage.listeners.chat.QuitListener;
 import jss.customjoinandquitmessage.managers.JoinQuitMessageHandlerFactory;
 import jss.customjoinandquitmessage.managers.groupmanager.GroupHelper;
+import jss.customjoinandquitmessage.storage.CacheManager;
+import jss.customjoinandquitmessage.storage.PlayerData;
+import jss.customjoinandquitmessage.storage.database.DataBaseManager;
+import jss.customjoinandquitmessage.storage.database.PlayerDataDAO;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
@@ -19,6 +23,8 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+
+import java.sql.SQLException;
 
 public final class CustomJoinAndQuitMessage extends JavaPlugin {
 
@@ -34,6 +40,9 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
     public GroupHelper groupHelper;
     public PlayerDataFile playerDataFile;
     private GroupUpdateTask groupUpdateTask;
+    private DataBaseManager dataBaseManager;
+    private CacheManager cacheManager;
+    private PlayerDataDAO playerDataDAO;
 
     public void onEnable() {
         instance = this;
@@ -47,15 +56,30 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugins();
         }
 
-        playerDataFile = new PlayerDataFile(getDataFolder());
-
         groupFile = new GroupFile();
         groupFile.saveDefaultConfig();
 
         metrics.addCustomChart( new SimplePie("using_the_group_function", () -> getConfig().getString("ChatFormat.Type","group")));
 
+        dataBaseManager = new DataBaseManager(Settings.db_host,Settings.db_port,Settings.db_database_name,Settings.db_user,Settings.db_password);
+        playerDataDAO = new PlayerDataDAO(dataBaseManager);
+        cacheManager = new CacheManager();
+        playerDataFile = new PlayerDataFile(getDataFolder());
+
+        if(Settings.db_enabled){
+            try {
+                dataBaseManager.connect();
+                dataBaseManager.createTable();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         groupHelper = new GroupHelper();
         groupHelper.checkPermissionPlugins(Bukkit.getPluginManager().isPluginEnabled("LuckPerms"));
+
+        groupUpdateTask = new GroupUpdateTask(this);
+        //groupUpdateTask.start(Settings.luckperms_autoUpdateGroup_delay, Settings.luckperms_autoUpdateGroup_tick,Settings.luckperms_autoUpdateGroup_enabled);
 
         new JoinQuitMessageHandlerFactory();
 
@@ -67,19 +91,30 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
         CommandHandler commandHandler = new CommandHandler();
         commandHandler.register();
 
-        groupUpdateTask = new GroupUpdateTask(this);
-        groupUpdateTask.start(Settings.luckperms_autoUpdateGroup_delay, Settings.luckperms_autoUpdateGroup_tick,Settings.luckperms_autoUpdateGroup_enabled);
-
     }
 
     public void onDisable() {
         instance = null;
+
         if(this.adventure != null) {
             this.adventure.close();
             this.adventure = null;
         }
+
         metrics.shutdown();
-        groupUpdateTask.cancel();
+
+        //groupUpdateTask.cancel();
+
+        try {
+            for (String playerName : cacheManager.getPlayerDataCache().keySet()){
+                PlayerData data = cacheManager.getPlayerData(playerName);
+                playerDataDAO.savePlayerData(playerName, data);
+                playerDataFile.saveData(playerName,data);
+            }
+            dataBaseManager.disconnect();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void reloadAllFiles(){
@@ -105,7 +140,15 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
         return preConfigLoader;
     }
 
-    public PluginManager getManager(){
+    public PlayerDataDAO getPlayerDataDAO() {
+        return playerDataDAO;
+    }
+
+    public CacheManager getCacheManager() {
+        return cacheManager;
+    }
+
+    public @NotNull PluginManager getManager(){
         return  Bukkit.getPluginManager();
     }
 

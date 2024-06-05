@@ -13,7 +13,7 @@ public class DataBaseManager {
     private Connection connection;
 
     public DataBaseManager(String host, int port, String database, String user, String password){
-        this.url = "jdbc:mysql://" + host + port + "/" + database;
+        this.url = "jdbc:mysql://" + host + ":" + port + "/" + database;
         this.user = user;
         this.password = password != null ? password : "";
     }

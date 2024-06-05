@@ -18,13 +18,13 @@ public class PlayerData {
         this.group = group;
     }
 
-    // Método para convertir el objeto PlayerData a formato JSON
+    // Method to convert PlayerData object to JSON format
     public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
 
-    // Método para crear un objeto PlayerData a partir de una cadena JSON
+    // Method to create a Player Data object from a JSON string
     public static PlayerData fromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, PlayerData.class);
