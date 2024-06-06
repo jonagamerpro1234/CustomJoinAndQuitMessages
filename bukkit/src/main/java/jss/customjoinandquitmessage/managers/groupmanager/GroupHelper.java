@@ -9,15 +9,14 @@ public class GroupHelper {
 
     public FileConfiguration config = new GroupFile().getConfig();
 
-    private boolean useDefaultSystemGroup;
-    private boolean isLuckperms;
+    private boolean isLuckPerms;
 
     public void checkPermissionPlugins(boolean value){
-         value = this.isLuckperms;
+         this.isLuckPerms = value;
     }
 
     public boolean isPermissionPlugin(){
-        return this.isLuckperms;
+        return this.isLuckPerms;
     }
 
     public Set<String> availableGroups(){
@@ -28,6 +27,7 @@ public class GroupHelper {
         return availableGroups().stream().filter(name::equalsIgnoreCase).findFirst().orElse("<red>Not found");
     }
 
+    //check de group file
     public Set<String> getDevKeys(){
         return config.getKeys(true);
     }
