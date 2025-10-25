@@ -13,7 +13,7 @@
     <artifactId>Bukkit</artifactId>
     <packaging>jar</packaging>
     <name>Bukkit</name>
-    <version>1.8.0-b2</version>
+    <version>1.8.0-b3</version>
 
     <properties>
         <java.version>1.8</java.version>
@@ -71,10 +71,7 @@
     </build>
 
     <repositories>
-        <repository>
-            <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
+
         <repository>
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
@@ -86,6 +83,11 @@
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
+        </repository>
+
+        <repository>
+            <id>spigotmc-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
     </repositories>
 
@@ -115,9 +117,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.jonagamerpro1234</groupId>
-            <artifactId>CommandAPI</artifactId>
-            <version>0.0.4-alpha</version>
+            <groupId>jss.commandapi</groupId>
+            <artifactId>command-api</artifactId>
+            <version>0.0.6-alpha</version>
         </dependency>
         <dependency>
             <groupId>net.kyori</groupId>

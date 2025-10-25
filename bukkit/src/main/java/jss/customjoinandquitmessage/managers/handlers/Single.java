@@ -75,7 +75,7 @@ public class Single extends AbstractJoinQuitMessageHandler {
                         p2.playSound(p2.getLocation(), Settings.chatformat_join_sound_name, Settings.chatformat_join_sound_pitch, Settings.chatformat_join_sound_volume);
                     }
                 }else{
-                    p.playSound(p.getLocation(), Sound.valueOf(Settings.chatformat_join_sound_name), Settings.chatformat_join_sound_pitch, Settings.chatformat_join_sound_volume);
+                    p.playSound(p.getLocation(), Sound.valueOf(Settings.chatformat_join_sound_name.toUpperCase()), Settings.chatformat_join_sound_pitch, Settings.chatformat_join_sound_volume);
                 }
             }
         }else{

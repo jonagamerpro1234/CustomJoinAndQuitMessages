@@ -85,6 +85,9 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
                     listOptions.add("lang");
                     listOptions.add("handlers");
                 }
+                if(args[0].equalsIgnoreCase("display")){
+                    listOptions.add("welcome");
+                }
                 break;
         }
 

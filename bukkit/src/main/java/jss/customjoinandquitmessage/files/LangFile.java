@@ -67,7 +67,7 @@ public class LangFile {
         Settings.lang_prefix = config.getString("Prefix");
         Settings.lang_noPermission = config.getString("NoPermission");
         Settings.lang_usageMainCommand = config.getString("UsageMainCommand");
-        Settings.lang_allowConsoleCommand = config.getString("allowConsoleCommand");
+        Settings.lang_allowConsoleCommand = config.getString("AllowConsoleCommand");
         Settings.lang_unknownArguments = config.getString("UnknownArguments");
         Settings.lang_reloadCommand = config.getString("ReloadCommand");
         Settings.lang_usageDisplayCommand = config.getString("UsageDisplayCommand");

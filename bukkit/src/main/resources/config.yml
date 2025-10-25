@@ -83,6 +83,7 @@ Hooks:
   # Here you can change the settings of each implementation that works with EssentialsX
   EssentialsX:
 
+    # Here you can enable or disable this feature
     Enabled: true
 
     # This allows you to join or quit the server without the message being shown to other players.
@@ -130,7 +131,7 @@ ChatFormat:
     #[Coming Soon]
     JoinMessageDelay: 0
 
-    # In this section you can configure the title of the join
+    # In this section, you can configure the title of the join
     Title-Settings:
 
       # Here you can enable or disable this feature
@@ -151,7 +152,7 @@ ChatFormat:
       # here you can set the title output time
       FadeOut: 20
 
-    # In this section you can configure the Actionbar of the join
+    # In this section, you can configure the Actionbar of the join
     Actionbar:
 
       # Here you can enable or disable this feature
@@ -194,7 +195,7 @@ ChatFormat:
     #[Coming Soon]
     FirstJoinMessageDelay: 0
 
-    # In this section you can configure the title of the join
+    # In this section, you can configure the title of the join
     Title-Settings:
 
       # Here you can enable or disable this feature
@@ -215,7 +216,7 @@ ChatFormat:
       # here you can set the title output time
       FadeOut: 20
 
-    # In this section you can configure the Actionbar of the first join
+    # In this section, you can configure the Actionbar of the first join
     Actionbar:
 
       # Here you can enable or disable this feature
@@ -276,7 +277,7 @@ ChatFormat:
       # here you can set the title output time
       FadeOut: 20
 
-    # In this section you can configure the Actionbar of the quit
+    # In this section, you can configure the Actionbar of the quit
     Actionbar:
 
       # Here you can enable or disable this feature
@@ -335,6 +336,6 @@ File-Version: 5
 
 # |> This is the end of the configuration... [-_-] more things coming soon
 #
-# | Config File  |
-# | Version 1.8  |
+# | Config File |
+# | Version 1.8 |
 #

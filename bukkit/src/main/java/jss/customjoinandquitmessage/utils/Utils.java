@@ -79,11 +79,11 @@ public class Utils {
                 String jsonResponse = response.toString();
                 System.out.println("Respuesta de Modrinth API: " + jsonResponse);
             } else {
-                System.out.println("La solicitud a Modrinth API falló. Código de respuesta: " + responseCode);
+                System.out.println("La solicitud a la api de Modrinth  falló. Código de error: " + responseCode);
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

@@ -83,7 +83,7 @@ public class MessageUtils {
 
     // Send a colorized message to a CommandSender
     public static void sendColorMessage(@NotNull CommandSender sender, String message){
-        plugin.adventure().sender(sender).sendMessage(colorize(message));
+        plugin.adventure().sender(sender).sendMessage(colorize(addTags(message,sender)));
     }
 
     // Send a colorized message to a Player
@@ -120,14 +120,20 @@ public class MessageUtils {
         });
     }
 
-    public static @NotNull String addTags(String message, @NotNull Player player){
-        message = message.replace("{player}", player.getName());
+    public static @NotNull String addTags(String message, @NotNull CommandSender sender){
+
+        if(sender instanceof Player){
+            Player player = (Player) sender;
+            message = Utils.onPlaceholderAPI(player, message);
+            message = message.replace("{player}", player.getName());
+        }
+
         message = message.replace("{0}", " ");
         message = message.replace("{version}", plugin.version);
         message = message.replace("{spigot}","https://www.spigotmc.org/resources/custom-join-and-quit-message.57006/");
         message = message.replace("{github}", "https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/releases");
         message = message.replace("{modrith}", "https://modrinth.com/plugin/customjoinandquitmessages");
-        message = Utils.onPlaceholderAPI(player, message);
+
         //message = miniMessage.stripTags (message, papiTag(player));
         return message;
     }

@@ -2,7 +2,9 @@ package jss.customjoinandquitmessage.commands.subcommands;
 
 import jss.commandapi.SubCommand;
 import jss.customjoinandquitmessage.files.utils.Settings;
+import jss.customjoinandquitmessage.utils.MessageUtils;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 
 public class DisplayCommand extends SubCommand {
@@ -19,7 +21,25 @@ public class DisplayCommand extends SubCommand {
         return true;
     }
 
-    public boolean onCommand(CommandSender sender, String[] args) {
+    public boolean onCommand(CommandSender sender, String @NotNull [] args) {
+
+        if(args.length >= 2){
+
+            if (args[1].equalsIgnoreCase("welcome")){
+                if (Settings.welcome_enabled){
+                    for(String s : Settings.welcome_message){
+                        MessageUtils.sendColorMessage(sender,s);
+                    }
+                    //Settings.welcome_message.forEach( s -> MessageUtils.sendColorMessage(sender, s));
+                }else {
+                    MessageUtils.sendColorMessage(sender, "<red> This featured is disabled");
+                }
+                return true;
+            }
+            MessageUtils.sendColorMessage(sender, Settings.lang_unknownArguments);
+            return true;
+        }
+        MessageUtils.sendColorMessage(sender, Settings.lang_usageDisplayCommand);
         return true;
     }
 
@@ -28,7 +48,7 @@ public class DisplayCommand extends SubCommand {
     }
 
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public String disabledMessage() {
