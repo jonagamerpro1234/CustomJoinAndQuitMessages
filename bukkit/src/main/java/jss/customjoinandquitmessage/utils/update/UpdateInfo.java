@@ -1,37 +1,39 @@
 package jss.customjoinandquitmessage.utils.update;
 
+import java.util.List;
+
 public class UpdateInfo {
 
-    private final String versionNumber;
-    private final String versionType;
+    private final String version_number;
+    private final String version_type;
     private final String changelog;
-    private final String downloadUrl;
+    private final List<FileInfo> files;
 
-    public UpdateInfo(String versionNumber, String versionType, String changelog, String downloadUrl) {
-        this.versionNumber = versionNumber;
-        this.versionType = versionType;
+    public UpdateInfo(String version_number, String version_type, String changelog, List<FileInfo> files) {
+        this.version_number = version_number;
+        this.version_type = version_type;
         this.changelog = changelog;
-        this.downloadUrl = downloadUrl;
+        this.files = files;
     }
 
-    public String getVersionNumber() {
-        return versionNumber;
-    }
-
-    public String getVersionType() {
-        return versionType;
-    }
-
-    public String getChangelog() {
-        return changelog;
-    }
-
+    public String getVersionNumber() { return version_number; }
+    public String getVersionType() { return version_type; }
+    public String getChangelog() { return changelog; }
     public String getDownloadUrl() {
-        return downloadUrl;
+        if (files != null && !files.isEmpty()) return files.get(0).url;
+        return "No disponible";
+    }
+
+    public List<FileInfo> getFiles() {
+        return files;
+    }
+
+    public static class FileInfo {
+        public String url;
     }
 
     @Override
     public String toString() {
-        return versionNumber + " (" + versionType + ")";
+        return version_number + " (" + version_type + ")";
     }
 }

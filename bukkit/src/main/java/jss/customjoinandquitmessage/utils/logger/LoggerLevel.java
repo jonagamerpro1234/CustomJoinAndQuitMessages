@@ -1,6 +1,5 @@
 package jss.customjoinandquitmessage.utils.logger;
 
-
 import jss.customjoinandquitmessage.utils.Utils;
 
 public enum LoggerLevel {

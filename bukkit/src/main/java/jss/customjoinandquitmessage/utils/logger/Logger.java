@@ -1,6 +1,5 @@
 package jss.customjoinandquitmessage.utils.logger;
 
-
 import jss.customjoinandquitmessage.files.utils.Settings;
 import jss.customjoinandquitmessage.utils.EventUtils;
 import jss.customjoinandquitmessage.utils.MessageUtils;
@@ -16,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 @SuppressWarnings("all")
 public class Logger {
 
-    private static final File logFile = new File("plugins/AdvancedChat/logs.txt");
+    private static final File logFile = new File("plugins/CustomJoinAndQuitMessages/logs.txt");
 
     private static void log(LoggerLevel level, String msg) {
         if (level == LoggerLevel.DEBUG && !Settings.config_Debug) return;
@@ -58,7 +57,7 @@ public class Logger {
             writer.write("[" + timeStamp + "] [" + level.name() + "] " + msg + "\n");
             writer.close();
         } catch (IOException e) {
-            Utils.sendColorMessage(EventUtils.getConsoleSender(), "§cError writing log file: " + e.getMessage());
+            MessageUtils.sendColorMessage(EventUtils.getConsoleSender(), "&cError writing log file: " + e.getMessage());
         }
     }
 
@@ -83,6 +82,6 @@ public class Logger {
                 ? Utils.getPrefix(true) + msg
                 : msg;
 
-        Utils.sendColorMessage(EventUtils.getConsoleSender(), formattedMsg);
+        MessageUtils.sendColorMessage(EventUtils.getConsoleSender(), formattedMsg);
     }
 }

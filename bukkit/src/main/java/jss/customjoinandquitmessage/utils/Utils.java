@@ -21,7 +21,7 @@ public class Utils {
     public static @NotNull String getPrefix(boolean ignoreCustomPrefix) {
         String prefixTemp;
         if(ignoreCustomPrefix){
-            prefixTemp = "&e[&dAdvancedChat&e]&7 ";
+            prefixTemp = "&e[&dCustomJoinAndQuitMessages&e]&7 ";
         }else{
             prefixTemp = Settings.lang_prefix + " ";
         }
