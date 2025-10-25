@@ -4,6 +4,9 @@ import java.util.List;
 
 public class Settings {
 
+    //dev settings
+    public static boolean enable_colors = true;
+
     //settings
     public static String config_Lang;
     public static boolean config_Debug;

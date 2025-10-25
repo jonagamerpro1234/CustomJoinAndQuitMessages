@@ -1,5 +1,6 @@
 package jss.customjoinandquitmessage.utils;
 
+import jss.customjoinandquitmessage.files.utils.Settings;
 import jss.customjoinandquitmessage.libs.iridium.IridiumColorAPI;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -16,6 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
+
+    public static @NotNull String getPrefix(boolean ignoreCustomPrefix) {
+        String prefixTemp;
+        if(ignoreCustomPrefix){
+            prefixTemp = "&e[&dAdvancedChat&e]&7 ";
+        }else{
+            prefixTemp = Settings.lang_prefix + " ";
+        }
+        return prefixTemp;
+    }
 
     public static @NotNull String colorized(String text){
         return IridiumColorAPI.process(text);
