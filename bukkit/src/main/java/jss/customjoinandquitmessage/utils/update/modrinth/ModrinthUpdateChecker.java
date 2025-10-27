@@ -6,7 +6,8 @@ import jss.customjoinandquitmessage.utils.logger.Logger;
 import jss.customjoinandquitmessage.utils.update.core.UpdateChecker;
 import jss.customjoinandquitmessage.utils.update.core.UpdateInfo;
 import jss.customjoinandquitmessage.utils.update.core.UpdateSettings;
-import jss.customjoinandquitmessage.utils.update.core.VersionComparator;
+import jss.customjoinandquitmessage.utils.update.util.ChangelogUtils;
+import jss.customjoinandquitmessage.utils.update.util.VersionComparator;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -70,7 +71,7 @@ public class ModrinthUpdateChecker extends UpdateChecker {
                 Logger.debug("[UpdateChecker] Current plugin version type: " + versionType);
                 Logger.debug("[UpdateChecker] Current plugin version: " + currentVersion);
 
-                // Compare current plugin version with latest
+                // Compare a current plugin version with latest
                 int compare = VersionComparator.compare(currentVersion, latest.getVersionNumber());
 
                 // Show information in console if configured
@@ -83,7 +84,7 @@ public class ModrinthUpdateChecker extends UpdateChecker {
                 // Show version status to user
                 if (compare < 0) {
                     Logger.warning("&cYour version (" + currentVersion + ") is outdated.");
-                    Logger.warning("&7Changelog: &f" + summarizeChangelog(latest.getChangelog()));
+                    Logger.warning("&7Changelog: &f" + ChangelogUtils.summarize(latest.getChangelog()));
                 } else if (compare == 0) {
                     Logger.info("&aYou are using the latest version " + currentVersion + " (" + versionType + ")");
                 } else {
@@ -139,15 +140,4 @@ public class ModrinthUpdateChecker extends UpdateChecker {
         }
     }
 
-    /**
-     * Summarizes a changelog for display (max 150 chars)
-     * @param changelog full changelog text
-     * @return summarized text
-     */
-    private @NotNull String summarizeChangelog(String changelog) {
-        Logger.debug("[UpdateChecker] Summarizing changelog...");
-        return (changelog == null || changelog.isEmpty())
-                ? "No changelog available"
-                : (changelog.length() > 150 ? changelog.substring(0, 150) + "..." : changelog);
-    }
 }

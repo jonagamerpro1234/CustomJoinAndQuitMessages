@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import jss.customjoinandquitmessage.utils.logger.Logger;
 import jss.customjoinandquitmessage.utils.update.core.UpdateChecker;
 import jss.customjoinandquitmessage.utils.update.core.UpdateSettings;
+import jss.customjoinandquitmessage.utils.update.util.ChangelogUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -44,7 +45,7 @@ public class GithubUpdateChecker extends UpdateChecker {
 
                 if (!currentVersion.equalsIgnoreCase(latestVersion)) {
                     Logger.warning("&cA new version is available: &a" + latestVersion);
-                    Logger.info("&7Changelog: &f" + changelog);
+                    Logger.info("&7Changelog: &f" + ChangelogUtils.summarizeByLines(changelog,6));
                     Logger.info("&7Download: &b" + pageUrl);
                 } else {
                     Logger.info("&aYou are using the latest version: " + currentVersion);
