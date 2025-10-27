@@ -1,4 +1,4 @@
-package jss.customjoinandquitmessage.utils.update;
+package jss.customjoinandquitmessage.utils.update.core;
 
 import java.util.List;
 
@@ -17,11 +17,14 @@ public class UpdateInfo {
     }
 
     public String getVersionNumber() { return version_number; }
+
     public String getVersionType() { return version_type; }
+
     public String getChangelog() { return changelog; }
+
     public String getDownloadUrl() {
         if (files != null && !files.isEmpty()) return files.get(0).url;
-        return "No disponible";
+        return "No available";
     }
 
     public List<FileInfo> getFiles() {

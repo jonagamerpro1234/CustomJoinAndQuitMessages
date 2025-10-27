@@ -1,4 +1,4 @@
-package jss.customjoinandquitmessage.utils.update;
+package jss.customjoinandquitmessage.utils.update.core;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

@@ -14,8 +14,8 @@ import jss.customjoinandquitmessage.storage.CacheManager;
 import jss.customjoinandquitmessage.storage.PlayerData;
 import jss.customjoinandquitmessage.storage.database.DataBaseManager;
 import jss.customjoinandquitmessage.storage.database.PlayerDataDAO;
-import jss.customjoinandquitmessage.utils.update.UpdateChecker;
-import jss.customjoinandquitmessage.utils.update.UpdateSettings;
+import jss.customjoinandquitmessage.utils.update.modrinth.ModrinthUpdateChecker;
+import jss.customjoinandquitmessage.utils.update.core.UpdateSettings;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
@@ -34,6 +34,7 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
     private static CustomJoinAndQuitMessage instance;
     public final String name = jss.getName();
     public final String version = jss.getVersion();
+
     //public String newestVersion;
     private final PreConfigLoader preConfigLoader = new PreConfigLoader(this);
     private BukkitAudiences adventure;
@@ -95,7 +96,7 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
 
         //updateChecker for Modrith
         UpdateSettings settings = UpdateSettings.defaultSettings();
-        new UpdateChecker(this,"1ywOweL3",settings).checkForUpdates();
+        new ModrinthUpdateChecker(this,"1ywOweL3",settings).checkForUpdates();
     }
 
     public void onDisable() {

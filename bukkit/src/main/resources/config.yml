@@ -32,13 +32,14 @@ Settings:
 
     # You will get the updates from [spigot | gitHub] what is the difference, here below is the explanation of why
     # |Spigot| Get only released updates, and you won't receive beta notifications
-    # |Modrinth| Coming Soon
+    # |Modrinth| Get only the released and beta updates, and you will be able to receive notifications of both versions
     # |GitHub| Get only the released and beta updates, and you will be able to receive notifications of both versions
     GetFromUpdate: spigot
 
+#
 Database:
 
-  Enabled: true
+  Enabled: false
 
   Host: "localhost"
 
@@ -77,7 +78,7 @@ Hooks:
     # Here you can enable or disable this feature
     Enabled: true
 
-    # Here is the id of the channel that is used for the chat
+    # Here is the id of the channel used for the chat
     Channel-Id: "none"
 
   # Here you can change the settings of each implementation that works with EssentialsX
@@ -99,10 +100,10 @@ Hooks:
       # Here you can enable or disable this feature
       Enabled: true
 
-      # Here is the id of the channel that is used for the chat
+      # Here is the id of the channel used for the chat
       Channel-Id: "none"
 
-      # It will use the channel that is defined in the EssentialsDiscord plugin configuration and ignore the Channel-Id of CustomJoinAndMessages
+      # It will use the channel defined in the EssentialsDiscord plugin configuration and ignore the Channel-Id of CustomJoinAndMessages
       UseDefaultChannel: false
 
 # | ChatFormat |

@@ -1,6 +1,6 @@
 package jss.customjoinandquitmessages.hook;
 
-import de.myzelyam.api.vanish.VanishAPI;
+//import de.myzelyam.api.vanish.VanishAPI;
 import jss.customjoinandquitmessages.utils.EventUtils;
 import jss.customjoinandquitmessages.utils.logger.Logger;
 import jss.customjoinandquitmessages.utils.Util;
@@ -28,7 +28,7 @@ public class SuperVanishHook implements IHook {
         return isEnabled;
     }
 
-    public boolean isVanishPlayer(Player player){
+   /* public boolean isVanishPlayer(Player player){
        return VanishAPI.isInvisible(player);
-    }
+    }*/
 }
