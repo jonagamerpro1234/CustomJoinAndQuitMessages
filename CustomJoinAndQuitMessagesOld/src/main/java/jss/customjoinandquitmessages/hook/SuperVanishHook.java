@@ -28,7 +28,7 @@ public class SuperVanishHook implements IHook {
         return isEnabled;
     }
 
-   /* public boolean isVanishPlayer(Player player){
+   /* }}public boolean isVanishPlayer(Player player){
        return VanishAPI.isInvisible(player);
     }*/
 }

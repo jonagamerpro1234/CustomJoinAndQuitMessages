@@ -1,4 +1,4 @@
-package jss.customjoinandquitmessages.commands;
+package jss.customjoinandquitmessages.commands.old;
 
 import jss.customjoinandquitmessages.CustomJoinAndQuitMessages;
 import jss.customjoinandquitmessages.utils.Util;

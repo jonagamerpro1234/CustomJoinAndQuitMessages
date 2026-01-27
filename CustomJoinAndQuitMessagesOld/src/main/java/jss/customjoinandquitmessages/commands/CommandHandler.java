@@ -1,4 +1,6 @@
 package jss.customjoinandquitmessages.commands;
 
-public class CommandHandler {
+import jss.commandapi.BaseCommand;
+
+public class CommandHandler extends BaseCommand {
 }
