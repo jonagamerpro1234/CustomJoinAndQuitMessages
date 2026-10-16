@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -86,11 +87,11 @@ public class ChangelogUtils {
      */
     public static @NotNull List<String> toLore(@Nullable String changelog, int maxLines) {
         if (changelog == null || changelog.isEmpty()) {
-            return new ArrayList<String>(Arrays.asList("No changelog available"));
+            return new ArrayList<>(Collections.singletonList("No changelog available"));
         }
 
         ChangelogEntry entry = new ChangelogEntry(changelog);
-        List<String> lore = new ArrayList<String>();
+        List<String> lore = new ArrayList<>();
 
         int limit = Math.min(maxLines, entry.getLines().size());
         for (int i = 0; i < limit; i++) {

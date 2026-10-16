@@ -32,13 +32,9 @@ public class JoinListener implements Listener {
 
         if(isNormal){
             e.setJoinMessage(null);
-
             handlerFactory.getActiveHandler().handlerJoinAndQuitMessages(p,true);
-
             handlerFactory.getActiveHandler().handlerJoinAndQuitTitle(p,true);
-
             handlerFactory.getActiveHandler().handlerJoinAndQuitActionbar(p,true);
-
             handlerFactory.getActiveHandler().handlerJoinAndQuitSound(p,true);
         }else if (isGroup) {
             e.setJoinMessage(null);

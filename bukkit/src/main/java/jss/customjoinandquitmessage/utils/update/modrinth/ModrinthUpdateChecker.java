@@ -82,19 +82,23 @@ public class ModrinthUpdateChecker extends UpdateChecker {
                 }
 
                 // Show version status to user
-                if (compare < 0) {
-                    Logger.warning("&cYour version (" + currentVersion + ") is outdated.");
-                    Logger.warning("&7Changelog: &f" + ChangelogUtils.summarize(latest.getChangelog()));
-                } else if (compare == 0) {
-                    Logger.info("&aYou are using the latest version " + currentVersion + " (" + versionType + ")");
-                } else {
-                    Logger.info("&eYou are using a development version " + currentVersion + " (" + versionType + ")");
-                }
+                getStatus(latest, currentVersion, versionType, compare);
 
             } catch (Exception e) {
                 Logger.warning("[UpdateChecker] Error while checking updates: " + e.getMessage());
             }
         });
+    }
+
+    public static void getStatus(UpdateInfo latest, String currentVersion, String versionType, int compare) {
+        if (compare < 0) {
+            Logger.warning("&cYour version (" + currentVersion + ") is outdated.");
+            Logger.warning("&7Changelog: &f" + ChangelogUtils.summarize(latest.getChangelog()));
+        } else if (compare == 0) {
+            Logger.info("&aYou are using the latest version " + currentVersion + " (" + versionType + ")");
+        } else {
+            Logger.info("&eYou are using a development version " + currentVersion + " (" + versionType + ")");
+        }
     }
 
     /**

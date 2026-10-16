@@ -14,6 +14,7 @@ import jss.customjoinandquitmessage.storage.CacheManager;
 import jss.customjoinandquitmessage.storage.PlayerData;
 import jss.customjoinandquitmessage.storage.database.DataBaseManager;
 import jss.customjoinandquitmessage.storage.database.PlayerDataDAO;
+import jss.customjoinandquitmessage.storage.database.PlayerDataDAOImpl;
 import jss.customjoinandquitmessage.utils.update.modrinth.ModrinthUpdateChecker;
 import jss.customjoinandquitmessage.utils.update.core.UpdateSettings;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
@@ -65,7 +66,7 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
         metrics.addCustomChart( new SimplePie("using_the_group_function", () -> getConfig().getString("ChatFormat.Type","group")));
 
         dataBaseManager = new DataBaseManager(Settings.db_host,Settings.db_port,Settings.db_database_name,Settings.db_user,Settings.db_password);
-        playerDataDAO = new PlayerDataDAO(dataBaseManager);
+        playerDataDAO = new PlayerDataDAOImpl(dataBaseManager);
         cacheManager = new CacheManager();
         playerDataFile = new PlayerDataFile(getDataFolder());
 

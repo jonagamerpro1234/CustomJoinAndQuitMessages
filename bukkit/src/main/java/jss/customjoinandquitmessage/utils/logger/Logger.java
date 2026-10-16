@@ -24,6 +24,7 @@ public class Logger {
 
         // Si es DEBUG, incluir la clase y la línea
         if (level == LoggerLevel.DEBUG) {
+
             // Obtener la clase y la línea
             StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
             StackTraceElement element = stackTrace[3]; // Tomamos el tercer elemento que es el que llamó a log
