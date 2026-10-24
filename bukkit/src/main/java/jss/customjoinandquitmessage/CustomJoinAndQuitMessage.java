@@ -12,6 +12,7 @@ import jss.customjoinandquitmessage.managers.JoinQuitMessageHandlerFactory;
 import jss.customjoinandquitmessage.managers.groupmanager.GroupHelper;
 import jss.customjoinandquitmessage.storage.CacheManager;
 import jss.customjoinandquitmessage.storage.PlayerData;
+import jss.customjoinandquitmessage.storage.PlayerDataManager;
 import jss.customjoinandquitmessage.storage.database.DataBaseManager;
 import jss.customjoinandquitmessage.storage.database.PlayerDataDAO;
 import jss.customjoinandquitmessage.storage.database.PlayerDataDAOImpl;
@@ -47,7 +48,9 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
     private DataBaseManager dataBaseManager;
     private CacheManager cacheManager;
     private PlayerDataDAO playerDataDAO;
+    private PlayerDataManager playerDataManager;
 
+    @Override
     public void onEnable() {
         instance = this;
         this.adventure = BukkitAudiences.create(this);
@@ -65,19 +68,36 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
 
         metrics.addCustomChart( new SimplePie("using_the_group_function", () -> getConfig().getString("ChatFormat.Type","group")));
 
-        dataBaseManager = new DataBaseManager(Settings.db_host,Settings.db_port,Settings.db_database_name,Settings.db_user,Settings.db_password);
-        playerDataDAO = new PlayerDataDAOImpl(dataBaseManager);
-        cacheManager = new CacheManager();
-        playerDataFile = new PlayerDataFile(getDataFolder());
 
-        if(Settings.db_enabled){
+        playerDataFile = new PlayerDataFile(getDataFolder());
+        cacheManager = new CacheManager();
+
+        dataBaseManager = new DataBaseManager(
+                Settings.db_host,
+                Settings.db_port,
+                Settings.db_database_name,
+                Settings.db_user,
+                Settings.db_password
+        );
+
+        playerDataDAO = new PlayerDataDAOImpl(dataBaseManager);
+
+        if (Settings.db_enabled) {
             try {
                 dataBaseManager.connect();
                 dataBaseManager.createTable();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException("Failed to initialize the player database.", e);
             }
         }
+
+        playerDataManager = new PlayerDataManager(
+                playerDataFile,
+                playerDataDAO,
+                cacheManager,
+                getLogger(),
+                Settings.db_enabled
+        );
 
         groupHelper = new GroupHelper();
         groupHelper.checkPermissionPlugins(Bukkit.getPluginManager().isPluginEnabled("LuckPerms"));
@@ -100,29 +120,37 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
         new ModrinthUpdateChecker(this,"1ywOweL3",settings).checkForUpdates();
     }
 
+
+    @Override
     public void onDisable() {
-        instance = null;
-
-        if(this.adventure != null) {
-            this.adventure.close();
-            this.adventure = null;
+        if (groupUpdateTask != null) {
+            groupUpdateTask.cancel();
         }
 
-        metrics.shutdown();
+        if (playerDataManager != null) {
+            playerDataManager.save(PlayerDataManager.DataType.BOTH);
+        }
 
-        //groupUpdateTask.cancel();
-
-        try {
-            for (String playerName : cacheManager.getPlayerDataCache().keySet()){
-                PlayerData data = cacheManager.getPlayerData(playerName);
-                playerDataDAO.savePlayerData(playerName, data);
-                playerDataFile.saveData(playerName,data);
+        if (dataBaseManager != null && Settings.db_enabled) {
+            try {
+                dataBaseManager.disconnect();
+            } catch (SQLException e) {
+                getLogger().severe("Failed to disconnect from the player database: " + e.getMessage());
             }
-            dataBaseManager.disconnect();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
+
+        if (adventure != null) {
+            adventure.close();
+            adventure = null;
+        }
+
+        if (metrics != null) {
+            metrics.shutdown();
+        }
+
+        instance = null;
     }
+
 
     public void reloadAllFiles(){
         reloadConfig();
@@ -153,6 +181,10 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
 
     public CacheManager getCacheManager() {
         return cacheManager;
+    }
+
+    public PlayerDataManager getPlayerDataManager() {
+        return playerDataManager;
     }
 
     public @NotNull PluginManager getManager(){

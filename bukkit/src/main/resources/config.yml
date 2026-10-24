@@ -129,7 +129,7 @@ ChatFormat:
     # Here you can define the input message
     Format: "&e[&a+&e] &3{player} &7has joined the server"
 
-    #[Coming Soon]
+    # Sets the delay before the join message is displayed
     JoinMessageDelay: 0
 
     # In this section, you can configure the title of the join
@@ -159,7 +159,7 @@ ChatFormat:
       # Here you can enable or disable this feature
       Enabled: true
 
-      #[Coming Soon]
+      # Sets the delay before the join actionbar is displayed
       Delay: 0
 
       # here you can set the message that appears in the action bar
@@ -193,7 +193,7 @@ ChatFormat:
     #
     Format: "&3Welcome to the server, we hope you enjoy your time here and have a good time"
 
-    #[Coming Soon]
+    # Sets the delay before the first-join message is displayed
     FirstJoinMessageDelay: 0
 
     # In this section, you can configure the title of the join
@@ -223,7 +223,7 @@ ChatFormat:
       # Here you can enable or disable this feature
       Enabled: true
 
-      #[Coming Soon]
+      # Sets the delay before the first-join actionbar is displayed
       Delay: 0
 
       # here you can set the message that appears in the action bar
@@ -284,7 +284,7 @@ ChatFormat:
       # Here you can enable or disable this feature
       Enabled: true
 
-      #[Coming Soon]
+      # Sets the delay before the quit actionbar is displayed
       Delay: 0
 
       # here you can set the message that appears in the action bar
@@ -318,7 +318,7 @@ Welcome:
   # Allows you to use one welcome message per group and disable the general welcome message
   UseWelcomePerGroup: false
 
-  #[Coming Soon]
+  # Sets the delay before the welcome message is displayed
   Delay: 0
 
   # Here you can set your own welcome message when entering
@@ -333,10 +333,11 @@ Welcome:
     - '<gradient:#8200FC:#00FC95>&m=========================================</gradient>&r'
 
 # I would not change anything
-File-Version: 5
+File-Version: 6
 
-# |> This is the end of the configuration... [-_-] more things coming soon
+# |> This is the end of the configuration... [-_-]
+# |> More things coming soon... and probably more bugs. 🐛
 #
 # | Config File |
-# | Version 1.8 |
-#
+# | Version 2.0.0 |
+# |> All bugs are undocumented features... until proven otherwise.

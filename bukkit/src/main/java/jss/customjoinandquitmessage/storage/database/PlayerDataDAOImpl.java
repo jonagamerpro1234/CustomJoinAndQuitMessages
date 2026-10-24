@@ -23,14 +23,14 @@ public class PlayerDataDAOImpl implements PlayerDataDAO {
             stmt.setString(1, playerName);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return new PlayerData(rs.getString("group"));
+                return new PlayerData(rs.getString("playerGroup"));
             }
         }
         return null;
     }
 
     public void savePlayerData(String playerName, @NotNull PlayerData data) throws SQLException {
-        String query = "REPLACE INTO PlayerData (playerName, group) VALUES (?, ?)";
+        String query = "REPLACE INTO PlayerData (playerName, playerGroup) VALUES (?, ?)";
         try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, playerName);

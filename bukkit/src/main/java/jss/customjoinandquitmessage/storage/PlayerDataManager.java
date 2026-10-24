@@ -33,6 +33,34 @@ public class PlayerDataManager {
         this.databaseEnabled = databaseEnabled;
     }
 
+    public PlayerData load(String playerName) {
+        PlayerData cachedData = cacheManager.getPlayerData(playerName);
+
+        if (cachedData != null) {
+            return cachedData;
+        }
+
+        PlayerData data = null;
+
+        if (databaseEnabled) {
+            try {
+                data = playerDataDAO.getPlayerData(playerName);
+            } catch (SQLException exception) {
+                logger.log(Level.SEVERE, "Failed to load player data from database: " + playerName, exception);
+            }
+        }
+
+        if (data == null && playerDataFile.playerDataFileExists(playerName)) {
+            data = playerDataFile.loadData(playerName);
+        }
+
+        if (data != null) {
+            cacheManager.setPlayerData(playerName, data);
+        }
+
+        return data;
+    }
+
     public void save(@NotNull DataType dataType) {
         Objects.requireNonNull(dataType, "DataType cannot be null");
 
@@ -68,13 +96,61 @@ public class PlayerDataManager {
         save(databaseEnabled ? DataType.DATABASE : DataType.JSON);
     }
 
+
+    public void savePlayer(@NotNull String playerName, @NotNull PlayerData data, @NotNull DataType dataType) {
+        Objects.requireNonNull(playerName, "Player name cannot be null");
+        Objects.requireNonNull(data, "Player data cannot be null");
+        Objects.requireNonNull(dataType, "DataType cannot be null");
+
+        // Actualizar la caché.
+        cacheManager.setPlayerData(playerName, data);
+
+        switch (dataType) {
+            case JSON:
+                savePlayerToJson(playerName, data);
+                break;
+
+            case DATABASE:
+                if (!databaseEnabled) {
+                    logger.warning("Cannot save player data: database is disabled.");
+                    return;
+                }
+                savePlayerToDatabase(playerName, data);
+                break;
+
+            case BOTH:
+                savePlayerToJson(playerName, data);
+
+                if (databaseEnabled) {
+                    savePlayerToDatabase(playerName, data);
+                }
+                break;
+        }
+    }
+
+    private void savePlayerToJson(@NotNull String playerName, @NotNull PlayerData data) {
+        try {
+            playerDataFile.saveData(playerName, data);
+        } catch (RuntimeException exception) {
+            logger.log(Level.SEVERE, "Failed to save player data to JSON for " + playerName, exception);
+        }
+    }
+
+    private void savePlayerToDatabase(@NotNull String playerName, @NotNull PlayerData data) {
+        try {
+            playerDataDAO.savePlayerData(playerName, data);
+        } catch (RuntimeException | SQLException exception) {
+            logger.log(Level.SEVERE, "Failed to save player data to database for " + playerName, exception);
+        }
+    }
+
+
     private void saveToJson(@NotNull Map<String, PlayerData> playerDataCache) {
         for (Map.Entry<String, PlayerData> entry : playerDataCache.entrySet()) {
             try {
                 playerDataFile.saveData(entry.getKey(), entry.getValue());
             } catch (RuntimeException exception) {
-                logger.log(Level.SEVERE, "Failed to save player data to JSON for "+ entry.getKey(), exception
-                );
+                logger.log(Level.SEVERE, "Failed to save player data to JSON for " + entry.getKey(), exception);
             }
         }
     }

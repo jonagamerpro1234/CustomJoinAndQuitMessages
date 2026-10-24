@@ -63,7 +63,7 @@ public class Utils {
         return sender.hasPermission("cjm." + perm);
     }
 
-    public static  void sendUpdate(){
+    public static void sendUpdate(){
         String modrinthApiUrl = "https://api.modrinth.com/v2/version/1ywOweL3";
 
         try {
