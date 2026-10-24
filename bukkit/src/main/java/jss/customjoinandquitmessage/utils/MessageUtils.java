@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+//remover clase y añadir como dependencia en maven
 public class MessageUtils {
 
     private static final CustomJoinAndQuitMessage plugin = CustomJoinAndQuitMessage.get();

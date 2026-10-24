@@ -23,9 +23,11 @@ Config:
     Enabled: true
 
     # !!This feature is not available yet!!
-    # |GetUpdateFrom| you will get the updates from [spigot | github] what is the difference, here below is the explanation of why
+    # |GetUpdateFrom| you will get the updates from [spigot | GitHub] what is the difference,
+    #  here below is the explanation of why
     # |Spigot| Get only released updates, and you won't receive beta notifications
-    # |GitHub| Get only the released and beta updates, and you will be able to receive notifications of both versions
+    # |GitHub| Get only the released and beta updates,
+    #  and you will be able to receive notifications of both versions
     GetUpdateFrom: Spigot
   
   # |Debug| shows you important information about the plugin loading 
@@ -79,7 +81,7 @@ Hooks:
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
 
-    # |Channel-ID| Here is the id of the channel that is used for the chat
+    # |Channel-ID| Here is the id of the channel used for the chat
     Channel-ID: 'none'
 
   # |Essentials|
@@ -98,7 +100,7 @@ Hooks:
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
 
-    # |Channel-ID| Here is the id of the channel that is used for the chat
+    # |Channel-ID| Here is the id of the channel used for the chat
     Channel-ID: 'none'
 
     # |Use-Default-Channel|
@@ -146,7 +148,7 @@ Join:
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
     
-    # |Mode| there are three different modes which are [ command | suggest | url ]
+    # |Mode| there are three different modes that are [ command | suggest | url ]
     Mode: command
 
     # |Actions| This is where are the available events that you can use
@@ -237,7 +239,7 @@ Quit:
     # |Enabled| Here you can enable or disable this feature
     Enabled: true
     
-    # |Mode| there are three different modes which are [ command | suggest | url ]
+    # |Mode| there are three different modes that are [ command | suggest | url ]
     Mode: command
 
     # |Actions| This is where are the available events that you can use

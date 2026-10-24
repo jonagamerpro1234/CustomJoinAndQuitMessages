@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class PreConfigLoader {
 
     private final CustomJoinAndQuitMessage plugin;
+    private final HashMap<String,LangFile> availableLangs = new HashMap<>();
 
     public PreConfigLoader(CustomJoinAndQuitMessage plugin) {
         this.plugin = plugin;
@@ -101,20 +102,25 @@ public class PreConfigLoader {
     }
 
     public boolean loadLangs(){
-        HashMap<String, LangFile> availableLangs = new HashMap<>();
         FileList fileList = new FileList();
         int index = 1;
 
         try {
+
             for(String code : fileList.list()){
                 availableLangs.put(code, new LangFile(plugin, code, index++));
             }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         if(!availableLangs.containsKey(Settings.config_Lang)){
-            //[debug] Settings.config_Lang = "en_US";
+
+            String lang = Settings.config_Lang;
+
+            if(!lang.matches("[aA-zZ]{2}_[aA-zZ]{2}")) return false;
+
             availableLangs.put(Settings.config_Lang, new LangFile(plugin, Settings.config_Lang,0));
         }
         return true;

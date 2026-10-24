@@ -3,7 +3,7 @@ package jss.customjoinandquitmessage.libs.iridium;
 import com.google.common.collect.ImmutableMap;
 import jss.customjoinandquitmessage.libs.iridium.patterns.*;
 import net.md_5.bungee.api.ChatColor;
-import org.apache.commons.lang.Validate;
+import org.apache.commons.lang.util.Validate;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

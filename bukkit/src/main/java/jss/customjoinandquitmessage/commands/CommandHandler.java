@@ -48,7 +48,7 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
                         s.onCommand(sender, args);
                         return true;
                     } else {
-                    MessageUtils.sendColorMessage(sender, s.disabledMessage());
+                        MessageUtils.sendColorMessage(sender, s.disabledMessage());
                     }
                     return true;
                 }
@@ -97,4 +97,5 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
     public ArrayList<SubCommand> getSubCommands() {
         return subCommands;
     }
+
 }

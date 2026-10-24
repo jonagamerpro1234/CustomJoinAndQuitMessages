@@ -84,12 +84,12 @@ public class JoinListener implements Listener {
             return;
         }
 
-        if (superVanishHook.isEnabled()){
+        /*if (superVanishHook.isEnabled()){
             if (superVanishHook.isVanishPlayer(p)){
                 e.setJoinMessage(null);
                 return;
             }
-        }
+        }*/
 
         if (essentialsXHook.isEnabled()) {
             if (Settings.hook_essentials_hidePlayerVanish) {

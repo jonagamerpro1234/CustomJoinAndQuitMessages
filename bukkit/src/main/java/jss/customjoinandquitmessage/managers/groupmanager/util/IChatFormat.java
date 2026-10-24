@@ -21,6 +21,5 @@ public interface IChatFormat {
     String getNameSound();
     boolean isSendToAllSound();
     int getSoundVolume();
-
     int getSoundPitch();
 }

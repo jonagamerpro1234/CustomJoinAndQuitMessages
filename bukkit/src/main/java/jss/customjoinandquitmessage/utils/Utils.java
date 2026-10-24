@@ -1,11 +1,13 @@
 package jss.customjoinandquitmessage.utils;
 
+import jss.customjoinandquitmessage.CustomJoinAndQuitMessage;
 import jss.customjoinandquitmessage.files.utils.Settings;
 import jss.customjoinandquitmessage.libs.iridium.IridiumColorAPI;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,17 +17,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utils {
 
     public static @NotNull String getPrefix(boolean ignoreCustomPrefix) {
-        String prefixTemp;
-        if(ignoreCustomPrefix){
-            prefixTemp = "&e[&dCustomJoinAndQuitMessages&e]&7 ";
-        }else{
-            prefixTemp = Settings.lang_prefix + " ";
-        }
-        return prefixTemp;
+        return  ignoreCustomPrefix ? "&e[&dCustomJoinAndQuitMessages&e]&7 " : Settings.lang_prefix + " ";
     }
 
     public static @NotNull String colorized(String text){
@@ -65,7 +63,7 @@ public class Utils {
         return sender.hasPermission("cjm." + perm);
     }
 
-    public static  void sendUpdate(){
+    public static void sendUpdate(){
         String modrinthApiUrl = "https://api.modrinth.com/v2/version/1ywOweL3";
 
         try {
@@ -77,6 +75,7 @@ public class Utils {
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
                 String inputLine;
                 StringBuilder response = new StringBuilder();
 
@@ -85,7 +84,6 @@ public class Utils {
                 }
 
                 in.close();
-
 
                 String jsonResponse = response.toString();
                 System.out.println("Respuesta de Modrinth API: " + jsonResponse);
@@ -98,7 +96,45 @@ public class Utils {
         }
     }
 
-    public static void addDelayMessage(int delayTime){
+    public static void addDelayMessage(String time, Runnable task){
+        long delayTicks = convertTime(time);
+        Bukkit.getScheduler().runTaskLater(
+                CustomJoinAndQuitMessage.get(),
+                task,
+                delayTicks
+        );
+    }
 
+    private static long convertTime(String time) {
+        Pattern pattern = Pattern.compile("^(\\d+)([smhd])$");
+        Matcher matcher = pattern.matcher(time);
+
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("Formato de tiempo inválido: " + time);
+        }
+
+        long value = Long.parseLong(matcher.group(1));
+        String unit = matcher.group(2);
+
+        long multiplier;
+
+        switch (unit) {
+            case "s":
+                multiplier = 20L;
+                break;
+            case "m":
+                multiplier = 1200L;
+                break;
+            case "h":
+                multiplier = 72000L;
+                break;
+            case "d":
+                multiplier = 1728000L;
+                break;
+            default:
+                throw new IllegalArgumentException("Unidad de tiempo no válida: " + unit);
+        }
+
+        return Math.multiplyExact(value, multiplier);
     }
 }

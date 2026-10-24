@@ -1,6 +1,6 @@
 package jss.customjoinandquitmessages;
 
-import jss.customjoinandquitmessages.commands.CustomJoinAndQuitCmd;
+import jss.customjoinandquitmessages.commands.old.CustomJoinAndQuitCmd;
 import jss.customjoinandquitmessages.config.ConfigFile;
 import jss.customjoinandquitmessages.config.GroupsFile;
 import jss.customjoinandquitmessages.config.Lang;

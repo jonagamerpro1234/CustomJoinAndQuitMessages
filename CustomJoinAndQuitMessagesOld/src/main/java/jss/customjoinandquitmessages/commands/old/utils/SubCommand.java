@@ -1,4 +1,4 @@
-package jss.customjoinandquitmessages.commands.utils;
+package jss.customjoinandquitmessages.commands.old.utils;
 
 import org.bukkit.command.CommandSender;
 

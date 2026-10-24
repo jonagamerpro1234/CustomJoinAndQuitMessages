@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Settings {
 
-    //dev settings
+    //dev settings not in the config
     public static boolean enable_colors = true;
 
     //settings
@@ -21,6 +21,7 @@ public class Settings {
     public static String db_password;
     public static String db_database_name;
 
+    //Hooks
     public static boolean luckperms_enabled;
     public static boolean luckperms_autoUpdateGroup_enabled;
     public static int luckperms_autoUpdateGroup_tick;

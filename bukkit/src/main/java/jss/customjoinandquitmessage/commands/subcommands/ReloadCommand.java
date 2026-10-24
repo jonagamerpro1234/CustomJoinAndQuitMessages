@@ -16,11 +16,9 @@ public class ReloadCommand extends SubCommand {
     public String name() {
         return "reload";
     }
-
     public String permission() {
         return "command.reload";
     }
-
     public boolean requiresPermission() {
         return true;
     }
