@@ -6,17 +6,14 @@ import jss.customjoinandquitmessage.utils.MessageUtils;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
-
 public class DisplayCommand extends SubCommand {
 
     public String name() {
         return "display";
     }
-
     public String permission() {
         return "command.display";
     }
-
     public boolean requiresPermission() {
         return true;
     }

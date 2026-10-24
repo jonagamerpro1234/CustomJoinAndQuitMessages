@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Join implements IChatFormat{
 
-    private String group;
+    private final String group;
     private final FileConfiguration config;
 
     public Join(String group,FileConfiguration config){

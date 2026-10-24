@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@SuppressWarnings("all")
+
 public class Logger {
 
     private static final File logFile = new File("plugins/CustomJoinAndQuitMessages/logs.txt");
@@ -33,14 +33,10 @@ public class Logger {
             int lineNumber = element.getLineNumber();
 
             // Formatear el mensaje para DEBUG incluyendo la clase y la línea
-            formattedMsg = Settings.enable_colors
-                    ? level.getPrefix() + " [" + className + ":" + lineNumber + "] " + msg
-                    : level.getPrefix() + " [" + className + ":" + lineNumber + "] " + msg;
+            formattedMsg = level.getPrefix() + " [" + className + ":" + lineNumber + "] " + msg;
         } else {
             // Para otros niveles, solo el mensaje con el prefijo
-            formattedMsg = Settings.enable_colors
-                    ? level.getPrefix() + " " + msg
-                    : level.getPrefix() + " " + msg;
+            formattedMsg = level.getPrefix() + " " + msg;
         }
 
         // Enviar mensaje a la consola
@@ -79,10 +75,7 @@ public class Logger {
 
     // Mensaje sin prefijo específico
     public static void defaultMessage(String msg) {
-        String formattedMsg = Settings.enable_colors
-                ? Utils.getPrefix(true) + msg
-                : msg;
-
+        String formattedMsg = Settings.enable_colors ? Utils.getPrefix(true) + msg: msg;
         MessageUtils.sendColorMessage(EventUtils.getConsoleSender(), formattedMsg);
     }
 }

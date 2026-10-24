@@ -13,11 +13,9 @@ public class HelpCommand extends SubCommand {
     public String name() {
         return "help";
     }
-
     public String permission()                                                                                                                                                                                         {
         return "command.help";
     }
-
     public boolean requiresPermission() {
         return true;
     }

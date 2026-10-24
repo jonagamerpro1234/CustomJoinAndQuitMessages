@@ -25,28 +25,29 @@ public class DevCommand extends SubCommand {
 
         if(args.length >= 2){
 
-            if(args[1].equalsIgnoreCase("group")){
+            if(args[1].equalsIgnoreCase("group")) {
 
                 GroupHelper groupHelper = new GroupHelper();
                 MessageUtils.sendColorMessage(sender, "<yellow>Group List is:");
 
-                for(String key : groupHelper.availableGroups()){
+                for (String key : groupHelper.availableGroups()) {
                     MessageUtils.sendColorMessage(sender, " - <green>" + key);
                 }
 
                 return true;
             }
-             if(args[1].equalsIgnoreCase("find")){
-                 GroupHelper groupHelper = new GroupHelper();
 
+            if(args[1].equalsIgnoreCase("find")){
+
+                 GroupHelper groupHelper = new GroupHelper();
                  String name = args[2];
 
                  MessageUtils.sendColorMessage(sender, "<green>Group: " + groupHelper.findGroup(name));
-
                  return true;
              }
 
             if (args[1].equalsIgnoreCase("file")){
+
                 GroupHelper groupHelper = new GroupHelper();
                 MessageUtils.sendColorMessage(sender, "<yellow>Group File:");
 

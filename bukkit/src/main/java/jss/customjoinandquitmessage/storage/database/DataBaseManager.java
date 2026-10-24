@@ -22,6 +22,7 @@ public class DataBaseManager {
     public boolean connect() throws SQLException {
         if(connection == null || connection.isClosed()){
             connection = DriverManager.getConnection(url, user, password);
+            return  true;
         }
         return false;
     }

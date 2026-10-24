@@ -39,17 +39,17 @@ Settings:
 #
 Database:
 
-  Enabled: false
+  Enabled: true
 
   Host: "localhost"
 
   Port: 3306
 
-  Database: "devplugin"
+  Database: "myDevplugin_db"
 
   User: "root"
 
-  Password: ""
+  Password: "admin"
 
 # | Hooks | Work in progress
 Hooks:
