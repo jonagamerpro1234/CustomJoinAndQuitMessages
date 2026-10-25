@@ -95,16 +95,15 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
                 playerDataFile,
                 playerDataDAO,
                 cacheManager,
-                getLogger(),
                 Settings.db_enabled
         );
 
         groupHelper = new GroupHelper();
         groupHelper.checkPermissionPlugins(Bukkit.getPluginManager().isPluginEnabled("LuckPerms"));
-
+/*
         groupUpdateTask = new GroupUpdateTask(this);
         //groupUpdateTask.start(Settings.luckperms_autoUpdateGroup_delay, Settings.luckperms_autoUpdateGroup_tick,Settings.luckperms_autoUpdateGroup_enabled);
-
+*/
         new JoinQuitMessageHandlerFactory();
 
         registerListener(
@@ -117,15 +116,15 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
 
         //updateChecker for Modrith
         UpdateSettings settings = UpdateSettings.defaultSettings();
-        new ModrinthUpdateChecker(this,"1ywOweL3",settings).checkForUpdates();
+        new ModrinthUpdateChecker(this,"1ywOweL3",UpdateSettings.defaultSettings()).checkForUpdates();
     }
 
 
     @Override
     public void onDisable() {
-        if (groupUpdateTask != null) {
+       /* if (groupUpdateTask != null) {
             groupUpdateTask.cancel();
-        }
+        }*/
 
         if (playerDataManager != null) {
             playerDataManager.save(PlayerDataManager.DataType.BOTH);

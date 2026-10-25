@@ -62,6 +62,7 @@ public class Logger {
     public static void warning(String msg) { log(LoggerLevel.WARNING, msg); }
     public static void success(String msg) { log(LoggerLevel.SUCCESS, msg); }
     public static void error(String msg) { log(LoggerLevel.ERROR, msg); }
+    public static void severe(String msg) { log(LoggerLevel.ERROR, msg); }
     public static void debug(String msg) { log(LoggerLevel.DEBUG, msg); }
     public static void info(String msg) { log(LoggerLevel.INFO, msg); }
     public static void outline(String msg) { log(LoggerLevel.OUTLINE, msg); }
@@ -70,6 +71,11 @@ public class Logger {
     // Método para logs con excepciones detalladas
     public static void error(@NotNull Exception e, String msg) {
         log(LoggerLevel.ERROR, msg + " | Exception: " + e.getMessage());
+        e.printStackTrace();
+    }
+
+    public static void severe(@NotNull Exception e, String msg) {
+        log(LoggerLevel.SEVERE, msg + " | Exception: " + e.getMessage());
         e.printStackTrace();
     }
 

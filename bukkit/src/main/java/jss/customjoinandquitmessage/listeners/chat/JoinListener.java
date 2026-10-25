@@ -4,6 +4,7 @@ import jss.customjoinandquitmessage.CustomJoinAndQuitMessage;
 import jss.customjoinandquitmessage.files.utils.Settings;
 import jss.customjoinandquitmessage.managers.JoinQuitMessageHandlerFactory;
 import jss.customjoinandquitmessage.storage.PlayerData;
+import jss.customjoinandquitmessage.storage.PlayerDataManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,10 +21,23 @@ public class JoinListener implements Listener {
     public void onJoin(@NotNull PlayerJoinEvent e){
         Player p = e.getPlayer();
 
+        PlayerDataManager playerDataManager = plugin.getPlayerDataManager();
+        PlayerData playerData = playerDataManager.load(p.getName());
 
-        if(plugin.playerDataFile.playerDataFileExists(p.getName())){
-            plugin.playerDataFile.saveData(p.getName(), new PlayerData("default"));
+        if(playerData == null){
+            playerData = new PlayerData("default");
         }
+
+        playerDataManager.savePlayer(
+                p.getName(),
+                playerData,
+                PlayerDataManager.DataType.BOTH
+        );
+
+
+        /*if(plugin.playerDataFile.playerDataFileExists(p.getName())){
+            plugin.playerDataFile.saveData(p.getName(), new PlayerData("default"));
+        }*/
 
         boolean isNormal = Settings.chatformat_type.equalsIgnoreCase("normal");
         boolean isGroup = Settings.chatformat_type.equalsIgnoreCase("group");
