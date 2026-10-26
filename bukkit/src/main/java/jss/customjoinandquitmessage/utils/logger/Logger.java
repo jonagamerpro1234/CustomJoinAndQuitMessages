@@ -19,32 +19,29 @@ public class Logger {
 
     private static void log(LoggerLevel level, String msg) {
         if (level == LoggerLevel.DEBUG && !Settings.config_Debug) return;
-        // Variable para el mensaje formateado
+
         String formattedMsg;
+        String fileMsg = msg;
 
-        // Si es DEBUG, incluir la clase y la línea
         if (level == LoggerLevel.DEBUG) {
-
-            // Obtener la clase y la línea
             StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-            StackTraceElement element = stackTrace[3]; // Tomamos el tercer elemento que es el que llamó a log
+            StackTraceElement element = stackTrace[3];
 
             String className = element.getClassName();
             int lineNumber = element.getLineNumber();
 
-            // Formatear el mensaje para DEBUG incluyendo la clase y la línea
-            formattedMsg = level.getPrefix() + " [" + className + ":" + lineNumber + "] " + msg;
+            String location = "[" + className + ":" + lineNumber + "] ";
+
+            formattedMsg = level.getPrefix() + " " + location + msg;
+            fileMsg = location + msg;
         } else {
-            // Para otros niveles, solo el mensaje con el prefijo
             formattedMsg = level.getPrefix() + " " + msg;
         }
 
-        // Enviar mensaje a la consola
         MessageUtils.sendColorMessage(EventUtils.getConsoleSender(), formattedMsg);
-
-        // Guardar en archivo de log
-        writeToFile(level, formattedMsg);
+        writeToFile(level, fileMsg);
     }
+
 
     private static void writeToFile(LoggerLevel level, String msg) {
         try {

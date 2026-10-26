@@ -9,7 +9,7 @@ public class Join implements IChatFormat{
     private final String group;
     private final FileConfiguration config;
 
-    public Join(String group,FileConfiguration config){
+    public Join(String group, FileConfiguration config){
         this.config = config;
         this.group = group;
     }
@@ -86,4 +86,11 @@ public class Join implements IChatFormat{
         return 0;
     }
 
+    public String getGroup() {
+        return group;
+    }
+
+    public FileConfiguration getConfig() {
+        return config;
+    }
 }
