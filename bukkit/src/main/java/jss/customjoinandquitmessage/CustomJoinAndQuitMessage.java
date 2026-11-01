@@ -116,7 +116,7 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
                 dataBaseManager.connect();
                 dataBaseManager.createTable();
             } catch (SQLException e) {
-                throw new RuntimeException("Failed to initialize the player database.", e);
+                Logger.severe(e, "Failed to initialize the player database.");
             }
         }
 
