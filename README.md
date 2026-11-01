@@ -6,7 +6,7 @@
 [LicenseImg]: https://img.shields.io/github/license/jonagamerpro1234/CustomJoinAndQuitMessages.svg?style=for-the-badge
 [SpigotReleases]: https://img.shields.io/spiget/version/57006?color=green&label=Spigot%20Release&style=for-the-badge
 [Issues]: https://img.shields.io/github/issues/jonagamerpro1234/CustomJoinAndQuitMessages.svg?color=yellow&style=for-the-badge
-[JavaVersion]: https://img.shields.io/badge/Java-11%2B-red?style=for-the-badge
+[JavaVersion]: https://img.shields.io/badge/Java-17%2B-red?style=for-the-badge
 [IssuesLink]: https://github.com/jonagamerpro1234/CustomJoinAndQuitMessages/issues
 [Discord]: https://discord.gg/c5GhQDQCK5
 [Statistics]: https://bstats.org/plugin/bukkit/CustomJoinAndQuitMessages/6318
