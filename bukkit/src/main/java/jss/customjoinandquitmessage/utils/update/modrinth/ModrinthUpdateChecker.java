@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
@@ -109,15 +110,7 @@ public class ModrinthUpdateChecker extends UpdateChecker {
         Logger.debug("[UpdateChecker] fetchLatestVersion: starting request to Modrinth...");
         try {
             //Create HTTP connection
-            URL url = new URL("https://api.modrinth.com/v2/project/" + projectId + "/version");
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("GET");
-            con.setRequestProperty("User-Agent", plugin.getName() + " UpdateChecker");
-            con.setConnectTimeout(5000);
-            con.setReadTimeout(5000);
-
-            // Parse JSON response into a list of UpdateInfo
-            BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            BufferedReader reader = getReader();
             Type listType = new TypeToken<List<UpdateInfo>>() {}.getType();
             List<UpdateInfo> versions = gson.fromJson(reader, listType);
             reader.close();
@@ -142,6 +135,18 @@ public class ModrinthUpdateChecker extends UpdateChecker {
             Logger.warning("[UpdateChecker] Error fetching data: " + e.getMessage());
             return null;
         }
+    }
+
+    private @NotNull BufferedReader getReader() throws IOException {
+        URL url = new URL("https://api.modrinth.com/v2/project/" + projectId + "/version");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("User-Agent", plugin.getName() + " UpdateChecker");
+        con.setConnectTimeout(5000);
+        con.setReadTimeout(5000);
+
+        // Parse JSON response into a list of UpdateInfo
+        return new BufferedReader(new InputStreamReader(con.getInputStream()));
     }
 
 }

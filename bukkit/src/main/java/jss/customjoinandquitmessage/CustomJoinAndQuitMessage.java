@@ -11,13 +11,17 @@ import jss.customjoinandquitmessage.listeners.chat.QuitListener;
 import jss.customjoinandquitmessage.managers.JoinQuitMessageHandlerFactory;
 import jss.customjoinandquitmessage.managers.groupmanager.GroupHelper;
 import jss.customjoinandquitmessage.storage.CacheManager;
-import jss.customjoinandquitmessage.storage.PlayerData;
 import jss.customjoinandquitmessage.storage.PlayerDataManager;
 import jss.customjoinandquitmessage.storage.database.DataBaseManager;
 import jss.customjoinandquitmessage.storage.database.PlayerDataDAO;
 import jss.customjoinandquitmessage.storage.database.PlayerDataDAOImpl;
+import jss.customjoinandquitmessage.utils.logger.Logger;
+import jss.customjoinandquitmessage.utils.logger.LoggerState;
+import jss.customjoinandquitmessage.utils.logger.LoggerStateManager;
+import jss.customjoinandquitmessage.utils.update.github.GithubUpdateChecker;
 import jss.customjoinandquitmessage.utils.update.modrinth.ModrinthUpdateChecker;
 import jss.customjoinandquitmessage.utils.update.core.UpdateSettings;
+import jss.customjoinandquitmessage.utils.update.spigot.SpigotUpdateChecker;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
@@ -28,6 +32,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public final class CustomJoinAndQuitMessage extends JavaPlugin {
@@ -50,13 +55,37 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
     private PlayerDataDAO playerDataDAO;
     private PlayerDataManager playerDataManager;
 
+    private LoggerStateManager loggerStateManager;
+    private LoggerState loggerState;
+
     @Override
     public void onEnable() {
         instance = this;
         this.adventure = BukkitAudiences.create(this);
+        loggerStateManager = new LoggerStateManager();
+
+        try {
+
+            loggerState = loggerStateManager.loadState();
+            if (!loggerState.isShutdownCompleted()) {
+                getLogger().warning("The previous logger session may not have shut down correctly.");
+
+                if (!Logger.recoverLogFile()) {
+                    getLogger().severe("Log recovery failed. The plugin will be disabled.");
+                    getServer().getPluginManager().disablePlugin(this);
+                    return;
+                }
+            }
+            Logger.initialize(loggerStateManager, loggerState);
+            loggerState.update(false);
+            loggerStateManager.saveState(loggerState);
+        } catch (IOException e) {
+            getLogger().severe("Failed to load or save logger state: " + e.getMessage());
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
 
         metrics = new Metrics(this,6318);
-
         saveDefaultConfig();
         preConfigLoader.loadConfigs();
         if(!preConfigLoader.loadLangs()){
@@ -115,13 +144,29 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
         commandHandler.register();
 
         //updateChecker for Modrith
-        UpdateSettings settings = UpdateSettings.defaultSettings();
+        new SpigotUpdateChecker(this,57006,UpdateSettings.defaultSettings()).checkForUpdates();
         new ModrinthUpdateChecker(this,"1ywOweL3",UpdateSettings.defaultSettings()).checkForUpdates();
+        new GithubUpdateChecker(this,UpdateSettings.defaultSettings(),"jonagamerpro1234","CustomJoinAndQuitMessages").checkForUpdates();
     }
 
 
     @Override
     public void onDisable() {
+        if (loggerStateManager != null && loggerState != null) {
+            boolean logsSaved = Logger.saveLogFile();
+
+            if (logsSaved) {
+                try {
+                    loggerState.update(true);
+                    loggerStateManager.saveState(loggerState);
+                } catch (IOException e) {
+                    Logger.severe(e,"Failed to save logger state: ");
+                }
+            } else {
+                Logger.severe("Logger shutdown was not marked as completed because log archival failed.");
+            }
+        }
+
        /* if (groupUpdateTask != null) {
             groupUpdateTask.cancel();
         }*/
@@ -134,7 +179,7 @@ public final class CustomJoinAndQuitMessage extends JavaPlugin {
             try {
                 dataBaseManager.disconnect();
             } catch (SQLException e) {
-                getLogger().severe("Failed to disconnect from the player database: " + e.getMessage());
+                Logger.severe(e, "Failed to disconnect from the player database: ");
             }
         }
 

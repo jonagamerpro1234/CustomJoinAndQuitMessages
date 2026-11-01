@@ -13,9 +13,9 @@
 
 default:
 
-  # [Disabled] [Experimental] esta funcion puede ser removida en cualquier momento sin previo aviso
-  # y puede sufrir cambios repentinos, existe la posibilidad de que no se encuentre activa a un
-  # Oculta los mensajes de los otros grupos si estan en la lista  no se veran
+  # [Disabled] [Experimental] This feature may be removed at any time without prior notice
+  # and may undergo sudden changes; it is possible that it is not currently active.
+  # Hides messages from other groups; if they are on the list, they will not be shown.
   HideOtherGroups:
 
     Enabled: true
@@ -23,12 +23,12 @@ default:
     List:
       - admin
 
-  # Permite la perzonalizacion de un mensaje de bienvenida que solo lo podran ver los miembros de este grupo
+  # Allows for the customization of a welcome message that will only be visible to members of this group
   Welcome:
 
     Enabled: true
 
-    # Aqui puedes perzonalisacion el mensaje de bienvenida que quieres que aparesca para este grupo
+    # Here you can customize the welcome message you want to appear for this group
     Text:
       - ""
 
@@ -38,11 +38,11 @@ default:
     # Here you can enable or disable this feature
     Enabled: true
 
-    # Aqui puedes definir el mensaje de entra
+    # Here you can define the entry message
     Format: "&e[&a+&e] &3{player} &7has joined the server"
 
-    #
-    JoinMessageDelay: 0
+    # Sets the delay before the join message is displayed
+    JoinMessageDelay: 0s
 
     #
     Title-Settings:
@@ -50,19 +50,19 @@ default:
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      # Here you can set the title text
       Title: ""
 
-      #
+      # Here you can set the subtitle text
       SubTitle: ""
 
-      #
+      # Sets the title fade-in time
       FadeIn: 20
 
-      #
+      # Sets how long the title stays visible
       Stay: 40
 
-      #
+      # Sets the title fade-out time
       FadeOut: 20
 
     #
@@ -71,10 +71,10 @@ default:
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      # Sets the delay before the actionbar is displayed
       Delay: 0
 
-      #
+      # Here you can set the actionbar message
       Format: ""
 
     Sound:
@@ -82,16 +82,16 @@ default:
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      # When enabled, the sound is sent to all players connected to the server
       SendToAll: true
 
-      #
+      # Sound name; see https://www.spigotmc.org/wiki/cc-sounds-list/
       Name: "BLOCK_NOTE_BLOCK_PLING"
 
-      #
+      # Sound volume
       Volume: 10
 
-      #
+      # Sound pitch
       Pitch: 1
 
   # | First Join |
@@ -100,11 +100,11 @@ default:
     # Here you can enable or disable this feature
     Enabled: true
 
-    #
+    # Here you can define the first-join message
     Format: "&3Welcome to the server, we hope you enjoy your time here and have a good time"
 
-    #
-    FirstJoinMessageDelay: 0
+    # Sets the delay before the first-join message is displayed
+    FirstJoinMessageDelay: 0s
 
     #
     Title-Settings:
@@ -112,19 +112,19 @@ default:
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      # Here you can set the title text
       Title: ""
 
-      #
+      # Here you can set the subtitle text
       SubTitle: ""
 
-      #
+      # Sets the title fade-in time
       FadeIn: 20
 
-      #
+      # Sets how long the title stays visible
       Stay: 40
 
-      #
+      # Sets the title fade-out time
       FadeOut: 20
 
     #
@@ -133,10 +133,10 @@ default:
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
-      Delay: 0
+      # Sets the delay before the actionbar is displayed
+      Delay: 0s
 
-      #
+      # Here you can set the actionbar message
       Format: ""
 
     #
@@ -145,16 +145,16 @@ default:
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      # When enabled, the sound is sent to all players connected to the server
       SendToAll: true
 
-      #
+      # Sound name; see https://www.spigotmc.org/wiki/cc-sounds-list/
       Name: "BLOCK_NOTE_BLOCK_PLING"
 
-      #
+      # Sound volume
       Volume: 10
 
-      #
+      # Sound pitch
       Pitch: 1
 
   # | Quit |
@@ -172,19 +172,19 @@ default:
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      # Here you can set the title text
       Title: ""
 
-      #
+      # Here you can set the subtitle text
       SubTitle: ""
 
-      #
+      # Sets the title fade-in time
       FadeIn: 20
 
-      #
+      # Sets how long the title stays visible
       Stay: 40
 
-      #
+      # Sets the title fade-out time
       FadeOut: 20
 
     #
@@ -193,10 +193,10 @@ default:
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
-      Delay: 0
+      # Sets the delay before the actionbar is displayed
+      Delay: 0s
 
-      #
+      # Here you can set the actionbar message
       Format: ""
 
     #
@@ -205,14 +205,14 @@ default:
       # Here you can enable or disable this feature
       Enabled: true
 
-      #
+      # When enabled, the sound is sent to all players connected to the server
       SendToAll: true
 
-      #
+      # Sound name; see https://www.spigotmc.org/wiki/cc-sounds-list/
       Name: "BLOCK_NOTE_BLOCK_PLING"
 
-      #
+      # Sound volume
       Volume: 10
 
-      #
+      # Sound pitch
       Pitch: 1

@@ -40,7 +40,7 @@ public class Settings {
     //Join
     public static boolean chatformat_join_enabled;
     public static String chatformat_join_message;
-    public static int chatformat_join_delay;
+    public static String chatformat_join_delay;
     public static String chatformat_join_titleSettings_title;
     public static String chatformat_join_titleSettings_subtitle;
     public static int chatformat_join_titleSettings_fadeIn;
@@ -49,7 +49,7 @@ public class Settings {
     public static boolean chatformat_join_titleSettings_enabled;
     public static boolean chatformat_join_actionbar_enabled;
     public static String chatformat_join_actionbar_message;
-    public static int chatformat_join_actionbar_delay;
+    public static String chatformat_join_actionbar_delay;
     public static boolean chatformat_join_sound_enabled;
     public static boolean chatformat_join_sound_sendToAll;
     public static String chatformat_join_sound_name;
@@ -59,7 +59,7 @@ public class Settings {
     //FirstJoin
     public static boolean chatformat_firstJoin_enabled;
     public static String chatformat_firstJoin_message;
-    public static int chatformat_firstJoin_delay;
+    public static String chatformat_firstJoin_delay;
     public static String chatformat_firstJoin_titleSettings_title;
     public static String chatformat_firstJoin_titleSettings_subtitle;
     public static int chatformat_firstJoin_titleSettings_fadeIn;
@@ -68,7 +68,7 @@ public class Settings {
     public static boolean chatformat_firstJoin_titleSettings_enabled;
     public static boolean chatformat_firstJoin_actionbar_enabled;
     public static String chatformat_firstJoin_actionbar_message;
-    public static int chatformat_firstJoin_actionbar_delay;
+    public static String chatformat_firstJoin_actionbar_delay;
     public static boolean chatformat_firstJoin_sound_enabled;
     public static boolean chatformat_firstJoin_sound_sendToAll;
     public static String chatformat_firstJoin_sound_name;
@@ -78,7 +78,7 @@ public class Settings {
     //Quit
     public static boolean chatformat_quit_enabled;
     public static String chatformat_quit_message;
-    public static int chatformat_quit_delay;
+    public static String chatformat_quit_delay;
     public static String chatformat_quit_titleSettings_title;
     public static String chatformat_quit_titleSettings_subtitle;
     public static int chatformat_quit_titleSettings_fadeIn;
@@ -87,7 +87,7 @@ public class Settings {
     public static boolean chatformat_quit_titleSettings_enabled;
     public static boolean chatformat_quit_actionbar_enabled;
     public static String chatformat_quit_actionbar_message;
-    public static int chatformat_quit_actionbar_delay;
+    public static String chatformat_quit_actionbar_delay;
     public static boolean chatformat_quit_sound_enabled;
     public static boolean chatformat_quit_sound_sendToAll;
     public static String chatformat_quit_sound_name;
@@ -97,7 +97,7 @@ public class Settings {
     //Welcome
     public static boolean welcome_enabled;
     public static List<String> welcome_message;
-    public static int welcome_delay;
+    public static String welcome_delay;
     public static boolean welcome_UseWelcomePerGroup;
 
     //Lang

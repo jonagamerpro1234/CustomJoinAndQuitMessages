@@ -42,7 +42,7 @@ public class PreConfigLoader {
         //ChatFormat
         Settings.chatformat_join_enabled = config.getBoolean("ChatFormat.Join.Enabled");
         Settings.chatformat_join_message = config.getString("ChatFormat.Join.Format");
-        Settings.chatformat_join_delay = config.getInt("ChatFormat.Join.JoinMessageDelay");
+        Settings.chatformat_join_delay = config.getString("ChatFormat.Join.JoinMessageDelay");
         Settings.chatformat_join_titleSettings_enabled = config.getBoolean("ChatFormat.Join.Title-Settings.Enabled");
         Settings.chatformat_join_titleSettings_title = config.getString("ChatFormat.Join.Title-Settings.Title");
         Settings.chatformat_join_titleSettings_subtitle = config.getString("ChatFormat.Join.Title-Settings.SubTitle");
@@ -51,7 +51,7 @@ public class PreConfigLoader {
         Settings.chatformat_join_titleSettings_fadeOut = config.getInt("ChatFormat.Join.Title-Settings.FadeOut");
         Settings.chatformat_join_actionbar_enabled = config.getBoolean("ChatFormat.Join.Actionbar.Enabled");
         Settings.chatformat_join_actionbar_message = config.getString("ChatFormat.Join.Actionbar.Format");
-        Settings.chatformat_join_actionbar_delay = config.getInt("ChatFormat.Join.Actionbar.Delay");
+        Settings.chatformat_join_actionbar_delay = config.getString("ChatFormat.Join.Actionbar.Delay");
         Settings.chatformat_join_sound_enabled = config.getBoolean("ChatFormat.Join.Sound.Enabled");
         Settings.chatformat_join_sound_sendToAll  = config.getBoolean("ChatFormat.Join.Sound.SendToAll");
         Settings.chatformat_join_sound_name = config.getString("ChatFormat.Join.Sound.Name");
@@ -60,7 +60,7 @@ public class PreConfigLoader {
 
         Settings.chatformat_firstJoin_enabled = config.getBoolean("ChatFormat.First-Join.Enabled");
         Settings.chatformat_firstJoin_message = config.getString("ChatFormat.First-Join.Format");
-        Settings.chatformat_firstJoin_delay = config.getInt("ChatFormat.First-Join.JoinMessageDelay");
+        Settings.chatformat_firstJoin_delay = config.getString("ChatFormat.First-Join.JoinMessageDelay");
         Settings.chatformat_firstJoin_titleSettings_enabled = config.getBoolean("ChatFormat.First-Join.Title-Settings.Enabled");
         Settings.chatformat_firstJoin_titleSettings_title = config.getString("ChatFormat.First-Join.Title-Settings.Title");
         Settings.chatformat_firstJoin_titleSettings_subtitle = config.getString("ChatFormat.First-Join.Title-Settings.SubTitle");
@@ -69,7 +69,7 @@ public class PreConfigLoader {
         Settings.chatformat_firstJoin_titleSettings_fadeOut = config.getInt("ChatFormat.First-Join.Title-Settings.FadeOut");
         Settings.chatformat_firstJoin_actionbar_enabled = config.getBoolean("ChatFormat.First-Join.Actionbar.Enabled");
         Settings.chatformat_firstJoin_actionbar_message = config.getString("ChatFormat.First-Join.Actionbar.Format");
-        Settings.chatformat_firstJoin_actionbar_delay = config.getInt("ChatFormat.First-Join.Actionbar.Delay");
+        Settings.chatformat_firstJoin_actionbar_delay = config.getString("ChatFormat.First-Join.Actionbar.Delay");
         Settings.chatformat_firstJoin_sound_enabled = config.getBoolean("ChatFormat.First-Join.Sound.Enabled");
         Settings.chatformat_firstJoin_sound_sendToAll  = config.getBoolean("ChatFormat.First-Join.Sound.SendToAll");
         Settings.chatformat_firstJoin_sound_name = config.getString("ChatFormat.First-Join.Sound.Name");
@@ -78,7 +78,7 @@ public class PreConfigLoader {
 
         Settings.chatformat_quit_enabled = config.getBoolean("ChatFormat.Quit.Enabled");
         Settings.chatformat_quit_message = config.getString("ChatFormat.Quit.Format");
-        Settings.chatformat_quit_delay = config.getInt("ChatFormat.Quit.JoinMessageDelay");
+        Settings.chatformat_quit_delay = config.getString("ChatFormat.Quit.JoinMessageDelay");
         Settings.chatformat_quit_titleSettings_enabled = config.getBoolean("ChatFormat.Quit.Title-Settings.Enabled");
         Settings.chatformat_quit_titleSettings_title = config.getString("ChatFormat.Quit.Title-Settings.Title");
         Settings.chatformat_quit_titleSettings_subtitle = config.getString("ChatFormat.Quit.Title-Settings.SubTitle");
@@ -87,7 +87,7 @@ public class PreConfigLoader {
         Settings.chatformat_quit_titleSettings_fadeOut = config.getInt("ChatFormat.Quit.Title-Settings.FadeOut");
         Settings.chatformat_quit_actionbar_enabled = config.getBoolean("ChatFormat.Quit.Actionbar.Enabled");
         Settings.chatformat_quit_actionbar_message = config.getString("ChatFormat.Quit.Actionbar.Format");
-        Settings.chatformat_quit_actionbar_delay = config.getInt("ChatFormat.Quit.Actionbar.Delay");
+        Settings.chatformat_quit_actionbar_delay = config.getString("ChatFormat.Quit.Actionbar.Delay");
         Settings.chatformat_quit_sound_enabled = config.getBoolean("ChatFormat.Quit.Sound.Enabled");
         Settings.chatformat_quit_sound_sendToAll  = config.getBoolean("ChatFormat.Quit.Sound.SendToAll");
         Settings.chatformat_quit_sound_name = config.getString("ChatFormat.Quit.Sound.Name");
@@ -96,7 +96,7 @@ public class PreConfigLoader {
 
         Settings.welcome_enabled = config.getBoolean("Welcome.Enabled");
         Settings.welcome_message = config.getStringList("Welcome.Text");
-        Settings.welcome_delay = config.getInt("Welcome.Delay");
+        Settings.welcome_delay = config.getString("Welcome.Delay");
         Settings.welcome_UseWelcomePerGroup = config.getBoolean("Welcome.UseWelcomePerGroup");
 
     }

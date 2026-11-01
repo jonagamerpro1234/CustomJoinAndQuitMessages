@@ -6,10 +6,13 @@ import jss.customjoinandquitmessage.utils.update.core.UpdateChecker;
 import jss.customjoinandquitmessage.utils.update.core.UpdateInfo;
 import jss.customjoinandquitmessage.utils.update.core.UpdateSettings;
 import jss.customjoinandquitmessage.utils.update.modrinth.ModrinthUpdateChecker;
+import jss.customjoinandquitmessage.utils.update.util.ChangelogUtils;
 import jss.customjoinandquitmessage.utils.update.util.VersionComparator;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
@@ -60,7 +63,7 @@ public class SpigotUpdateChecker extends UpdateChecker {
                     Logger.info("&7Download: &b" + latest.getDownloadUrl());
                 }
 
-                ModrinthUpdateChecker.getStatus(latest, currentVersion, versionType, compare);
+                getStatus(latest, currentVersion, versionType, compare);
 
             } catch (Exception e) {
                 Logger.warning("[SpigotUpdateChecker] Error checking updates: " + e.getMessage());
@@ -89,7 +92,7 @@ public class SpigotUpdateChecker extends UpdateChecker {
 
             // Build UpdateInfo using FileInfo list
             UpdateInfo.FileInfo fileInfo = new UpdateInfo.FileInfo();
-            fileInfo.url = response.getFile() != null ? response.getFile() : "No available";
+            fileInfo.url = getResourceUrl();
 
             return new UpdateInfo(
                     response.getCurrentVersion(),
@@ -104,6 +107,17 @@ public class SpigotUpdateChecker extends UpdateChecker {
         }
     }
 
+    public static void getStatus(UpdateInfo latest, String currentVersion, String versionType, int compare) {
+        if (compare < 0) {
+            Logger.warning("&cYour version (" + currentVersion + ") is outdated.");
+            Logger.warning("&7Changelog: &f" + ChangelogUtils.summarize(latest.getChangelog()));
+        } else if (compare == 0) {
+            Logger.info("&aYou are using the latest version " + currentVersion + " (" + versionType + ")");
+        } else {
+            Logger.info("&eYou are using a development version " + currentVersion + " (" + versionType + ")");
+        }
+    }
+
     private static class SpigotResponse {
         private String current_version;
         private String changelog;
@@ -112,5 +126,12 @@ public class SpigotUpdateChecker extends UpdateChecker {
         public String getCurrentVersion() { return current_version; }
         public String getChangelog() { return changelog; }
         public String getFile() { return file; }
+    }
+
+    @Contract(pure = true)
+    private @NotNull String getResourceUrl() {
+        return "https://www.spigotmc.org/resources/"
+                + "custom-join-and-quit-message."
+                + resourceId + "/";
     }
 }

@@ -3,6 +3,8 @@ package jss.customjoinandquitmessage.managers.handlers;
 import jss.customjoinandquitmessage.files.utils.Settings;
 import jss.customjoinandquitmessage.managers.AbstractJoinQuitMessageHandler;
 import jss.customjoinandquitmessage.utils.MessageUtils;
+import jss.customjoinandquitmessage.utils.Utils;
+import jss.customjoinandquitmessage.utils.logger.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -13,7 +15,7 @@ public class Single extends AbstractJoinQuitMessageHandler {
         if(isJoin){
             if(Settings.chatformat_join_enabled){
 
-                String mainMessage = "";
+                String mainMessage;
 
                 if (Settings.chatformat_firstJoin_enabled){
                     if(!p.hasPlayedBefore()){
@@ -21,14 +23,22 @@ public class Single extends AbstractJoinQuitMessageHandler {
                     } else {
                         mainMessage = Settings.chatformat_join_message;
                     }
+                } else {
+                    Logger.error("The message could not be sent correctly.");
+                    mainMessage = "";
                 }
 
-                MessageUtils.sendColorMessage(p, mainMessage);
+                Utils.addDelayMessage(Settings.chatformat_join_delay, () -> {
+
+                    if (!p.isOnline()) return;
+
+                    MessageUtils.sendColorMessage(p, mainMessage);
+                });
 
             }
         }else{
             if(!Settings.chatformat_quit_enabled) return;
-            MessageUtils.sendColorMessage(p, Settings.chatformat_quit_message);
+            Utils.addDelayMessage(Settings.chatformat_quit_delay, () -> MessageUtils.sendColorMessage(p, Settings.chatformat_quit_message));
         }
     }
 
@@ -37,7 +47,7 @@ public class Single extends AbstractJoinQuitMessageHandler {
             if(Settings.welcome_UseWelcomePerGroup){
                return;
             }
-            Settings.welcome_message.forEach( s -> MessageUtils.sendColorMessage(p, s));
+            Utils.addDelayMessage(Settings.welcome_delay, () -> Settings.welcome_message.forEach( s -> MessageUtils.sendColorMessage(p, s)));
         }
     }
 
@@ -58,11 +68,18 @@ public class Single extends AbstractJoinQuitMessageHandler {
     public void handlerJoinAndQuitActionbar(Player p, boolean isJoin) {
         if(isJoin){
             if(Settings.chatformat_join_actionbar_enabled){
-                MessageUtils.showActionbar(p,Settings.chatformat_join_actionbar_message);
+                Utils.addDelayMessage(Settings.chatformat_quit_actionbar_delay, () -> {
+                    if(!p.isOnline()){
+                        return;
+                    }
+                    MessageUtils.showActionbar(p,Settings.chatformat_join_actionbar_message);
+                });
             }
         }else {
             if (Settings.chatformat_quit_actionbar_enabled){
-                MessageUtils.showActionbar(p,Settings.chatformat_quit_actionbar_message);
+                Utils.addDelayMessage(Settings.chatformat_quit_actionbar_delay, () -> {
+                    MessageUtils.showActionbar(p,Settings.chatformat_quit_actionbar_message);
+                });
             }
         }
     }

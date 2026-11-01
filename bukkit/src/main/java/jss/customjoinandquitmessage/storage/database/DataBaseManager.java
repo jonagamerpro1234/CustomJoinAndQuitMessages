@@ -33,7 +33,7 @@ public class DataBaseManager {
         if(connection == null || connection.isClosed()){
             connection = DriverManager.getConnection(url, user, password);
             Logger.success("Connected to database");
-            return  true;
+            return true;
         }
         Logger.warning("Database is already connected!");
         return false;

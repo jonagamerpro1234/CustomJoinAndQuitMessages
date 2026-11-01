@@ -30,26 +30,32 @@ Settings:
     # Here you can enable or disable this feature
     Enabled: true
 
-    # You will get the updates from [spigot | gitHub] what is the difference, here below is the explanation of why
+    # You will get the updates from [spigot | github] what is the difference, here below is the explanation of why
     # |Spigot| Get only released updates, and you won't receive beta notifications
     # |Modrinth| Get only the released and beta updates, and you will be able to receive notifications of both versions
     # |GitHub| Get only the released and beta updates, and you will be able to receive notifications of both versions
     GetFromUpdate: spigot
 
-#
+# | Database | [Experimental] Configure the database connection used by the plugin
 Database:
 
-  Enabled: true
+  # Enable or disable the database connection
+  Enabled: false
 
+  # Database server address
   Host: "localhost"
 
+  # Database server port
   Port: 3306
 
+  # Name of the database
   Database: "myDevplugin_db"
 
+  # Database username
   User: "root"
 
-  Password: "admin"
+  # Database password
+  Password: ""
 
 # | Hooks | Work in progress
 Hooks:
@@ -90,7 +96,7 @@ Hooks:
     # This allows you to join or quit the server without the message being shown to other players.
     HidePlayerIsVanish: true
 
-    #
+    # Disable join and quit sounds while the player is vanished
     DisableJoinQuitSoundsInVanish: true
 
     # Here you can define the discord channel where the messages from minecraft to discord are seen
@@ -130,7 +136,7 @@ ChatFormat:
     Format: "&e[&a+&e] &3{player} &7has joined the server"
 
     # Sets the delay before the join message is displayed
-    JoinMessageDelay: 0
+    JoinMessageDelay: 0s
 
     # In this section, you can configure the title of the join
     Title-Settings:
@@ -160,7 +166,7 @@ ChatFormat:
       Enabled: true
 
       # Sets the delay before the join actionbar is displayed
-      Delay: 0
+      Delay: 0s
 
       # here you can set the message that appears in the action bar
       Format: "<gradient:#8afff5:#ff1430>Welcome to server {player}</gradient>"
@@ -190,11 +196,11 @@ ChatFormat:
     # Here you can enable or disable this feature
     Enabled: true
 
-    #
+    # Here you can define the first-join message
     Format: "&3Welcome to the server, we hope you enjoy your time here and have a good time"
 
     # Sets the delay before the first-join message is displayed
-    FirstJoinMessageDelay: 0
+    FirstJoinMessageDelay: 0s
 
     # In this section, you can configure the title of the join
     Title-Settings:
@@ -203,10 +209,10 @@ ChatFormat:
       Enabled: true
 
       # here you can set the title text
-      Title: ""
+      Title: "Welcome to the server"
 
       # here you can set the subtitle text
-      SubTitle: ""
+      SubTitle: "{player}"
 
       # here you can set the input time of the title
       FadeIn: 20
@@ -224,7 +230,7 @@ ChatFormat:
       Enabled: true
 
       # Sets the delay before the first-join actionbar is displayed
-      Delay: 0
+      Delay: 0s
 
       # here you can set the message that appears in the action bar
       Format: "<red>Welcome to the &bserver"
@@ -257,11 +263,11 @@ ChatFormat:
     # Here you can define the output message
     Format: "&e[&c-&e] &3{player} &7has left the server"
 
-    #
+    # [Experimental]
     Title-Settings:
 
       # Here you can enable or disable this feature
-      Enabled: true
+      Enabled: false
 
       # here you can set the title text
       Title: ""
@@ -278,17 +284,17 @@ ChatFormat:
       # here you can set the title output time
       FadeOut: 20
 
-    # In this section, you can configure the Actionbar of the quit
+    # [Experimental] In this section, you can configure the Actionbar of the quit
     Actionbar:
 
       # Here you can enable or disable this feature
-      Enabled: true
+      Enabled: false
 
       # Sets the delay before the quit actionbar is displayed
       Delay: 0
 
       # here you can set the message that appears in the action bar
-      Format: "<red>Welcome to the &bserver"
+      Format: "<red>[-] &7 {player}"
 
     # |Sound| In this section you can configure the sound of the quit
     # |Sound list: https://www.spigotmc.org/wiki/cc-sounds-list/

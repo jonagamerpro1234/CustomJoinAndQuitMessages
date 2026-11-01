@@ -9,6 +9,11 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,6 +21,13 @@ import java.time.format.DateTimeFormatter;
 public class Logger {
 
     private static final File logFile = new File("plugins/CustomJoinAndQuitMessages/logs.txt");
+    private static LoggerStateManager stateManager;
+    private static LoggerState state;
+
+    public static void initialize(LoggerStateManager stateManager, LoggerState state) {
+        Logger.stateManager = stateManager;
+        Logger.state = state;
+    }
 
     private static void log(LoggerLevel level, String msg) {
         if (level == LoggerLevel.DEBUG && !Settings.config_Debug) return;
@@ -42,14 +54,68 @@ public class Logger {
         writeToFile(level, fileMsg);
     }
 
+    public static boolean saveLogFile() {
+        Path source = logFile.toPath();
+        Path directory = Paths.get("plugins/CustomJoinAndQuitMessages/dev/logs");
+        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        Path destination = directory.resolve(date + ".log");
 
-    private static void writeToFile(LoggerLevel level, String msg) {
         try {
-            if (!logFile.exists()) logFile.createNewFile();
-            FileWriter writer = new FileWriter(logFile, true);
+            if (!Files.exists(source) || Files.size(source) == 0) return true;
+
+            Files.createDirectories(directory);
+            byte[] logData = Files.readAllBytes(source);
+
+            Files.write(destination, logData, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            Files.write(source, new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
+            return true;
+        } catch (IOException e) {
+            severe(e, "Failed to save log file");
+            return false;
+        }
+    }
+
+    public static boolean recoverLogFile() {
+        if (!Files.exists(logFile.toPath())) return true;
+
+        try {
+            if (Files.size(logFile.toPath()) == 0) return true;
+
+            info("Recovering pending log records...");
+            return saveLogFile();
+        } catch (IOException e) {
+            severe(e, "Failed to recover pending log records");
+            return false;
+        }
+    }
+
+    public static boolean rotareLogFile(LoggerStateManager stateManager, @NotNull LoggerState state) {
+        LocalDate lastLogDate = state.getLastUpdated().toLocalDate();
+        LocalDate latestLogDate = LocalDate.now();
+
+        if (lastLogDate.equals(latestLogDate)) return true;
+        if (!saveLogFile()) return false;
+
+        state.update(false);
+        try {
+            stateManager.saveState(state);
+            return true;
+        } catch (IOException e) {
+            severe(e, "Failed to update logger state after rotation");
+            return false;
+        }
+    }
+
+    private static void writeToFile(@NotNull LoggerLevel level, String msg) {
+        if (stateManager != null && state != null) {
+            if (!rotareLogFile(stateManager, state)) {
+
+            }
+        }
+
+        try (FileWriter writer = new FileWriter(logFile, true)) {
             String timeStamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             writer.write("[" + timeStamp + "] [" + level.name() + "] " + msg + "\n");
-            writer.close();
         } catch (IOException e) {
             MessageUtils.sendColorMessage(EventUtils.getConsoleSender(), "&cError writing log file: " + e.getMessage());
         }
@@ -59,7 +125,7 @@ public class Logger {
     public static void warning(String msg) { log(LoggerLevel.WARNING, msg); }
     public static void success(String msg) { log(LoggerLevel.SUCCESS, msg); }
     public static void error(String msg) { log(LoggerLevel.ERROR, msg); }
-    public static void severe(String msg) { log(LoggerLevel.ERROR, msg); }
+    public static void severe(String msg) { log(LoggerLevel.SEVERE, msg); }
     public static void debug(String msg) { log(LoggerLevel.DEBUG, msg); }
     public static void info(String msg) { log(LoggerLevel.INFO, msg); }
     public static void outline(String msg) { log(LoggerLevel.OUTLINE, msg); }
@@ -68,12 +134,10 @@ public class Logger {
     // Método para logs con excepciones detalladas
     public static void error(@NotNull Exception e, String msg) {
         log(LoggerLevel.ERROR, msg + " | Exception: " + e.getMessage());
-        e.printStackTrace();
     }
 
     public static void severe(@NotNull Exception e, String msg) {
         log(LoggerLevel.SEVERE, msg + " | Exception: " + e.getMessage());
-        e.printStackTrace();
     }
 
     // Mensaje sin prefijo específico
